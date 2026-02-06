@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Magic Menu Loader</title>
+
+<style>
+@import url(https://fonts.googleapis.com/css?family=Poppins:400,500,600);
+:root{ --clr:#000000; }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Poppins",sans-serif;
+}
+
+
+
+body{
+  height:100vh;
+  overflow:hidden;
+}
+
+/* CONTENT */
+iframe{
+  width:100%;
+  height:calc(101vh - 66px); /* gap space */
+  border: black;
+  background: black;
+}
+
+/* NAVIGATION */
+.navigation{
+  position:fixed;
+  bottom:12px;
+  left:50%;
+  transform:translateX(-50%);
+  width:95%;
+  max-width:400px;
+  height:59px;
+  background:#DAF5DB;
+  border:2.2px solid var(--clr);
+  border-radius:16px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  box-shadow:0 8px 25px rgba(0,0,0,0.25);
+}
+
+.navigation ul{
+  display:flex;
+  width:350px;
+  position:relative;
+}
+
+.navigation ul li{
+  list-style:none;
+  width:70px;
+  height:70px;
+  z-index:1;
+}
+
+.navigation ul li a{
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+}
+
+/* ICON FIX */
+.icon{
+  font-size:22px;
+  color:#E41B17;
+  line-height:1;
+  transition:0.4s;
+}
+
+/* TEXT FIX */
+.text{
+  font-size:12px;
+  font-weight:600;
+  color:#E41B17;
+  margin-top:2px;
+  opacity:0;
+  transition:0.4s;
+}
+
+li.active .icon{
+  transform:translateY(-20px);
+}
+
+li.active .text{
+  opacity:1;
+  transform:translateY(-2x);
+}
+
+/* INDICATOR */
+.indicator{
+  position:absolute;
+  top:-45%;
+  width:64px;
+  height:63px;
+  background:rgba(16, 185, 129);
+  border-radius:50%;
+  border:3px solid var(--clr);
+  transition:0.4s;
+}
+
+li:nth-child(1).active~.indicator{ transform:translateX(3px); }
+li:nth-child(2).active~.indicator{ transform:translateX(73px); }
+li:nth-child(3).active~.indicator{ transform:translateX(143px); }
+li:nth-child(4).active~.indicator{ transform:translateX(211px); }
+li:nth-child(5).active~.indicator{ transform:translateX(282px); }
+</style>
+</head>
+
+<body>
+
+<iframe id="content" src="home.html"></iframe>
+
+<div class="navigation">
+  <ul>
+    <li class="list active" data-page="home.html">
+      <a>
+        <img src="image/home.png" alt="Home" class="icon" style="width:30px; height:30px;">
+        <span class="text">Home</span>
+      </a>
+    </li>
+    <li class="list" data-page="paper trading.html">
+      <a>
+        <img src="image/trade.png" alt="Trade" class="icon" style="width:30px; height:30px;">
+        <span class="text">Trade</span>
+      </a>
+    </li>
+    <li class="list" data-page="libary.html">
+      <a>
+        <img src="image/library.png" alt="Library" class="icon" style="width:30px; height:30px;">
+        <span class="text">Library</span>
+      </a>
+    </li>
+    <li class="list" data-page="lab.html">
+      <a>
+        <img src="image/lab.png" alt="Lab" class="icon" style="width:30px; height:30px;">
+        <span class="text">Lab</span>
+      </a>
+    </li>
+    <li class="list" data-page="ai.html">
+      <a>
+        <img src="image/ai.png" alt="RO AI" class="icon" style="width:40px; height:40px;">
+        <span class="text">AI</span>
+      </a>
+    </li>
+    <div class="indicator"></div>
+  </ul>
+</div>
+
+<script>
+const list = document.querySelectorAll('.list');
+const frame = document.getElementById('content');
+const nav = document.querySelector('.navigation');
+
+// Define exactly which pages should show the navigation bar
+const mainPages = [
+    "home.html", 
+    "paper trading.html", 
+    "libary.html", 
+    "lab.html", 
+    "ai.html"
+];
+
+function updateNavVisibility() {
+    try {
+        // Get current filename from iframe and handle URL spaces
+        const path = frame.contentWindow.location.pathname;
+        const currentPage = decodeURIComponent(path.split("/").pop());
+
+        // Only show nav if the page is one of the 5 main menu items
+        if (mainPages.includes(currentPage)) {
+            nav.style.display = "flex";
+            
+            // Auto-update the active bubble if you navigate via ppscript
+            list.forEach(item => {
+                if(item.dataset.page === currentPage) {
+                    list.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                }
+            });
+        } else {
+            // Hide navigation if you go to any other "new" HTML page
+            nav.style.display = "none";
+        }
+    } catch(e) {
+        // Fallback for security errors
+        nav.style.display = "none";
+    }
+}
+
+// Menu Clicks
+list.forEach(item => {
+    item.addEventListener('click', function() {
+        list.forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+        frame.src = this.dataset.page;
+    });
+});
+
+// Watch the iframe for any page changes
+frame.addEventListener('load', updateNavVisibility);
+
+// Initial check on startup
+updateNavVisibility();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1418 @@
+[
+  {
+    "title": "Frontend Development Bootcamp",
+    "file": "https://www.youtube.com/watch?v=abc123",
+    "cover": "https://img.youtube.com/vi/abc123/maxresdefault.jpg",
+    "imf": "Web"
+  },
+  {
+    "title": "Machine Learning Full Course - Stanford (English)",
+    "file": "https://www.youtube.com/watch?v=jGwO_UgTS7I",
+    "cover": "https://img.youtube.com/vi/jGwO_UgTS7I/maxresdefault.jpg",
+    "imf": "Machine Learning"
+  },
+  {
+    "title": "Deep Learning Specialization - Andrew Ng (English)",
+    "file": "https://www.youtube.com/watch?v=CS4cs9xVecg",
+    "cover": "https://img.youtube.com/vi/CS4cs9xVecg/maxresdefault.jpg",
+    "imf": "Deep Learning"
+  },
+  {
+    "title": "Machine Learning in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=7eh4d6sabA0",
+    "cover": "https://img.youtube.com/vi/7eh4d6sabA0/maxresdefault.jpg",
+    "imf": "Machine Learning"
+  },
+  {
+    "title": "Python for Data Science - Hindi",
+    "file": "https://www.youtube.com/watch?v=WGJJIrtnfpk",
+    "cover": "https://img.youtube.com/vi/WGJJIrtnfpk/maxresdefault.jpg",
+    "imf": "Python"
+  },
+  {
+    "title": "PyTorch Tutorial - Complete Course (English)",
+    "file": "https://www.youtube.com/watch?v=V_xro1bcAuA",
+    "cover": "https://img.youtube.com/vi/V_xro1bcAuA/maxresdefault.jpg",
+    "imf": "Deep Learning"
+  },
+  {
+    "title": "TensorFlow 2.0 Complete Course (English)",
+    "file": "https://www.youtube.com/watch?v=tPYj3fFJGjk",
+    "cover": "https://img.youtube.com/vi/tPYj3fFJGjk/maxresdefault.jpg",
+    "imf": "Deep Learning"
+  },
+  {
+    "title": "Neural Networks from Scratch (English)",
+    "file": "https://www.youtube.com/watch?v=Wo5dMEP_BbI",
+    "cover": "https://img.youtube.com/vi/Wo5dMEP_BbI/maxresdefault.jpg",
+    "imf": "Neural Networks"
+  },
+  {
+    "title": "Deep Learning in Hindi - Complete Tutorial",
+    "file": "https://www.youtube.com/watch?v=DKSZHN7jftI",
+    "cover": "https://img.youtube.com/vi/DKSZHN7jftI/maxresdefault.jpg",
+    "imf": "Deep Learning"
+  },
+  {
+    "title": "Natural Language Processing - Stanford (English)",
+    "file": "https://www.youtube.com/watch?v=8rXD5-xhemo",
+    "cover": "https://img.youtube.com/vi/8rXD5-xhemo/maxresdefault.jpg",
+    "imf": "NLP"
+  },
+  {
+    "title": "NLP with Python - Hindi Tutorial",
+    "file": "https://www.youtube.com/watch?v=fM4qTMfCoak",
+    "cover": "https://img.youtube.com/vi/fM4qTMfCoak/maxresdefault.jpg",
+    "imf": "NLP"
+  },
+  {
+    "title": "Transformers and BERT Explained (English)",
+    "file": "https://www.youtube.com/watch?v=TQQlZhbC5ps",
+    "cover": "https://img.youtube.com/vi/TQQlZhbC5ps/maxresdefault.jpg",
+    "imf": "Transformers"
+  },
+  {
+    "title": "GPT and Large Language Models (English)",
+    "file": "https://www.youtube.com/watch?v=kCc8FmEb1nY",
+    "cover": "https://img.youtube.com/vi/kCc8FmEb1nY/maxresdefault.jpg",
+    "imf": "LLMs"
+  },
+  {
+    "title": "ChatGPT Explained - Hindi",
+    "file": "https://www.youtube.com/watch?v=JhCl-GeT4jw",
+    "cover": "https://img.youtube.com/vi/JhCl-GeT4jw/maxresdefault.jpg",
+    "imf": "LLMs"
+  },
+  {
+    "title": "Computer Vision Course - MIT (English)",
+    "file": "https://www.youtube.com/watch?v=dJYGatp4SvA",
+    "cover": "https://img.youtube.com/vi/dJYGatp4SvA/maxresdefault.jpg",
+    "imf": "Computer Vision"
+  },
+  {
+    "title": "OpenCV Python Tutorial - Hindi",
+    "file": "https://www.youtube.com/watch?v=oXlwWbU8l2o",
+    "cover": "https://img.youtube.com/vi/oXlwWbU8l2o/maxresdefault.jpg",
+    "imf": "Computer Vision"
+  },
+  {
+    "title": "YOLO Object Detection Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=ag3DLKsl2vk",
+    "cover": "https://img.youtube.com/vi/ag3DLKsl2vk/maxresdefault.jpg",
+    "imf": "Object Detection"
+  },
+  {
+    "title": "Image Classification with CNN - Hindi",
+    "file": "https://www.youtube.com/watch?v=zfiSAzpy9NM",
+    "cover": "https://img.youtube.com/vi/zfiSAzpy9NM/maxresdefault.jpg",
+    "imf": "Computer Vision"
+  },
+  {
+    "title": "Reinforcement Learning Course - DeepMind (English)",
+    "file": "https://www.youtube.com/watch?v=TCCjZe0y4Qc",
+    "cover": "https://img.youtube.com/vi/TCCjZe0y4Qc/maxresdefault.jpg",
+    "imf": "Reinforcement Learning"
+  },
+  {
+    "title": "Q-Learning Tutorial - Hindi",
+    "file": "https://www.youtube.com/watch?v=qhRNvCVVJaA",
+    "cover": "https://img.youtube.com/vi/qhRNvCVVJaA/maxresdefault.jpg",
+    "imf": "Reinforcement Learning"
+  },
+  {
+    "title": "Data Science Full Course (English)",
+    "file": "https://www.youtube.com/watch?v=ua-CiDNNj30",
+    "cover": "https://img.youtube.com/vi/ua-CiDNNj30/maxresdefault.jpg",
+    "imf": "Data Science"
+  },
+  {
+    "title": "Data Science in Hindi - Complete Roadmap",
+    "file": "https://www.youtube.com/watch?v=JL_grPUnXzY",
+    "cover": "https://img.youtube.com/vi/JL_grPUnXzY/maxresdefault.jpg",
+    "imf": "Data Science"
+  },
+  {
+    "title": "Statistics for Data Science (English)",
+    "file": "https://www.youtube.com/watch?v=xxpc-HPKN28",
+    "cover": "https://img.youtube.com/vi/xxpc-HPKN28/maxresdefault.jpg",
+    "imf": "Statistics"
+  },
+  {
+    "title": "Statistics in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=LZzq1zSL1bs",
+    "cover": "https://img.youtube.com/vi/LZzq1zSL1bs/maxresdefault.jpg",
+    "imf": "Statistics"
+  },
+  {
+    "title": "Pandas Tutorial - Complete Course (English)",
+    "file": "https://www.youtube.com/watch?v=vmEHCJofslg",
+    "cover": "https://img.youtube.com/vi/vmEHCJofslg/maxresdefault.jpg",
+    "imf": "Python"
+  },
+  {
+    "title": "Pandas in Hindi - Data Analysis",
+    "file": "https://www.youtube.com/watch?v=CmorAWRsCAw",
+    "cover": "https://img.youtube.com/vi/CmorAWRsCAw/maxresdefault.jpg",
+    "imf": "Python"
+  },
+  {
+    "title": "NumPy Tutorial for Beginners (English)",
+    "file": "https://www.youtube.com/watch?v=QUT1VHiLmmI",
+    "cover": "https://img.youtube.com/vi/QUT1VHiLmmI/maxresdefault.jpg",
+    "imf": "Python"
+  },
+  {
+    "title": "NumPy in Hindi - Complete Tutorial",
+    "file": "https://www.youtube.com/watch?v=Rbh1rieb3zc",
+    "cover": "https://img.youtube.com/vi/Rbh1rieb3zc/maxresdefault.jpg",
+    "imf": "Python"
+  },
+  {
+    "title": "Matplotlib Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=3Xc3CA655Y4",
+    "cover": "https://img.youtube.com/vi/3Xc3CA655Y4/maxresdefault.jpg",
+    "imf": "Data Visualization"
+  },
+  {
+    "title": "Data Visualization in Hindi - Matplotlib",
+    "file": "https://www.youtube.com/watch?v=DAQNHzOcO5A",
+    "cover": "https://img.youtube.com/vi/DAQNHzOcO5A/maxresdefault.jpg",
+    "imf": "Data Visualization"
+  },
+  {
+    "title": "Seaborn Tutorial - Complete Guide (English)",
+    "file": "https://www.youtube.com/watch?v=6GUZXDef2U0",
+    "cover": "https://img.youtube.com/vi/6GUZXDef2U0/maxresdefault.jpg",
+    "imf": "Data Visualization"
+  },
+  {
+    "title": "SQL for Data Science (English)",
+    "file": "https://www.youtube.com/watch?v=HXV3zeQKqGY",
+    "cover": "https://img.youtube.com/vi/HXV3zeQKqGY/maxresdefault.jpg",
+    "imf": "SQL"
+  },
+  {
+    "title": "SQL Complete Course - Hindi",
+    "file": "https://www.youtube.com/watch?v=hlGoQC332VM",
+    "cover": "https://img.youtube.com/vi/hlGoQC332VM/maxresdefault.jpg",
+    "imf": "SQL"
+  },
+  {
+    "title": "MongoDB Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=c2M-rlkkT5o",
+    "cover": "https://img.youtube.com/vi/c2M-rlkkT5o/maxresdefault.jpg",
+    "imf": "Database"
+  },
+  {
+    "title": "MongoDB in Hindi - Complete Tutorial",
+    "file": "https://www.youtube.com/watch?v=oSIv-E60NiU",
+    "cover": "https://img.youtube.com/vi/oSIv-E60NiU/maxresdefault.jpg",
+    "imf": "Database"
+  },
+  {
+    "title": "Git and GitHub Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=RGOj5yH7evk",
+    "cover": "https://img.youtube.com/vi/RGOj5yH7evk/maxresdefault.jpg",
+    "imf": "Version Control"
+  },
+  {
+    "title": "Git & GitHub in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=gwWKnnCMQ5c",
+    "cover": "https://img.youtube.com/vi/gwWKnnCMQ5c/maxresdefault.jpg",
+    "imf": "Version Control"
+  },
+  {
+    "title": "Docker Tutorial for Beginners (English)",
+    "file": "https://www.youtube.com/watch?v=fqMOX6JJhGo",
+    "cover": "https://img.youtube.com/vi/fqMOX6JJhGo/maxresdefault.jpg",
+    "imf": "DevOps"
+  },
+  {
+    "title": "Docker in Hindi - Complete Tutorial",
+    "file": "https://www.youtube.com/watch?v=31k6AtW-b3Y",
+    "cover": "https://img.youtube.com/vi/31k6AtW-b3Y/maxresdefault.jpg",
+    "imf": "DevOps"
+  },
+  {
+    "title": "Kubernetes Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=X48VuDVv0do",
+    "cover": "https://img.youtube.com/vi/X48VuDVv0do/maxresdefault.jpg",
+    "imf": "DevOps"
+  },
+  {
+    "title": "Kubernetes in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=KVBON1lA9N8",
+    "cover": "https://img.youtube.com/vi/KVBON1lA9N8/maxresdefault.jpg",
+    "imf": "DevOps"
+  },
+  {
+    "title": "AWS Tutorial for Beginners (English)",
+    "file": "https://www.youtube.com/watch?v=ulprqHHWlng",
+    "cover": "https://img.youtube.com/vi/ulprqHHWlng/maxresdefault.jpg",
+    "imf": "Cloud Computing"
+  },
+  {
+    "title": "AWS in Hindi - Complete Tutorial",
+    "file": "https://www.youtube.com/watch?v=k1RI5locZE4",
+    "cover": "https://img.youtube.com/vi/k1RI5locZE4/maxresdefault.jpg",
+    "imf": "Cloud Computing"
+  },
+  {
+    "title": "Azure Fundamentals (English)",
+    "file": "https://www.youtube.com/watch?v=NKEFWyqJ5XA",
+    "cover": "https://img.youtube.com/vi/NKEFWyqJ5XA/maxresdefault.jpg",
+    "imf": "Cloud Computing"
+  },
+  {
+    "title": "Google Cloud Platform Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=4D3X6Xl5c_Y",
+    "cover": "https://img.youtube.com/vi/4D3X6Xl5c_Y/maxresdefault.jpg",
+    "imf": "Cloud Computing"
+  },
+  {
+    "title": "MLOps Tutorial - Complete Guide (English)",
+    "file": "https://www.youtube.com/watch?v=Cj3lXW_Jk8I",
+    "cover": "https://img.youtube.com/vi/Cj3lXW_Jk8I/maxresdefault.jpg",
+    "imf": "MLOps"
+  },
+  {
+    "title": "MLOps in Hindi - End to End Project",
+    "file": "https://www.youtube.com/watch?v=pxk1Fr33-L4",
+    "cover": "https://img.youtube.com/vi/pxk1Fr33-L4/maxresdefault.jpg",
+    "imf": "MLOps"
+  },
+  {
+    "title": "FastAPI Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=0sOvCWFmrtA",
+    "cover": "https://img.youtube.com/vi/0sOvCWFmrtA/maxresdefault.jpg",
+    "imf": "Backend"
+  },
+  {
+    "title": "FastAPI in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=7t2alSnE2-I",
+    "cover": "https://img.youtube.com/vi/7t2alSnE2-I/maxresdefault.jpg",
+    "imf": "Backend"
+  },
+  {
+    "title": "Flask Tutorial for Beginners (English)",
+    "file": "https://www.youtube.com/watch?v=Z1RJmh_OqeA",
+    "cover": "https://img.youtube.com/vi/Z1RJmh_OqeA/maxresdefault.jpg",
+    "imf": "Backend"
+  },
+  {
+    "title": "Flask in Hindi - Web Development",
+    "file": "https://www.youtube.com/watch?v=4L_xAWDRs7w",
+    "cover": "https://img.youtube.com/vi/4L_xAWDRs7w/maxresdefault.jpg",
+    "imf": "Backend"
+  },
+  {
+    "title": "Django Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=F5mRW0jo-U4",
+    "cover": "https://img.youtube.com/vi/F5mRW0jo-U4/maxresdefault.jpg",
+    "imf": "Backend"
+  },
+  {
+    "title": "Django in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=JxzZxdht-XY",
+    "cover": "https://img.youtube.com/vi/JxzZxdht-XY/maxresdefault.jpg",
+    "imf": "Backend"
+  },
+  {
+    "title": "React JS Full Course (English)",
+    "file": "https://www.youtube.com/watch?v=bMknfKXIFA8",
+    "cover": "https://img.youtube.com/vi/bMknfKXIFA8/maxresdefault.jpg",
+    "imf": "Frontend"
+  },
+  {
+    "title": "React JS in Hindi - Complete Tutorial",
+    "file": "https://www.youtube.com/watch?v=RGKi6LSPDLU",
+    "cover": "https://img.youtube.com/vi/RGKi6LSPDLU/maxresdefault.jpg",
+    "imf": "Frontend"
+  },
+  {
+    "title": "Next.js Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=mTz0GXj8NN0",
+    "cover": "https://img.youtube.com/vi/mTz0GXj8NN0/maxresdefault.jpg",
+    "imf": "Frontend"
+  },
+  {
+    "title": "Next.js in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=9P8mASSREYM",
+    "cover": "https://img.youtube.com/vi/9P8mASSREYM/maxresdefault.jpg",
+    "imf": "Frontend"
+  },
+  {
+    "title": "Vue.js Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=FXpIoQ_rT_c",
+    "cover": "https://img.youtube.com/vi/FXpIoQ_rT_c/maxresdefault.jpg",
+    "imf": "Frontend"
+  },
+  {
+    "title": "Angular Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=3qBXWUpoPHo",
+    "cover": "https://img.youtube.com/vi/3qBXWUpoPHo/maxresdefault.jpg",
+    "imf": "Frontend"
+  },
+  {
+    "title": "JavaScript Full Course (English)",
+    "file": "https://www.youtube.com/watch?v=PkZNo7MFNFg",
+    "cover": "https://img.youtube.com/vi/PkZNo7MFNFg/maxresdefault.jpg",
+    "imf": "JavaScript"
+  },
+  {
+    "title": "JavaScript in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=ER9SspLe4Hg",
+    "cover": "https://img.youtube.com/vi/ER9SspLe4Hg/maxresdefault.jpg",
+    "imf": "JavaScript"
+  },
+  {
+    "title": "TypeScript Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=BwuLxPH8IDs",
+    "cover": "https://img.youtube.com/vi/BwuLxPH8IDs/maxresdefault.jpg",
+    "imf": "TypeScript"
+  },
+  {
+    "title": "TypeScript in Hindi - Complete Guide",
+    "file": "https://www.youtube.com/watch?v=d56mG7DezGs",
+    "cover": "https://img.youtube.com/vi/d56mG7DezGs/maxresdefault.jpg",
+    "imf": "TypeScript"
+  },
+  {
+    "title": "Node.js Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=TlB_eWDSMt4",
+    "cover": "https://img.youtube.com/vi/TlB_eWDSMt4/maxresdefault.jpg",
+    "imf": "Backend"
+  },
+  {
+    "title": "Node.js in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=BLl32FvcdVM",
+    "cover": "https://img.youtube.com/vi/BLl32FvcdVM/maxresdefault.jpg",
+    "imf": "Backend"
+  },
+  {
+    "title": "Express.js Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=L72fhGm1tfE",
+    "cover": "https://img.youtube.com/vi/L72fhGm1tfE/maxresdefault.jpg",
+    "imf": "Backend"
+  },
+  {
+    "title": "HTML & CSS Full Course (English)",
+    "file": "https://www.youtube.com/watch?v=mU6anWqZJcc",
+    "cover": "https://img.youtube.com/vi/mU6anWqZJcc/maxresdefault.jpg",
+    "imf": "Web Development"
+  },
+  {
+    "title": "HTML & CSS in Hindi - Complete Tutorial",
+    "file": "https://www.youtube.com/watch?v=6mbwJ2xhgzM",
+    "cover": "https://img.youtube.com/vi/6mbwJ2xhgzM/maxresdefault.jpg",
+    "imf": "Web Development"
+  },
+  {
+    "title": "Tailwind CSS Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=ft30zcMlFao",
+    "cover": "https://img.youtube.com/vi/ft30zcMlFao/maxresdefault.jpg",
+    "imf": "CSS"
+  },
+  {
+    "title": "Tailwind CSS in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=_9mTJ84uL1Q",
+    "cover": "https://img.youtube.com/vi/_9mTJ84uL1Q/maxresdefault.jpg",
+    "imf": "CSS"
+  },
+  {
+    "title": "Bootstrap 5 Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=-qfEOE4vtxE",
+    "cover": "https://img.youtube.com/vi/-qfEOE4vtxE/maxresdefault.jpg",
+    "imf": "CSS"
+  },
+  {
+    "title": "Algorithmic Trading Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=xfzGZB4HhEE",
+    "cover": "https://img.youtube.com/vi/xfzGZB4HhEE/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Algo Trading in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=c9OjEThuJjY",
+    "cover": "https://img.youtube.com/vi/c9OjEThuJjY/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Python for Trading (English)",
+    "file": "https://www.youtube.com/watch?v=xfzGZB4HhEE",
+    "cover": "https://img.youtube.com/vi/xfzGZB4HhEE/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Stock Market Trading in Hindi",
+    "file": "https://www.youtube.com/watch?v=jTzovxm_Qes",
+    "cover": "https://img.youtube.com/vi/jTzovxm_Qes/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Technical Analysis Course (English)",
+    "file": "https://www.youtube.com/watch?v=08c8uMKRNfU",
+    "cover": "https://img.youtube.com/vi/08c8uMKRNfU/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Technical Analysis in Hindi - Complete",
+    "file": "https://www.youtube.com/watch?v=nWB5FKkYOdU",
+    "cover": "https://img.youtube.com/vi/nWB5FKkYOdU/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Options Trading Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=7PM4rNDr4oI",
+    "cover": "https://img.youtube.com/vi/7PM4rNDr4oI/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Options Trading in Hindi",
+    "file": "https://www.youtube.com/watch?v=qqyfGUjDRIY",
+    "cover": "https://img.youtube.com/vi/qqyfGUjDRIY/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Cryptocurrency Trading (English)",
+    "file": "https://www.youtube.com/watch?v=1YyAzVmP9xQ",
+    "cover": "https://img.youtube.com/vi/1YyAzVmP9xQ/maxresdefault.jpg",
+    "imf": "Crypto Trading"
+  },
+  {
+    "title": "Crypto Trading in Hindi - Complete Guide",
+    "file": "https://www.youtube.com/watch?v=rYQgy8QDEBI",
+    "cover": "https://img.youtube.com/vi/rYQgy8QDEBI/maxresdefault.jpg",
+    "imf": "Crypto Trading"
+  },
+  {
+    "title": "Quantitative Finance (English)",
+    "file": "https://www.youtube.com/watch?v=wvMrRKCJwXA",
+    "cover": "https://img.youtube.com/vi/wvMrRKCJwXA/maxresdefault.jpg",
+    "imf": "Quant Finance"
+  },
+  {
+    "title": "Portfolio Management (English)",
+    "file": "https://www.youtube.com/watch?v=8TJQhQ2GZ0Y",
+    "cover": "https://img.youtube.com/vi/8TJQhQ2GZ0Y/maxresdefault.jpg",
+    "imf": "Finance"
+  },
+  {
+    "title": "Risk Management in Trading (English)",
+    "file": "https://www.youtube.com/watch?v=SW7qpFGdFHw",
+    "cover": "https://img.youtube.com/vi/SW7qpFGdFHw/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Backtesting Trading Strategies (English)",
+    "file": "https://www.youtube.com/watch?v=FfPqsQpkN8g",
+    "cover": "https://img.youtube.com/vi/FfPqsQpkN8g/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Psychology of Trading (English)",
+    "file": "https://www.youtube.com/watch?v=yDDwo7O0i-o",
+    "cover": "https://img.youtube.com/vi/yDDwo7O0i-o/maxresdefault.jpg",
+    "imf": "Trading Psychology"
+  },
+  {
+    "title": "Trading Psychology in Hindi",
+    "file": "https://www.youtube.com/watch?v=Ej0nbVwn2xE",
+    "cover": "https://img.youtube.com/vi/Ej0nbVwn2xE/maxresdefault.jpg",
+    "imf": "Trading Psychology"
+  },
+  {
+    "title": "Behavioral Economics (English)",
+    "file": "https://www.youtube.com/watch?v=vVTKXLfHZ2w",
+    "cover": "https://img.youtube.com/vi/vVTKXLfHZ2w/maxresdefault.jpg",
+    "imf": "Psychology"
+  },
+  {
+    "title": "Cognitive Psychology Course (English)",
+    "file": "https://www.youtube.com/watch?v=nyeOBbTAwnU",
+    "cover": "https://img.youtube.com/vi/nyeOBbTAwnU/maxresdefault.jpg",
+    "imf": "Psychology"
+  },
+  {
+    "title": "Psychology in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=vo4pMVb0R6M",
+    "cover": "https://img.youtube.com/vi/vo4pMVb0R6M/maxresdefault.jpg",
+    "imf": "Psychology"
+  },
+  {
+    "title": "Neuroscience Fundamentals (English)",
+    "file": "https://www.youtube.com/watch?v=nvXuq9jRWKE",
+    "cover": "https://img.youtube.com/vi/nvXuq9jRWKE/maxresdefault.jpg",
+    "imf": "Neuroscience"
+  },
+  {
+    "title": "Decision Making Psychology (English)",
+    "file": "https://www.youtube.com/watch?v=GJQ0Hh4Jj0M",
+    "cover": "https://img.youtube.com/vi/GJQ0Hh4Jj0M/maxresdefault.jpg",
+    "imf": "Psychology"
+  },
+  {
+    "title": "Human Behavior Analysis (English)",
+    "file": "https://www.youtube.com/watch?v=P_6vDLq64gE",
+    "cover": "https://img.youtube.com/vi/P_6vDLq64gE/maxresdefault.jpg",
+    "imf": "Psychology"
+  },
+  {
+    "title": "Social Psychology (English)",
+    "file": "https://www.youtube.com/watch?v=bK-4TwqLDcQ",
+    "cover": "https://img.youtube.com/vi/bK-4TwqLDcQ/maxresdefault.jpg",
+    "imf": "Psychology"
+  },
+  {
+    "title": "Emotional Intelligence (English)",
+    "file": "https://www.youtube.com/watch?v=Y7m9eNoB3NU",
+    "cover": "https://img.youtube.com/vi/Y7m9eNoB3NU/maxresdefault.jpg",
+    "imf": "Psychology"
+  },
+  {
+    "title": "Blockchain Technology (English)",
+    "file": "https://www.youtube.com/watch?v=qOVAbKKSH10",
+    "cover": "https://img.youtube.com/vi/qOVAbKKSH10/maxresdefault.jpg",
+    "imf": "Blockchain"
+  },
+  {
+    "title": "Blockchain in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=gyMwXuJrbJQ",
+    "cover": "https://img.youtube.com/vi/gyMwXuJrbJQ/maxresdefault.jpg",
+    "imf": "Blockchain"
+  },
+  {
+    "title": "Solidity Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=M576WGiDBdQ",
+    "cover": "https://img.youtube.com/vi/M576WGiDBdQ/maxresdefault.jpg",
+    "imf": "Blockchain"
+  },
+  {
+    "title": "Smart Contracts in Hindi",
+    "file": "https://www.youtube.com/watch?v=ZE2HxTmxfrI",
+    "cover": "https://img.youtube.com/vi/ZE2HxTmxfrI/maxresdefault.jpg",
+    "imf": "Blockchain"
+  },
+  {
+    "title": "Web3 Development (English)",
+    "file": "https://www.youtube.com/watch?v=gyMwXuJrbJQ",
+    "cover": "https://img.youtube.com/vi/gyMwXuJrbJQ/maxresdefault.jpg",
+    "imf": "Web3"
+  },
+  {
+    "title": "DeFi Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=pWGLtjG-F5c",
+    "cover": "https://img.youtube.com/vi/pWGLtjG-F5c/maxresdefault.jpg",
+    "imf": "DeFi"
+  },
+  {
+    "title": "NFT Development Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=YPbgjPPC1d0",
+    "cover": "https://img.youtube.com/vi/YPbgjPPC1d0/maxresdefault.jpg",
+    "imf": "NFT"
+  },
+  {
+    "title": "Ethereum Development (English)",
+    "file": "https://www.youtube.com/watch?v=M576WGiDBdQ",
+    "cover": "https://img.youtube.com/vi/M576WGiDBdQ/maxresdefault.jpg",
+    "imf": "Blockchain"
+  },
+  {
+    "title": "Rust Programming (English)",
+    "file": "https://www.youtube.com/watch?v=zF34dRivLOw",
+    "cover": "https://img.youtube.com/vi/zF34dRivLOw/maxresdefault.jpg",
+    "imf": "Programming"
+  },
+  {
+    "title": "Rust in Hindi - Complete Tutorial",
+    "file": "https://www.youtube.com/watch?v=T_KrYLW4jw8",
+    "cover": "https://img.youtube.com/vi/T_KrYLW4jw8/maxresdefault.jpg",
+    "imf": "Programming"
+  },
+  {
+    "title": "Go Programming Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=YS4e4q9oBaU",
+    "cover": "https://img.youtube.com/vi/YS4e4q9oBaU/maxresdefault.jpg",
+    "imf": "Programming"
+  },
+  {
+    "title": "Golang in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=JoJ8Sw5Yb4c",
+    "cover": "https://img.youtube.com/vi/JoJ8Sw5Yb4c/maxresdefault.jpg",
+    "imf": "Programming"
+  },
+  {
+    "title": "C++ Programming (English)",
+    "file": "https://www.youtube.com/watch?v=vLnPwxZdW4Y",
+    "cover": "https://img.youtube.com/vi/vLnPwxZdW4Y/maxresdefault.jpg",
+    "imf": "Programming"
+  },
+  {
+    "title": "C++ in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=yGB9jhsEsr8",
+    "cover": "https://img.youtube.com/vi/yGB9jhsEsr8/maxresdefault.jpg",
+    "imf": "Programming"
+  },
+  {
+    "title": "Java Programming (English)",
+    "file": "https://www.youtube.com/watch?v=eIrMbAQSU34",
+    "cover": "https://img.youtube.com/vi/eIrMbAQSU34/maxresdefault.jpg",
+    "imf": "Programming"
+  },
+  {
+    "title": "Java in Hindi - Complete Tutorial",
+    "file": "https://www.youtube.com/watch?v=ntLJmHOJ0ME",
+    "cover": "https://img.youtube.com/vi/ntLJmHOJ0ME/maxresdefault.jpg",
+    "imf": "Programming"
+  },
+  {
+    "title": "Data Structures & Algorithms (English)",
+    "file": "https://www.youtube.com/watch?v=8hly31xKli0",
+    "cover": "https://img.youtube.com/vi/8hly31xKli0/maxresdefault.jpg",
+    "imf": "DSA"
+  },
+  {
+    "title": "DSA in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=5_5oE5lgrhw",
+    "cover": "https://img.youtube.com/vi/5_5oE5lgrhw/maxresdefault.jpg",
+    "imf": "DSA"
+  },
+  {
+    "title": "System Design Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=UzLMhqg3_Wc",
+    "cover": "https://img.youtube.com/vi/UzLMhqg3_Wc/maxresdefault.jpg",
+    "imf": "System Design"
+  },
+  {
+    "title": "System Design in Hindi",
+    "file": "https://www.youtube.com/watch?v=0163cssUxLA",
+    "cover": "https://img.youtube.com/vi/0163cssUxLA/maxresdefault.jpg",
+    "imf": "System Design"
+  },
+  {
+    "title": "LeetCode Problem Solving (English)",
+    "file": "https://www.youtube.com/watch?v=KLlXCFG5TnA",
+    "cover": "https://img.youtube.com/vi/KLlXCFG5TnA/maxresdefault.jpg",
+    "imf": "Coding"
+  },
+  {
+    "title": "Competitive Programming in Hindi",
+    "file": "https://www.youtube.com/watch?v=xAeiXy8-9Y8",
+    "cover": "https://img.youtube.com/vi/xAeiXy8-9Y8/maxresdefault.jpg",
+    "imf": "Coding"
+  },
+  {
+    "title": "GraphQL Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=ed8SzALpx1Q",
+    "cover": "https://img.youtube.com/vi/ed8SzALpx1Q/maxresdefault.jpg",
+    "imf": "API"
+  },
+  {
+    "title": "REST API Design (English)",
+    "file": "https://www.youtube.com/watch?v=0oXYLzuucwE",
+    "cover": "https://img.youtube.com/vi/0oXYLzuucwE/maxresdefault.jpg",
+    "imf": "API"
+  },
+  {
+    "title": "REST API in Hindi - Complete Guide",
+    "file": "https://www.youtube.com/watch?v=BZi44GOD8kY",
+    "cover": "https://img.youtube.com/vi/BZi44GOD8kY/maxresdefault.jpg",
+    "imf": "API"
+  },
+  {
+    "title": "Microservices Architecture (English)",
+    "file": "https://www.youtube.com/watch?v=CdBtNQZH8a4",
+    "cover": "https://img.youtube.com/vi/CdBtNQZH8a4/maxresdefault.jpg",
+    "imf": "Architecture"
+  },
+  {
+    "title": "Redis Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=jgpVdJB2sKQ",
+    "cover": "https://img.youtube.com/vi/jgpVdJB2sKQ/maxresdefault.jpg",
+    "imf": "Database"
+  },
+  {
+    "title": "PostgreSQL Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=qw--VYLpxG4",
+    "cover": "https://img.youtube.com/vi/qw--VYLpxG4/maxresdefault.jpg",
+    "imf": "Database"
+  },
+  {
+    "title": "PostgreSQL in Hindi",
+    "file": "https://www.youtube.com/watch?v=zw4s3Ey8ayo",
+    "cover": "https://img.youtube.com/vi/zw4s3Ey8ayo/maxresdefault.jpg",
+    "imf": "Database"
+  },
+  {
+    "title": "Elasticsearch Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=C3tlMqaNSaI",
+    "cover": "https://img.youtube.com/vi/C3tlMqaNSaI/maxresdefault.jpg",
+    "imf": "Search"
+  },
+  {
+    "title": "Apache Kafka Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=aj9CDZm0Glc",
+    "cover": "https://img.youtube.com/vi/aj9CDZm0Glc/maxresdefault.jpg",
+    "imf": "Streaming"
+  },
+  {
+    "title": "RabbitMQ Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=deG25y_r6OY",
+    "cover": "https://img.youtube.com/vi/deG25y_r6OY/maxresdefault.jpg",
+    "imf": "Message Queue"
+  },
+  {
+    "title": "CI/CD Pipeline Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=scEDHsr3APg",
+    "cover": "https://img.youtube.com/vi/scEDHsr3APg/maxresdefault.jpg",
+    "imf": "DevOps"
+  },
+  {
+    "title": "Jenkins Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=FX322RVNGj4",
+    "cover": "https://img.youtube.com/vi/FX322RVNGj4/maxresdefault.jpg",
+    "imf": "DevOps"
+  },
+  {
+    "title": "Terraform Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=l5k1ai_GBDE",
+    "cover": "https://img.youtube.com/vi/l5k1ai_GBDE/maxresdefault.jpg",
+    "imf": "Infrastructure"
+  },
+  {
+    "title": "Ansible Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=3RiVKs8GHYQ",
+    "cover": "https://img.youtube.com/vi/3RiVKs8GHYQ/maxresdefault.jpg",
+    "imf": "DevOps"
+  },
+  {
+    "title": "Prometheus & Grafana (English)",
+    "file": "https://www.youtube.com/watch?v=h4Sl21AKiDg",
+    "cover": "https://img.youtube.com/vi/h4Sl21AKiDg/maxresdefault.jpg",
+    "imf": "Monitoring"
+  },
+  {
+    "title": "Linux Administration (English)",
+    "file": "https://www.youtube.com/watch?v=wBp0Rb-ZJak",
+    "cover": "https://img.youtube.com/vi/wBp0Rb-ZJak/maxresdefault.jpg",
+    "imf": "Linux"
+  },
+  {
+    "title": "Linux in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=_tCY-c-sPZc",
+    "cover": "https://img.youtube.com/vi/_tCY-c-sPZc/maxresdefault.jpg",
+    "imf": "Linux"
+  },
+  {
+    "title": "Bash Scripting Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=tK9Oc6AEnR4",
+    "cover": "https://img.youtube.com/vi/tK9Oc6AEnR4/maxresdefault.jpg",
+    "imf": "Scripting"
+  },
+  {
+    "title": "Cybersecurity Fundamentals (English)",
+    "file": "https://www.youtube.com/watch?v=U_P23SqJaDc",
+    "cover": "https://img.youtube.com/vi/U_P23SqJaDc/maxresdefault.jpg",
+    "imf": "Security"
+  },
+  {
+    "title": "Ethical Hacking in Hindi",
+    "file": "https://www.youtube.com/watch?v=dz7Ntp7KQGA",
+    "cover": "https://img.youtube.com/vi/dz7Ntp7KQGA/maxresdefault.jpg",
+    "imf": "Security"
+  },
+  {
+    "title": "Penetration Testing (English)",
+    "file": "https://www.youtube.com/watch?v=3Kq1MIfTWCE",
+    "cover": "https://img.youtube.com/vi/3Kq1MIfTWCE/maxresdefault.jpg",
+    "imf": "Security"
+  },
+  {
+    "title": "Network Security (English)",
+    "file": "https://www.youtube.com/watch?v=qiQR5rTSshw",
+    "cover": "https://img.youtube.com/vi/qiQR5rTSshw/maxresdefault.jpg",
+    "imf": "Security"
+  },
+  {
+    "title": "OSINT Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=qwA6MmbeGNo",
+    "cover": "https://img.youtube.com/vi/qwA6MmbeGNo/maxresdefault.jpg",
+    "imf": "Security"
+  },
+  {
+    "title": "Mobile App Development - Flutter (English)",
+    "file": "https://www.youtube.com/watch?v=VPvVD8t02U8",
+    "cover": "https://img.youtube.com/vi/VPvVD8t02U8/maxresdefault.jpg",
+    "imf": "Mobile Dev"
+  },
+  {
+    "title": "Flutter in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=_uOgXpEHNbc",
+    "cover": "https://img.youtube.com/vi/_uOgXpEHNbc/maxresdefault.jpg",
+    "imf": "Mobile Dev"
+  },
+  {
+    "title": "React Native Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=0-S5a0eXPoc",
+    "cover": "https://img.youtube.com/vi/0-S5a0eXPoc/maxresdefault.jpg",
+    "imf": "Mobile Dev"
+  },
+  {
+    "title": "React Native in Hindi",
+    "file": "https://www.youtube.com/watch?v=ANdSdIlgsEw",
+    "cover": "https://img.youtube.com/vi/ANdSdIlgsEw/maxresdefault.jpg",
+    "imf": "Mobile Dev"
+  },
+  {
+    "title": "Android Development - Kotlin (English)",
+    "file": "https://www.youtube.com/watch?v=F9UC9DY-vIU",
+    "cover": "https://img.youtube.com/vi/F9UC9DY-vIU/maxresdefault.jpg",
+    "imf": "Android"
+  },
+  {
+    "title": "Android Development in Hindi",
+    "file": "https://www.youtube.com/watch?v=aS__9RbCyHg",
+    "cover": "https://img.youtube.com/vi/aS__9RbCyHg/maxresdefault.jpg",
+    "imf": "Android"
+  },
+  {
+    "title": "iOS Development - Swift (English)",
+    "file": "https://www.youtube.com/watch?v=comQ1-x2a1Q",
+    "cover": "https://img.youtube.com/vi/comQ1-x2a1Q/maxresdefault.jpg",
+    "imf": "iOS"
+  },
+  {
+    "title": "SwiftUI Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=F2ojC6TNwws",
+    "cover": "https://img.youtube.com/vi/F2ojC6TNwws/maxresdefault.jpg",
+    "imf": "iOS"
+  },
+  {
+    "title": "Game Development - Unity (English)",
+    "file": "https://www.youtube.com/watch?v=gB1F9G0JXOo",
+    "cover": "https://img.youtube.com/vi/gB1F9G0JXOo/maxresdefault.jpg",
+    "imf": "Game Dev"
+  },
+  {
+    "title": "Unity in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=pwZpJzpE2lQ",
+    "cover": "https://img.youtube.com/vi/pwZpJzpE2lQ/maxresdefault.jpg",
+    "imf": "Game Dev"
+  },
+  {
+    "title": "Unreal Engine Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=k-zMkzmduqI",
+    "cover": "https://img.youtube.com/vi/k-zMkzmduqI/maxresdefault.jpg",
+    "imf": "Game Dev"
+  },
+  {
+    "title": "Godot Game Engine (English)",
+    "file": "https://www.youtube.com/watch?v=LOhfqjmasi0",
+    "cover": "https://img.youtube.com/vi/LOhfqjmasi0/maxresdefault.jpg",
+    "imf": "Game Dev"
+  },
+  {
+    "title": "Blender 3D Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=nIoXOplUvAw",
+    "cover": "https://img.youtube.com/vi/nIoXOplUvAw/maxresdefault.jpg",
+    "imf": "3D Modeling"
+  },
+  {
+    "title": "Blender in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=jnj2BL4chaQ",
+    "cover": "https://img.youtube.com/vi/jnj2BL4chaQ/maxresdefault.jpg",
+    "imf": "3D Modeling"
+  },
+  {
+    "title": "Adobe Photoshop Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=IyR_uYsRdPs",
+    "cover": "https://img.youtube.com/vi/IyR_uYsRdPs/maxresdefault.jpg",
+    "imf": "Design"
+  },
+  {
+    "title": "Photoshop in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=34ke6TzoeZQ",
+    "cover": "https://img.youtube.com/vi/34ke6TzoeZQ/maxresdefault.jpg",
+    "imf": "Design"
+  },
+  {
+    "title": "Figma UI/UX Design (English)",
+    "file": "https://www.youtube.com/watch?v=FTFaQWZBqQ8",
+    "cover": "https://img.youtube.com/vi/FTFaQWZBqQ8/maxresdefault.jpg",
+    "imf": "UI/UX"
+  },
+  {
+    "title": "Figma in Hindi - Complete Tutorial",
+    "file": "https://www.youtube.com/watch?v=4YPRqHMoJQ8",
+    "cover": "https://img.youtube.com/vi/4YPRqHMoJQ8/maxresdefault.jpg",
+    "imf": "UI/UX"
+  },
+  {
+    "title": "Adobe Illustrator Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=Ib8UBwu3yGA",
+    "cover": "https://img.youtube.com/vi/Ib8UBwu3yGA/maxresdefault.jpg",
+    "imf": "Design"
+  },
+  {
+    "title": "After Effects Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=vCqMgP7W-Gg",
+    "cover": "https://img.youtube.com/vi/vCqMgP7W-Gg/maxresdefault.jpg",
+    "imf": "Motion Graphics"
+  },
+  {
+    "title": "Premiere Pro Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=Hls3Tp7JS8E",
+    "cover": "https://img.youtube.com/vi/Hls3Tp7JS8E/maxresdefault.jpg",
+    "imf": "Video Editing"
+  },
+  {
+    "title": "DaVinci Resolve Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=63Ln33O4p4c",
+    "cover": "https://img.youtube.com/vi/63Ln33O4p4c/maxresdefault.jpg",
+    "imf": "Video Editing"
+  },
+  {
+    "title": "Excel for Data Analysis (English)",
+    "file": "https://www.youtube.com/watch?v=Vl0H-qTclOg",
+    "cover": "https://img.youtube.com/vi/Vl0H-qTclOg/maxresdefault.jpg",
+    "imf": "Excel"
+  },
+  {
+    "title": "Excel in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=RJlPSLZAb_E",
+    "cover": "https://img.youtube.com/vi/RJlPSLZAb_E/maxresdefault.jpg",
+    "imf": "Excel"
+  },
+  {
+    "title": "Power BI Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=AGrl-H87pRU",
+    "cover": "https://img.youtube.com/vi/AGrl-H87pRU/maxresdefault.jpg",
+    "imf": "Business Intelligence"
+  },
+  {
+    "title": "Power BI in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=3u7MQz1EyPY",
+    "cover": "https://img.youtube.com/vi/3u7MQz1EyPY/maxresdefault.jpg",
+    "imf": "Business Intelligence"
+  },
+  {
+    "title": "Tableau Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=aHaOIvR00So",
+    "cover": "https://img.youtube.com/vi/aHaOIvR00So/maxresdefault.jpg",
+    "imf": "Business Intelligence"
+  },
+  {
+    "title": "Tableau in Hindi - Complete Guide",
+    "file": "https://www.youtube.com/watch?v=jj6-0cvcNEA",
+    "cover": "https://img.youtube.com/vi/jj6-0cvcNEA/maxresdefault.jpg",
+    "imf": "Business Intelligence"
+  },
+  {
+    "title": "R Programming for Data Science (English)",
+    "file": "https://www.youtube.com/watch?v=_V8eKsto3Ug",
+    "cover": "https://img.youtube.com/vi/_V8eKsto3Ug/maxresdefault.jpg",
+    "imf": "R Programming"
+  },
+  {
+    "title": "R Programming in Hindi",
+    "file": "https://www.youtube.com/watch?v=fDRa82lxzaU",
+    "cover": "https://img.youtube.com/vi/fDRa82lxzaU/maxresdefault.jpg",
+    "imf": "R Programming"
+  },
+  {
+    "title": "Generative AI Course (English)",
+    "file": "https://www.youtube.com/watch?v=mEsleV16qdo",
+    "cover": "https://img.youtube.com/vi/mEsleV16qdo/maxresdefault.jpg",
+    "imf": "Generative AI"
+  },
+  {
+    "title": "Stable Diffusion Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=DHaL56P6f5M",
+    "cover": "https://img.youtube.com/vi/DHaL56P6f5M/maxresdefault.jpg",
+    "imf": "Image Generation"
+  },
+  {
+    "title": "Midjourney Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=_bYELqKkNh0",
+    "cover": "https://img.youtube.com/vi/_bYELqKkNh0/maxresdefault.jpg",
+    "imf": "Image Generation"
+  },
+  {
+    "title": "Prompt Engineering Course (English)",
+    "file": "https://www.youtube.com/watch?v=_ZvnD73m40o",
+    "cover": "https://img.youtube.com/vi/_ZvnD73m40o/maxresdefault.jpg",
+    "imf": "Prompt Engineering"
+  },
+  {
+    "title": "LangChain Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=LbT1yp6quS8",
+    "cover": "https://img.youtube.com/vi/LbT1yp6quS8/maxresdefault.jpg",
+    "imf": "LLM Development"
+  },
+  {
+    "title": "Vector Databases Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=dN0lsF2cvm4",
+    "cover": "https://img.youtube.com/vi/dN0lsF2cvm4/maxresdefault.jpg",
+    "imf": "Vector DB"
+  },
+  {
+    "title": "RAG Tutorial - Retrieval Augmented Generation (English)",
+    "file": "https://www.youtube.com/watch?v=T-D1OfcDW1M",
+    "cover": "https://img.youtube.com/vi/T-D1OfcDW1M/maxresdefault.jpg",
+    "imf": "LLM Applications"
+  },
+  {
+    "title": "Fine-tuning LLMs (English)",
+    "file": "https://www.youtube.com/watch?v=eC6Hd1hFvos",
+    "cover": "https://img.youtube.com/vi/eC6Hd1hFvos/maxresdefault.jpg",
+    "imf": "LLM Training"
+  },
+  {
+    "title": "Hugging Face Transformers (English)",
+    "file": "https://www.youtube.com/watch?v=QEaBAZQCtwE",
+    "cover": "https://img.youtube.com/vi/QEaBAZQCtwE/maxresdefault.jpg",
+    "imf": "Transformers"
+  },
+  {
+    "title": "Building AI Agents (English)",
+    "file": "https://www.youtube.com/watch?v=F8NKVhkZZWI",
+    "cover": "https://img.youtube.com/vi/F8NKVhkZZWI/maxresdefault.jpg",
+    "imf": "AI Agents"
+  },
+  {
+    "title": "AutoGPT Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=jn8n212l3PQ",
+    "cover": "https://img.youtube.com/vi/jn8n212l3PQ/maxresdefault.jpg",
+    "imf": "AI Agents"
+  },
+  {
+    "title": "Quantum Computing Basics (English)",
+    "file": "https://www.youtube.com/watch?v=QuR969uMICM",
+    "cover": "https://img.youtube.com/vi/QuR969uMICM/maxresdefault.jpg",
+    "imf": "Quantum Computing"
+  },
+  {
+    "title": "Edge AI and TinyML (English)",
+    "file": "https://www.youtube.com/watch?v=Ejld8XZmvwE",
+    "cover": "https://img.youtube.com/vi/Ejld8XZmvwE/maxresdefault.jpg",
+    "imf": "Edge AI"
+  },
+  {
+    "title": "IoT Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=h0gWfVCSGQQ",
+    "cover": "https://img.youtube.com/vi/h0gWfVCSGQQ/maxresdefault.jpg",
+    "imf": "IoT"
+  },
+  {
+    "title": "Arduino Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=zJ-LqeX_fLU",
+    "cover": "https://img.youtube.com/vi/zJ-LqeX_fLU/maxresdefault.jpg",
+    "imf": "Electronics"
+  },
+  {
+    "title": "Raspberry Pi Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=BpJCAafw2qE",
+    "cover": "https://img.youtube.com/vi/BpJCAafw2qE/maxresdefault.jpg",
+    "imf": "Electronics"
+  },
+  {
+    "title": "Robotics Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=0yD3uBshJB0",
+    "cover": "https://img.youtube.com/vi/0yD3uBshJB0/maxresdefault.jpg",
+    "imf": "Robotics"
+  },
+  {
+    "title": "ROS (Robot Operating System) Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=9U6GDonGFHw",
+    "cover": "https://img.youtube.com/vi/9U6GDonGFHw/maxresdefault.jpg",
+    "imf": "Robotics"
+  },
+  {
+    "title": "Computer Networks (English)",
+    "file": "https://www.youtube.com/watch?v=IPvYjXCsTg8",
+    "cover": "https://img.youtube.com/vi/IPvYjXCsTg8/maxresdefault.jpg",
+    "imf": "Networking"
+  },
+  {
+    "title": "Computer Networks in Hindi",
+    "file": "https://www.youtube.com/watch?v=VwN91x5i25g",
+    "cover": "https://img.youtube.com/vi/VwN91x5i25g/maxresdefault.jpg",
+    "imf": "Networking"
+  },
+  {
+    "title": "Operating Systems (English)",
+    "file": "https://www.youtube.com/watch?v=vBURTt97EkA",
+    "cover": "https://img.youtube.com/vi/vBURTt97EkA/maxresdefault.jpg",
+    "imf": "OS"
+  },
+  {
+    "title": "Operating Systems in Hindi",
+    "file": "https://www.youtube.com/watch?v=bkSWJJZNgf8",
+    "cover": "https://img.youtube.com/vi/bkSWJJZNgf8/maxresdefault.jpg",
+    "imf": "OS"
+  },
+  {
+    "title": "Database Management Systems (English)",
+    "file": "https://www.youtube.com/watch?v=ztHopE5Wnpc",
+    "cover": "https://img.youtube.com/vi/ztHopE5Wnpc/maxresdefault.jpg",
+    "imf": "DBMS"
+  },
+  {
+    "title": "DBMS in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=dl00fOOYLOM",
+    "cover": "https://img.youtube.com/vi/dl00fOOYLOM/maxresdefault.jpg",
+    "imf": "DBMS"
+  },
+  {
+    "title": "Compiler Design (English)",
+    "file": "https://www.youtube.com/watch?v=Qkwj65l_96I",
+    "cover": "https://img.youtube.com/vi/Qkwj65l_96I/maxresdefault.jpg",
+    "imf": "Computer Science"
+  },
+  {
+    "title": "Theory of Computation (English)",
+    "file": "https://www.youtube.com/watch?v=58N2N7zJGrQ",
+    "cover": "https://img.youtube.com/vi/58N2N7zJGrQ/maxresdefault.jpg",
+    "imf": "Computer Science"
+  },
+  {
+    "title": "Digital Marketing Course (English)",
+    "file": "https://www.youtube.com/watch?v=nU-IIXBWlS4",
+    "cover": "https://img.youtube.com/vi/nU-IIXBWlS4/maxresdefault.jpg",
+    "imf": "Marketing"
+  },
+  {
+    "title": "Digital Marketing in Hindi",
+    "file": "https://www.youtube.com/watch?v=geFvGxl6t5Q",
+    "cover": "https://img.youtube.com/vi/geFvGxl6t5Q/maxresdefault.jpg",
+    "imf": "Marketing"
+  },
+  {
+    "title": "SEO Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=SnxeXZpZkI0",
+    "cover": "https://img.youtube.com/vi/SnxeXZpZkI0/maxresdefault.jpg",
+    "imf": "SEO"
+  },
+  {
+    "title": "SEO in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=geFvGxl6t5Q",
+    "cover": "https://img.youtube.com/vi/geFvGxl6t5Q/maxresdefault.jpg",
+    "imf": "SEO"
+  },
+  {
+    "title": "Content Writing Course (English)",
+    "file": "https://www.youtube.com/watch?v=yGKYJyrqHsA",
+    "cover": "https://img.youtube.com/vi/yGKYJyrqHsA/maxresdefault.jpg",
+    "imf": "Content Writing"
+  },
+  {
+    "title": "Copywriting Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=hJF3Vm8fHWw",
+    "cover": "https://img.youtube.com/vi/hJF3Vm8fHWw/maxresdefault.jpg",
+    "imf": "Copywriting"
+  },
+  {
+    "title": "Email Marketing (English)",
+    "file": "https://www.youtube.com/watch?v=YBPLcHVQPpI",
+    "cover": "https://img.youtube.com/vi/YBPLcHVQPpI/maxresdefault.jpg",
+    "imf": "Marketing"
+  },
+  {
+    "title": "Social Media Marketing (English)",
+    "file": "https://www.youtube.com/watch?v=3Sk7cOqB9Dk",
+    "cover": "https://img.youtube.com/vi/3Sk7cOqB9Dk/maxresdefault.jpg",
+    "imf": "Marketing"
+  },
+  {
+    "title": "Affiliate Marketing Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=jMB5k8RLNRo",
+    "cover": "https://img.youtube.com/vi/jMB5k8RLNRo/maxresdefault.jpg",
+    "imf": "Marketing"
+  },
+  {
+    "title": "Affiliate Marketing in Hindi",
+    "file": "https://www.youtube.com/watch?v=HAqSz_c3BHw",
+    "cover": "https://img.youtube.com/vi/HAqSz_c3BHw/maxresdefault.jpg",
+    "imf": "Marketing"
+  },
+  {
+    "title": "YouTube Growth Strategy (English)",
+    "file": "https://www.youtube.com/watch?v=3Sk7cOqB9Dk",
+    "cover": "https://img.youtube.com/vi/3Sk7cOqB9Dk/maxresdefault.jpg",
+    "imf": "YouTube"
+  },
+  {
+    "title": "YouTube Tips in Hindi",
+    "file": "https://www.youtube.com/watch?v=Ej0Kijd4_4Q",
+    "cover": "https://img.youtube.com/vi/Ej0Kijd4_4Q/maxresdefault.jpg",
+    "imf": "YouTube"
+  },
+  {
+    "title": "Entrepreneurship Course (English)",
+    "file": "https://www.youtube.com/watch?v=wbkwHIRfN3E",
+    "cover": "https://img.youtube.com/vi/wbkwHIRfN3E/maxresdefault.jpg",
+    "imf": "Business"
+  },
+  {
+    "title": "Startup Guide in Hindi",
+    "file": "https://www.youtube.com/watch?v=0JCBCL8xZmI",
+    "cover": "https://img.youtube.com/vi/0JCBCL8xZmI/maxresdefault.jpg",
+    "imf": "Business"
+  },
+  {
+    "title": "Product Management (English)",
+    "file": "https://www.youtube.com/watch?v=2zqJg_6H8Rc",
+    "cover": "https://img.youtube.com/vi/2zqJg_6H8Rc/maxresdefault.jpg",
+    "imf": "Product Management"
+  },
+  {
+    "title": "Project Management - PMP (English)",
+    "file": "https://www.youtube.com/watch?v=vzqDTSZOTic",
+    "cover": "https://img.youtube.com/vi/vzqDTSZOTic/maxresdefault.jpg",
+    "imf": "Project Management"
+  },
+  {
+    "title": "Agile & Scrum Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=2Vt7Ik8Ublw",
+    "cover": "https://img.youtube.com/vi/2Vt7Ik8Ublw/maxresdefault.jpg",
+    "imf": "Agile"
+  },
+  {
+    "title": "Scrum in Hindi - Complete Guide",
+    "file": "https://www.youtube.com/watch?v=XU0llRltyFM",
+    "cover": "https://img.youtube.com/vi/XU0llRltyFM/maxresdefault.jpg",
+    "imf": "Agile"
+  },
+  {
+    "title": "Business Analytics (English)",
+    "file": "https://www.youtube.com/watch?v=VjwMMCuIyZo",
+    "cover": "https://img.youtube.com/vi/VjwMMCuIyZo/maxresdefault.jpg",
+    "imf": "Analytics"
+  },
+  {
+    "title": "Financial Modeling (English)",
+    "file": "https://www.youtube.com/watch?v=WgKPpsJIgQg",
+    "cover": "https://img.youtube.com/vi/WgKPpsJIgQg/maxresdefault.jpg",
+    "imf": "Finance"
+  },
+  {
+    "title": "Accounting Basics (English)",
+    "file": "https://www.youtube.com/watch?v=FXpIoQ_rT_c",
+    "cover": "https://img.youtube.com/vi/FXpIoQ_rT_c/maxresdefault.jpg",
+    "imf": "Accounting"
+  },
+  {
+    "title": "Personal Finance in Hindi",
+    "file": "https://www.youtube.com/watch?v=Ej0Kijd4_4Q",
+    "cover": "https://img.youtube.com/vi/Ej0Kijd4_4Q/maxresdefault.jpg",
+    "imf": "Finance"
+  },
+  {
+    "title": "Investment Strategies (English)",
+    "file": "https://www.youtube.com/watch?v=gFr9FTSkDw4",
+    "cover": "https://img.youtube.com/vi/gFr9FTSkDw4/maxresdefault.jpg",
+    "imf": "Investing"
+  },
+  {
+    "title": "Mutual Funds in Hindi",
+    "file": "https://www.youtube.com/watch?v=Wz5pRCD8tPU",
+    "cover": "https://img.youtube.com/vi/Wz5pRCD8tPU/maxresdefault.jpg",
+    "imf": "Investing"
+  },
+  {
+    "title": "Real Estate Investing (English)",
+    "file": "https://www.youtube.com/watch?v=YBPLcHVQPpI",
+    "cover": "https://img.youtube.com/vi/YBPLcHVQPpI/maxresdefault.jpg",
+    "imf": "Real Estate"
+  },
+  {
+    "title": "Communication Skills (English)",
+    "file": "https://www.youtube.com/watch?v=cXAF5fPadFo",
+    "cover": "https://img.youtube.com/vi/cXAF5fPadFo/maxresdefault.jpg",
+    "imf": "Soft Skills"
+  },
+  {
+    "title": "Public Speaking in Hindi",
+    "file": "https://www.youtube.com/watch?v=Ej0Kijd4_4Q",
+    "cover": "https://img.youtube.com/vi/Ej0Kijd4_4Q/maxresdefault.jpg",
+    "imf": "Soft Skills"
+  },
+  {
+    "title": "Leadership Skills (English)",
+    "file": "https://www.youtube.com/watch?v=ks-gx5EbZs4",
+    "cover": "https://img.youtube.com/vi/ks-gx5EbZs4/maxresdefault.jpg",
+    "imf": "Leadership"
+  },
+  {
+    "title": "Time Management (English)",
+    "file": "https://www.youtube.com/watch?v=iONDebHX9qk",
+    "cover": "https://img.youtube.com/vi/iONDebHX9qk/maxresdefault.jpg",
+    "imf": "Productivity"
+  },
+  {
+    "title": "Productivity Hacks in Hindi",
+    "file": "https://www.youtube.com/watch?v=Ej0Kijd4_4Q",
+    "cover": "https://img.youtube.com/vi/Ej0Kijd4_4Q/maxresdefault.jpg",
+    "imf": "Productivity"
+  },
+  {
+    "title": "Critical Thinking (English)",
+    "file": "https://www.youtube.com/watch?v=Qhm6TUPqM-w",
+    "cover": "https://img.youtube.com/vi/Qhm6TUPqM-w/maxresdefault.jpg",
+    "imf": "Thinking"
+  },
+  {
+    "title": "Problem Solving Skills (English)",
+    "file": "https://www.youtube.com/watch?v=UFdR8w_R1HA",
+    "cover": "https://img.youtube.com/vi/UFdR8w_R1HA/maxresdefault.jpg",
+    "imf": "Skills"
+  },
+  {
+    "title": "Memory Techniques (English)",
+    "file": "https://www.youtube.com/watch?v=mh45igK4Esw",
+    "cover": "https://img.youtube.com/vi/mh45igK4Esw/maxresdefault.jpg",
+    "imf": "Learning"
+  },
+  {
+    "title": "Speed Reading Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=ZwEquW_Yij0",
+    "cover": "https://img.youtube.com/vi/ZwEquW_Yij0/maxresdefault.jpg",
+    "imf": "Learning"
+  },
+  {
+    "title": "Study Techniques in Hindi",
+    "file": "https://www.youtube.com/watch?v=Ej0Kijd4_4Q",
+    "cover": "https://img.youtube.com/vi/Ej0Kijd4_4Q/maxresdefault.jpg",
+    "imf": "Learning"
+  },
+  {
+    "title": "Interview Preparation (English)",
+    "file": "https://www.youtube.com/watch?v=ji5_MqicxSo",
+    "cover": "https://img.youtube.com/vi/ji5_MqicxSo/maxresdefault.jpg",
+    "imf": "Career"
+  },
+  {
+    "title": "Resume Building in Hindi",
+    "file": "https://www.youtube.com/watch?v=Ej0Kijd4_4Q",
+    "cover": "https://img.youtube.com/vi/Ej0Kijd4_4Q/maxresdefault.jpg",
+    "imf": "Career"
+  },
+  {
+    "title": "Career Guidance (English)",
+    "file": "https://www.youtube.com/watch?v=C_r5UJrxcck",
+    "cover": "https://img.youtube.com/vi/C_r5UJrxcck/maxresdefault.jpg",
+    "imf": "Career"
+  },
+  {
+    "title": "Freelancing Guide (English)",
+    "file": "https://www.youtube.com/watch?v=YBPLcHVQPpI",
+    "cover": "https://img.youtube.com/vi/YBPLcHVQPpI/maxresdefault.jpg",
+    "imf": "Freelancing"
+  },
+  {
+    "title": "Freelancing in Hindi - Complete Guide",
+    "file": "https://www.youtube.com/watch?v=Ej0Kijd4_4Q",
+    "cover": "https://img.youtube.com/vi/Ej0Kijd4_4Q/maxresdefault.jpg",
+    "imf": "Freelancing"
+  }
+]

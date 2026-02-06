@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Lab App Mobile Pro</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* Base Setup */
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body { margin: 0; font-family: -apple-system, sans-serif; transition: background 0.3s; }
+
+/* Grid Layout - Strict 3 Columns */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 10px 10px 80px 10px;
+}
+
+.card {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s;
+    text-align: center;
+    position: relative; /* needed for badge positioning */
+    cursor: pointer;
+}
+.card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
+.card-info { padding: 6px 6px 12px 6px; display:flex; flex-direction:column; gap:6px; align-items:center; }
+.card-info strong { display: block; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-info small { font-size: 9px; opacity: 0.7; text-align:center; }
+
+/* Badge / Capsule inside card (top-left) */
+.card-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* Category Button moved to bottom inside card-info */
+.card-category {
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+    z-index: 11;
+    border: none;
+    cursor: pointer;
+    background: rgba(0,0,0,0.12);
+    white-space: nowrap;
+}
+
+/* type-specific colors (class names generated from JSON type) */
+.type-app { background: linear-gradient(90deg,#10b981,#059669); }
+.type-website { background: linear-gradient(90deg,#3b82f6,#2563eb); }
+.type-mod-apk, .type-mod { background: linear-gradient(90deg,#fb923c,#f97316); }
+
+/* category-specific colors */
+.cat-ai { background: linear-gradient(90deg,#7c3aed,#5b21b6); }          /* purple */
+.cat-editing { background: linear-gradient(90deg,#f97316,#fb923c); }     /* orange */
+.cat-earning { background: linear-gradient(90deg,#f43f5e,#ef4444); }     /* red */
+.cat-design { background: linear-gradient(90deg,#06b6d4,#0891b2); }      /* teal */
+.cat-development { background: linear-gradient(90deg,#2563eb,#1e40af); } /* blue */
+.cat-education { background: linear-gradient(90deg,#f59e0b,#d97706); }   /* amber */
+.cat-productivity { background: linear-gradient(90deg,#10b981,#059669); }/* green */
+.cat-utility { background: linear-gradient(90deg,#64748b,#475569); }     /* gray/indigo */
+.cat-media { background: linear-gradient(90deg,#ef77ff,#a855f7); }       /* pink/purple */
+.cat-analytics { background: linear-gradient(90deg,#06b6d4,#0ea5a4); }   /* cyan */
+.cat-finance { background: linear-gradient(90deg,#0ea5a4,#059669); }     /* mint/green */
+.cat-unknown { background: linear-gradient(90deg,#94a3b8,#64748b); }     /* muted */
+
+/* UI Placements */
+.tab-bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px;
+    padding: 10px 5px;
+    border-radius: 15px;
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+}
+.tab-bar button { background: none; border: none; font-size: 20px; color: white !important; cursor: pointer; }
+
+.search-bar { margin: 15px 10px; display: flex; gap: 8px; }
+.search-bar input { flex: 1; padding: 12px; border-radius: 12px; border: 1px solid transparent; outline: none; font-size: 14px; }
+.search-bar button { padding: 0 15px; border-radius: 12px; border: none; font-weight: bold; }
+
+/* Modal & Toast */
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 1000; }
+.modal-content { border-radius: 20px; padding: 20px; width: 85%; max-width: 300px; text-align: center; }
+.modal img { width: 100px; height: 100px; border-radius: 15px; margin-bottom: 10px; }
+.modal-buttons { display: flex; gap: 10px; margin-top: 15px; }
+.modal-buttons button { flex: 1; padding: 12px; border-radius: 10px; border: none; font-weight: bold; }
+
+#noinfo-modal .modal-content { max-width: 320px; }
+#noinfo-modal .modal-content p { color: #f3f4f6; margin: 8px 0 0; }
+
+#toast {
+    position: fixed; bottom:px; left: 50%; transform: translateX(-45%);
+    padding: 10px 20px; border-radius: 20px; font-size: 12px; font-weight: bold;
+    display: none; z-index: 2000;
+}
+</style>
+</head>
+<body>
+<iframe src="loader.html" id="app-loader" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    z-index: 999999;
+    background: white; /* Start solid white */
+    transition: opacity 0.8s ease;
+"></iframe>
+
+<script>
+    // Detect when the background page is fully loaded
+    window.addEventListener('load', function() {
+        const loader = document.getElementById('app-loader');
+        
+        // Wait for the logo merge animation to finish (approx 3 seconds)
+        setTimeout(() => {
+            loader.style.opacity = "0"; // Fade out
+            setTimeout(() => {
+                loader.remove(); // Delete from page
+            }, 800);
+        }, 3000); 
+    });
+</script>
+
+<div class="tab-bar">
+    <button id="mod" title="Mod APK"><i class="fa fa-file-zipper"></i></button>
+    <button id="web" title="Website"><i class="fa fa-globe"></i></button>
+    <button id="apps" title="Apps"><i class="fa fa-android"></i></button>
+    <button id="favourite" title="Favourites"><i class="fa fa-star"></i></button>
+</div>
+
+<div class="search-bar">
+    <input type="text" id="search-input" placeholder="Search resources...">
+    <button id="search-btn">🔍︎</button>
+</div>
+
+<div class="grid" id="content"></div>
+
+<!-- Standard item modal -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <img id="modal-img" src="">
+    <h3 id="modal-name"></h3>
+    <p id="modal-info"></p>
+    <div class="modal-buttons">
+      <button class="fav-btn" id="add-fav"> 🖤</button>
+      <button class="open-btn" id="open-link">Open</button>
+    </div>
+  </div>
+</div>
+
+<!-- No-info modal -->
+<div class="modal" id="noinfo-modal" aria-hidden="true">
+  <div class="modal-content">
+    <h3>No information available</h3>
+    <p>This item doesn't include descriptive information.</p>
+    <div class="modal-buttons">
+      <button id="noinfo-close" style="background:#222;color:#fff;border-radius:10px;padding:10px;border:none;">Close</button>
+      <button id="noinfo-open" style="background:#10b981;color:#000;border-radius:10px;padding:10px;border:none;">Open anyway</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast">Saved!</div>
+
+<script>
+(function() {
+    // 1. Theme Logic (unchanged)
+    const savedTheme = localStorage.getItem('perfectTheme') || 'dark';
+    const applyForceTheme = (theme) => {
+        const isDark = theme === 'dark';
+        let style = document.getElementById("force-lab-emerald");
+        if (!style) {
+            style = document.createElement('style');
+            style.id = "force-lab-emerald";
+            document.head.appendChild(style);
+        }
+
+        if (isDark) {
+            style.innerHTML = `
+                body { background: #010d08 !important; color: #ecfdf5 !important; }
+                .tab-bar { background: linear-gradient(145deg, #064e3b, #042f24) !important; border: 1px solid rgba(16,185,129,0.3) !important; box-shadow: 0 8px 20px rgba(0,0,0,0.5) !important;}
+                .search-bar input { background: #042f24 !important; color: white !important; border-color: rgba(16,185,129,0.2) !important; }
+                .search-bar button { background: #10b981 !important; color: #010d08 !important; }
+                .card { background: #062d1f !important; border: 1px solid rgba(255,255,255,0.05) !important; }
+                .modal-content { background: #063d2b !important; border: 1px solid #10b981 !important; color: white !important; }
+                .fav-btn { background: white !important; color: black !important; }
+                .open-btn { background: #10b981 !important; color: #010d08 !important; }
+                #toast { background: #10b981 !important; color: #000 !important; }
+            `;
+        } else {
+            style.innerHTML = `
+                body { background: #f0fdf4 !important; color: #064e3b !important; }
+                .tab-bar { background: #10b981 !important; border: 1px solid #059669 !important; }
+                .search-bar input { background: white !important; color: black !important; border-color: #059669 !important; }
+                .search-bar button { background: #064e3b !important; color: white !important; }
+                .card { background: white !important; border: 1px solid #d1fae5 !important; box-shadow: 0 2px 5px rgba(0,0,0,0.05) !important; }
+                .modal-content { background: white !important; border: 1px solid #10b981 !important; color: black !important; }
+                .fav-btn { background: #064e3b !important; color: white !important; }
+                .open-btn { background: #10b981 !important; color: white !important; }
+                #toast { background: #064e3b !important; color: #fff !important; }
+            `;
+        }
+    };
+    applyForceTheme(savedTheme);
+})();
+
+// 2. Core App Logic
+let data = [], filteredData = [], currentIndex = 0, batchSize = 21, currentFilter = "all", currentItem = null;
+let categoryFilter = null;
+let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+const content = document.getElementById('content');
+const modal = document.getElementById('modal');
+const noinfoModal = document.getElementById('noinfo-modal');
+const searchInput = document.getElementById('search-input');
+
+// Try apps.json first, fallback to apps.json.txt
+fetch('apps.json').then(res => {
+    if (!res.ok) return fetch('apps.json.txt');
+    return res;
+}).then(res => res.json()).then(json=>{
+    data = json.items || [];
+    // Render initial view showing Mod APK items by default (same as before)
+    resetRender('Mod APK');
+}).catch(err=>{
+    console.error('Failed to load apps JSON:', err);
+    data = [];
+    resetRender();
+});
+
+/* Category detection (prefers item.category if present) */
+function getCategory(item) {
+    const text = ((item.name || "") + " " + (item.info || "")).toLowerCase();
+    const keywords = {
+        ai: ['ai','chatgpt','claude','gemini','assistant','copilot','ai assistant','palm','llm','large model','anthropic','hugging','poe','perplexity','pi.ai'],
+        editing: ['photo','image','edit','editor','photoshop','photopea','pixlr','remove.bg','remove','dall','midjourney','stable diffusion','craiyon','leonardo','iconmaker','tilemaker'],
+        earning: ['earn','earning','cash','pay','wallet','money','affiliate','monet','income','stripe','earnings'],
+        design: ['figma','miro','uizard','prototype','design','ui/ux','canva','brand kit','mockup'],
+        development: ['github','gitpod','replit','codesandbox','stackblitz','cursor','autocode','gitwit','dev','code','developer'],
+        education: ['khan','coursera','edx','mit','open course','quizlet','duolingo','wolfram','education','learn','ocw','arxiv','semantic scholar'],
+        productivity: ['notion','task','todo','trello','asana','airtable','calendar','calendly','otter.ai','fathom','notion ai','twos','reclaim'],
+        analytics: ['analytics','ahrefs','semrush','google analytics','fathom','insight','seo'],
+        finance: ['quickbooks','stripe','paypal','payments','payment','invoice','accounting','hubspot','financial','stripe dashboard','shopify'],
+        media: ['video','capcut','speechify','transcribe','audio','media','unsplash','pexels'],
+        utility: ['pdf','convert','smallpdf','cloudconvert','dns','speedtest','worldtime','caniuse','browserstack','photopea','cloudways','vercel','heroku','supabase']
+    };
+
+    for (const cat of Object.keys(keywords)) {
+        for (const kw of keywords[cat]) {
+            if (text.indexOf(kw) !== -1) {
+                switch(cat) {
+                    case 'ai': return 'AI';
+                    case 'editing': return 'Editing';
+                    case 'earning': return 'Earning';
+                    case 'design': return 'Design';
+                    case 'development': return 'Development';
+                    case 'education': return 'Education';
+                    case 'productivity': return 'Productivity';
+                    case 'analytics': return 'Analytics';
+                    case 'finance': return 'Finance';
+                    case 'media': return 'Media';
+                    case 'utility': return 'Utility';
+                }
+            }
+        }
+    }
+    return 'Other';
+}
+
+function slugifyCategory(cat) {
+    return 'cat-' + (cat || 'unknown').toString().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+}
+
+function resetRender(filter = currentFilter) {
+    currentFilter = filter;
+    content.innerHTML = "";
+    currentIndex = 0;
+    filterData();
+    renderBatch();
+}
+
+function filterData() {
+    const search = (searchInput.value || '').toLowerCase();
+    filteredData = data.filter(item => {
+        const itemType = item.type || '';
+        const matchType = currentFilter === "all" || (currentFilter === "favourite" ? favorites.some(f=>f.name===item.name) : itemType === currentFilter);
+        const matchSearch = (item.name || '').toLowerCase().includes(search) || (item.info || '').toLowerCase().includes(search);
+        const itemCategory = item.category ? item.category : getCategory(item);
+        const matchCategory = !categoryFilter || (itemCategory === categoryFilter);
+        return matchType && matchSearch && matchCategory;
+    });
+}
+
+function renderBatch() {
+    const slice = filteredData.slice(currentIndex, currentIndex + batchSize);
+    slice.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'card';
+
+        // generate safe class name from type (e.g. "Mod APK" -> "type-mod-apk")
+        const typeClass = 'type-' + (item.type || 'unknown').toString().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+
+        // label text - use original JSON type if present, otherwise fallback
+        const label = item.type ? item.type : 'Unknown';
+
+        // category inference (if item.category exists prefer it)
+        const categoryLabel = item.category ? item.category : getCategory(item);
+        const catClass = slugifyCategory(categoryLabel);
+
+        // Build card markup: badge (top-left), image, info, and category button at bottom
+        div.innerHTML = `
+            <div class="card-badge ${typeClass}">${label}</div>
+            <img src="${item.image}" loading="lazy" alt="${item.name} screenshot">
+            <div class="card-info">
+                <strong>${item.name}</strong>
+                <small>${item.info || ''}</small>
+                <button class="card-category ${catClass}" aria-label="Filter by ${categoryLabel}">${categoryLabel}</button>
+            </div>
+        `;
+
+        // Card click => open modal or no-info modal if info is missing
+        div.addEventListener('click', () => {
+            currentItem = item;
+            const infoText = (item.info || '').toString().trim();
+            if (!infoText) {
+                // show no-info modal
+                noinfoModal.style.display = 'flex';
+                noinfoModal.setAttribute('aria-hidden', 'false');
+            } else {
+                document.getElementById('modal-img').src = item.image;
+                document.getElementById('modal-name').textContent = item.name;
+                document.getElementById('modal-info').textContent = item.info;
+                modal.style.display = "flex";
+            }
+        });
+
+        // Category button click => filter by category (stop propagation so modal doesn't open)
+        const catBtn = div.querySelector('.card-category');
+        catBtn.addEventListener('click', (ev) => {
+            ev.stopPropagation();
+            // toggle category filter: if same category clicked again, clear filter
+            if (categoryFilter === categoryLabel) {
+                categoryFilter = null;
+                showToast('Category cleared');
+            } else {
+                categoryFilter = categoryLabel;
+                showToast('Filtered: ' + categoryLabel);
+            }
+            // reset the grid (preserves the current type filter)
+            resetRender(currentFilter);
+        });
+
+        content.appendChild(div);
+    });
+    currentIndex += batchSize;
+}
+
+// Event Listeners
+document.getElementById('add-fav').onclick = () => {
+    if (!currentItem) { modal.style.display = "none"; return; }
+    if(!favorites.some(f => f.name === currentItem.name)) {
+        favorites.push(currentItem);
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+        showToast("Saved to Lab!");
+    }
+    modal.style.display = "none";
+};
+
+document.getElementById('open-link').onclick = () => { if(currentItem && currentItem.link) window.open(currentItem.link, '_blank'); modal.style.display = "none"; };
+
+// No-info modal buttons
+document.getElementById('noinfo-close').addEventListener('click', () => {
+    noinfoModal.style.display = 'none';
+    noinfoModal.setAttribute('aria-hidden', 'true');
+});
+document.getElementById('noinfo-open').addEventListener('click', () => {
+    // open original link (if any) or show standard modal with minimal fields
+    noinfoModal.style.display = 'none';
+    noinfoModal.setAttribute('aria-hidden', 'true');
+    if (currentItem) {
+        if (currentItem.link) {
+            window.open(currentItem.link, '_blank');
+        } else {
+            // show standard modal but with placeholder info
+            document.getElementById('modal-img').src = currentItem.image || '';
+            document.getElementById('modal-name').textContent = currentItem.name || '';
+            document.getElementById('modal-info').textContent = currentItem.info || 'No additional information provided.';
+            modal.style.display = 'flex';
+        }
+    }
+});
+
+// Buttons: type filters
+document.getElementById('mod').onclick = () => { categoryFilter = null; resetRender('Mod APK'); };
+document.getElementById('web').onclick = () => { categoryFilter = null; resetRender('website'); };
+document.getElementById('apps').onclick = () => { categoryFilter = null; resetRender('app'); };
+document.getElementById('favourite').onclick = () => { categoryFilter = null; resetRender('favourite'); };
+document.getElementById('search-btn').onclick = () => { categoryFilter = null; resetRender(); };
+searchInput.oninput = () => { categoryFilter = null; resetRender(); };
+
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.style.display = "block";
+    setTimeout(() => t.style.display = "none", 2000);
+}
+
+// Close modals when clicking outside
+window.onclick = (e) => {
+    if (e.target == modal) {
+        modal.style.display = "none";
+    }
+    if (e.target == noinfoModal) {
+        noinfoModal.style.display = "none";
+        noinfoModal.setAttribute('aria-hidden', 'true');
+    }
+};
+
+window.onscroll = () => { if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) renderBatch(); };
+</script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <script>
+        if (localStorage.getItem('userProfile')) {
+            window.location.replace('third.html');
+        }
+    </script>
+
+    <title>Anxro | Authentication</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg: #010d08;
+            --card: #062d1f;
+            --accent: #10b981;
+            --input-bg: #041a12;
+            --text: #ffffff;
+            --text-muted: #a7f3d0;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        /* ... rest of your existing CSS ... */
+    </style>
+</head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Anxro | Authentication</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+    --bg: #010d08;
+    --card: #062d1f;
+    --accent: #10b981;
+    --input-bg: #041a12;
+    --text: #ffffff;
+    --text-muted: #a7f3d0;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.auth-container {
+    width: 90%;
+    max-width: 380px;
+    background: var(--card);
+    border-radius: 28px;
+    padding: 35px 25px;
+    border: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+.tabs {
+    display: flex;
+    background: var(--input-bg);
+    padding: 6px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+}
+.tabs button {
+    flex: 1; padding: 12px; border: none; border-radius: 12px;
+    background: none; color: var(--text-muted); font-weight: 600; cursor: pointer;
+}
+.tabs button.active { background: var(--accent); color: var(--bg); }
+
+.avatar-section { position: relative; width: 100px; height: 100px; margin: 0 auto 25px; cursor: pointer; }
+.avatar-section img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
+.edit-icon { position: absolute; bottom: 2px; right: 2px; background: var(--accent); color: var(--bg); width: 28px; height: 28px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid var(--card); }
+
+input {
+    width: 100%; padding: 15px; margin-bottom: 12px; border-radius: 14px;
+    border: 1px solid rgba(16, 185, 129, 0.1); background: var(--input-bg); color: #fff; outline: none;
+}
+
+.terms-wrapper { display: flex; align-items: flex-start; gap: 12px; margin: 10px 0 25px; }
+.terms-wrapper input { width: 20px; height: 20px; margin: 0; accent-color: var(--accent); }
+.terms-text { font-size: 12px; color: var(--text-muted); }
+
+.submit-btn {
+    width: 100%; padding: 16px; border-radius: 14px; border: none;
+    background: var(--accent); color: var(--bg); font-weight: 700; cursor: pointer;
+}
+
+/* --- CUSTOM POPUP (MODAL) --- */
+.custom-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+.modal-box {
+    background: var(--card);
+    width: 85%;
+    max-width: 320px;
+    padding: 30px;
+    border-radius: 24px;
+    border: 1px solid var(--accent);
+    text-align: center;
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.modal-box i { font-size: 45px; color: var(--accent); margin-bottom: 15px; }
+.modal-box h3 { margin: 10px 0; font-size: 18px; }
+.modal-box p { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
+.modal-close {
+    background: var(--accent); color: var(--bg); border: none;
+    padding: 12px 25px; border-radius: 10px; font-weight: bold; cursor: pointer;
+}
+
+.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<div class="auth-container">
+    <div class="tabs">
+        <button id="tabNew" class="active" onclick="switchMode('new')">Register</button>
+        <button id="tabLogin" onclick="switchMode('login')">Sync</button>
+    </div>
+
+    <div id="formNew">
+        <div class="avatar-section" onclick="document.getElementById('fileIn').click()">
+            <img src="https://via.placeholder.com/100?text=Logo" id="avatarImg">
+            <div class="edit-icon"><i class="fa fa-camera"></i></div>
+            <input type="file" id="fileIn" class="hidden" accept="image/*" onchange="preview(event)">
+        </div>
+        <input type="text" id="name" placeholder="Full Name">
+        <input type="date" id="dob">
+        <input type="number" id="code" placeholder="Create 5-Digit Code" oninput="limit(this)">
+        <div class="terms-wrapper">
+            <input type="checkbox" id="agreeCheck">
+            <div class="terms-text">Agree to <a href="#" style="color:var(--accent)">Terms & Policy</a></div>
+        </div>
+        <button class="submit-btn" onclick="onRegister()">Create Profile</button>
+    </div>
+
+    <div id="formLogin" class="hidden">
+        <div style="text-align:center; padding-bottom: 20px;">
+            <i class="fa fa-fingerprint" style="font-size: 50px; color: var(--accent);"></i>
+            <h3>Security Sync</h3>
+        </div>
+        <input type="number" id="loginCode" placeholder="Enter 5-Digit Code" oninput="limit(this)">
+        <button class="submit-btn" onclick="onLogin()">Verify & Open</button>
+    </div>
+</div>
+
+<div class="custom-modal" id="alertModal">
+    <div class="modal-box">
+        <i id="modalIcon" class="fa fa-circle-exclamation"></i>
+        <h3 id="modalTitle">Notice</h3>
+        <p id="modalMsg">Please fill in all details.</p>
+        <button class="modal-close" onclick="closeModal()">Got it</button>
+    </div>
+</div>
+
+<script>
+if (localStorage.getItem('userProfile')) { window.location.href = 'third.html'; }
+
+function showAlert(title, msg, icon = "fa-circle-exclamation") {
+    document.getElementById('modalTitle').innerText = title;
+    document.getElementById('modalMsg').innerText = msg;
+    document.getElementById('modalIcon').className = "fa " + icon;
+    document.getElementById('alertModal').style.display = "flex";
+}
+
+function closeModal() { document.getElementById('alertModal').style.display = "none"; }
+
+function switchMode(m) {
+    document.getElementById('formNew').classList.toggle('hidden', m !== 'new');
+    document.getElementById('formLogin').classList.toggle('hidden', m !== 'login');
+    document.getElementById('tabNew').classList.toggle('active', m === 'new');
+    document.getElementById('tabLogin').classList.toggle('active', m === 'login');
+}
+
+function limit(e) { if(e.value.length > 5) e.value = e.value.slice(0,5); }
+
+function preview(e) {
+    const reader = new FileReader();
+    reader.onload = () => document.getElementById('avatarImg').src = reader.result;
+    reader.readAsDataURL(e.target.files[0]);
+}
+
+function onRegister() {
+    const n = document.getElementById('name').value;
+    const d = document.getElementById('dob').value;
+    const c = document.getElementById('code').value;
+    const img = document.getElementById('avatarImg').src;
+    const agree = document.getElementById('agreeCheck').checked;
+
+    if(!n || !d || c.length !== 5 || img.includes('placeholder')) {
+        showAlert("Missing Info", "Please complete all fields and upload a photo."); return;
+    }
+    if(!agree) {
+        showAlert("Terms Required", "You must agree to the terms to continue."); return;
+    }
+
+    localStorage.setItem('userProfile', JSON.stringify({ name: n, dob: d, userId: c, avatar: img }));
+    showAlert("Success", "Profile Created! Redirecting...", "fa-circle-check");
+    setTimeout(() => window.location.href = "index.html", 1500);
+}
+
+function onLogin() {
+    const c = document.getElementById('loginCode').value;
+    const saved = JSON.parse(localStorage.getItem('userProfile'));
+
+    if(saved && c === saved.userId) {
+        showAlert("Verified", "Welcome back!", "fa-circle-check");
+        setTimeout(() => window.location.href = "index.html", 1000);
+    } else {
+        showAlert("Sync Failed", "Incorrect code or no local profile found.");
+    }
+}
+</script>
+</body>
+</html>

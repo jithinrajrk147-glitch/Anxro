@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emerald Perfect Fixed</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #010d08;
+  --surface: #064e3b; 
+  --surface-bright: #059669;
+  --accent: #10b981;
+  --text: #ecfdf5;
+  --text-dim: #a7f3d0;
+  --nav-height: 48px;
+}
+
+[data-theme="light"] {
+  --bg: #f0fdf4;
+  --surface: #10b981;
+  --surface-bright: #059669;
+  --accent: #064e3b;
+  --text: #000000;
+  --text-dim: #d1fae5;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: background 0.4s ease;
+}
+
+/* 🔝 Slim Navigation */
+.top-bar {
+  height: var(--nav-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  padding: 0 16px;
+  background: var(--surface);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+}
+/* Center the logo container in the top bar */
+.logo-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/* Make sure the iframe doesn't block clicks on the menu */
+.logo-center iframe {
+  pointer-events: none; 
+}
+
+.hamburger { font-size: 22px; cursor: pointer; color: var(--text); }
+
+/* 👤 Profile Fix */
+.profile-circle {
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  background: var(--surface-bright);
+  border: 1.5px solid rgba(255,255,255,0.2);
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-circle img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  /* Fix for rotation issues */
+  transform: rotate(0deg) !important; 
+  image-orientation: from-image;
+}
+
+/* 📂 Menu Dropdown */
+.menu {
+  display: none;
+  position: absolute;
+  top: 52px;
+  left: 10px;
+  background: var(--surface);
+  border-radius: 12px;
+  width: 200px;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.menu a, .menu-item {
+  padding: 12px 18px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 🔧 Full-Occupied Tool Cards */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 23px;
+  padding: 15px 16px;
+}
+
+.tool-item {
+  background: var(--surface);
+  aspect-ratio: 1/1;
+  border-radius: 18px; /* Smooth curve */
+  overflow: hidden; /* Ensures image/video follows curves */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.tool-item:hover { transform: scale(1.05); }
+
+/* The fix for complete occupancy */
+.tool-item img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; /* This makes it fill the entire square */
+}
+
+/* 📢 Ad Box */
+.ad-box {
+  margin: 12px 16px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--surface), var(--surface-bright));
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quote-area { padding: 5px 20px; text-align: center; margin-bottom: 15px; }
+.message-text { font-size: 14px; font-weight: 600; font-style: italic; opacity: 0.9; }
+.message-author { font-size: 10px; color: var(--accent); text-transform: uppercase; margin-top: 4px; }
+
+/* 📉 Content Cards */
+.content-stack { padding: 10px 16px 100px; display: flex; flex-direction: column; gap: 14px; }
+.chart-card {
+  background: var(--surface);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.chart-card img { width: 100%; height: 150px; object-fit: cover; }
+.card-info { padding: 12px; }
+.card-title { font-size: 16px; font-weight: 800; color: #fff; }
+.card-desc { font-size: 12px; color: var(--text-dim); margin-top: 3px; }
+
+/* 🌗 Toggle Switch */
+.switch { position: relative; width: 34px; height: 18px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+  position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(255,255,255,0.2); border-radius: 20px; transition: .4s;
+}
+.slider:before {
+  position: absolute; content: ""; height: 12px; width: 12px; left: 3px; bottom: 3px;
+  background-color: white; border-radius: 50%; transition: .4s;
+}
+input:checked + .slider { background-color: var(--accent); }
+input:checked + .slider:before { transform: translateX(16px); }
+
+</style>
+</head>
+<body>
+
+
+<nav class="top-bar">
+  <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+  <div class="logo-center">
+  <iframe src="ANXRO.html" width="200" height="60" style="border:none;" allowtransparency="true" scrolling="no"></iframe>
+</div>
+
+<div class="profile-circle" onclick="window.location.href='profile.html'" style="cursor: pointer;">
+    <img src="https://via.placeholder.com/50" id="homeAvatar" alt="Profile">
+</div>
+
+<script>
+  // This part makes sure the image actually shows up on your home page
+  document.addEventListener("DOMContentLoaded", () => {
+    const savedProfile = JSON.parse(localStorage.getItem('userProfile'));
+    if (savedProfile && savedProfile.avatar) {
+      document.getElementById('homeAvatar').src = savedProfile.avatar;
+    }
+  });
+</script>
+
+
+  <div class="menu" id="menu"
+
+    <a href="help.html">Help</a>
+    <a href="terms.html">Terms</a>
+    <div class="menu-item">
+      <span>Dark Mode</span>
+      <label class="switch">
+        <input type="checkbox" id="themeToggle" onchange="applyTheme()">
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+</nav>
+
+<div class="ad-box"><img src="image/ad.png" style="height: 1%;"></div>
+
+<div class="quote-area">
+  <div class="message-text" id="quoteText">Loading...</div>
+  <div class="message-author" id="quoteAuthor"></div>
+</div>
+
+<div class="tools-grid" id="toolsGrid"></div>
+
+<div class="content-stack" id="contentStack"></div>
+
+<script>
+const UI = {
+  menu: document.getElementById('menu'),
+  themeToggle: document.getElementById('themeToggle'),
+  avatar: document.getElementById('homeAvatar'),
+  quoteText: document.getElementById('quoteText'),
+  quoteAuthor: document.getElementById('quoteAuthor'),
+  tGrid: document.getElementById('toolsGrid'),
+  cStack: document.getElementById('contentStack')
+};
+
+function toggleMenu() {
+  UI.menu.style.display = UI.menu.style.display === 'flex' ? 'none' : 'flex';
+}
+
+function applyTheme() {
+  const mode = UI.themeToggle.checked ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', mode);
+  localStorage.setItem('perfectTheme', mode);
+}
+
+// 1. Immediate Theme/Profile Load (Zero Delay)
+const savedTheme = localStorage.getItem('perfectTheme') || 'dark';
+document.documentElement.setAttribute('data-theme', savedTheme);
+UI.themeToggle.checked = (savedTheme === 'dark');
+
+const prof = JSON.parse(localStorage.getItem('userProfile'));
+if(prof?.avatar) UI.avatar.src = prof.avatar;
+
+// 2. Optimized Data Fetching
+async function loadData() {
+  try {
+    // Fire all requests at the same time
+    const [qRes, tRes, thumbRes] = await Promise.all([
+      fetch("text.json").then(r => r.json()),
+      fetch("tools.json").then(r => r.json()),
+      fetch("thumbnails.json").then(r => r.json())
+    ]);
+
+    // Render Quote
+    UI.quoteText.textContent = qRes.message.text;
+    UI.quoteAuthor.textContent = `~ ${qRes.message.author}`;
+
+    // Render Tools (Batching DOM updates)
+    UI.tGrid.innerHTML = tRes.map(t => `
+      <div class="tool-item" onclick="location.href='${t.link}'">
+        <video src="${t.video}" autoplay muted loop playsinline></video>
+      </div>
+    `).join('');
+
+    // Render Content (Batching DOM updates)
+    UI.cStack.innerHTML = thumbRes.map(i => `
+      <div class="chart-card" onclick="window.open('${i.link}', '_blank')">
+        <img src="${i.image}" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">${i.title}</div>
+          <div class="card-desc">${i.desc}</div>
+        </div>
+      </div>
+    `).join('');
+
+  } catch (err) {
+    console.error("Loading Error:", err);
+  }
+}
+
+loadData();
+
+</script>
+
+</body>
+</html>
