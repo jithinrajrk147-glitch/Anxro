@@ -1,17 +1,56 @@
-[  
-  {  
-    "title": "Mathematics 101",  
-    "author": "John Doe",  
-    "file": "http://example.com/mathematics101.pdf"  
-  },  
-  {  
-    "title": "Physics 101",  
-    "author": "Jane Doe",  
-    "file": "http://example.com/physics101.pdf"  
-  },  
-  {  
-    "title": "Chemistry 101",  
-    "author": "Jim Beam",  
-    "file": "http://example.com/chemistry101.pdf"  
-  }  
+[
+  {
+    "id": 301,
+    "title": "The Art of War",
+    "cover": "https://img.youtube.com/vi/-9rmyMaKAaQ/maxresdefault.jpg",
+    "file": "https://raw.githubusercontent.com/jithinrajrk147-glitch/Pdf-database/main/3.%20The%20Art%20of%20War%20by%20Sun%20Tzu%20-%20Complete%20Summary%20(25K%20Words)_Custom.pdf"
+  },
+  {
+    "id": 302,
+    "title": "Never Split the Difference",
+    "cover": "https://img.youtube.com/vi/ySAxwCXjOuo/maxresdefault.jpg",
+    "file": "https://raw.githubusercontent.com/jithinrajrk147-glitch/Pdf-database/main/4.%20Never%20Split%20the%20Difference%20by%20Chris%20Voss%20-%20Complete%20Summary%20(25K%20Words)_Custom.pdf"
+  },
+  {
+    "id": 303,
+    "title": "The 48 Laws of Power",
+    "cover": "https://img.youtube.com/vi/rqrivxFGBzQ/maxresdefault.jpg",
+    "file": "https://raw.githubusercontent.com/jithinrajrk147-glitch/Pdf-database/main/1.%20The%2048%20Laws%20of%20Power%20by%20Robert%20Greene%20-%20Complete%20Summary%20(25K%20Words)_Custom.pdf"
+  },
+  {
+    "id": 304,
+    "title": "Eat That Frog",
+    "cover": "https://img.youtube.com/vi/Syi2Wb1zg7g/maxresdefault.jpg",
+    "file": "https://raw.githubusercontent.com/jithinrajrk147-glitch/Pdf-database/main/2.%20Eat%20That%20Frog%20by%20Brian%20Tracy%20-%20Complete%20Summary%20(25K%20Words)_Custom.pdf"
+  },
+  {
+    "id": 305,
+    "title": "8 Things to Do When You Turn 20",
+    "cover": "https://img.youtube.com/vi/EvkGWd5d6DU/maxresdefault.jpg",
+    "file": "https://raw.githubusercontent.com/jithinrajrk147-glitch/Pdf-database/main/7.%208%20Things%20to%20Do%20When%20You%20Turn%2020%20-%20Complete%20Summary%20(25K%20Words)_Custom.pdf"
+  },
+  {
+    "id": 306,
+    "title": "The Power of Your Subconscious Mind",
+    "cover": "https://img.youtube.com/vi/2k_S9f4IiQ4/maxresdefault.jpg",
+    "file": "https://raw.githubusercontent.com/jithinrajrk147-glitch/Pdf-database/main/11.%20The%20Power%20of%20Your%20Subconscious%20Mind%20by%20Joseph%20Murphy%20-%20Complete%20Summary%20(25K%20Words)_Custom.pdf"
+  },
+  {
+    "id": 307,
+    "title": "How to Talk to Anyone",
+    "cover": "https://img.youtube.com/vi/dWtMMUmYKy4/maxresdefault.jpg",
+    "file": "https://raw.githubusercontent.com/jithinrajrk147-glitch/Pdf-database/main/8.%20How%20to%20Talk%20to%20Anyone%20by%20Leil%20Lowndes%20-%20Complete%20Summary%20(25K%20Words)_Custom.pdf"
+  },
+  {
+    "id": 308,
+    "title": "The Art of Laziness",
+    "cover": "https://img.youtube.com/vi/aEss2qjcQdk/maxresdefault.jpg",
+    "file": "https://raw.githubusercontent.com/jithinrajrk147-glitch/Pdf-database/main/9.%20The%20Art%20of%20Laziness%20by%20Library%20Mindset%20-%20Complete%20Summary%20(25K%20Words)_Custom.pdf"
+  },
+  {
+    "id": 309,
+    "title": "Read People Like a Book",
+    "cover": "https://img.youtube.com/vi/jROK8NsdufE/maxresdefault.jpg",
+    "file": "https://raw.githubusercontent.com/jithinrajrk147-glitch/Pdf-database/main/10.%20Read%20People%20Like%20a%20Book%20by%20Patrick%20King%20-%20Complete%20Summary%20(25K%20Words)_Custom.pdf"
+  }
 ]
