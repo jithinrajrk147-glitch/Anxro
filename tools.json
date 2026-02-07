@@ -1,82 +1,72 @@
 [
   {
-    "name": "Calculator",
-    "link": "calculator.html",
-    "image": "calculator.png"
+    "name": "Discipline Tracker",
+    "link": "distrkwr.html",
+    "image": "displine.png"
   },
   {
-    "name": "Notepad",
+    "name": "To-Do List",
+    "link": "dotoday.html",
+    "image": "app.png"
+  },
+  {
+    "name": "Business Name Generator",
+    "link": "bbg.html",
+    "image": "bussiuss.png"
+  },
+  {
+    "name": "Caption Generator",
+    "link": "cap.html",
+    "image": "caption.png"
+  },
+  {
+    "name": "Code Editor",
+    "link": "code.html",
+    "image": "code.png"
+  },
+  {
+    "name": "Compact Tracker",
+    "link": "habits2.html",
+    "image": "habit 2.png"
+  },
+  {
+    "name": "Zen Habit Tracker",
+    "link": "habit.html",
+    "image": "habit3.png"
+  },
+  {
+    "name": "Microsheet Habit Tracker",
+    "link": "n.html",
+    "image": "habit4.png"
+  },
+  {
+    "name": "Hashtag Generator",
+    "link": "hastag.html",
+    "image": "hashtag.png"
+  },
+  {
+    "name": "Slogan Generator",
+    "link": "is.html",
+    "image": "slogan.png"
+  },
+  {
+    "name": "Note",
     "link": "note.html",
     "image": "note.png"
   },
   {
     "name": "Calendar",
-    "link": "calendar.html",
+    "link": "calandar.html",
     "image": "calendar.png"
   },
   {
-    "name": "Music Player",
-    "link": "music.html",
-    "image": "music.png"
-  },
-  {
-    "name": "Barcode Generator",
-    "link": "barcode.html",
-    "image": "barcode.png"
-  },
-  {
-    "name": "QR Scanner",
-    "link": "scanner.html",
-    "image": "scanner.png"
-  },
-  {
-    "name": "PDF Reader",
-    "link": "pdf.html",
-    "image": "pdf.png"
-  },
-  {
-    "name": "Image Compressor",
-    "link": "compress.html",
-    "image": "compress.png"
-  },
-  {
-    "name": "Video Cutter",
-    "link": "video-cutter.html",
-    "image": "video.png"
-  },
-  {
-    "name": "File Manager",
-    "link": "files.html",
-    "image": "files.png"
-  },
-  {
-    "name": "Text to Speech",
-    "link": "tts.html",
-    "image": "tts.png"
-  },
-  {
-    "name": "Speech to Text",
-    "link": "stt.html",
-    "image": "stt.png"
-  },
-  {
-    "name": "Password Generator",
-    "link": "password.html",
-    "image": "password.png"
-  },
-  {
-    "name": "Unit Converter",
-    "link": "converter.html",
-    "image": "converter.png"
-  },
-  {
-    "name": "Stopwatch",
-    "link": "stopwatch.html",
-    "image": "stopwatch.png"
-  },
-  {
-    "name": "Diary",
+    "name": "Diary Book",
     "link": "real-diary.html",
-    "image": "diary.png"
+    "image": "dairy.png"
+  },
+  {
+    "name": "Calculator",
+    "link": "calculator.html",
+    "image": "calculator.png"
   }
 ]
