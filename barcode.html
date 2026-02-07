@@ -1,0 +1,162 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Barcode & QR Code Generator</title>
+  <style>
+    :root{font-family:Inter,system-ui,Arial,Helvetica,sans-serif}
+    body{display:flex;align-items:flex-start;justify-content:center;padding:28px;background:#f6f8fb;color:#111}
+    .card{width:100%;max-width:760px;background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(20,30,50,0.06);padding:20px}
+    h1{margin:0 0 10px;font-size:20px}
+    .row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+    input[type=text], select{flex:1;padding:10px;border:1px solid #e6e9ef;border-radius:8px;font-size:14px}
+    button{padding:10px 14px;border-radius:8px;border:0;background:#0b6cff;color:#fff;cursor:pointer}
+    button.secondary{background:#e6eefc;color:#0b6cff}
+    #preview{display:flex;align-items:center;justify-content:center;padding:18px;border-radius:10px;background:#fbfdff;border:1px dashed #e6edf9;min-height:140px}
+    .hint{font-size:13px;color:#6b7280;margin-top:8px}
+    .controls{display:flex;gap:8px}
+    label.small{font-size:13px;color:#374151}
+    .footer{margin-top:14px;font-size:13px;color:#6b7280}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Barcode & QR Code Generator</h1>
+    <div class="row">
+      <select id="type">
+        <option value="code128">Code 128 (general)</option>
+        <option value="qr">QR Code</option>
+      </select>
+      <input type="text" id="data" placeholder="Enter data (numbers for EAN/UPC)" value="123456789012" />
+    </div><div class="row">
+  <div style="flex:1" class="controls">
+    <button id="generate">Generate</button>
+    <button id="download" class="secondary">Download</button>
+    <button id="clear" class="secondary">Clear</button>
+  </div>
+  <div style="min-width:220px;max-width:260px">
+    <label class="small">Options</label>
+    <div style="display:flex;gap:8px;margin-top:8px;">
+      <input id="showValue" type="checkbox" checked /> <label for="showValue">Show value under barcode</label>
+    </div>
+  </div>
+</div>
+
+<div id="preview">
+  <svg id="barcodeSvg" xmlns="http://www.w3.org/2000/svg"></svg>
+  <div id="qrContainer" style="display:none"></div>
+</div>
+
+<div class="hint">Tip: For QR Codes enter any text, URL, or JSON. For EAN/UPC provide valid digit counts.</div>
+<div class="footer">This tool runs fully offline — just save this file and open in your browser.</div>
+
+  </div>  <!-- Libraries from CDN -->  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>  <script>
+  (function() {
+    const savedTheme = localStorage.getItem('perfectTheme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    const applyForceTheme = (theme) => {
+        const isDark = theme === 'dark';
+        let style = document.getElementById("force-ui-theme");
+        if (!style) {
+            style = document.createElement('style');
+            style.id = "force-ui-theme";
+            document.head.appendChild(style);
+        }
+
+        if (isDark) {
+            style.innerHTML = `
+                body { background: #010d08 !important; color: #ecfdf5 !important; }
+                .header-gradient, .today, .nav-bar, .top-bar { background: rgb(6, 78, 59) !important; color: #ffffff !important; }
+                .calendar-box, .calendar-day, .card, .tool-item, .container { background: rgb(6, 78, 59) !important; color: #ecfdf5 !important; }
+                .weekday, .accent-text, .nav-button { color: rgb(16, 185, 129) !important; }
+                img, video { transform: rotate(0deg) !important; object-fit: cover !important; }
+            `;
+        } else {
+            style.innerHTML = `
+                body { background: #f0fdf4 !important; color: #000000 !important; }
+                .header-gradient, .nav-bar, .top-bar { background: rgb(16, 185, 129) !important; color: #000000 !important; }
+                .calendar-box, .calendar-day, .card, .tool-item, .container { background: #ffffff !important; color: #000000 !important; }
+                h1, h2, h3, p, span, div, .weekday, .day-number, .nav-button { color: #000000 !important; }
+                img, video { transform: rotate(0deg) !important; object-fit: cover !important; }
+            `;
+        }
+    };
+
+    applyForceTheme(savedTheme);
+})();
+
+    const typeEl = document.getElementById('type');
+    const dataEl = document.getElementById('data');
+    const genBtn = document.getElementById('generate');
+    const dlBtn = document.getElementById('download');
+    const clearBtn = document.getElementById('clear');
+    const svg = document.getElementById('barcodeSvg');
+    const qrContainer = document.getElementById('qrContainer');
+    const showValue = document.getElementById('showValue');
+
+    function showSvg(){ svg.style.display='block'; qrContainer.style.display='none'; }
+    function showQR(){ svg.style.display='none'; qrContainer.style.display='block'; }
+
+    function generate(){
+      const t = typeEl.value;
+      const val = dataEl.value.trim();
+      if(!val){ alert('Enter data to encode'); return }
+
+      if(t === 'qr'){
+        qrContainer.innerHTML = '';
+        showQR();
+        new QRCode(qrContainer, { text: val, width: 220, height: 220, correctLevel: QRCode.CorrectLevel.H });
+      } else {
+        showSvg();
+        svg.innerHTML = '';
+        try{
+          JsBarcode(svg, val, {
+            format: t,
+            displayValue: showValue.checked,
+            fontSize: 16,
+            height: 60,
+            margin: 10
+          });
+        } catch(err){
+          alert('Could not generate barcode: ' + err.message);
+        }
+      }
+    }
+
+    function download(){
+      const t = typeEl.value;
+      if(t === 'qr'){
+        const img = qrContainer.querySelector('img') || qrContainer.querySelector('canvas');
+        if(!img){ alert('No QR generated'); return }
+        const dataUrl = img.tagName === 'IMG' ? img.src : img.toDataURL('image/png');
+        const a = document.createElement('a');
+        a.href = dataUrl; a.download = 'qrcode.png'; a.click();
+      } else {
+        const serializer = new XMLSerializer();
+        const source = serializer.serializeToString(svg);
+        const svgBlob = new Blob([source], {type:'image/svg+xml;charset=utf-8'});
+        const url = URL.createObjectURL(svgBlob);
+        const img = new Image();
+        img.onload = function(){
+          const canvas = document.createElement('canvas');
+          canvas.width = img.width; canvas.height = img.height;
+          const ctx = canvas.getContext('2d');
+          ctx.fillStyle = '#fff'; ctx.fillRect(0,0,canvas.width,canvas.height);
+          ctx.drawImage(img,0,0);
+          const png = canvas.toDataURL('image/png');
+          const a = document.createElement('a'); a.href = png; a.download = 'barcode.png'; a.click();
+          URL.revokeObjectURL(url);
+        };
+        img.src = url;
+      }
+    }
+
+    genBtn.addEventListener('click', generate);
+    dlBtn.addEventListener('click', download);
+    clearBtn.addEventListener('click', ()=>{ svg.innerHTML=''; qrContainer.innerHTML=''; });
+    window.addEventListener('load', generate);
+  </script></body>
+</html>

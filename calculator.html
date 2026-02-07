@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0e1a 0%, #0d1421 50%, #0f1419 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .calculator {
+            background: linear-gradient(145deg, #0f1419, #0a0e1a);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 
+                20px 20px 60px rgba(0, 0, 0, 0.8),
+                -20px -20px 60px rgba(15, 20, 25, 0.3),
+                inset 0 0 0 1px rgba(64, 128, 128, 0.1);
+            max-width: 400px;
+            width: 100%;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(64, 128, 128, 0.15);
+        }
+
+        .display {
+            background: linear-gradient(145deg, #0a0e1a, #050810);
+            border-radius: 15px;
+            padding: 25px 20px;
+            margin-bottom: 25px;
+            box-shadow: 
+                inset 8px 8px 16px rgba(0, 0, 0, 0.6),
+                inset -8px -8px 16px rgba(15, 20, 25, 0.2);
+            border: 1px solid rgba(64, 128, 128, 0.1);
+        }
+
+        .history {
+            color: #888;
+            font-size: 14px;
+            text-align: right;
+            margin-bottom: 10px;
+            min-height: 20px;
+            opacity: 0.7;
+        }
+
+        .current {
+            color: #e0f2f1;
+            font-size: 32px;
+            font-weight: 300;
+            text-align: right;
+            min-height: 40px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .history-panel {
+            background: linear-gradient(145deg, #0a0e1a, #050810);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 
+                inset 8px 8px 16px rgba(0, 0, 0, 0.6),
+                inset -8px -8px 16px rgba(15, 20, 25, 0.2);
+            border: 1px solid rgba(64, 128, 128, 0.1);
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+        }
+
+        .history-panel.open {
+            max-height: 300px;
+            opacity: 1;
+            margin-bottom: 20px;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #b2dfdb;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .history-toggle {
+            background: linear-gradient(145deg, #1f4e5f, #0f2a35);
+            border: none;
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: #b2dfdb;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .history-toggle:hover {
+            background: linear-gradient(145deg, #2f5e6f, #1f4e5f);
+            transform: scale(1.05);
+        }
+
+        .history-list {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+
+        .history-item {
+            background: rgba(31, 78, 95, 0.2);
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 8px;
+            color: #e0f2f1;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(64, 128, 128, 0.1);
+        }
+
+        .history-item:hover {
+            background: rgba(31, 78, 95, 0.4);
+            transform: translateX(5px);
+        }
+
+        .clear-history {
+            background: linear-gradient(145deg, #2d5a87, #1e3a5f);
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            color: #e0f2f1;
+            cursor: pointer;
+            font-size: 14px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .clear-history:hover {
+            background: linear-gradient(145deg, #3d6a97, #2d5a87);
+            transform: translateY(-1px);
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .btn {
+            height: 70px;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-number {
+            background: linear-gradient(145deg, #1a2530, #0f1419);
+            color: #e0f2f1;
+            box-shadow: 
+                8px 8px 16px rgba(0, 0, 0, 0.6),
+                -8px -8px 16px rgba(26, 37, 48, 0.3);
+        }
+
+        .btn-number:hover {
+            background: linear-gradient(145deg, #26374a, #1a2530);
+            box-shadow: 
+                12px 12px 24px rgba(0, 0, 0, 0.7),
+                -12px -12px 24px rgba(26, 37, 48, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-operator {
+            background: linear-gradient(145deg, #2d5a87, #1e3a5f);
+            color: #e0f2f1;
+            box-shadow: 
+                8px 8px 16px rgba(0, 0, 0, 0.6),
+                -8px -8px 16px rgba(45, 90, 135, 0.3);
+        }
+
+        .btn-operator:hover {
+            background: linear-gradient(145deg, #3d6a97, #2d5a87);
+            box-shadow: 
+                12px 12px 24px rgba(0, 0, 0, 0.7),
+                -12px -12px 24px rgba(45, 90, 135, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-function {
+            background: linear-gradient(145deg, #1f4e5f, #0f2a35);
+            color: #b2dfdb;
+            box-shadow: 
+                8px 8px 16px rgba(0, 0, 0, 0.6),
+                -8px -8px 16px rgba(31, 78, 95, 0.3);
+        }
+
+        .btn-function:hover {
+            background: linear-gradient(145deg, #2f5e6f, #1f4e5f);
+            box-shadow: 
+                12px 12px 24px rgba(0, 0, 0, 0.7),
+                -12px -12px 24px rgba(31, 78, 95, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-equals {
+            background: linear-gradient(145deg, #2e7d8a, #1e5a67);
+            color: #e0f7fa;
+            box-shadow: 
+                8px 8px 16px rgba(0, 0, 0, 0.6),
+                -8px -8px 16px rgba(46, 125, 138, 0.3);
+        }
+
+        .btn-equals:hover {
+            background: linear-gradient(145deg, #3e8d9a, #2e7d8a);
+            box-shadow: 
+                12px 12px 24px rgba(0, 0, 0, 0.7),
+                -12px -12px 24px rgba(46, 125, 138, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-zero {
+            grid-column: span 1;
+        }
+
+        .error {
+            color: #ff6b6b;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            .calculator {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .btn {
+                height: 60px;
+                font-size: 16px;
+            }
+            
+            .current {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="history-panel" id="historyPanel">
+            <div class="history-header">
+                <span>History</span>
+                <button class="history-toggle" onclick="toggleHistory()">📋</button>
+            </div>
+            <div class="history-list" id="historyList"></div>
+            <button class="clear-history" onclick="clearHistory()">Clear All</button>
+        </div>
+        
+        <div class="display">
+            <div class="history" id="history"></div>
+            <div class="current" id="current">0</div>
+        </div>
+        
+        <div class="buttons">
+            <button class="btn btn-function" onclick="clearAll()">AC</button>
+            <button class="btn btn-function" onclick="clearEntry()">CE</button>
+            <button class="btn btn-function" onclick="deleteLast()">⌫</button>
+            <button class="btn btn-operator" onclick="setOperator('÷')">÷</button>
+            
+            <button class="btn btn-number" onclick="appendNumber('7')">7</button>
+            <button class="btn btn-number" onclick="appendNumber('8')">8</button>
+            <button class="btn btn-number" onclick="appendNumber('9')">9</button>
+            <button class="btn btn-operator" onclick="setOperator('×')">×</button>
+            
+            <button class="btn btn-number" onclick="appendNumber('4')">4</button>
+            <button class="btn btn-number" onclick="appendNumber('5')">5</button>
+            <button class="btn btn-number" onclick="appendNumber('6')">6</button>
+            <button class="btn btn-operator" onclick="setOperator('-')">-</button>
+            
+            <button class="btn btn-number" onclick="appendNumber('1')">1</button>
+            <button class="btn btn-number" onclick="appendNumber('2')">2</button>
+            <button class="btn btn-number" onclick="appendNumber('3')">3</button>
+            <button class="btn btn-operator" onclick="setOperator('+')">+</button>
+            
+            <button class="btn btn-number btn-zero" onclick="appendNumber('0')">0</button>
+            <button class="btn btn-number" onclick="appendDecimal()">.</button>
+            <button class="btn btn-function" onclick="percentage()">%</button>
+            <button class="btn btn-equals" onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <script>(function() {
+    const savedTheme = localStorage.getItem('perfectTheme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    const applyForceTheme = (theme) => {
+        const isDark = theme === 'dark';
+        let style = document.getElementById("force-calculator-theme");
+        if (!style) {
+            style = document.createElement('style');
+            style.id = "force-calculator-theme";
+            document.head.appendChild(style);
+        }
+
+        if (isDark) {
+            style.innerHTML = `
+                body { background: #010d08 !important; color: #ecfdf5 !important; }
+                .calculator { background: rgb(6, 78, 59) !important; border: 1px solid rgba(16, 185, 129, 0.3) !important; }
+                .display, .history-panel, .btn-number { background: #010d08 !important; color: #ecfdf1 !important; }
+                .btn-operator, .btn-equals { background: rgb(6, 78, 59) !important; color: rgb(16, 185, 129) !important; }
+                .btn-function { background: #0d140e !important; color: rgb(16, 185, 129) !important; }
+                .current, .history, .history-item { color: #ecfdf5 !important; }
+            `;
+        } else {
+            style.innerHTML = `
+                body { background: #f0fdf4 !important; color: #000000 !important; }
+                .calculator { background: #ffffff !important; border: 1px solid rgb(16, 185, 129) !important; }
+                .display, .history-panel, .btn-number, .btn-operator, .btn-function, .btn-equals { 
+                    background: #ffffff !important; 
+                    color: #000000 !important; 
+                    box-shadow: none !important;
+                    border: 1px solid #e5e7eb !important;
+                }
+                .current, .history, .history-item, .history-header, .history-toggle, span, div { 
+                    color: #000000 !important; 
+                }
+                .history-toggle, .clear-history { background: rgb(16, 185, 129) !important; color: #000000 !important; }
+            `;
+        }
+    };
+
+    applyForceTheme(savedTheme);
+})();
+
+        let currentInput = '0';
+        let previousInput = '';
+        let operator = '';
+        let shouldResetDisplay = false;
+        let calculationHistory = [];
+
+        const currentDisplay = document.getElementById('current');
+        const historyDisplay = document.getElementById('history');
+        const historyPanel = document.getElementById('historyPanel');
+        const historyList = document.getElementById('historyList');
+
+        function updateDisplay() {
+            currentDisplay.textContent = formatNumber(currentInput);
+            currentDisplay.classList.add('fade-in');
+            setTimeout(() => currentDisplay.classList.remove('fade-in'), 300);
+        }
+
+        function updateHistory() {
+            if (previousInput && operator) {
+                historyDisplay.textContent = `${formatNumber(previousInput)} ${operator}`;
+            } else {
+                historyDisplay.textContent = '';
+            }
+        }
+
+        function formatNumber(num) {
+            if (num === '') return '0';
+            if (num.includes('.')) {
+                const parts = num.split('.');
+                parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                return parts.join('.');
+            }
+            return num.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        function appendNumber(num) {
+            if (shouldResetDisplay) {
+                currentInput = '';
+                shouldResetDisplay = false;
+            }
+            
+            if (currentInput === '0') {
+                currentInput = num;
+            } else {
+                currentInput += num;
+            }
+            updateDisplay();
+        }
+
+        function appendDecimal() {
+            if (shouldResetDisplay) {
+                currentInput = '0';
+                shouldResetDisplay = false;
+            }
+            
+            if (!currentInput.includes('.')) {
+                currentInput += '.';
+                updateDisplay();
+            }
+        }
+
+        function setOperator(op) {
+            if (previousInput && operator && !shouldResetDisplay) {
+                calculate();
+            }
+            
+            previousInput = currentInput;
+            operator = op;
+            shouldResetDisplay = true;
+            updateHistory();
+        }
+
+        function calculate() {
+            if (!previousInput || !operator) return;
+            
+            const prev = parseFloat(previousInput.replace(/,/g, ''));
+            const current = parseFloat(currentInput.replace(/,/g, ''));
+            let result;
+            
+            try {
+                switch (operator) {
+                    case '+':
+                        result = prev + current;
+                        break;
+                    case '-':
+                        result = prev - current;
+                        break;
+                    case '×':
+                        result = prev * current;
+                        break;
+                    case '÷':
+                        if (current === 0) {
+                            throw new Error('Cannot divide by zero');
+                        }
+                        result = prev / current;
+                        break;
+                    default:
+                        return;
+                }
+                
+                // Handle very large or very small numbers
+                if (Math.abs(result) > 1e15) {
+                    currentInput = result.toExponential(6);
+                } else if (Math.abs(result) < 1e-6 && result !== 0) {
+                    currentInput = result.toExponential(6);
+                } else {
+                    currentInput = result.toString();
+                }
+                
+                const calculation = `${formatNumber(previousInput)} ${operator} ${formatNumber(current.toString())}`;
+                historyDisplay.textContent = `${calculation} =`;
+                addToHistory(calculation, currentInput);
+                
+            } catch (error) {
+                currentInput = 'Error';
+                currentDisplay.classList.add('error');
+                setTimeout(() => currentDisplay.classList.remove('error'), 500);
+            }
+            
+            operator = '';
+            previousInput = '';
+            shouldResetDisplay = true;
+            updateDisplay();
+        }
+
+        function clearAll() {
+            currentInput = '0';
+            previousInput = '';
+            operator = '';
+            shouldResetDisplay = false;
+            updateDisplay();
+            updateHistory();
+        }
+
+        function clearEntry() {
+            currentInput = '0';
+            updateDisplay();
+        }
+
+        function percentage() {
+            const current = parseFloat(currentInput.replace(/,/g, ''));
+            currentInput = (current / 100).toString();
+            updateDisplay();
+            shouldResetDisplay = true;
+        }
+
+        function deleteLast() {
+            if (currentInput.length > 1) {
+                currentInput = currentInput.slice(0, -1);
+            } else {
+                currentInput = '0';
+            }
+            updateDisplay();
+        }
+
+        function toggleHistory() {
+            historyPanel.classList.toggle('open');
+        }
+
+        function addToHistory(calculation, result) {
+            calculationHistory.unshift({ calculation, result });
+            if (calculationHistory.length > 10) {
+                calculationHistory.pop();
+            }
+            updateHistoryDisplay();
+        }
+
+        function updateHistoryDisplay() {
+            historyList.innerHTML = '';
+            calculationHistory.forEach((item, index) => {
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                historyItem.innerHTML = `
+                    <div>${item.calculation}</div>
+                    <div style="font-weight: bold; margin-top: 5px;">${formatNumber(item.result)}</div>
+                `;
+                historyItem.onclick = () => {
+                    currentInput = item.result;
+                    updateDisplay();
+                    shouldResetDisplay = true;
+                };
+                historyList.appendChild(historyItem);
+            });
+        }
+
+        function clearHistory() {
+            calculationHistory = [];
+            updateHistoryDisplay();
+        }
+
+        // Keyboard support
+        document.addEventListener('keydown', function(event) {
+            const key = event.key;
+            
+            if (key >= '0' && key <= '9') {
+                appendNumber(key);
+            } else if (key === '.') {
+                appendDecimal();
+            } else if (key === '+') {
+                setOperator('+');
+            } else if (key === '-') {
+                setOperator('-');
+            } else if (key === '*') {
+                setOperator('×');
+            } else if (key === '/') {
+                event.preventDefault();
+                setOperator('÷');
+            } else if (key === 'Enter' || key === '=') {
+                calculate();
+            } else if (key === 'Escape') {
+                clearAll();
+            } else if (key === 'Backspace') {
+                clearEntry();
+            } else if (key === '%') {
+                percentage();
+            }
+        });
+
+        // Initialize display
+        updateDisplay();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96f0c23af474ff97',t:'MTc1NTE3NzcyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Compact Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --bg: #f8fafc;
+            --border: #e2e8f0;
+            --success: #22c55e; /* Green for completed */
+        }
+
+        * { box-sizing: border-box; font-family: sans-serif; }
+        body { background: var(--bg); margin: 0; padding: 10px; display: flex; justify-content: center; }
+
+        .app { width: 100%; max-width: 400px; }
+
+        /* Header & Date Selectors */
+        .header { background: white; padding: 15px; border-radius: 12px; margin-bottom: 10px; border: 1px solid var(--border); }
+        .row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        
+        /* Fixed Button Sizes */
+        select { padding: 6px; border-radius: 6px; border: 1px solid var(--border); font-size: 14px; }
+        input { padding: 8px; border: 1px solid var(--border); border-radius: 6px; outline: none; }
+        
+        .btn { 
+            background: var(--primary); color: white; border: none; 
+            padding: 8px 16px; border-radius: 6px; font-weight: bold; 
+            cursor: pointer; width: auto; /* Prevents long buttons */
+        }
+
+        /* Scrollable Habit Chart */
+        .chart-card { background: white; border-radius: 12px; border: 1px solid var(--border); overflow: hidden; margin-bottom: 10px; }
+        .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #f1f5f9; padding: 8px 4px; text-align: center; font-size: 12px; }
+
+        .habit-name { 
+            position: sticky; left: 0; background: white; 
+            min-width: 100px; text-align: left; padding-left: 10px;
+            font-weight: 600; border-right: 2px solid var(--border);
+        }
+
+        /* Custom "Candle" Checkbox Style */
+        .cell-btn {
+            width: 22px; height: 22px; border-radius: 4px; border: 1px solid #cbd5e1;
+            background: #f1f5f9; cursor: pointer; display: inline-block;
+        }
+        .cell-btn.active { background: var(--success); border-color: var(--success); }
+
+        /* Graph & Inputs */
+        .card { background: white; padding: 15px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 10px; }
+        .s-input-group { display: flex; gap: 5px; margin-top: 10px; }
+        .s-input-group input { width: 60px; }
+        
+        canvas { max-height: 180px; }
+        textarea { width: 100%; height: 80px; margin-top: 10px; border-radius: 8px; border: 1px solid var(--border); padding: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="app">
+    <div class="header">
+        <div class="row">
+            <select id="mS"></select>
+            <select id="yS"></select>
+        </div>
+        <div class="row" style="gap: 10px;">
+            <input id="hI" type="text" placeholder="Add habit..." style="flex-grow: 1;">
+            <button class="btn" onclick="addH()">Add</button>
+        </div>
+    </div>
+
+    <div class="chart-card">
+        <div class="table-scroll">
+            <table>
+                <thead><tr id="hH"></tr></thead>
+                <tbody id="hB"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <h4 style="margin:0">Sleep Graph</h4>
+        <canvas id="sC"></canvas>
+        <div class="s-input-group">
+            <input id="sD" type="number" placeholder="Day">
+            <input id="sH" type="number" placeholder="Hrs">
+            <button class="btn" onclick="updS()">Log</button>
+        </div>
+    </div>
+
+    <textarea id="nt" placeholder="Notes..." oninput="svN()"></textarea>
+</div>
+
+<script>
+(function() {
+    const savedTheme = localStorage.getItem('perfectTheme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    const applyForceTheme = (theme) => {
+        const isDark = theme === 'dark';
+        let style = document.getElementById("force-tracker-theme");
+        if (!style) {
+            style = document.createElement('style');
+            style.id = "force-tracker-theme";
+            document.head.appendChild(style);
+        }
+
+        if (isDark) {
+            style.innerHTML = `
+                body { background: #010d08 !important; color: #ecfdf5 !important; }
+                .header, .chart-card, .card, textarea, select, input { 
+                    background: rgb(6, 78, 59) !important; 
+                    color: #ecfdf5 !important; 
+                    border: 1px solid rgba(16, 185, 129, 0.3) !important; 
+                }
+                .habit-name { background: rgb(6, 78, 59) !important; color: #10b981 !important; }
+                .btn { background: #10b981 !important; color: #010d08 !important; }
+                .cell-btn { background: #010d08 !important; border-color: #059669 !important; }
+                .cell-btn.active { background: #10b981 !important; }
+                th, td { border-color: rgba(16, 185, 129, 0.1) !important; }
+            `;
+            // Update Chart.js color for Dark Mode
+            if(window.chart) {
+                window.chart.data.datasets[0].borderColor = '#10b981';
+                window.chart.update();
+            }
+        } else {
+            style.innerHTML = `
+                body { background: #f0fdf4 !important; color: #000000 !important; }
+                .header, .chart-card, .card, textarea, .habit-name { background: #ffffff !important; color: #000000 !important; }
+                .btn { background: #10b981 !important; color: #000000 !important; font-weight: 800 !important; }
+                select, input, textarea { background: #ffffff !important; color: #000000 !important; border-color: #059669 !important; }
+                h4, th, td, select, input, .habit-name { color: #000000 !important; }
+                .cell-btn { background: #e2e8f0 !important; }
+                .cell-btn.active { background: #059669 !important; }
+            `;
+            // Update Chart.js color for Light Mode
+            if(window.chart) {
+                window.chart.data.datasets[0].borderColor = '#059669';
+                window.chart.update();
+            }
+        }
+    };
+
+    applyForceTheme(savedTheme);
+})();
+
+    let habits = JSON.parse(localStorage.getItem('habits_v3')) || [];
+    let sleep = JSON.parse(localStorage.getItem('sleep_v3')) || {};
+    let chart;
+
+    function init() {
+        const ms = document.getElementById('mS'), ys = document.getElementById('yS');
+        const mNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+        mNames.forEach((m,i) => ms.add(new Option(m,i)));
+        for(let y=2025; y<=2030; y++) ys.add(new Option(y,y));
+        
+        ms.value = new Date().getMonth(); ys.value = new Date().getFullYear();
+        ms.onchange = render; ys.onchange = render;
+        
+        initChart(); render();
+    }
+
+    function render() {
+        const m = document.getElementById('mS').value, y = document.getElementById('yS').value;
+        const days = new Date(y, parseInt(m)+1, 0).getDate();
+        const key = `${y}-${m}`;
+
+        // Header
+        let head = `<th class="habit-name">Habit</th>`;
+        for(let i=1; i<=days; i++) head += `<th>${i}</th>`;
+        document.getElementById('hH').innerHTML = head;
+
+        // Rows
+        document.getElementById('hB').innerHTML = habits.map((h, i) => {
+            let row = `<tr><td class="habit-name">${h}</td>`;
+            for(let d=1; d<=days; d++) {
+                let active = localStorage.getItem(`${key}-${i}-${d}`) === 'true' ? 'active' : '';
+                row += `<td><div class="cell-btn ${active}" onclick="toggle(${i},${d},this)"></div></td>`;
+            }
+            return row + `</tr>`;
+        }).join('');
+
+        document.getElementById('nt').value = localStorage.getItem(`n-${key}`) || "";
+        updChart();
+    }
+
+    function toggle(hIdx, day, el) {
+        const m = document.getElementById('mS').value, y = document.getElementById('yS').value;
+        const key = `${y}-${m}-${hIdx}-${day}`;
+        const newState = !el.classList.contains('active');
+        el.classList.toggle('active');
+        localStorage.setItem(key, newState);
+    }
+
+    function addH() {
+        let v = document.getElementById('hI').value;
+        if(!v) return; habits.push(v);
+        localStorage.setItem('habits_v3', JSON.stringify(habits));
+        document.getElementById('hI').value = ''; render();
+    }
+
+    function initChart() {
+        chart = new Chart(document.getElementById('sC'), {
+            type: 'line',
+            data: { labels: [], datasets: [{ label: 'Sleep', data: [], borderColor: '#4f46e5', pointRadius: 2 }] },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
+    }
+
+    function updS() {
+        let d = document.getElementById('sD').value, h = document.getElementById('sH').value;
+        let k = `${document.getElementById('yS').value}-${document.getElementById('mS').value}`;
+        if(!d || !h) return; if(!sleep[k]) sleep[k] = {};
+        sleep[k][d] = h; localStorage.setItem('sleep_v3', JSON.stringify(sleep)); updChart();
+    }
+
+    function updChart() {
+        let m = document.getElementById('mS').value, y = document.getElementById('yS').value, k = `${y}-${m}`;
+        let days = new Date(y, parseInt(m)+1, 0).getDate();
+        chart.data.labels = Array.from({length: days}, (_, i) => i+1);
+        chart.data.datasets[0].data = Array.from({length: days}, (_, i) => (sleep[k]||{})[i+1] || 0);
+        chart.update();
+    }
+
+    function svN() {
+        const k = `${document.getElementById('yS').value}-${document.getElementById('mS').value}`;
+        localStorage.setItem(`n-${k}`, document.getElementById('nt').value);
+    }
+
+    init();
+</script>
+</body>
+</html>

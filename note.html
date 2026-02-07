@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --primary-solid: #6366f1;
+            --bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --surface: #ffffff;
+            --text: #1e293b;
+            --border: #e2e8f0;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --text: #f1f5f9;
+            --border: #334155;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            height: 100vh;
+            overflow: hidden;
+            min-height: 100vh;
+        }
+
+        .app {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-icon {
+            padding: 8px;
+            background: var(--bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+        }
+
+        .search {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 16px;
+        }
+
+        .main {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            position: absolute;
+            height: calc(100vh - 60px);
+            z-index: 100;
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .notes-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px;
+        }
+
+        .note {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            position: relative;
+        }
+
+        .note.active {
+            background: var(--primary-solid);
+            color: white;
+            border-color: var(--primary-solid);
+        }
+
+        .note-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .note-preview {
+            font-size: 12px;
+            opacity: 0.7;
+            line-height: 1.3;
+        }
+
+        .note-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+            font-size: 12px;
+        }
+
+        .note-delete {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .note:hover .note-delete {
+            opacity: 1;
+        }
+
+        .editor {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--surface);
+        }
+
+        .editor-header {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .title-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 16px;
+            font-weight: 600;
+            min-width: 200px;
+        }
+
+        .mode-toggle {
+            display: flex;
+            background: var(--bg);
+            border-radius: 6px;
+            padding: 2px;
+        }
+
+        .mode-btn {
+            padding: 6px 12px;
+            border: none;
+            background: transparent;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .mode-btn.active {
+            background: var(--primary-solid);
+            color: white;
+        }
+
+        .editor-content {
+            flex: 1;
+            position: relative;
+        }
+
+        .text-editor {
+            width: 100%;
+            height: 100%;
+            padding: 16px;
+            border: none;
+            outline: none;
+            resize: none;
+            font-family: inherit;
+            font-size: 16px;
+            line-height: 1.5;
+            background: transparent;
+            color: var(--text);
+        }
+
+        .canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: none;
+        }
+
+        .canvas-container.active {
+            display: block;
+        }
+
+        .drawing-canvas {
+            width: 100%;
+            height: calc(100% - 60px);
+            margin-top: 60px;
+            cursor: crosshair;
+            background: #fafafa;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .canvas-toolbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow-x: auto;
+            z-index: 10;
+        }
+
+        .tool-section {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .tool-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text);
+            opacity: 0.7;
+            margin-right: 4px;
+        }
+
+        .tool-group {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+
+        .tool-btn {
+            padding: 6px 8px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: var(--bg);
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        .tool-btn.active {
+            background: var(--primary-solid);
+            color: white;
+            border-color: var(--primary-solid);
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .color-picker {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .color.active {
+            border-color: var(--text);
+            transform: scale(1.1);
+        }
+
+        .size-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .size-slider {
+            width: 80px;
+        }
+
+        .font-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .font-select {
+            padding: 4px 8px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 12px;
+        }
+
+        .text-input {
+            padding: 6px 8px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 12px;
+            width: 120px;
+        }
+
+        .toolbar-separator {
+            width: 1px;
+            height: 30px;
+            background: var(--border);
+            margin: 0 4px;
+        }
+
+        .empty {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 99;
+            display: none;
+        }
+
+        .overlay.open {
+            display: block;
+        }
+
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 20px;
+            z-index: 101;
+            min-width: 280px;
+            display: none;
+        }
+
+        .modal.open {
+            display: block;
+        }
+
+        .modal input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 16px;
+            margin: 12px 0;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+            margin-top: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .sidebar {
+                position: relative;
+                transform: translateX(0);
+                height: auto;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .sidebar {
+                width: 100%;
+            }
+            
+            .header {
+                padding: 8px 12px;
+            }
+            
+            .btn, .search {
+                font-size: 14px;
+            }
+
+            .canvas-toolbar {
+                padding: 8px 12px;
+                gap: 12px;
+            }
+
+            .tool-section {
+                min-width: max-content;
+            }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div class="app">
+        <div class="header">
+            <button class="btn btn-icon" onclick="toggleSidebar()">☰</button>
+            <input type="text" class="search" placeholder="Search..." id="search">
+            <button class="btn" onclick="createNote()">+</button>
+            <button class="btn btn-icon" onclick="toggleTheme()">🌙</button>
+        </div>
+
+        <div class="main">
+            <div class="sidebar" id="sidebar">
+                <div class="notes-list" id="notesList"></div>
+            </div>
+
+            <div class="editor">
+                <div class="editor-header" id="editorHeader" style="display: none;">
+                    <input type="text" class="title-input" id="titleInput" placeholder="Note title...">
+                    
+                    <div class="mode-toggle">
+                        <button class="mode-btn active" onclick="switchMode('text')">📝</button>
+                        <button class="mode-btn" onclick="switchMode('draw')">🎨</button>
+                    </div>
+                    
+                    <button class="btn btn-icon" onclick="togglePin()" id="pinBtn">📌</button>
+                    <button class="btn btn-icon" onclick="setReminder()" id="reminderBtn">⏰</button>
+                    <button class="btn btn-danger" onclick="deleteCurrentNote()">🗑️</button>
+                </div>
+
+                <div class="editor-content">
+                    <div class="empty" id="empty">
+                        <div style="font-size: 48px; margin-bottom: 16px;">📝</div>
+                        <h3>No notes yet</h3>
+                        <p>Tap + to create your first note</p>
+                    </div>
+
+                    <textarea class="text-editor" id="textEditor" placeholder="Start typing..." style="display: none;"></textarea>
+
+                    <div class="canvas-container" id="canvasContainer">
+                        <canvas class="drawing-canvas" id="canvas"></canvas>
+                        <div class="canvas-toolbar">
+                            <div class="tool-section">
+                                <div class="tool-label">Tools:</div>
+                                <div class="tool-group">
+                                    <button class="tool-btn active" data-tool="pen" onclick="setTool('pen')">✏️</button>
+                                    <button class="tool-btn" data-tool="brush" onclick="setTool('brush')">🖌️</button>
+                                    <button class="tool-btn" data-tool="marker" onclick="setTool('marker')">🖊️</button>
+                                    <button class="tool-btn" data-tool="highlighter" onclick="setTool('highlighter')">🖍️</button>
+                                    <button class="tool-btn" data-tool="eraser" onclick="setTool('eraser')">🧽</button>
+                                    <button class="tool-btn" data-tool="spray" onclick="setTool('spray')">💨</button>
+                                    <button class="tool-btn" data-tool="text" onclick="setTool('text')">📝</button>
+                                </div>
+                            </div>
+
+                            <div class="toolbar-separator"></div>
+
+                            <div class="tool-section">
+                                <div class="tool-label">Colors:</div>
+                                <div class="color-picker">
+                                    <div class="color active" style="background: #000" data-color="#000"></div>
+                                    <div class="color" style="background: #fff; border: 1px solid #ccc" data-color="#fff"></div>
+                                    <div class="color" style="background: #ef4444" data-color="#ef4444"></div>
+                                    <div class="color" style="background: #f97316" data-color="#f97316"></div>
+                                    <div class="color" style="background: #f59e0b" data-color="#f59e0b"></div>
+                                    <div class="color" style="background: #eab308" data-color="#eab308"></div>
+                                    <div class="color" style="background: #84cc16" data-color="#84cc16"></div>
+                                    <div class="color" style="background: #10b981" data-color="#10b981"></div>
+                                    <div class="color" style="background: #06b6d4" data-color="#06b6d4"></div>
+                                    <div class="color" style="background: #3b82f6" data-color="#3b82f6"></div>
+                                    <div class="color" style="background: #6366f1" data-color="#6366f1"></div>
+                                    <div class="color" style="background: #8b5cf6" data-color="#8b5cf6"></div>
+                                    <div class="color" style="background: #a855f7" data-color="#a855f7"></div>
+                                    <div class="color" style="background: #ec4899" data-color="#ec4899"></div>
+                                    <div class="color" style="background: #f43f5e" data-color="#f43f5e"></div>
+                                    <div class="color" style="background: #64748b" data-color="#64748b"></div>
+                                </div>
+                            </div>
+
+                            <div class="toolbar-separator"></div>
+
+                            <div class="tool-section">
+                                <div class="tool-label">Size:</div>
+                                <div class="size-control">
+                                    <input type="range" class="size-slider" min="1" max="50" value="3" id="brushSize">
+                                    <span id="sizeDisplay">3px</span>
+                                </div>
+                            </div>
+
+                            <div class="toolbar-separator" id="fontSeparator" style="display: none;"></div>
+
+                            <div class="tool-section" id="fontControls" style="display: none;">
+                                <div class="tool-label">Font:</div>
+                                <div class="font-controls">
+                                    <select class="font-select" id="fontFamily">
+                                        <option value="Arial">Arial</option>
+                                        <option value="Times New Roman">Times</option>
+                                        <option value="Courier New">Courier</option>
+                                        <option value="Georgia">Georgia</option>
+                                        <option value="Verdana">Verdana</option>
+                                    </select>
+                                    <input type="text" class="text-input" id="textInput" placeholder="Type text...">
+                                </div>
+                            </div>
+
+                            <div class="toolbar-separator"></div>
+
+                            <div class="tool-section">
+                                <button class="btn btn-icon" onclick="clearCanvas()">🗑️ Clear</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="closeModal()"></div>
+    
+    <div class="modal" id="reminderModal">
+        <h3>Set Reminder</h3>
+        <input type="datetime-local" id="reminderTime">
+        <div class="modal-actions">
+            <button class="btn btn-icon" onclick="closeModal()">Cancel</button>
+            <button class="btn" onclick="saveReminder()">Set</button>
+        </div>
+    </div>
+
+    <script>
+        let notes = JSON.parse(localStorage.getItem('notes') || '[]');
+        let currentNote = null;
+        let currentMode = 'text';
+        let canvas, ctx;
+        let isDrawing = false;
+        let currentColor = '#000';
+        let currentTool = 'pen';
+        let currentSize = 3;
+        let isAddingText = false;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initCanvas();
+            loadNotes();
+            setupEvents();
+            checkReminders();
+            setInterval(checkReminders, 60000);
+        });
+
+        function initCanvas() {
+            canvas = document.getElementById('canvas');
+            ctx = canvas.getContext('2d');
+            
+            // Optimize canvas for smooth drawing
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+            
+            function resize() {
+                const container = document.getElementById('canvasContainer');
+                if (container.offsetWidth > 0 && container.offsetHeight > 0) {
+                    const oldData = canvas.toDataURL();
+                    canvas.width = container.offsetWidth;
+                    canvas.height = container.offsetHeight - 60;
+                    
+                    // Restore drawing after resize
+                    if (oldData !== 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==') {
+                        const img = new Image();
+                        img.onload = () => ctx.drawImage(img, 0, 0);
+                        img.src = oldData;
+                    }
+                    
+                    setupCanvasStyle();
+                }
+            }
+            
+            function setupCanvasStyle() {
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                ctx.strokeStyle = currentColor;
+                ctx.lineWidth = currentSize;
+                ctx.imageSmoothingEnabled = true;
+            }
+            
+            setupCanvasStyle();
+            setTimeout(resize, 100);
+            window.addEventListener('resize', resize);
+            
+            // Optimized mouse events
+            canvas.addEventListener('mousedown', startDrawing, { passive: false });
+            canvas.addEventListener('mousemove', draw, { passive: false });
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseleave', stopDrawing);
+            
+            // Optimized touch events
+            canvas.addEventListener('touchstart', startDrawing, { passive: false });
+            canvas.addEventListener('touchmove', draw, { passive: false });
+            canvas.addEventListener('touchend', stopDrawing, { passive: false });
+            canvas.addEventListener('touchcancel', stopDrawing);
+        }
+
+        function setupEvents() {
+            document.getElementById('search').addEventListener('input', e => filterNotes(e.target.value));
+            document.getElementById('textEditor').addEventListener('input', saveNote);
+            document.getElementById('titleInput').addEventListener('input', saveNote);
+            
+            document.querySelectorAll('.color').forEach(c => {
+                c.addEventListener('click', function() {
+                    document.querySelector('.color.active').classList.remove('active');
+                    this.classList.add('active');
+                    currentColor = this.dataset.color;
+                });
+            });
+            
+            document.getElementById('brushSize').addEventListener('input', function() {
+                currentSize = this.value;
+                document.getElementById('sizeDisplay').textContent = this.value + 'px';
+            });
+        }
+
+        function setTool(tool) {
+            currentTool = tool;
+            document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`[data-tool="${tool}"]`).classList.add('active');
+            
+            // Show/hide font controls
+            const fontControls = document.getElementById('fontControls');
+            const fontSeparator = document.getElementById('fontSeparator');
+            fontControls.style.display = tool === 'text' ? 'flex' : 'none';
+            fontSeparator.style.display = tool === 'text' ? 'block' : 'none';
+            
+            // Update cursor
+            canvas.style.cursor = tool === 'text' ? 'text' : 'crosshair';
+        }
+
+        let lastX = 0;
+        let lastY = 0;
+
+        function startDrawing(e) {
+            e.preventDefault();
+            
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            
+            const x = ((e.clientX || e.touches?.[0]?.clientX) - rect.left) * scaleX;
+            const y = ((e.clientY || e.touches?.[0]?.clientY) - rect.top) * scaleY;
+            
+            lastX = x;
+            lastY = y;
+            
+            if (currentTool === 'text') {
+                addText(x, y);
+                return;
+            }
+            
+            isDrawing = true;
+            
+            // Set tool properties with better performance
+            ctx.globalCompositeOperation = currentTool === 'eraser' ? 'destination-out' : 'source-over';
+            ctx.strokeStyle = currentColor;
+            ctx.fillStyle = currentColor;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            
+            if (currentTool === 'pen') {
+                ctx.globalAlpha = 1;
+                ctx.lineWidth = currentSize;
+            } else if (currentTool === 'brush') {
+                ctx.globalAlpha = 0.8;
+                ctx.lineWidth = currentSize * 2;
+            } else if (currentTool === 'marker') {
+                ctx.globalAlpha = 0.9;
+                ctx.lineWidth = currentSize * 1.5;
+                ctx.lineCap = 'square';
+            } else if (currentTool === 'highlighter') {
+                ctx.globalAlpha = 0.3;
+                ctx.lineWidth = currentSize * 4;
+                ctx.lineCap = 'square';
+            } else if (currentTool === 'eraser') {
+                ctx.globalAlpha = 1;
+                ctx.lineWidth = currentSize * 3;
+            } else if (currentTool === 'spray') {
+                ctx.globalAlpha = 0.1;
+                drawSpray(x, y);
+                return;
+            }
+            
+            // Start the path
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+        }
+
+        function draw(e) {
+            if (!isDrawing || currentTool === 'text') return;
+            e.preventDefault();
+            
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            
+            const x = ((e.clientX || e.touches?.[0]?.clientX) - rect.left) * scaleX;
+            const y = ((e.clientY || e.touches?.[0]?.clientY) - rect.top) * scaleY;
+            
+            if (currentTool === 'spray') {
+                drawSpray(x, y);
+                return;
+            }
+            
+            // Smooth line drawing using quadratic curves
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            
+            const midX = (lastX + x) / 2;
+            const midY = (lastY + y) / 2;
+            ctx.quadraticCurveTo(lastX, lastY, midX, midY);
+            ctx.stroke();
+            
+            lastX = x;
+            lastY = y;
+        }
+
+        function drawSpray(x, y) {
+            for (let i = 0; i < 20; i++) {
+                const offsetX = (Math.random() - 0.5) * currentSize * 4;
+                const offsetY = (Math.random() - 0.5) * currentSize * 4;
+                ctx.fillRect(x + offsetX, y + offsetY, 1, 1);
+            }
+        }
+
+        function stopDrawing() {
+            if (isDrawing) {
+                isDrawing = false;
+                ctx.globalCompositeOperation = 'source-over';
+                ctx.globalAlpha = 1;
+                
+                // Only save after drawing is complete to reduce lag
+                requestAnimationFrame(() => {
+                    saveNote();
+                });
+            }
+        }
+
+        function addText(x, y) {
+            const text = document.getElementById('textInput').value;
+            if (!text) return;
+            
+            const fontSize = currentSize * 4;
+            const fontFamily = document.getElementById('fontFamily').value;
+            
+            ctx.font = `${fontSize}px ${fontFamily}`;
+            ctx.fillStyle = currentColor;
+            ctx.globalAlpha = 1;
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.fillText(text, x, y);
+            
+            document.getElementById('textInput').value = '';
+            saveNote();
+        }
+
+
+
+        function createNote() {
+            const note = {
+                id: Date.now(),
+                title: 'New Note',
+                content: '',
+                drawing: '',
+                created: new Date(),
+                pinned: false,
+                reminder: null
+            };
+            
+            notes.unshift(note);
+            saveNotes();
+            loadNotes();
+            selectNote(note.id);
+            closeSidebar();
+        }
+
+        function selectNote(id) {
+            currentNote = notes.find(n => n.id === id);
+            if (!currentNote) return;
+            
+            document.getElementById('empty').style.display = 'none';
+            document.getElementById('editorHeader').style.display = 'flex';
+            document.getElementById('titleInput').value = currentNote.title;
+            
+            if (currentMode === 'text') {
+                document.getElementById('textEditor').style.display = 'block';
+                document.getElementById('textEditor').value = currentNote.content;
+                document.getElementById('canvasContainer').classList.remove('active');
+            } else {
+                document.getElementById('textEditor').style.display = 'none';
+                document.getElementById('canvasContainer').classList.add('active');
+                loadDrawing();
+            }
+            
+            updateButtons();
+            updateActiveNote();
+        }
+
+        function updateButtons() {
+            document.getElementById('pinBtn').style.opacity = currentNote.pinned ? '1' : '0.5';
+            document.getElementById('reminderBtn').style.opacity = currentNote.reminder ? '1' : '0.5';
+        }
+
+        function updateActiveNote() {
+            document.querySelectorAll('.note').forEach(n => n.classList.remove('active'));
+            document.querySelector(`[data-id="${currentNote.id}"]`)?.classList.add('active');
+        }
+
+        function switchMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`[onclick="switchMode('${mode}')"]`).classList.add('active');
+            
+            if (currentNote) {
+                if (mode === 'text') {
+                    document.getElementById('textEditor').style.display = 'block';
+                    document.getElementById('canvasContainer').classList.remove('active');
+                } else {
+                    document.getElementById('textEditor').style.display = 'none';
+                    document.getElementById('canvasContainer').classList.add('active');
+                    loadDrawing();
+                }
+            }
+        }
+
+        let saveTimeout;
+        
+        function saveNote() {
+            if (!currentNote) return;
+            
+            currentNote.title = document.getElementById('titleInput').value || 'Untitled';
+            
+            if (currentMode === 'text') {
+                currentNote.content = document.getElementById('textEditor').value;
+            } else {
+                currentNote.drawing = canvas.toDataURL();
+            }
+            
+            // Debounce saving to reduce lag
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(() => {
+                saveNotes();
+                loadNotes();
+            }, 500);
+        }
+
+        function loadDrawing() {
+            if (currentNote?.drawing) {
+                const img = new Image();
+                img.onload = () => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0);
+                };
+                img.src = currentNote.drawing;
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            saveNote();
+        }
+
+        function togglePin() {
+            if (!currentNote) return;
+            currentNote.pinned = !currentNote.pinned;
+            updateButtons();
+            saveNotes();
+            loadNotes();
+        }
+
+        function setReminder() {
+            if (!currentNote) return;
+            
+            if (currentNote.reminder) {
+                currentNote.reminder = null;
+                updateButtons();
+                saveNotes();
+                loadNotes();
+            } else {
+                document.getElementById('reminderModal').classList.add('open');
+                document.getElementById('overlay').classList.add('open');
+            }
+        }
+
+        function saveReminder() {
+            const time = document.getElementById('reminderTime').value;
+            if (time && currentNote) {
+                currentNote.reminder = time;
+                updateButtons();
+                saveNotes();
+                loadNotes();
+                closeModal();
+            }
+        }
+
+        function deleteNote(id, event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            
+            const noteToDelete = notes.find(n => n.id === id);
+            if (!noteToDelete) return;
+            
+            if (!confirm(`Delete "${noteToDelete.title}"?`)) return;
+            
+            notes = notes.filter(n => n.id !== id);
+            
+            if (currentNote && currentNote.id === id) {
+                currentNote = null;
+                document.getElementById('empty').style.display = 'flex';
+                document.getElementById('editorHeader').style.display = 'none';
+                document.getElementById('textEditor').style.display = 'none';
+                document.getElementById('canvasContainer').classList.remove('active');
+            }
+            
+            saveNotes();
+            loadNotes();
+        }
+
+        function deleteCurrentNote() {
+            if (!currentNote || !confirm('Delete this note?')) return;
+            
+            notes = notes.filter(n => n.id !== currentNote.id);
+            currentNote = null;
+            document.getElementById('empty').style.display = 'flex';
+            document.getElementById('editorHeader').style.display = 'none';
+            document.getElementById('textEditor').style.display = 'none';
+            document.getElementById('canvasContainer').classList.remove('active');
+            
+            saveNotes();
+            loadNotes();
+        }
+
+        function loadNotes() {
+            const list = document.getElementById('notesList');
+            const sorted = [...notes].sort((a, b) => {
+                if (a.pinned && !b.pinned) return -1;
+                if (!a.pinned && b.pinned) return 1;
+                return new Date(b.created) - new Date(a.created);
+            });
+            
+            list.innerHTML = sorted.map(note => `
+                <div class="note" data-id="${note.id}" onclick="selectNote(${note.id})">
+                    <button class="note-delete" onclick="deleteNote(${note.id}, event)">×</button>
+                    <div class="note-title">${note.title}</div>
+                    <div class="note-preview">${note.content.substring(0, 50) || 'No content'}</div>
+                    <div class="note-meta">
+                        ${note.pinned ? '📌' : ''}
+                        ${note.reminder ? '⏰' : ''}
+                        <span>${new Date(note.created).toLocaleDateString()}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterNotes(query) {
+            document.querySelectorAll('.note').forEach(note => {
+                const text = note.textContent.toLowerCase();
+                note.style.display = text.includes(query.toLowerCase()) ? 'block' : 'none';
+            });
+        }
+
+        function checkReminders() {
+            const now = new Date();
+            notes.forEach(note => {
+                if (note.reminder && new Date(note.reminder) <= now) {
+                    alert(`⏰ ${note.title}`);
+                    note.reminder = null;
+                    saveNotes();
+                    loadNotes();
+                }
+            });
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('open');
+        }
+
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('open');
+        }
+
+        function toggleTheme() {
+            const current = document.body.getAttribute('data-theme');
+            const newTheme = current === 'dark' ? 'light' : 'dark';
+            document.body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        function closeModal() {
+            document.getElementById('reminderModal').classList.remove('open');
+            document.getElementById('overlay').classList.remove('open');
+        }
+
+        function saveNotes() {
+            localStorage.setItem('notes', JSON.stringify(notes));
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.body.setAttribute('data-theme', savedTheme);
+    </script>
+<script>
+    (function() {
+    // 1. Theme Detection & Sync
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.body.setAttribute('data-theme', savedTheme);
+
+    const applyForceTheme = (theme) => {
+        const isDark = theme === 'dark';
+        let style = document.getElementById("force-emerald-notes");
+        if (!style) {
+            style = document.createElement('style');
+            style.id = "force-emerald-notes";
+            document.head.appendChild(style);
+        }
+
+        if (isDark) {
+            style.innerHTML = `
+                :root {
+                    --bg: #010d08 !important;
+                    --surface: #064e3b !important;
+                    --text: #ecfdf5 !important;
+                    --border: #065f46 !important;
+                    --primary-solid: #10b981 !important;
+                    --primary: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+                }
+                body { background: #010d08 !important; }
+                .header { background: #010d08 !important; border-bottom: 2px solid #065f46 !important; }
+                .sidebar, .editor-header, .canvas-toolbar { background: #064e3b !important; border-color: #065f46 !important; }
+                .note { background: #010d08 !important; border-color: #065f46 !important; }
+                .note.active { background: #10b981 !important; color: #010d08 !important; }
+                .note-preview { color: #34d399 !important; }
+                .btn { box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2) !important; color: #010d08 !important; font-weight: 800 !important; }
+                .search, .title-input, .text-editor, .mode-toggle { background: #010d08 !important; border-color: #059669 !important; color: #fff !important; }
+                .drawing-canvas { background: #010d08 !important; }
+                .tool-btn { background: #010d08 !important; border-color: #059669 !important; color: #10b981 !important; }
+                .tool-btn.active { background: #10b981 !important; color: #010d08 !important; }
+                .modal { background: #064e3b !important; color: #fff !important; border: 1px solid #10b981 !important; }
+            `;
+        } else {
+            style.innerHTML = `
+                :root {
+                    --bg: #f0fdf4 !important;
+                    --surface: #ffffff !important;
+                    --text: #000000 !important;
+                    --border: #059669 !important;
+                    --primary-solid: #059669 !important;
+                }
+                body { background: #f0fdf4 !important; color: #000000 !important; }
+                .note-title, .note-preview, .title-input, .text-editor, h3, p, span { color: #000000 !important; font-weight: 600 !important; }
+                .note-preview { opacity: 0.8 !important; }
+                .note { border: 1px solid #059669 !important; background: #ffffff !important; }
+                .note.active { background: #059669 !important; color: #ffffff !important; }
+                .note.active .note-preview { color: #ffffff !important; }
+                .btn { background: #059669 !important; color: #ffffff !important; }
+                .search, .title-input, .text-editor { border-color: #059669 !important; background: #ffffff !important; color: #000000 !important; }
+                .mode-btn { color: #000000 !important; }
+                .mode-btn.active { color: #ffffff !important; }
+            `;
+        }
+    };
+
+    applyForceTheme(savedTheme);
+
+    // Patch the existing toggleTheme function to refresh our styles
+    const originalToggle = window.toggleTheme;
+    window.toggleTheme = function() {
+        originalToggle();
+        const newTheme = document.body.getAttribute('data-theme');
+        applyForceTheme(newTheme);
+    };
+})();
+(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98755e9ba2213d25',t:'MTc1OTI1MjYwMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

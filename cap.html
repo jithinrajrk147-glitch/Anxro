@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Superior Caption Generator Pro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; transition: 0.3s; }
+        #box { padding: 25px; max-width: 500px; margin: auto; }
+        
+        /* Emerald Trading Theme Styles */
+        .emerald-dark { background: #010d08; color: #ecfdf5; min-height: 100vh; }
+        h2 { color: #10b981; text-align: center; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; }
+        
+        #kw { 
+            width: 100%; box-sizing: border-box; padding: 15px; 
+            background: #064e3b; border: 2px solid #059669; 
+            color: #ecfdf5; border-radius: 12px; font-size: 16px; outline: none;
+        }
+        
+        #btn { 
+            width: 100%; margin-top: 15px; padding: 15px; 
+            background: linear-gradient(45deg, #059669, #10b981); 
+            color: #010d08; font-weight: 800; border: none; 
+            border-radius: 12px; font-size: 18px; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); transition: 0.2s;
+        }
+        #btn:active { transform: scale(0.98); }
+
+        #out { 
+            margin-top: 25px; background: #064e3b; 
+            border-left: 6px solid #10b981; padding: 20px; 
+            border-radius: 12px; line-height: 1.6; min-height: 50px;
+        }
+        .candle { color: #10b981; font-weight: bold; margin-right: 8px; }
+        ::placeholder { color: #34d399; opacity: 0.5; }
+    </style>
+</head>
+<body class="emerald-dark">
+
+<div id="box">
+    <h2>Caption Gen Pro</h2>
+    <input id="kw" placeholder="Enter keyword (e.g. Success, Coffee, Gym)">
+    <button id="btn" onclick="generateCaptions()">GENERATE 5 CAPTIONS</button>
+    <div id="out">Enter a keyword and hit generate.</div>
+</div>
+
+<script>
+async function api(url) {
+    try {
+        const response = await fetch(url);
+        return await response.json();
+    } catch (e) {
+        return null;
+    }
+}
+
+async function generateCaptions() {
+    const kw = document.getElementById("kw").value.trim();
+    const out = document.getElementById("out");
+
+    if (!kw) {
+        out.innerHTML = "Please enter a keyword first.";
+        return;
+    }
+
+    out.innerHTML = "Fetching real-time data...";
+
+    // Fetching from 5 diverse content APIs
+    const [advice, activity, affirmation, joke, quote] = await Promise.all([
+        api("https://api.adviceslip.com/advice"),
+        api("https://www.boredapi.com/api/activity"),
+        api("https://www.affirmations.dev/"),
+        api("https://official-joke-api.appspot.com/random_joke"),
+        api("https://api.quotable.io/random?maxLength=50")
+    ]);
+
+    // Processing the data
+    const list = [
+        // Advice based
+        `Current status: ${kw}. Remember: ${advice?.slip?.advice || "Keep pushing forward."}`,
+        
+        // Activity/Lifestyle based
+        `Focused on ${kw}. Maybe I'll ${activity?.activity?.toLowerCase() || "keep it simple"} today.`,
+        
+        // Affirmation based
+        `${kw} mindset. ${affirmation?.affirmation || "Everything is falling into place."}`,
+        
+        // Short Quote/Vibe based
+        `${kw} vibes. "${quote?.content || "Be the change."}"`,
+        
+        // Personality based
+        `Life update: ${kw}. ${joke ? joke.setup + " " + joke.punchline : "Staying on top of the game."}`
+    ];
+
+    // Render with Bullish Candle Pattern
+    out.innerHTML = list.map(text => {
+        return `<div style="margin-bottom: 15px;"><span class="candle">▮</span> ${text}</div>`;
+    }).join("");
+}
+</script>
+
+</body>
+</html>
