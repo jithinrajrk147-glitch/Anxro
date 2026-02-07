@@ -2,81 +2,81 @@
   {
     "name": "Calculator",
     "link": "calculator.html",
-    "video": "image/calculator.mp4"
+    "image": "calculator.png"
   },
   {
     "name": "Notepad",
     "link": "note.html",
-    "video": "image/note.png"
+    "image": "note.png"
   },
   {
     "name": "Calendar",
     "link": "calendar.html",
-    "video": "image/calandar.png"
+    "image": "calendar.png"
   },
   {
-    "name": "Music",
-    "link": "calandar.html",
-    "video": "image/music.mp4"
+    "name": "Music Player",
+    "link": "music.html",
+    "image": "music.png"
   },
   {
-    "name": "Barcode",
+    "name": "Barcode Generator",
     "link": "barcode.html",
-    "video": "image/barcode.mp4"
+    "image": "barcode.png"
   },
   {
-    "name": "Scanner",
+    "name": "QR Scanner",
     "link": "scanner.html",
-    "video": "image/scanner.mp4"
+    "image": "scanner.png"
   },
-   {
-    "name": "Music",
-    "link": "calandar.html",
-    "video": "image/music.mp4"
+  {
+    "name": "PDF Reader",
+    "link": "pdf.html",
+    "image": "pdf.png"
   },
-   {
-    "name": "Music",
-    "link": "calandar.html",
-    "video": "image/music.mp4"
+  {
+    "name": "Image Compressor",
+    "link": "compress.html",
+    "image": "compress.png"
   },
-   {
-    "name": "Music",
-    "link": "calandar.html",
-    "video": "image/music.mp4"
+  {
+    "name": "Video Cutter",
+    "link": "video-cutter.html",
+    "image": "video.png"
   },
-   {
-    "name": "Music",
-    "link": "calandar.html",
-    "video": "image/music.mp4"
-  } ,
-   {
-    "name": "Music",
-    "link": "calandar.html",
-    "video": "image/music.mp4"
-  }, {
-    "name": "Music",
-    "link": "calandar.html",
-    "video": "image/music.mp4"
-  }, {
-    "name": "Music",
-    "link": "calandar.html",
-    "video": "image/music.mp4"
-  }, {
-    "name": "Music",
-    "link": "calandar.html",
-    "video": "image/music.mp4"
-  }, {
-    "name": "Music",
-    "link": "calandar.html",
-    "video": "image/music.mp4"
-  }, {
-    "name": "Music",
+  {
+    "name": "File Manager",
+    "link": "files.html",
+    "image": "files.png"
+  },
+  {
+    "name": "Text to Speech",
+    "link": "tts.html",
+    "image": "tts.png"
+  },
+  {
+    "name": "Speech to Text",
+    "link": "stt.html",
+    "image": "stt.png"
+  },
+  {
+    "name": "Password Generator",
+    "link": "password.html",
+    "image": "password.png"
+  },
+  {
+    "name": "Unit Converter",
+    "link": "converter.html",
+    "image": "converter.png"
+  },
+  {
+    "name": "Stopwatch",
+    "link": "stopwatch.html",
+    "image": "stopwatch.png"
+  },
+  {
+    "name": "Diary",
     "link": "real-diary.html",
-    "video": "image/music.mp4"
-  }, {
-    "name": "Music",
-    "link": "calandar.html",
-    "video": "image/music.mp4"
+    "image": "diary.png"
   }
-  
 ]
