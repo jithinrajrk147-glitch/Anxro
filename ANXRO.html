@@ -1,125 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-.<link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ANXRO Logo - Final Version</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="load.png" as="image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    
     <style>
-
-        :root {
-             /* Change from dark green to light emerald */
-    --emerald-dark: #7CEB92; 
-        
-            /* Logic Variables */
-            --image-height: 40px;
-            --pos-apart: -100px;
-            --pos-merge: 7.5px; /* Precise meeting point */
-        }
-
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            width: 100vw;
-            
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            font-family: 'Arial Black', sans-serif;
-        }
-
-        /* LOGO STRUCTURE */
-        .logo-wrapper {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-.text {
-    font-family: 'Bungee', sans-serif;
-    font-size: 20px;
-    color: var(--emerald-dark);
-    margin-top: 2px; 
-    transition: transform 0.8s ease;
-}
-        .text {
-            font-family: 'Bungee', sans-serif;
-            font-size: 20px;
-            color: var(--emerald-dark);
-            /* Positioning text lower */
-            margin-top: 2px; 
-            transition: transform 0.8s ease;
-        }
-
-        .x-join-area {
-            position: relative;
-            width:16px; /* Space where X forms */
-            height: var(--image-height);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .figure {
-            position: absolute;
-            height: 100%;
-            width: auto;
-            transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s;
-            will-change: transform;
-            opacity: 0;
-        }
-
-        /* Horizontal Movement Setup */
-        #fig-left {
-            transform: translateX(var(--pos-apart));
-        }
-
-        #fig-right {
-            transform: scaleX(-1) translateX(var(--pos-apart));
-        }
-
-        /* Active Animation State */
-        .animate #fig-left {
-            transform: translateX(calc(-1 * var(--pos-merge)));
-            opacity: 1;
-        }
-
-        .animate #fig-right {
-            transform: scaleX(-1) translateX(calc(-1 * var(--pos-merge)));
-            opacity: 1;
-        }
-
-
+        :root{--emerald-dark:#7CEB92;--image-height:40px;--pos-apart:-100px;--pos-merge:7.5px}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body,html{height:100vh;width:100vw;display:flex;justify-content:center;align-items:center;overflow:hidden;font-family:'Arial Black',sans-serif}
+        .logo-wrapper{position:relative;z-index:10;display:flex;align-items:center;justify-content:center;gap:15px}
+        .text{font-family:'Bungee',sans-serif;font-size:20px;color:var(--emerald-dark);margin-top:2px;transition:transform .8s ease;will-change:transform}
+        .x-join-area{position:relative;width:16px;height:var(--image-height);display:flex;justify-content:center;align-items:center}
+        .figure{position:absolute;height:100%;width:auto;transition:transform 1.2s cubic-bezier(.34,1.56,.64,1),opacity .6s;will-change:transform,opacity;opacity:0}
+        #fig-left{transform:translateX(var(--pos-apart))}
+        #fig-right{transform:scaleX(-1) translateX(var(--pos-apart))}
+        .animate #fig-left{transform:translateX(calc(-1*var(--pos-merge)));opacity:1}
+        .animate #fig-right{transform:scaleX(-1) translateX(calc(-1*var(--pos-merge)));opacity:1}
     </style>
 </head>
 <body>
-
-
     <div class="logo-wrapper" id="logo-container">
         <div class="text">AN</div>
         <div class="x-join-area">
-            <img src="load.png" id="fig-left" class="figure">
-            <img src="load.png" id="fig-right" class="figure">
+            <img src="load.png" id="fig-left" class="figure" alt="X left" width="16" height="40">
+            <img src="load.png" id="fig-right" class="figure" alt="X right" width="16" height="40">
         </div>
         <div class="text">RO</div>
     </div>
 
     <script>
-        window.onload = () => {
-            const container = document.getElementById('logo-container');
-         
-            setTimeout(() => {
-                // Join images and let text settle
-                container.classList.add('animate');
-
-                setTimeout(() => {
-                     setTimeout(() => popup.classList.remove('popup-active'), 3000);
-                }, 1100);
-            }, 500);
+        window.onload=()=>{
+            const container=document.getElementById('logo-container');
+            setTimeout(()=>container.classList.add('animate'),500);
         };
     </script>
 </body>
