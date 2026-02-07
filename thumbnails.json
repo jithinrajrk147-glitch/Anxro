@@ -2,25 +2,25 @@
   {
     "title": "Top Ai ",
     "desc": "The top Ai of the years",
-    "image": "image/Aii.png",
+    "image": "Aii.png",
     "link": "https://v1.bhindi.io/auth/login?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRhZTBjNmU4LTliZTgtNDAyNC1hOGViLTc2YTZjYzgyNzA5MSIsImlhdCI6MTc2OTkyOTAxMywiZXhwIjoxNzc3NzA1MDEzfQ.FHL-irz36qlzEWp3ENyqMRUk-9lluiQZJH6J7asMws8"
   },
   {
     "title": "Top websites",
     "desc": "The best website of the year",
-    "image": "image/web.png",
+    "image": "web.png",
     "link": "lab.html"
   },
   {
     "title": "Top application",
     "desc": "The best app of the year",
-    "image": "image/app.png",
+    "image": "app.png",
     "link": "lab.html"
   },
   {
     "title": "Paper trading with us",
     "desc": "Our full live paper trading section",
-    "image": "image/trd.png",
+    "image": "trd.png",
     "link": "paper trading.html"
   }
   
