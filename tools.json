@@ -1,13 +1,13 @@
 [
   {
-    "name": "Discipline Tracker",
-    "link": "distrkwr.html",
-    "image": "displine.png"
+    "name": "Qr generator",
+    "link": "barcode.html",
+    "image": "qr.png"
   },
   {
     "name": "To-Do List",
     "link": "dotoday.html",
-    "image": "app.png"
+    "image": "habit 1.png"
   },
   {
     "name": "Business Name Generator",
@@ -36,7 +36,7 @@
   },
   {
     "name": "Microsheet Habit Tracker",
-    "link": "n.html",
+    "link": "distrkwr.html",
     "image": "habit4.png"
   },
   {
