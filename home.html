@@ -141,8 +141,8 @@ body {
 
 /* The fix for complete occupancy */
 .tool-item img { 
-  width: 100%; 
-  height: 100%; 
+  width: 90%; 
+  height: 90%; 
   object-fit: cover; /* This makes it fill the entire square */
 }
 
@@ -282,11 +282,11 @@ async function loadData() {
     UI.quoteAuthor.textContent = `~ ${qRes.message.author}`;
 
     // Render Tools (Batching DOM updates)
-    UI.tGrid.innerHTML = tRes.map(t => `
-      <div class="tool-item" onclick="location.href='${t.link}'">
-        <video src="${t.video}" autoplay muted loop playsinline></video>
-      </div>
-    `).join('');
+UI.tGrid.innerHTML = tRes.map(t => `
+  <div class="tool-item" onclick="location.href='${t.link}'">
+    <img src="${t.image}" alt="tool">
+  </div>
+`).join('');
 
     // Render Content (Batching DOM updates)
     UI.cStack.innerHTML = thumbRes.map(i => `
