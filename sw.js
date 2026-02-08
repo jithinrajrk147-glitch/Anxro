@@ -1,7 +1,7 @@
 // Service Worker for ANXRO PWA
-// Version 1.1.0 - Enhanced offline support with live updates
+// Version 1.2.0 - Updated with new logo
 
-const CACHE_NAME = 'anxro-v1.1.0';
+const CACHE_NAME = 'anxro-v1.2.0';
 const RUNTIME_CACHE = 'anxro-runtime-v1';
 const OFFLINE_PAGE = '/Anxro/offline.html';
 
@@ -12,12 +12,9 @@ const CORE_ASSETS = [
   '/Anxro/ANXRO.html',
   '/Anxro/offline.html',
   '/Anxro/manifest.json',
+  '/Anxro/anxro-logo.png',
   '/Anxro/load.png',
-  '/Anxro/app.png',
-  '/Anxro/logo.png',
-  '/Anxro/Bungee-Regular.ttf',
-  '/Anxro/icon-192',
-  '/Anxro/icon-512'
+  '/Anxro/Bungee-Regular.ttf'
 ];
 
 // Extended assets to cache (tools and features)
@@ -54,7 +51,7 @@ const IMAGE_ASSETS = [
 
 // Install event - cache core assets immediately
 self.addEventListener('install', (event) => {
-  console.log('[SW v1.1.0] Installing service worker...');
+  console.log('[SW v1.2.0] Installing service worker with new logo...');
   
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -89,7 +86,7 @@ self.addEventListener('install', (event) => {
 
 // Activate event - clean up old caches and take control
 self.addEventListener('activate', (event) => {
-  console.log('[SW v1.1.0] Activating service worker...');
+  console.log('[SW v1.2.0] Activating service worker...');
   
   event.waitUntil(
     caches.keys()
@@ -200,8 +197,8 @@ self.addEventListener('push', (event) => {
   
   const options = {
     body: event.data ? event.data.text() : 'New update available in ANXRO!',
-    icon: '/Anxro/app.png',
-    badge: '/Anxro/app.png',
+    icon: '/Anxro/anxro-logo.png',
+    badge: '/Anxro/anxro-logo.png',
     vibrate: [200, 100, 200],
     tag: 'anxro-notification',
     requireInteraction: false,
@@ -255,4 +252,4 @@ self.addEventListener('message', (event) => {
   }
 });
 
-console.log('[SW v1.1.0] Service Worker loaded successfully ✅');
+console.log('[SW v1.2.0] Service Worker loaded successfully with new logo ✅');
