@@ -2,11 +2,11 @@
   "name": "ANXRO - All in One Business & Productivity App",
   "short_name": "ANXRO",
   "description": "Complete productivity suite with AI tools, calculators, calendar, crypto converter, code editor, and more - fully offline capable",
-  "start_url": "/Anxro/index.html",
+  "start_url": "/Anxro/mainprof.html",
   "scope": "/Anxro/",
-  "display": "standalone",
-  "background_color": "#f5f5f5",
-  "theme_color": "#1a1a1a",
+  "display": "fullscreen",
+  "background_color": "#000000",
+  "theme_color": "#0f172a",
   "orientation": "any",
   "icons": [
     {
