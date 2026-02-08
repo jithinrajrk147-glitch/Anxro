@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f172a">
+    <title>Offline - ANXRO</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .offline-container {
+            text-align: center;
+            max-width: 500px;
+        }
+        
+        .offline-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: #7CEB92;
+        }
+        
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #cbd5e1;
+        }
+        
+        .features {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .features h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #7CEB92;
+        }
+        
+        .features ul {
+            list-style: none;
+            text-align: left;
+        }
+        
+        .features li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .features li:last-child {
+            border-bottom: none;
+        }
+        
+        .features li::before {
+            content: "✓ ";
+            color: #7CEB92;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .retry-btn {
+            background: #7CEB92;
+            color: #0f172a;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .retry-btn:hover {
+            background: #6dd882;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(124, 235, 146, 0.3);
+        }
+        
+        .status {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #94a3b8;
+        }
+        
+        .online {
+            color: #7CEB92;
+        }
+        
+        .offline-badge {
+            display: inline-block;
+            background: #ef4444;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">📡</div>
+        <div class="offline-badge">Offline Mode</div>
+        <h1>You're Offline</h1>
+        <p>No internet connection detected. But don't worry, ANXRO still works!</p>
+        
+        <div class="features">
+            <h2>Available Offline:</h2>
+            <ul>
+                <li>Calculator</li>
+                <li>Calendar (view & create)</li>
+                <li>Code Editor</li>
+                <li>Notes & To-Do Lists</li>
+                <li>Habit Tracker</li>
+                <li>Barcode Generator</li>
+                <li>All Cached Pages</li>
+            </ul>
+        </div>
+        
+        <button class="retry-btn" onclick="location.reload()">
+            🔄 Retry Connection
+        </button>
+        
+        <div class="status" id="status">
+            Checking connection...
+        </div>
+    </div>
+    
+    <script>
+        // Check online status
+        function updateStatus() {
+            const status = document.getElementById('status');
+            if (navigator.onLine) {
+                status.innerHTML = '<span class="online">✓ Back Online!</span>';
+                setTimeout(() => {
+                    location.reload();
+                }, 1500);
+            } else {
+                status.textContent = '✗ Still offline';
+            }
+        }
+        
+        // Listen for online/offline events
+        window.addEventListener('online', updateStatus);
+        window.addEventListener('offline', updateStatus);
+        
+        // Initial check
+        updateStatus();
+        
+        // Periodic check every 5 seconds
+        setInterval(updateStatus, 5000);
+    </script>
+</body>
+</html>
