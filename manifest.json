@@ -5,33 +5,27 @@
   "start_url": "/Anxro/index.html",
   "scope": "/Anxro/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#0f172a",
+  "background_color": "#f5f5f5",
+  "theme_color": "#1a1a1a",
   "orientation": "any",
   "icons": [
     {
-      "src": "icon-192",
+      "src": "anxro-logo.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "icon-512",
+      "src": "anxro-logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "app.png",
-      "sizes": "192x192",
+      "src": "anxro-logo.png",
+      "sizes": "any",
       "type": "image/png",
       "purpose": "any maskable"
-    },
-    {
-      "src": "logo.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
     }
   ],
   "categories": ["productivity", "business", "utilities", "education", "finance"],
