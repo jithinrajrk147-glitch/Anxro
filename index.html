@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="theme-color" content="#000000">
     <meta name="description" content="ANXRO - All in One Business & Productivity App with offline support">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="ANXRO">
+    <meta name="mobile-web-app-capable" content="yes">
     <title>ANXRO - Pro Fit</title>
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
     
-    <!-- Apple Touch Icons - Old B Logo for index page -->
+    <!-- Apple Touch Icons - Old B Logo -->
     <link rel="apple-touch-icon" href="logo.png">
     <link rel="apple-touch-icon" sizes="192x192" href="logo.png">
     <link rel="apple-touch-icon" sizes="512x512" href="logo.png">
@@ -21,12 +22,115 @@
     <!-- Favicon - Old B Logo -->
     <link rel="icon" href="logo.png">
     
-    <script>
-        // Instant redirect - no intro animation
-        window.location.href = "mainprof.html";
-    </script>
+    <!-- Preload critical resources -->
+    <link rel="preload" href="logo.png" as="image">
+    <link rel="preload" href="Bungee-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    
+    <style>
+        /* Inline critical CSS for instant render */
+        @font-face{font-family:'Bungee';src:url('Bungee-Regular.ttf') format('truetype');font-display:swap}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body,html{width:100%;height:100%;background:#000;display:flex;justify-content:center;align-items:center;overflow:hidden;font-family:'Roboto Slab',serif}
+        .canvas{display:flex;align-items:center;justify-content:center;min-width:300px;transition:opacity .8s ease-in-out}
+        .logo-img{height:27vh;width:auto;flex-shrink:0;z-index:10;transform:translateY(2vh);animation:logoFocus 4s cubic-bezier(.85,0,.15,1) forwards;will-change:transform}
+        .brand-text-container{display:flex;align-items:center;overflow:hidden;max-width:500px;animation:typingRetract 4s cubic-bezier(.85,0,.15,1) forwards;will-change:max-width,opacity}
+        .brand-text{font-family:'Bungee',sans-serif;color:#fff;font-size:8vw;letter-spacing:1.5px;white-space:nowrap;margin-left:7px;padding-right:10px}
+        @keyframes logoFocus{0%,30%{transform:translateY(2vh) scale(1)}100%{transform:translateY(0) scale(1.6)}}
+        @keyframes typingRetract{0%,40%{max-width:500px;opacity:1}100%{max-width:0;opacity:0}}
+        .bg-glow{position:absolute;width:100%;height:100%;background:radial-gradient(circle at center,#1a1a1a 0%,#000 85%);z-index:-1}
+        
+        /* Install prompt styles */
+        .install-prompt{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:15px 25px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.3);display:none;align-items:center;gap:15px;z-index:1000;font-family:Arial,sans-serif;max-width:90%;animation:slideUp 0.3s ease-out}
+        .install-prompt.show{display:flex}
+        .install-btn{background:#fff;color:#1a1a1a;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-weight:bold;font-size:14px}
+        .install-btn:hover{background:#f0f0f0}
+        .close-prompt{background:transparent;border:none;color:#fff;font-size:20px;cursor:pointer;padding:0 5px}
+        @keyframes slideUp{from{transform:translateX(-50%) translateY(100px);opacity:0}to{transform:translateX(-50%) translateY(0);opacity:1}}
+    </style>
 </head>
 <body>
-    <!-- Redirecting... -->
+    <div class="bg-glow"></div>
+    <div class="canvas" id="intro-canvas">
+        <img src="logo.png" alt="ANXRO Logo" class="logo-img" width="200" height="200">
+        <div class="brand-text-container">
+            <div class="brand-text">NXRO</div>
+        </div>
+    </div>
+    
+    <!-- Install Prompt -->
+    <div class="install-prompt" id="installPrompt">
+        <span>📱 Install ANXRO app for offline access!</span>
+        <button class="install-btn" id="installBtn">Install</button>
+        <button class="close-prompt" id="closePrompt">×</button>
+    </div>
+    
+    <script>
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('✅ Service Worker registered successfully:', registration.scope);
+                        
+                        // Check for updates
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    console.log('🔄 New version available! Refresh to update.');
+                                }
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.log('❌ Service Worker registration failed:', error);
+                    });
+            });
+        }
+
+        // Install Prompt Handler
+        let deferredPrompt;
+        const installPrompt = document.getElementById('installPrompt');
+        const installBtn = document.getElementById('installBtn');
+        const closePrompt = document.getElementById('closePrompt');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show install prompt after 3 seconds
+            setTimeout(() => {
+                installPrompt.classList.add('show');
+            }, 3000);
+        });
+
+        installBtn.addEventListener('click', async () => {
+            if (!deferredPrompt) return;
+            
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            
+            console.log(`User response: ${outcome}`);
+            deferredPrompt = null;
+            installPrompt.classList.remove('show');
+        });
+
+        closePrompt.addEventListener('click', () => {
+            installPrompt.classList.remove('show');
+        });
+
+        // Track installation
+        window.addEventListener('appinstalled', () => {
+            console.log('✅ ANXRO PWA installed successfully!');
+            deferredPrompt = null;
+        });
+
+        // Optimized redirect with minimal delay
+        const canvas = document.getElementById('intro-canvas');
+        setTimeout(() => {
+            canvas.style.opacity = '0';
+            setTimeout(() => window.location.href = "mainprof.html", 800);
+        }, 4000);
+    </script>
 </body>
 </html>
