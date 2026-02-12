@@ -1,9 +1,11 @@
 // Service Worker for ANXRO PWA
-// Version 1.2.0 - Updated with new logo
+// Version 1.3.0 - Fixed network timeout issue for slow connections
+// Now uses cache-first with network update strategy for instant loading
 
-const CACHE_NAME = 'anxro-v1.2.0';
+const CACHE_NAME = 'anxro-v1.3.0';
 const RUNTIME_CACHE = 'anxro-runtime-v1';
 const OFFLINE_PAGE = '/Anxro/offline.html';
+const NETWORK_TIMEOUT = 3000; // 3 seconds timeout for network requests
 
 // Core files to cache immediately (critical for app functionality)
 const CORE_ASSETS = [
@@ -51,7 +53,7 @@ const IMAGE_ASSETS = [
 
 // Install event - cache core assets immediately
 self.addEventListener('install', (event) => {
-  console.log('[SW v1.2.0] Installing service worker with new logo...');
+  console.log('[SW v1.3.0] Installing service worker with network timeout fix...');
   
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -86,7 +88,7 @@ self.addEventListener('install', (event) => {
 
 // Activate event - clean up old caches and take control
 self.addEventListener('activate', (event) => {
-  console.log('[SW v1.2.0] Activating service worker...');
+  console.log('[SW v1.3.0] Activating service worker...');
   
   event.waitUntil(
     caches.keys()
@@ -107,7 +109,17 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch event - Network first with cache fallback (for live updates)
+// Helper function: Network request with timeout
+function fetchWithTimeout(request, timeout = NETWORK_TIMEOUT) {
+  return Promise.race([
+    fetch(request),
+    new Promise((_, reject) => 
+      setTimeout(() => reject(new Error('Network timeout')), timeout)
+    )
+  ]);
+}
+
+// Fetch event - Cache first with network update (FAST & RELIABLE)
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
@@ -123,37 +135,73 @@ self.addEventListener('fetch', (event) => {
   }
 
   event.respondWith(
-    // Try network first for live updates
-    fetch(request)
-      .then((response) => {
-        // Check if valid response
-        if (!response || response.status !== 200 || response.type === 'error') {
-          return response;
+    // Try cache first for instant loading
+    caches.match(request)
+      .then((cachedResponse) => {
+        // If we have a cached response, return it immediately
+        if (cachedResponse) {
+          console.log('[SW] ⚡ Serving from cache (instant):', request.url);
+          
+          // Update cache in background (stale-while-revalidate)
+          fetchWithTimeout(request)
+            .then((response) => {
+              if (response && response.status === 200 && response.type !== 'error') {
+                const responseToCache = response.clone();
+                caches.open(RUNTIME_CACHE)
+                  .then((cache) => {
+                    cache.put(request, responseToCache);
+                    console.log('[SW] 🔄 Cache updated in background:', request.url);
+                  });
+              }
+            })
+            .catch(() => {
+              // Network failed, but we already served from cache, so no problem
+              console.log('[SW] 📡 Background update failed (offline), using cached version');
+            });
+          
+          return cachedResponse;
         }
-
-        // Clone the response (can only be consumed once)
-        const responseToCache = response.clone();
         
-        // Update runtime cache with fresh content
-        caches.open(RUNTIME_CACHE)
-          .then((cache) => {
-            cache.put(request, responseToCache);
-          });
-        
-        return response;
-      })
-      .catch(() => {
-        // Network failed, try cache
-        return caches.match(request)
-          .then((cachedResponse) => {
-            if (cachedResponse) {
-              console.log('[SW] Serving from cache:', request.url);
-              return cachedResponse;
+        // No cache, try network with timeout
+        console.log('[SW] 🌐 Not in cache, fetching from network:', request.url);
+        return fetchWithTimeout(request)
+          .then((response) => {
+            // Check if valid response
+            if (!response || response.status !== 200 || response.type === 'error') {
+              throw new Error('Invalid response');
             }
+
+            // Clone the response (can only be consumed once)
+            const responseToCache = response.clone();
             
-            // If not in cache and it's a navigation request, return offline page
+            // Update cache with fresh content
+            caches.open(RUNTIME_CACHE)
+              .then((cache) => {
+                cache.put(request, responseToCache);
+                console.log('[SW] ✅ Cached new resource:', request.url);
+              });
+            
+            return response;
+          })
+          .catch((error) => {
+            console.log('[SW] ❌ Network failed:', error.message);
+            
+            // If it's a navigation request, return offline page
             if (request.mode === 'navigate') {
-              return caches.match(OFFLINE_PAGE);
+              return caches.match(OFFLINE_PAGE)
+                .then((offlinePage) => {
+                  if (offlinePage) {
+                    return offlinePage;
+                  }
+                  // Fallback if offline page is not cached
+                  return new Response('Offline - Please check your connection', {
+                    status: 503,
+                    statusText: 'Service Unavailable',
+                    headers: new Headers({
+                      'Content-Type': 'text/html'
+                    })
+                  });
+                });
             }
             
             // For other requests, return a generic offline response
@@ -248,8 +296,14 @@ self.addEventListener('message', (event) => {
     event.waitUntil(
       caches.open(RUNTIME_CACHE)
         .then((cache) => cache.addAll(event.data.urls))
+        .then(() => {
+          console.log('[SW] URLs cached successfully');
+        })
+        .catch((error) => {
+          console.error('[SW] Failed to cache URLs:', error);
+        })
     );
   }
 });
 
-console.log('[SW v1.2.0] Service Worker loaded successfully with new logo ✅');
+console.log('[SW v1.3.0] Service Worker loaded successfully with network timeout fix ✅');
