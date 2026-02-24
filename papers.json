@@ -1,36 +1,36 @@
 [
   {
-    "title": "Demystifying Artificial Intelligence: A Comprehensive Guide",
+    "title": "Demystifying Artificial Intelligence: Comprehensive Guide",
     "file": "https://www.researchgate.net/publication/393698439_Demystifying_Artificial_Intelligence_A_Comprehensive_Guide_to_Foundational_AI_Techniques_and_Their_Applications",
     "imf": "AI Research",
     "cover": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80"
   },
   {
-    "title": "Deep Learning: Comprehensive Overview on Techniques & Applications",
+    "title": "Deep Learning: Comprehensive Overview",
     "file": "https://pubmed.ncbi.nlm.nih.gov/34426802/",
     "imf": "AI Research",
     "cover": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80"
   },
   {
-    "title": "Explainable AI: From Classical Models to LLMs",
+    "title": "Explainable AI: Classical Models to LLMs",
     "file": "https://arxiv.org/abs/2412.00800",
     "imf": "AI Research",
     "cover": "https://images.unsplash.com/photo-1655720828018-edd2daec9349?w=800&q=80"
   },
   {
-    "title": "A Decade of Deep Learning: The Magnificent Seven",
+    "title": "A Decade of Deep Learning Survey",
     "file": "https://arxiv.org/abs/2412.16188",
     "imf": "AI Research",
     "cover": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&q=80"
   },
   {
-    "title": "Attention Is All You Need - Transformer Paper",
+    "title": "Attention Is All You Need - Transformer",
     "file": "https://arxiv.org/pdf/1706.03762.pdf",
     "imf": "AI Research",
     "cover": "https://images.unsplash.com/photo-1676277791608-ac52e1ddfb5c?w=800&q=80"
   },
   {
-    "title": "GPT-3 Language Models Paper",
+    "title": "GPT-3 Language Models",
     "file": "https://arxiv.org/pdf/2005.14165.pdf",
     "imf": "AI Research",
     "cover": "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=80"
@@ -40,6 +40,582 @@
     "file": "https://arxiv.org/pdf/1810.04805.pdf",
     "imf": "AI Research",
     "cover": "https://images.unsplash.com/photo-1655720033654-a4239dd42d10?w=800&q=80"
+  },
+  {
+    "title": "Data Science and Machine Learning: Mathematical Methods",
+    "file": "https://people.smp.uq.edu.au/DirkKroese/DSML/DSML.pdf",
+    "imf": "ML Education",
+    "cover": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+  },
+  {
+    "title": "Pattern Recognition and Machine Learning",
+    "file": "https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf",
+    "imf": "ML Education",
+    "cover": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&q=80"
+  },
+  {
+    "title": "The Hundred-Page Machine Learning Book",
+    "file": "http://ema.cri-info.cm/wp-content/uploads/2019/07/2019BurkovTheHundred-pageMachineLearning.pdf",
+    "imf": "ML Education",
+    "cover": "https://images.unsplash.com/photo-1516110833967-0b5716ca1387?w=800&q=80"
+  },
+  {
+    "title": "Big Book of Chart Patterns",
+    "file": "https://www.slideshare.net/slideshow/big-book-of-chart-patternspdf/252082434",
+    "imf": "Trading - Chart Patterns",
+    "cover": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80"
+  },
+  {
+    "title": "Classic Chart Patterns - Josh Trade",
+    "file": "https://www.scribd.com/document/642653769/josh-trade-classic-chart-patterns",
+    "imf": "Trading - Chart Patterns",
+    "cover": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=800&q=80"
+  },
+  {
+    "title": "Identifying Chart Patterns - Fidelity",
+    "file": "https://www.fidelity.com/bin-public/060_www_fidelity_com/documents/learning-center/Idenitfying-Chart-Patterns.pdf",
+    "imf": "Trading - Chart Patterns",
+    "cover": "https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=800&q=80"
+  },
+  {
+    "title": "24 Chart Patterns & Candlesticks Cheat Sheet",
+    "file": "https://timonandmati.com/wp-content/uploads/2022/06/CandleandBreakoutPatternCheatSheetGuide.pdf",
+    "imf": "Trading - Candlesticks",
+    "cover": "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?w=800&q=80"
+  },
+  {
+    "title": "Trade Chart Patterns Like the Pros",
+    "file": "https://carlosandcompany.com/wp-content/uploads/2021/01/TRADE-CHART-PATTERNS-GUIDE.pdf",
+    "imf": "Trading - Chart Patterns",
+    "cover": "https://images.unsplash.com/photo-1611095790444-1dfa35e37b52?w=800&q=80"
+  },
+  {
+    "title": "42 Chart Patterns Layouts",
+    "file": "https://www.strike.money/wp-content/uploads/2023/09/Chart-Pattern-PDF-Free-Download-1.pdf",
+    "imf": "Trading - Chart Patterns",
+    "cover": "https://images.unsplash.com/photo-1642790551116-18e150f248e5?w=800&q=80"
+  },
+  {
+    "title": "Technical Analysis of Stock Trends - 9th Edition",
+    "file": "https://vdthangmeomeo.files.wordpress.com/2014/08/edwards-magee-technical-analysis-of-stock-trends-9th-edition.pdf",
+    "imf": "Trading - Technical Analysis",
+    "cover": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+  },
+  {
+    "title": "Candlestick Pattern Cheat Sheet - XS.com",
+    "file": "https://www.xs.com/en/blog/candlestick-patterns-cheat-sheet/",
+    "imf": "Trading - Candlesticks",
+    "cover": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80"
+  },
+  {
+    "title": "Candlestick Chart Patterns - Dhanarthi",
+    "file": "https://dhanarthi.com/blog/candlestick-chart-patterns",
+    "imf": "Trading - Candlesticks",
+    "cover": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80"
+  },
+  {
+    "title": "45 Candlestick Patterns - Saras Market",
+    "file": "https://www.saras.market/blogs/candlestick-patterns-for-top-traders-free-pdf",
+    "imf": "Trading - Candlesticks",
+    "cover": "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=800&q=80"
+  },
+  {
+    "title": "Free Candlestick Patterns - Chart Guys",
+    "file": "https://www.chartguys.com/articles/free-candlestick-patterns-pdf",
+    "imf": "Trading - Candlesticks",
+    "cover": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80"
+  },
+  {
+    "title": "Technical Indicators - RSI, MACD, Moving Averages",
+    "file": "https://ncfe.org.in/wp-content/uploads/2023/12/Technical-analysis-Indicators.pdf",
+    "imf": "Trading - Technical Analysis",
+    "cover": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80"
+  },
+  {
+    "title": "Understanding Technical Indicators - Fidelity",
+    "file": "https://www.fidelity.com/bin-public/060_www_fidelity_com/documents/learning-center/Understanding-Indicators-TA.pdf",
+    "imf": "Trading - Technical Analysis",
+    "cover": "https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=800&q=80"
+  },
+  {
+    "title": "Chart Patterns and Technical Indicators",
+    "file": "https://www.aesinternational.com/hubfs/Independent%20Reviews/Swissquote/Chart%20Patterns%20and%20Technical%20Indicators.pdf",
+    "imf": "Trading - Technical Analysis",
+    "cover": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80"
+  },
+  {
+    "title": "Introduction to Technical Analysis - Babson",
+    "file": "https://www.babson.edu/media/babson/assets/cutler-center/Introduciton-to-Technical-Analysis.pdf",
+    "imf": "Trading - Technical Analysis",
+    "cover": "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=800&q=80"
+  },
+  {
+    "title": "Ultimate Price Action Trading Guide",
+    "file": "https://aichat.physics.ucla.edu/Download_PDFS/uploaded-files/bATzMz/The-Ultimate-Price-Action-Trading-Guide-Atanas-Matov.pdf",
+    "imf": "Trading - Price Action",
+    "cover": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800&q=80"
+  },
+  {
+    "title": "Price Action Trading - Colibri Trader",
+    "file": "https://www.colibritrader.com/price-action-trading-PDF.pdf",
+    "imf": "Trading - Price Action",
+    "cover": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&q=80"
+  },
+  {
+    "title": "How to Trade Price Action",
+    "file": "https://archive.org/download/how-to-trade-price-action/How%20To%20Trade%20Price%20Action.pdf",
+    "imf": "Trading - Price Action",
+    "cover": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80"
+  },
+  {
+    "title": "Price Action Trading Guide - Dr Wealth",
+    "file": "https://drwealth.com/wp-content/uploads/Price-Action-Trading-Guide.pdf",
+    "imf": "Trading - Price Action",
+    "cover": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80"
+  },
+  {
+    "title": "Elliott Wave & Fibonacci Tool",
+    "file": "https://www.asamforex.com/Asamdocs/ELLIOTT%20WAVE%20&%20FIBONACCI%20TOOL.pdf",
+    "imf": "Trading - Elliott Wave",
+    "cover": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80"
+  },
+  {
+    "title": "Elliott Wave and Fibonacci All-in-One",
+    "file": "https://www.scribd.com/document/501459261/elliot-wave-and-fibo-all-in-one",
+    "imf": "Trading - Elliott Wave",
+    "cover": "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800&q=80"
+  },
+  {
+    "title": "Fibonacci Basics",
+    "file": "https://marscapitalpartners.com/wp-content/uploads/2014/01/Fibonacci-Basics.pdf",
+    "imf": "Trading - Fibonacci",
+    "cover": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80"
+  },
+  {
+    "title": "Elliott Wave Principle",
+    "file": "https://investmenttheory.org/uploads/3/4/8/2/34825752/elliott-wave-principle.pdf",
+    "imf": "Trading - Elliott Wave",
+    "cover": "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=800&q=80"
+  },
+  {
+    "title": "Day Trading Strategies Guide",
+    "file": "https://tradewiththepros.com/a-practical-guide-to-day-trading-pdf/",
+    "imf": "Trading - Day Trading",
+    "cover": "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?w=800&q=80"
+  },
+  {
+    "title": "5 Day Trading Strategies",
+    "file": "https://www.scribd.com/document/814721870/5-Day-Trading-Strategies-VF-PDF",
+    "imf": "Trading - Day Trading",
+    "cover": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80"
+  },
+  {
+    "title": "Day Trading Strategy Guide",
+    "file": "https://howtotrade.com/wp-content/uploads/2023/02/Day-Trading-Strategy-1.pdf",
+    "imf": "Trading - Day Trading",
+    "cover": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80"
+  },
+  {
+    "title": "How to Day Trade for a Living",
+    "file": "https://bearbulltraders.com/docs/AndrewAziz-How_to_Day_Trade_for_a_Living_AUDIOBOOK-FIGS.pdf",
+    "imf": "Trading - Day Trading",
+    "cover": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&q=80"
+  },
+  {
+    "title": "Day Trading Strategies for Beginners",
+    "file": "https://www.staff.ces.funai.edu.ng/textbook-solutions/virtual-library/_pdfs/day_trading_strategies_a_beginners_guide_to_day_trading.pdf",
+    "imf": "Trading - Day Trading",
+    "cover": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80"
+  },
+  {
+    "title": "Options Trading Cheat Sheet",
+    "file": "https://de.scribd.com/document/436519173/Options-Trading-CheatSheet-pdf",
+    "imf": "Trading - Options",
+    "cover": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+  },
+  {
+    "title": "Option Strategies - NCFE",
+    "file": "https://ncfe.org.in/wp-content/uploads/2023/12/Option-strategies.pdf",
+    "imf": "Trading - Options",
+    "cover": "https://images.unsplash.com/photo-1543286386-713bdd548da4?w=800&q=80"
+  },
+  {
+    "title": "Understanding Options Strategies - ASX",
+    "file": "https://www.asx.com.au/content/dam/asx/investors/investment-options/options/understanding-options-strategies.pdf",
+    "imf": "Trading - Options",
+    "cover": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+  },
+  {
+    "title": "Options Trading Strategies Complete Guide",
+    "file": "https://procapital.mohdfaiz.com/books/books-image/mainBook/options-trading-strategies-complete-guide-danes-scott-j-.pdf",
+    "imf": "Trading - Options",
+    "cover": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80"
+  },
+  {
+    "title": "The Bible of Options Strategies",
+    "file": "https://dl.fxf1.com/files/books/english/Guy%20Cohen%20The%20Bible%20of%20Options%20Strategies.pdf",
+    "imf": "Trading - Options",
+    "cover": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80"
+  },
+  {
+    "title": "Volume Spread Analysis System Explained",
+    "file": "http://www.tradeguider.com/customer/pdf/VSA_System_explained.pdf",
+    "imf": "Trading - VSA",
+    "cover": "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800&q=80"
+  },
+  {
+    "title": "Volume Spread Analysis Fundamentals",
+    "file": "https://wallstreettraderpro.com/files/Volume-Spread-Analysis-Fundamentals.pdf",
+    "imf": "Trading - VSA",
+    "cover": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80"
+  },
+  {
+    "title": "VSA Guide",
+    "file": "https://dl.najafi8.ir/dl/Library/book/VSA%20Guide.pdf",
+    "imf": "Trading - VSA",
+    "cover": "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=800&q=80"
+  },
+  {
+    "title": "Trading in the Shadow - VSA",
+    "file": "http://www.tradeguider.com/tradingintheshadow/book1.pdf",
+    "imf": "Trading - VSA",
+    "cover": "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?w=800&q=80"
+  },
+  {
+    "title": "Harmonic Trading Patterns",
+    "file": "https://www.scribd.com/document/646901343/Harmonic-Trading-Patterns",
+    "imf": "Trading - Harmonic Patterns",
+    "cover": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80"
+  },
+  {
+    "title": "Harmonic Patterns Cheat Sheet - ForexBee",
+    "file": "https://forexbee.co/harmonic-patterns-cheat-sheet/",
+    "imf": "Trading - Harmonic Patterns",
+    "cover": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80"
+  },
+  {
+    "title": "Ultimate Harmonic Pattern Trading Guide",
+    "file": "https://www.ecoaca.com/wp-content/uploads/2023/08/The-Ultimate-Harmonic-Pattern-Trading-Guides-FULL-VERSION.pdf",
+    "imf": "Trading - Harmonic Patterns",
+    "cover": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&q=80"
+  },
+  {
+    "title": "Harmonic Trading Volume 3 - Scott Carney",
+    "file": "https://harmonictrader.com/wp-content/uploads/2020/06/HarmonicTradingV3Carney.pdf",
+    "imf": "Trading - Harmonic Patterns",
+    "cover": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80"
+  },
+  {
+    "title": "Trading Psychology 2.0",
+    "file": "https://procapital.mohdfaiz.com/books/books-image/mainBook/Trading_Psychology_2_0_From_Best%20(1).pdf",
+    "imf": "Trading - Psychology",
+    "cover": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+  },
+  {
+    "title": "The Psychology of Investing",
+    "file": "https://dn790006.ca.archive.org/0/items/sheikh-yameen-100-best-selling-self-help-books_202107/The%20Psychology%20of%20Investing.pdf",
+    "imf": "Trading - Psychology",
+    "cover": "https://images.unsplash.com/photo-1543286386-713bdd548da4?w=800&q=80"
+  },
+  {
+    "title": "Mastering Trading Psychology",
+    "file": "https://bearbulltraders.com/wp-content/uploads/pdfs/books/Mastering-Trading-Psychology.pdf",
+    "imf": "Trading - Psychology",
+    "cover": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+  },
+  {
+    "title": "Decision Making in the Stock Market",
+    "file": "https://mpra.ub.uni-muenchen.de/21288/1/Decision_Making_in_the_Stock_Market.pdf",
+    "imf": "Trading - Psychology",
+    "cover": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80"
+  },
+  {
+    "title": "Ultimate Trading Risk Management Guide",
+    "file": "https://www.scribd.com/document/836622714/the-ultimate-trading-risk-management-guide-1-2-1",
+    "imf": "Trading - Risk Management",
+    "cover": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80"
+  },
+  {
+    "title": "Mastering Risk Management - altFINS",
+    "file": "https://altfins.com/wp-content/uploads/2024/10/altFINS-E-book-Risk-Management.pdf",
+    "imf": "Trading - Risk Management",
+    "cover": "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800&q=80"
+  },
+  {
+    "title": "Trading Risk Management Strategy",
+    "file": "https://tradingstrategyguides.com/trading-risk-management-strategy/",
+    "imf": "Trading - Risk Management",
+    "cover": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80"
+  },
+  {
+    "title": "Risk Management Guide - DayTrading.com",
+    "file": "https://www.daytrading.com/wp-content/uploads/2025/01/DayTrading.com-PDF-Guide-Risk-Management.pdf",
+    "imf": "Trading - Risk Management",
+    "cover": "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=800&q=80"
+  },
+  {
+    "title": "Cryptocurrency Technical Analysis",
+    "file": "https://www.scribd.com/document/858414362/Cryptocurrency-technical-analysis-1-2",
+    "imf": "Trading - Cryptocurrency",
+    "cover": "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?w=800&q=80"
+  },
+  {
+    "title": "Crypto Trading and Analysis Guide",
+    "file": "https://masterthecrypto.com/wp-content/uploads/2017/07/COMPLETE-GUIDE-TO-CRYPTOCURRENCY-ANALYSIS-4.pdf",
+    "imf": "Trading - Cryptocurrency",
+    "cover": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80"
+  },
+  {
+    "title": "Technical Analysis for Cryptocurrency",
+    "file": "https://www.theseus.fi/bitstream/handle/10024/802533/Ratia_Kristian.pdf",
+    "imf": "Trading - Cryptocurrency",
+    "cover": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80"
+  },
+  {
+    "title": "Cryptocurrency Trading Indicators",
+    "file": "https://www.theseus.fi/bitstream/handle/10024/510408/Zanni_Alessandro.pdf",
+    "imf": "Trading - Cryptocurrency",
+    "cover": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&q=80"
+  },
+  {
+    "title": "Beginners Guide to Algorithmic Trading",
+    "file": "https://www.scribd.com/document/451545946/beginners-guide-to-learn-algorithmic-trading-1",
+    "imf": "Trading - Algorithmic",
+    "cover": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80"
+  },
+  {
+    "title": "Building Winning Algorithmic Trading Systems",
+    "file": "https://sar.ac.id/stmik_ebook/prog_file_file/T44EQS0DQC.pdf",
+    "imf": "Trading - Algorithmic",
+    "cover": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+  },
+  {
+    "title": "Successful Algorithmic Trading",
+    "file": "https://raw.githubusercontent.com/englianhu/binary.com-interview-question/fcad2844d7f10c486f3601af9932f49973548e4b/reference/Successful%20Algorithmic%20Trading.pdf",
+    "imf": "Trading - Algorithmic",
+    "cover": "https://images.unsplash.com/photo-1543286386-713bdd548da4?w=800&q=80"
+  },
+  {
+    "title": "Algorithmic Trading Methods",
+    "file": "https://asset.quant-wiki.com/pdf/Algorithmic%20Trading%20Methods_%20Applications%20Using%20Advanced%20Statistics,%20Optimization,%20and%20Machine%20Learning%20Techniques-Academic%20Press%20(2020).pdf",
+    "imf": "Trading - Algorithmic",
+    "cover": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+  },
+  {
+    "title": "Ichimoku Cloud Trading Strategy",
+    "file": "https://howtotrade.com/wp-content/uploads/2023/12/Ichimoku-Cloud-Trading-Strategy-1.pdf",
+    "imf": "Trading - Ichimoku",
+    "cover": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80"
+  },
+  {
+    "title": "Understanding Ichimoku Kinko Hyo Clouds",
+    "file": "https://www.barchart.com/media/education/pdf/Trader's%20Guide%20to%20Understanding%20Ichimoku%20Kinko%20Hyo%20Clouds.pdf",
+    "imf": "Trading - Ichimoku",
+    "cover": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80"
+  },
+  {
+    "title": "Ichimoku Strategy Guide",
+    "file": "https://www.scribd.com/document/513806843/Day-Ichimoku-Strategy",
+    "imf": "Trading - Ichimoku",
+    "cover": "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800&q=80"
+  },
+  {
+    "title": "Ichimoku Cloud Charts",
+    "file": "http://bestinfo2010.com/userfiles/Cloud%20Charts.pdf",
+    "imf": "Trading - Ichimoku",
+    "cover": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80"
+  },
+  {
+    "title": "Pivot Point Trading Strategy",
+    "file": "https://stockmarketsguides.com/pivot-point-trading-strategy-pdf/",
+    "imf": "Trading - Pivot Points",
+    "cover": "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=800&q=80"
+  },
+  {
+    "title": "Pit Pivot Points",
+    "file": "https://www.scribd.com/doc/241558839/Pit-Pivot-Points",
+    "imf": "Trading - Pivot Points",
+    "cover": "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?w=800&q=80"
+  },
+  {
+    "title": "Pivot Trading Guide",
+    "file": "https://c.mql5.com/forextsd/forum/161/pivot_trading.pdf",
+    "imf": "Trading - Pivot Points",
+    "cover": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80"
+  },
+  {
+    "title": "Ultimate Pivot Points User Guide",
+    "file": "https://www.fibozachi.com/user-guides/Ultimate%20Pivot%20Points%E2%84%A2%20-%20User%20Guide.pdf",
+    "imf": "Trading - Pivot Points",
+    "cover": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80"
+  },
+  {
+    "title": "Bollinger Bands Strategy: Squeeze Then Surge",
+    "file": "https://www.luxalgo.com/blog/bollinger-bands-strategy-squeeze-then-surge/",
+    "imf": "Trading - Bollinger Bands",
+    "cover": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&q=80"
+  },
+  {
+    "title": "Bollinger Band Squeeze Trading",
+    "file": "https://chartschool.stockcharts.com/table-of-contents/trading-strategies-and-models/trading-strategies/bollinger-band-squeeze",
+    "imf": "Trading - Bollinger Bands",
+    "cover": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80"
+  },
+  {
+    "title": "Bollinger Squeeze Strategy",
+    "file": "https://www.tradingsetupsreview.com/bollinger-squeeze/",
+    "imf": "Trading - Bollinger Bands",
+    "cover": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+  },
+  {
+    "title": "Bollinger Bands Explained - Futures Guide",
+    "file": "https://ninjatrader.com/futures/blogs/bollinger-bands-explained-a-futures-traders-guide/",
+    "imf": "Trading - Bollinger Bands",
+    "cover": "https://images.unsplash.com/photo-1543286386-713bdd548da4?w=800&q=80"
+  },
+  {
+    "title": "Order Flow Trading E-Book",
+    "file": "https://www.gffbrokers.com/wp-content/uploads/2023/03/Order-Flow-Trading-E-Book.pdf",
+    "imf": "Trading - Order Flow",
+    "cover": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+  },
+  {
+    "title": "Order Flow Trading Guide",
+    "file": "https://howtotrade.com/wp-content/uploads/2023/01/Order-Flow-Trading.pdf",
+    "imf": "Trading - Order Flow",
+    "cover": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80"
+  },
+  {
+    "title": "Order Flow Trading Strategies",
+    "file": "https://www.scribd.com/document/521542181/Order-Flow-Trading-Strategies",
+    "imf": "Trading - Order Flow",
+    "cover": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80"
+  },
+  {
+    "title": "Trading Order Flow",
+    "file": "https://www.orderflows.com/book/TradingOrderFlow768.pdf",
+    "imf": "Trading - Order Flow",
+    "cover": "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800&q=80"
+  },
+  {
+    "title": "Order Flow Trading Setups",
+    "file": "https://www.trader-dale.com/wp-content/uploads/2020/12/Order-Flow-Trading-Setups-1.pdf",
+    "imf": "Trading - Order Flow",
+    "cover": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80"
+  },
+  {
+    "title": "Technical Analysis in Stock Market: A Review",
+    "file": "https://www.researchgate.net/publication/351847015_Technical_Analysis_in_the_Stock_Market_A_Review",
+    "imf": "Trading - Research",
+    "cover": "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=800&q=80"
+  },
+  {
+    "title": "Forex Market Forecasting Using Machine Learning",
+    "file": "https://journalofbigdata.springeropen.com/articles/10.1186/s40537-022-00676-2",
+    "imf": "Trading - Research",
+    "cover": "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?w=800&q=80"
+  },
+  {
+    "title": "How Profitable are FX Technical Trading Rules",
+    "file": "https://ideas.repec.org/a/eee/finana/v45y2016icp273-282.html",
+    "imf": "Trading - Research",
+    "cover": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80"
+  },
+  {
+    "title": "The Profitability of Technical Analysis: A Review",
+    "file": "https://farmdoc.illinois.edu/assets/marketing/agmas/AgMAS04_04.pdf",
+    "imf": "Trading - Research",
+    "cover": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80"
+  },
+  {
+    "title": "Trading FX with Technical Analysis and Bayesian Statistics",
+    "file": "https://www.sciencedirect.com/science/article/abs/pii/S0927539821000542",
+    "imf": "Trading - Research",
+    "cover": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&q=80"
+  },
+  {
+    "title": "Fundamentals of Investments - Technical Analysis",
+    "file": "https://www.srcc.edu/sites/default/files/B.Com(Hons)_IIIyearVIsem_FundamentalsofInvestments_Week2_DrKanuJain.pdf",
+    "imf": "Trading - Education",
+    "cover": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80"
+  },
+  {
+    "title": "Market-Share Analysis and Competitive Strategy",
+    "file": "https://www.anderson.ucla.edu/faculty/lee.cooper/MCI_Book/BOOKI2010.pdf",
+    "imf": "Market Management",
+    "cover": "https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=800&q=80"
+  },
+  {
+    "title": "A Concise Guide to Market Research",
+    "file": "https://educons.edu.rs/wp-content/uploads/2020/05/2019A-Concise-Guide-To-Market-Research.pdf",
+    "imf": "Market Management",
+    "cover": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+  },
+  {
+    "title": "Social Media Marketing Guide - Sprout Social",
+    "file": "https://media.sproutsocial.com/uploads/2020/02/Sprout-Social-Media-Marketing-Guide-gated.pdf",
+    "imf": "Social Media Growth",
+    "cover": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80"
+  },
+  {
+    "title": "Developing a Social Media Strategy",
+    "file": "https://www.efna.net/wp-content/uploads/2020/12/Developing-a-Social-Media-Strategy.pdf",
+    "imf": "Social Media Growth",
+    "cover": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80"
+  },
+  {
+    "title": "Social Media Growth Guide - Paradym",
+    "file": "https://www.paradym.com/wp-content/uploads/2019/01/Social-Media-Growth-Guide-by-Paradym.pdf",
+    "imf": "Social Media Growth",
+    "cover": "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=800&q=80"
+  },
+  {
+    "title": "Social Media Strategy Guide",
+    "file": "https://jobs.mo.gov/sites/g/files/zuston471/files/media/pdf/2022/07/social_media_strategy_guide.pdf",
+    "imf": "Social Media Growth",
+    "cover": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80"
+  },
+  {
+    "title": "Social Media Marketing - ETSU",
+    "file": "https://dc.etsu.edu/cgi/viewcontent.cgi?article=1956&context=honors",
+    "imf": "Social Media Growth",
+    "cover": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80"
+  },
+  {
+    "title": "Definitive Guide to Social Media Marketing",
+    "file": "https://engage.marketo.com/rs/460-TDH-945/images/The-Definitive-Guide-to-Social-Media-Marketing-Marketo.pdf",
+    "imf": "Social Media Growth",
+    "cover": "https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=800&q=80"
+  },
+  {
+    "title": "Social Media Best Practices - SJSU",
+    "file": "https://www.sjsu.edu/ajeep/docs/Social%20Media.pdf",
+    "imf": "Social Media Growth",
+    "cover": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80"
+  },
+  {
+    "title": "Machine Learning by Tom Mitchell",
+    "file": "https://www.cs.cmu.edu/~tom/files/MachineLearningTomMitchell.pdf",
+    "imf": "ML Education",
+    "cover": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80"
+  },
+  {
+    "title": "Deep Learning Book",
+    "file": "https://www.deeplearningbook.org/contents/intro.pdf",
+    "imf": "ML Education",
+    "cover": "https://images.unsplash.com/photo-1509228627152-72ae9ae6848d?w=800&q=80"
+  },
+  {
+    "title": "Neural Networks and Deep Learning",
+    "file": "http://neuralnetworksanddeeplearning.com/chap1.pdf",
+    "imf": "ML Education",
+    "cover": "https://images.unsplash.com/photo-1655720408747-7f1e4c6a0e1e?w=800&q=80"
+  },
+  {
+    "title": "Reinforcement Learning Introduction",
+    "file": "http://incompleteideas.net/book/RLbook2020.pdf",
+    "imf": "ML Education",
+    "cover": "https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=800&q=80"
   },
   {
     "title": "Stable Diffusion Paper",
@@ -72,156 +648,6 @@
     "cover": "https://images.unsplash.com/photo-1528819622765-d6bcf132f793?w=800&q=80"
   },
   {
-    "title": "Data Science and Machine Learning: Mathematical Methods",
-    "file": "https://people.smp.uq.edu.au/DirkKroese/DSML/DSML.pdf",
-    "imf": "ML Education",
-    "cover": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
-  },
-  {
-    "title": "Pattern Recognition and Machine Learning",
-    "file": "https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf",
-    "imf": "ML Education",
-    "cover": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&q=80"
-  },
-  {
-    "title": "The Hundred-Page Machine Learning Book",
-    "file": "http://ema.cri-info.cm/wp-content/uploads/2019/07/2019BurkovTheHundred-pageMachineLearning.pdf",
-    "imf": "ML Education",
-    "cover": "https://images.unsplash.com/photo-1516110833967-0b5716ca1387?w=800&q=80"
-  },
-  {
-    "title": "Machine Learning by Tom Mitchell",
-    "file": "https://www.cs.cmu.edu/~tom/files/MachineLearningTomMitchell.pdf",
-    "imf": "ML Education",
-    "cover": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80"
-  },
-  {
-    "title": "Deep Learning Book - Chapter 1",
-    "file": "https://www.deeplearningbook.org/contents/intro.pdf",
-    "imf": "ML Education",
-    "cover": "https://images.unsplash.com/photo-1509228627152-72ae9ae6848d?w=800&q=80"
-  },
-  {
-    "title": "Neural Networks and Deep Learning",
-    "file": "http://neuralnetworksanddeeplearning.com/chap1.pdf",
-    "imf": "ML Education",
-    "cover": "https://images.unsplash.com/photo-1655720408747-7f1e4c6a0e1e?w=800&q=80"
-  },
-  {
-    "title": "Reinforcement Learning Introduction",
-    "file": "http://incompleteideas.net/book/RLbook2020.pdf",
-    "imf": "ML Education",
-    "cover": "https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=800&q=80"
-  },
-  {
-    "title": "Machine Learning Yearning",
-    "file": "https://github.com/ajaymache/machine-learning-yearning/raw/master/full%20book/machine-learning-yearning.pdf",
-    "imf": "ML Education",
-    "cover": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=800&q=80"
-  },
-  {
-    "title": "Big Book of Chart Patterns",
-    "file": "https://www.slideshare.net/slideshow/big-book-of-chart-patternspdf/252082434",
-    "imf": "Trading",
-    "cover": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80"
-  },
-  {
-    "title": "Classic Chart Patterns - Josh Trade",
-    "file": "https://www.scribd.com/document/642653769/josh-trade-classic-chart-patterns",
-    "imf": "Trading",
-    "cover": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=800&q=80"
-  },
-  {
-    "title": "Identifying Chart Patterns - Fidelity",
-    "file": "https://www.fidelity.com/bin-public/060_www_fidelity_com/documents/learning-center/Idenitfying-Chart-Patterns.pdf",
-    "imf": "Trading",
-    "cover": "https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=800&q=80"
-  },
-  {
-    "title": "24 Chart Patterns & Candlesticks Cheat Sheet",
-    "file": "https://timonandmati.com/wp-content/uploads/2022/06/CandleandBreakoutPatternCheatSheetGuide.pdf",
-    "imf": "Trading",
-    "cover": "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?w=800&q=80"
-  },
-  {
-    "title": "Trade Chart Patterns Like the Pros",
-    "file": "https://carlosandcompany.com/wp-content/uploads/2021/01/TRADE-CHART-PATTERNS-GUIDE.pdf",
-    "imf": "Trading",
-    "cover": "https://images.unsplash.com/photo-1611095790444-1dfa35e37b52?w=800&q=80"
-  },
-  {
-    "title": "42 Chart Patterns Layouts",
-    "file": "https://www.strike.money/wp-content/uploads/2023/09/Chart-Pattern-PDF-Free-Download-1.pdf",
-    "imf": "Trading",
-    "cover": "https://images.unsplash.com/photo-1642790551116-18e150f248e5?w=800&q=80"
-  },
-  {
-    "title": "Technical Analysis of Stock Trends - 9th Edition",
-    "file": "https://vdthangmeomeo.files.wordpress.com/2014/08/edwards-magee-technical-analysis-of-stock-trends-9th-edition.pdf",
-    "imf": "Trading",
-    "cover": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
-  },
-  {
-    "title": "Fundamentals of Investments - Technical Analysis",
-    "file": "https://www.srcc.edu/sites/default/files/B.Com(Hons)_IIIyearVIsem_FundamentalsofInvestments_Week2_DrKanuJain.pdf",
-    "imf": "Trading",
-    "cover": "https://images.unsplash.com/photo-1559526324-593bc073d938?w=800&q=80"
-  },
-  {
-    "title": "Market-Share Analysis and Competitive Strategy",
-    "file": "https://www.anderson.ucla.edu/faculty/lee.cooper/MCI_Book/BOOKI2010.pdf",
-    "imf": "Market Management",
-    "cover": "https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=800&q=80"
-  },
-  {
-    "title": "A Concise Guide to Market Research",
-    "file": "https://educons.edu.rs/wp-content/uploads/2020/05/2019A-Concise-Guide-To-Market-Research.pdf",
-    "imf": "Market Management",
-    "cover": "https://images.unsplash.com/photo-1543286386-713bdd548da4?w=800&q=80"
-  },
-  {
-    "title": "Social Media Marketing Guide - Sprout Social",
-    "file": "https://media.sproutsocial.com/uploads/2020/02/Sprout-Social-Media-Marketing-Guide-gated.pdf",
-    "imf": "Social Media Growth",
-    "cover": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80"
-  },
-  {
-    "title": "Developing a Social Media Strategy",
-    "file": "https://www.efna.net/wp-content/uploads/2020/12/Developing-a-Social-Media-Strategy.pdf",
-    "imf": "Social Media Growth",
-    "cover": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80"
-  },
-  {
-    "title": "Social Media Growth Guide - Paradym",
-    "file": "https://www.paradym.com/wp-content/uploads/2019/01/Social-Media-Growth-Guide-by-Paradym.pdf",
-    "imf": "Social Media Growth",
-    "cover": "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=800&q=80"
-  },
-  {
-    "title": "Social Media Strategy Guide - Missouri Jobs",
-    "file": "https://jobs.mo.gov/sites/g/files/zuston471/files/media/pdf/2022/07/social_media_strategy_guide.pdf",
-    "imf": "Social Media Growth",
-    "cover": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80"
-  },
-  {
-    "title": "Social Media Marketing - ETSU Honors",
-    "file": "https://dc.etsu.edu/cgi/viewcontent.cgi?article=1956&context=honors",
-    "imf": "Social Media Growth",
-    "cover": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80"
-  },
-  {
-    "title": "The Definitive Guide to Social Media Marketing - Marketo",
-    "file": "https://engage.marketo.com/rs/460-TDH-945/images/The-Definitive-Guide-to-Social-Media-Marketing-Marketo.pdf",
-    "imf": "Social Media Growth",
-    "cover": "https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=800&q=80"
-  },
-  {
-    "title": "Social Media Best Practices - SJSU",
-    "file": "https://www.sjsu.edu/ajeep/docs/Social%20Media.pdf",
-    "imf": "Social Media Growth",
-    "cover": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80"
-  },
-  {
     "title": "Python for Data Analysis",
     "file": "https://wesmckinney.com/book/python-basics.pdf",
     "imf": "Programming",
@@ -246,30 +672,6 @@
     "cover": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&q=80"
   },
   {
-    "title": "Design Patterns Book",
-    "file": "https://github.com/TushaarGVS/Design-Patterns-Mentorship/raw/master/Erich%20Gamma%2C%20Richard%20Helm%2C%20Ralph%20Johnson%2C%20John%20M.%20Vlissides-Design%20Patterns_%20Elements%20of%20Reusable%20Object-Oriented%20Software%20%20-Addison-Wesley%20Professional%20(1994).pdf",
-    "imf": "Programming",
-    "cover": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80"
-  },
-  {
-    "title": "Git Pro Book - Getting Started",
-    "file": "https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control",
-    "imf": "DevOps",
-    "cover": "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=800&q=80"
-  },
-  {
-    "title": "Docker Getting Started Guide",
-    "file": "https://docs.docker.com/get-started/overview/",
-    "imf": "DevOps",
-    "cover": "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=800&q=80"
-  },
-  {
-    "title": "Kubernetes Basics",
-    "file": "https://kubernetes.io/docs/tutorials/kubernetes-basics/",
-    "imf": "DevOps",
-    "cover": "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=800&q=80"
-  },
-  {
     "title": "TensorFlow Guide",
     "file": "https://www.tensorflow.org/guide",
     "imf": "ML Framework",
@@ -282,22 +684,10 @@
     "cover": "https://images.unsplash.com/photo-1655720033654-a4239dd42d10?w=800&q=80"
   },
   {
-    "title": "Scikit-learn User Guide",
-    "file": "https://scikit-learn.org/stable/user_guide.html",
-    "imf": "ML Framework",
-    "cover": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
-  },
-  {
     "title": "LangChain Documentation",
     "file": "https://python.langchain.com/docs/get_started/introduction",
     "imf": "LLM Framework",
     "cover": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=800&q=80"
-  },
-  {
-    "title": "Hugging Face Transformers",
-    "file": "https://huggingface.co/docs/transformers/index",
-    "imf": "LLM Framework",
-    "cover": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80"
   },
   {
     "title": "OpenAI API Documentation",
@@ -306,76 +696,10 @@
     "cover": "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=80"
   },
   {
-    "title": "Anthropic Claude API Docs",
-    "file": "https://docs.anthropic.com/claude/docs",
-    "imf": "AI API",
-    "cover": "https://images.unsplash.com/photo-1676277791608-ac52e1ddfb5c?w=800&q=80"
-  },
-  {
-    "title": "Google Gemini API Guide",
-    "file": "https://ai.google.dev/docs",
-    "imf": "AI API",
-    "cover": "https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=800&q=80"
-  },
-  {
-    "title": "AWS Well-Architected Framework",
-    "file": "https://docs.aws.amazon.com/wellarchitected/latest/framework/wellarchitected-framework.pdf",
-    "imf": "Cloud Computing",
-    "cover": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80"
-  },
-  {
-    "title": "Google Cloud Architecture",
-    "file": "https://cloud.google.com/architecture/framework",
-    "imf": "Cloud Computing",
-    "cover": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80"
-  },
-  {
-    "title": "Azure Cloud Adoption",
-    "file": "https://azure.microsoft.com/en-us/resources/cloud-adoption-framework/",
-    "imf": "Cloud Computing",
-    "cover": "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800&q=80"
-  },
-  {
-    "title": "Blockchain Basics",
-    "file": "https://arxiv.org/pdf/1612.06244.pdf",
-    "imf": "Blockchain",
-    "cover": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80"
-  },
-  {
     "title": "Bitcoin Whitepaper",
     "file": "https://bitcoin.org/bitcoin.pdf",
     "imf": "Blockchain",
     "cover": "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=800&q=80"
-  },
-  {
-    "title": "Ethereum Whitepaper",
-    "file": "https://ethereum.org/en/whitepaper/",
-    "imf": "Blockchain",
-    "cover": "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?w=800&q=80"
-  },
-  {
-    "title": "Smart Contracts Security",
-    "file": "https://arxiv.org/pdf/1902.06710.pdf",
-    "imf": "Blockchain",
-    "cover": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80"
-  },
-  {
-    "title": "Cybersecurity Fundamentals",
-    "file": "https://www.cisa.gov/sites/default/files/publications/Cybersecurity%20Best%20Practices.pdf",
-    "imf": "Security",
-    "cover": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80"
-  },
-  {
-    "title": "OWASP Top 10 Security Risks",
-    "file": "https://owasp.org/www-project-top-ten/",
-    "imf": "Security",
-    "cover": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&q=80"
-  },
-  {
-    "title": "Network Security Essentials",
-    "file": "https://www.cisco.com/c/en/us/products/security/what-is-network-security.html",
-    "imf": "Security",
-    "cover": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80"
   },
   {
     "title": "Data Science Handbook",
@@ -390,13 +714,7 @@
     "cover": "https://images.unsplash.com/photo-1543286386-713bdd548da4?w=800&q=80"
   },
   {
-    "title": "Think Stats - Probability",
-    "file": "https://greenteapress.com/thinkstats2/thinkstats2.pdf",
-    "imf": "Data Science",
-    "cover": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
-  },
-  {
-    "title": "Journal of Machine Learning Research (JMLR)",
+    "title": "Journal of Machine Learning Research",
     "file": "https://www.jmlr.org",
     "imf": "AI Research",
     "cover": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80"
