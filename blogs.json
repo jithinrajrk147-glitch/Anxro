@@ -1,0 +1,1130 @@
+[
+  {
+    "title": "QuantInsti Blog - Technical Analysis & Trading",
+    "link": "https://blog.quantinsti.com/technical-analysis-top-blogs/",
+    "category": "Trading",
+    "cover": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80"
+  },
+  {
+    "title": "OpenAI Blog - AI Research & Deep Learning",
+    "link": "https://openai.com/blog/",
+    "category": "AI & ML",
+    "cover": "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=80"
+  },
+  {
+    "title": "CoinDesk - Cryptocurrency News & Analysis",
+    "link": "https://www.coindesk.com",
+    "category": "Cryptocurrency",
+    "cover": "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?w=800&q=80"
+  },
+  {
+    "title": "Social Media Examiner - Instagram & YouTube Growth",
+    "link": "https://www.socialmediaexaminer.com",
+    "category": "Social Media",
+    "cover": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80"
+  },
+  {
+    "title": "Psychology Today - Emotional Intelligence",
+    "link": "https://www.psychologytoday.com",
+    "category": "Psychology",
+    "cover": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80"
+  },
+  {
+    "title": "People Managing People - Leadership Skills",
+    "link": "https://peoplemanagingpeople.com",
+    "category": "Leadership",
+    "cover": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80"
+  },
+  {
+    "title": "StockCharts - Chart Patterns & Technical Analysis",
+    "link": "https://articles.stockcharts.com",
+    "category": "Trading",
+    "cover": "https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=800&q=80"
+  },
+  {
+    "title": "Asian Efficiency - Productivity & GTD",
+    "link": "https://www.asianefficiency.com/blog/",
+    "category": "Productivity",
+    "cover": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80"
+  },
+  {
+    "title": "Machine Learning Mastery - Neural Networks",
+    "link": "https://machinelearningmastery.com",
+    "category": "AI & ML",
+    "cover": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80"
+  },
+  {
+    "title": "James Clear - Habits & Self Improvement",
+    "link": "https://jamesclear.com/articles",
+    "category": "Personal Development",
+    "cover": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80"
+  },
+  {
+    "title": "The Block - Blockchain & Ethereum Analysis",
+    "link": "https://www.theblock.co",
+    "category": "Cryptocurrency",
+    "cover": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80"
+  },
+  {
+    "title": "freeCodeCamp - Web Development Tutorials",
+    "link": "https://www.freecodecamp.org/news/",
+    "category": "Programming",
+    "cover": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&q=80"
+  },
+  {
+    "title": "Buffer Blog - Social Media Strategy",
+    "link": "https://buffer.com/resources/",
+    "category": "Social Media",
+    "cover": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80"
+  },
+  {
+    "title": "ATAS Blog - Price Action Trading",
+    "link": "https://atas.net/blog/category/technical-analysis/",
+    "category": "Trading",
+    "cover": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800&q=80"
+  },
+  {
+    "title": "Towards Data Science - ML & Analytics",
+    "link": "https://towardsdatascience.com",
+    "category": "Data Science",
+    "cover": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+  },
+  {
+    "title": "Zen Habits - Mindfulness & Simplicity",
+    "link": "https://zenhabits.net",
+    "category": "Personal Development",
+    "cover": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&q=80"
+  },
+  {
+    "title": "Harvard Business Review - Business Strategy",
+    "link": "https://hbr.org",
+    "category": "Entrepreneurship",
+    "cover": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80"
+  },
+  {
+    "title": "Cointelegraph - Bitcoin & Crypto News",
+    "link": "https://cointelegraph.com",
+    "category": "Cryptocurrency",
+    "cover": "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=800&q=80"
+  },
+  {
+    "title": "BAIR Blog - Deep Learning Research",
+    "link": "https://bair.berkeley.edu/blog/",
+    "category": "AI & ML",
+    "cover": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&q=80"
+  },
+  {
+    "title": "Backlinko - SEO & Content Marketing",
+    "link": "https://backlinko.com/blog",
+    "category": "Content Marketing",
+    "cover": "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=800&q=80"
+  },
+  {
+    "title": "STA Blog - Candlestick Patterns",
+    "link": "https://www.technicalanalysts.com/sta-blog/",
+    "category": "Trading",
+    "cover": "https://images.unsplash.com/photo-1611095790444-1dfa35e37b52?w=800&q=80"
+  },
+  {
+    "title": "The Penny Hoarder - Personal Finance",
+    "link": "https://www.thepennyhoarder.com",
+    "category": "Finance",
+    "cover": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80"
+  },
+  {
+    "title": "Sprout Social Insights - TikTok Marketing",
+    "link": "https://sproutsocial.com/insights/",
+    "category": "Social Media",
+    "cover": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80"
+  },
+  {
+    "title": "PositivePsychology.com - Mental Health",
+    "link": "https://positivepsychology.com",
+    "category": "Psychology",
+    "cover": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&q=80"
+  },
+  {
+    "title": "Smashing Magazine - UI/UX Design",
+    "link": "https://www.smashingmagazine.com",
+    "category": "Design",
+    "cover": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+  },
+  {
+    "title": "Traders.com - Options & Futures",
+    "link": "https://traders.com",
+    "category": "Trading",
+    "cover": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+  },
+  {
+    "title": "Google DeepMind Blog - AI Innovation",
+    "link": "https://deepmind.google/discover/blog/",
+    "category": "AI & ML",
+    "cover": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80"
+  },
+  {
+    "title": "Scott H. Young - Learning & Productivity",
+    "link": "https://www.scotthyoung.com/blog/",
+    "category": "Productivity",
+    "cover": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80"
+  },
+  {
+    "title": "Bankless - DeFi & Ethereum",
+    "link": "https://www.bankless.com",
+    "category": "Cryptocurrency",
+    "cover": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&q=80"
+  },
+  {
+    "title": "CSS-Tricks - Frontend Development",
+    "link": "https://css-tricks.com",
+    "category": "Programming",
+    "cover": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&q=80"
+  },
+  {
+    "title": "Breaking Muscle - Fitness & Workouts",
+    "link": "https://breakingmuscle.com",
+    "category": "Health & Fitness",
+    "cover": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80"
+  },
+  {
+    "title": "Marc and Angel - Life Advice",
+    "link": "https://www.marcandangel.com",
+    "category": "Personal Development",
+    "cover": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80"
+  },
+  {
+    "title": "Entrepreneur - Startup Strategies",
+    "link": "https://www.entrepreneur.com",
+    "category": "Entrepreneurship",
+    "cover": "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80"
+  },
+  {
+    "title": "The Muse - Career Development",
+    "link": "https://www.themuse.com/advice",
+    "category": "Career",
+    "cover": "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80"
+  },
+  {
+    "title": "LuxAlgo - Trading Indicators",
+    "link": "https://www.luxalgo.com/blog/",
+    "category": "Trading",
+    "cover": "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?w=800&q=80"
+  },
+  {
+    "title": "KDnuggets - Data Mining & ML",
+    "link": "https://www.kdnuggets.com",
+    "category": "Data Science",
+    "cover": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&q=80"
+  },
+  {
+    "title": "The Verge - Tech News & Gadgets",
+    "link": "https://www.theverge.com",
+    "category": "Technology",
+    "cover": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80"
+  },
+  {
+    "title": "Kraken Blog - Crypto Trading Education",
+    "link": "https://blog.kraken.com",
+    "category": "Cryptocurrency",
+    "cover": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80"
+  },
+  {
+    "title": "Hugging Face Blog - LLMs & Transformers",
+    "link": "https://huggingface.co/blog",
+    "category": "AI & ML",
+    "cover": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=800&q=80"
+  },
+  {
+    "title": "Copyblogger - Content Writing",
+    "link": "https://copyblogger.com",
+    "category": "Content Marketing",
+    "cover": "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&q=80"
+  },
+  {
+    "title": "Six Seconds - Emotional Intelligence",
+    "link": "https://www.6seconds.org/blog/",
+    "category": "Psychology",
+    "cover": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80"
+  },
+  {
+    "title": "Social Media Today - Platform Updates",
+    "link": "https://www.socialmediatoday.com",
+    "category": "Social Media",
+    "cover": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80"
+  },
+  {
+    "title": "Money Crashers - Debt & Investing",
+    "link": "https://www.moneycrashers.com",
+    "category": "Finance",
+    "cover": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80"
+  },
+  {
+    "title": "Living As A Leader - Team Building",
+    "link": "https://www.livingasaleader.com",
+    "category": "Leadership",
+    "cover": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80"
+  },
+  {
+    "title": "SitePoint - JavaScript Tutorials",
+    "link": "https://www.sitepoint.com/blog/",
+    "category": "Programming",
+    "cover": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800&q=80"
+  },
+  {
+    "title": "GTD Blog - Getting Things Done",
+    "link": "https://gettingthingsdone.com/blog/",
+    "category": "Productivity",
+    "cover": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80"
+  },
+  {
+    "title": "Well+Good - Wellness & Nutrition",
+    "link": "https://www.wellandgood.com",
+    "category": "Health & Fitness",
+    "cover": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80"
+  },
+  {
+    "title": "UX Collective - User Experience Design",
+    "link": "https://uxdesign.cc",
+    "category": "Design",
+    "cover": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+  },
+  {
+    "title": "TechCrunch - Startup News",
+    "link": "https://techcrunch.com",
+    "category": "Technology",
+    "cover": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80"
+  },
+  {
+    "title": "Coin Bureau - Crypto Reviews",
+    "link": "https://www.coinbureau.com",
+    "category": "Cryptocurrency",
+    "cover": "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?w=800&q=80"
+  },
+  {
+    "title": "AWS Machine Learning Blog",
+    "link": "https://aws.amazon.com/blogs/machine-learning/",
+    "category": "AI & ML",
+    "cover": "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=800&q=80"
+  },
+  {
+    "title": "Get Rich Slowly - Financial Freedom",
+    "link": "https://www.getrichslowly.org",
+    "category": "Finance",
+    "cover": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80"
+  },
+  {
+    "title": "Animalz Blog - Content Strategy",
+    "link": "https://www.animalz.co/blog/",
+    "category": "Content Marketing",
+    "cover": "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=800&q=80"
+  },
+  {
+    "title": "Nerd Fitness - Beginner Workouts",
+    "link": "https://www.nerdfitness.com/blog/",
+    "category": "Health & Fitness",
+    "cover": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80"
+  },
+  {
+    "title": "OnStartups - Founder Advice",
+    "link": "https://www.onstartups.com",
+    "category": "Entrepreneurship",
+    "cover": "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80"
+  },
+  {
+    "title": "Stack Overflow Blog - Developer Insights",
+    "link": "https://stackoverflow.blog",
+    "category": "Programming",
+    "cover": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&q=80"
+  },
+  {
+    "title": "Data Science Central - Analytics Hub",
+    "link": "https://www.datasciencecentral.com",
+    "category": "Data Science",
+    "cover": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+  },
+  {
+    "title": "HR Bartender - Resume & Interview Tips",
+    "link": "https://www.hrbartender.com",
+    "category": "Career",
+    "cover": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80"
+  },
+  {
+    "title": "Live Bold and Bloom - Confidence Building",
+    "link": "https://liveboldandbloom.com",
+    "category": "Personal Development",
+    "cover": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80"
+  },
+  {
+    "title": "Wired - Tech & Innovation",
+    "link": "https://www.wired.com",
+    "category": "Technology",
+    "cover": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80"
+  },
+  {
+    "title": "Mr. Money Mustache - Early Retirement",
+    "link": "https://www.mrmoneymustache.com",
+    "category": "Finance",
+    "cover": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80"
+  },
+  {
+    "title": "Dribbble - Design Inspiration",
+    "link": "https://dribbble.com/stories",
+    "category": "Design",
+    "cover": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+  },
+  {
+    "title": "MarkTechPost - AI Research News",
+    "link": "https://www.marktechpost.com",
+    "category": "AI & ML",
+    "cover": "https://images.unsplash.com/photo-1655720828018-edd2daec9349?w=800&q=80"
+  },
+  {
+    "title": "Hootsuite Blog - Social Media Trends",
+    "link": "https://blog.hootsuite.com",
+    "category": "Social Media",
+    "cover": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80"
+  },
+  {
+    "title": "Tiny Buddha - Emotional Wisdom",
+    "link": "https://tinybuddha.com",
+    "category": "Psychology",
+    "cover": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&q=80"
+  },
+  {
+    "title": "Y Combinator Blog - Startup Funding",
+    "link": "https://www.ycombinator.com/blog",
+    "category": "Entrepreneurship",
+    "cover": "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80"
+  },
+  {
+    "title": "LogRocket - Web App Performance",
+    "link": "https://blog.logrocket.com",
+    "category": "Programming",
+    "cover": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&q=80"
+  },
+  {
+    "title": "insideBIGDATA - Machine Learning",
+    "link": "https://insidebigdata.com",
+    "category": "Data Science",
+    "cover": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&q=80"
+  },
+  {
+    "title": "Financial Samurai - Real Estate Investing",
+    "link": "https://www.financialsamurai.com",
+    "category": "Finance",
+    "cover": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80"
+  },
+  {
+    "title": "Muscle and Fitness - Bodybuilding",
+    "link": "https://www.muscleandfitness.com",
+    "category": "Health & Fitness",
+    "cover": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80"
+  },
+  {
+    "title": "TopResume - Career Advice",
+    "link": "https://www.topresume.com/career-advice",
+    "category": "Career",
+    "cover": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80"
+  },
+  {
+    "title": "Seth Godin - Marketing & Creativity",
+    "link": "https://seths.blog",
+    "category": "Content Marketing",
+    "cover": "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&q=80"
+  },
+  {
+    "title": "Abduzeedo - Creative Design",
+    "link": "https://abduzeedo.com",
+    "category": "Design",
+    "cover": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+  },
+  {
+    "title": "Tim Ferriss - High Performance",
+    "link": "https://tim.blog",
+    "category": "Productivity",
+    "cover": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80"
+  },
+  {
+    "title": "Ars Technica - Tech Deep Dives",
+    "link": "https://arstechnica.com",
+    "category": "Technology",
+    "cover": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80"
+  },
+  {
+    "title": "Distill - ML Research Visualization",
+    "link": "https://distill.pub",
+    "category": "AI & ML",
+    "cover": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&q=80"
+  },
+  {
+    "title": "Brain Pickings - Wisdom & Philosophy",
+    "link": "https://www.themarginalian.org",
+    "category": "Personal Development",
+    "cover": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80"
+  },
+  {
+    "title": "Fast Company - Business Innovation",
+    "link": "https://www.fastcompany.com",
+    "category": "Entrepreneurship",
+    "cover": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80"
+  },
+  {
+    "title": "CNET - Product Reviews",
+    "link": "https://www.cnet.com",
+    "category": "Technology",
+    "cover": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80"
+  },
+  {
+    "title": "DataCamp Blog - Python & R Tutorials",
+    "link": "https://www.datacamp.com/blog",
+    "category": "Data Science",
+    "cover": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+  },
+  {
+    "title": "HubSpot Blog - Inbound Marketing",
+    "link": "https://blog.hubspot.com",
+    "category": "Content Marketing",
+    "cover": "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=800&q=80"
+  },
+  {
+    "title": "MyFitnessPal Blog - Nutrition Tracking",
+    "link": "https://blog.myfitnesspal.com",
+    "category": "Health & Fitness",
+    "cover": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80"
+  },
+  {
+    "title": "Shopify Blog - E-commerce Growth",
+    "link": "https://www.shopify.com/blog",
+    "category": "Entrepreneurship",
+    "cover": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
+  },
+  {
+    "title": "UX Planet - User Research",
+    "link": "https://uxplanet.org",
+    "category": "Design",
+    "cover": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+  },
+  {
+    "title": "Node.js Blog - Backend Development",
+    "link": "https://nodejs.org/en/blog",
+    "category": "Programming",
+    "cover": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800&q=80"
+  },
+  {
+    "title": "Analytics Vidhya - ML Tutorials",
+    "link": "https://www.analyticsvidhya.com/blog/",
+    "category": "Data Science",
+    "cover": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&q=80"
+  },
+  {
+    "title": "Marie Forleo - Dream Building",
+    "link": "https://www.marieforleo.com/blog/",
+    "category": "Personal Development",
+    "cover": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80"
+  },
+  {
+    "title": "Engadget - Consumer Electronics",
+    "link": "https://www.engadget.com",
+    "category": "Technology",
+    "cover": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80"
+  },
+  {
+    "title": "Money Talks News - Saving Tips",
+    "link": "https://www.moneytalksnews.com",
+    "category": "Finance",
+    "cover": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80"
+  },
+  {
+    "title": "Orbit Media Studios - Content Strategy",
+    "link": "https://www.orbitmedia.com/blog/",
+    "category": "Content Marketing",
+    "cover": "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&q=80"
+  },
+  {
+    "title": "Ben Greenfield Fitness - Performance",
+    "link": "https://bengreenfieldlife.com/blog/",
+    "category": "Health & Fitness",
+    "cover": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80"
+  },
+  {
+    "title": "Small Business Trends - Owner Tips",
+    "link": "https://smallbiztrends.com",
+    "category": "Entrepreneurship",
+    "cover": "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80"
+  },
+  {
+    "title": "Creative Boom - Graphic Design Trends",
+    "link": "https://www.creativeboom.com",
+    "category": "Design",
+    "cover": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+  },
+  {
+    "title": "React Blog - Frontend Framework",
+    "link": "https://react.dev/blog",
+    "category": "Programming",
+    "cover": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&q=80"
+  },
+  {
+    "title": "Kaggle Blog - Data Competitions",
+    "link": "https://www.kaggle.com/discussions",
+    "category": "Data Science",
+    "cover": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+  },
+  {
+    "title": "Steve Pavlina - Personal Growth",
+    "link": "https://stevepavlina.com",
+    "category": "Personal Development",
+    "cover": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80"
+  },
+  {
+    "title": "ZDNet - Enterprise Tech",
+    "link": "https://www.zdnet.com",
+    "category": "Technology",
+    "cover": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80"
+  },
+  {
+    "title": "Modest Money - Investing News",
+    "link": "https://www.modestmoney.com",
+    "category": "Finance",
+    "cover": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80"
+  },
+  {
+    "title": "Ahrefs Blog - SEO Research",
+    "link": "https://ahrefs.com/blog/",
+    "category": "Content Marketing",
+    "cover": "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=800&q=80"
+  },
+  {
+    "title": "Fit Bottomed Girls - Women's Fitness",
+    "link": "https://fitbottomedgirls.com",
+    "category": "Health & Fitness",
+    "cover": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80"
+  },
+  {
+    "title": "Foundr - Entrepreneur Stories",
+    "link": "https://foundr.com/articles",
+    "category": "Entrepreneurship",
+    "cover": "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80"
+  },
+  {
+    "title": "Justinmind Blog - Prototyping Tips",
+    "link": "https://www.justinmind.com/blog/",
+    "category": "Design",
+    "cover": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+  },
+  {
+    "title": "David Walsh - JavaScript Experiments",
+    "link": "https://davidwalsh.name",
+    "category": "Programming",
+    "cover": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800&q=80"
+  },
+  {
+    "title": "Datanami - Big Data News",
+    "link": "https://www.datanami.com",
+    "category": "Data Science",
+    "cover": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&q=80"
+  },
+  {
+    "title": "LifeDev - Creative Workflows",
+    "link": "https://lifedev.net",
+    "category": "Productivity",
+    "cover": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80"
+  },
+  {
+    "title": "Gizmodo - Tech & Culture",
+    "link": "https://gizmodo.com",
+    "category": "Technology",
+    "cover": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80"
+  },
+  {
+    "title": "Women Who Money - Financial Empowerment",
+    "link": "https://www.womenwhomoney.com",
+    "category": "Finance",
+    "cover": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80"
+  },
+  {
+    "title": "Content Marketing Institute - Strategy",
+    "link": "https://contentmarketinginstitute.com",
+    "category": "Content Marketing",
+    "cover": "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=800&q=80"
+  },
+  {
+    "title": "NASM Blog - Sports Medicine",
+    "link": "https://blog.nasm.org",
+    "category": "Health & Fitness",
+    "cover": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80"
+  },
+  {
+    "title": "Both Sides of the Table - VC Insights",
+    "link": "https://bothsidesofthetable.com",
+    "category": "Entrepreneurship",
+    "cover": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80"
+  },
+  {
+    "title": "Awwwards - Web Design Trends",
+    "link": "https://www.awwwards.com/blog/",
+    "category": "Design",
+    "cover": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+  },
+  {
+    "title": "Flavio Copes - Node.js Tutorials",
+    "link": "https://flaviocopes.com",
+    "category": "Programming",
+    "cover": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&q=80"
+  },
+  {
+    "title": "R-bloggers - Statistics Programming",
+    "link": "https://www.r-bloggers.com",
+    "category": "Data Science",
+    "cover": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+  },
+  {
+    "title": "The Blissful Mind - Mindset Coaching",
+    "link": "https://www.theblissfulmind.com/blog/",
+    "category": "Personal Development",
+    "cover": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80"
+  },
+  {
+    "title": "PCMag - Device Reviews",
+    "link": "https://www.pcmag.com",
+    "category": "Technology",
+    "cover": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80"
+  },
+  {
+    "title": "My Money Blog - Credit Rewards",
+    "link": "https://www.mymoneyblog.com",
+    "category": "Finance",
+    "cover": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80"
+  },
+  {
+    "title": "Neil Patel - Digital Marketing",
+    "link": "https://neilpatel.com/blog/",
+    "category": "Content Marketing",
+    "cover": "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=800&q=80"
+  },
+  {
+    "title": "Blogilates - Fun Exercises",
+    "link": "https://www.blogilates.com/blog/",
+    "category": "Health & Fitness",
+    "cover": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80"
+  },
+  {
+    "title": "Steve Blank - Lean Startup",
+    "link": "https://steveblank.com",
+    "category": "Entrepreneurship",
+    "cover": "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80"
+  },
+  {
+    "title": "Codrops - Web Experiments",
+    "link": "https://tympanus.net/codrops/",
+    "category": "Design",
+    "cover": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+  },
+  {
+    "title": "ITNEXT - JavaScript Frameworks",
+    "link": "https://itnext.io",
+    "category": "Programming",
+    "cover": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800&q=80"
+  },
+  {
+    "title": "Dataquest Blog - Data Science Learning",
+    "link": "https://www.dataquest.io/blog/",
+    "category": "Data Science",
+    "cover": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&q=80"
+  },
+  {
+    "title": "Maura Thomas - Attention Management",
+    "link": "https://regainyourtime.com/blog/",
+    "category": "Productivity",
+    "cover": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80"
+  },
+  {
+    "title": "TechRadar - Tech Buying Guides",
+    "link": "https://www.techradar.com",
+    "category": "Technology",
+    "cover": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80"
+  },
+  {
+    "title": "Rich & REGULAR - Debt Payoff Stories",
+    "link": "https://richandregular.com",
+    "category": "Finance",
+    "cover": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80"
+  },
+  {
+    "title": "Moz Blog - SEO Best Practices",
+    "link": "https://moz.com/blog",
+    "category": "Content Marketing",
+    "cover": "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=800&q=80"
+  },
+  {
+    "title": "ACE Insights - Exercise Science",
+    "link": "https://www.acefitness.org/resources/everyone/blog/",
+    "category": "Health & Fitness",
+    "cover": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80"
+  },
+  {
+    "title": "Stanford GSB Insights - Business Models",
+    "link": "https://www.gsb.stanford.edu/insights",
+    "category": "Entrepreneurship",
+    "cover": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80"
+  },
+  {
+    "title": "Muzli - Design Inspiration",
+    "link": "https://medium.muz.li",
+    "category": "Design",
+    "cover": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+  },
+  {
+    "title": "Hack The Developer - Python Advanced",
+    "link": "https://hackthedeveloper.com/blog/",
+    "category": "Programming",
+    "cover": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&q=80"
+  },
+  {
+    "title": "Dataiku Blog - ML Operations",
+    "link": "https://blog.dataiku.com",
+    "category": "Data Science",
+    "cover": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+  },
+  {
+    "title": "Success Consciousness - Motivation",
+    "link": "https://www.successconsciousness.com",
+    "category": "Personal Development",
+    "cover": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80"
+  },
+  {
+    "title": "Tom's Guide - Consumer Tech",
+    "link": "https://www.tomsguide.com",
+    "category": "Technology",
+    "cover": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80"
+  },
+  {
+    "title": "Budgets Are Sexy - Money Management",
+    "link": "https://www.budgetsaresexy.com",
+    "category": "Finance",
+    "cover": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80"
+  },
+  {
+    "title": "QuickSprout - Traffic Growth",
+    "link": "https://www.quicksprout.com",
+    "category": "Content Marketing",
+    "cover": "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=800&q=80"
+  },
+  {
+    "title": "Fitnessista - Family Wellness",
+    "link": "https://www.fitnessista.com",
+    "category": "Health & Fitness",
+    "cover": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80"
+  },
+  {
+    "title": "AllBusiness - Small Business Tools",
+    "link": "https://www.allbusiness.com",
+    "category": "Entrepreneurship",
+    "cover": "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80"
+  },
+  {
+    "title": "Webdesigner Depot - Design Tutorials",
+    "link": "https://www.webdesignerdepot.com",
+    "category": "Design",
+    "cover": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+  },
+  {
+    "title": "DigitalOcean Community - Cloud Tutorials",
+    "link": "https://www.digitalocean.com/community",
+    "category": "Programming",
+    "cover": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&q=80"
+  },
+  {
+    "title": "SmartData Collective - BI Trends",
+    "link": "https://www.smartdatacollective.com",
+    "category": "Data Science",
+    "cover": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&q=80"
+  },
+  {
+    "title": "The Everygirl - Career & Wellness",
+    "link": "https://theeverygirl.com",
+    "category": "Personal Development",
+    "cover": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80"
+  },
+  {
+    "title": "DEV Community - Developer Stories",
+    "link": "https://dev.to",
+    "category": "Technology",
+    "cover": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80"
+  },
+  {
+    "title": "SavingAdvice - Debt-Free Living",
+    "link": "https://www.savingadvice.com",
+    "category": "Finance",
+    "cover": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80"
+  },
+  {
+    "title": "Yoast SEO Blog - WordPress Optimization",
+    "link": "https://yoast.com/seo-blog/",
+    "category": "Content Marketing",
+    "cover": "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=800&q=80"
+  },
+  {
+    "title": "Born Fitness - Sustainable Lifestyle",
+    "link": "https://www.bornfitness.com/blog/",
+    "category": "Health & Fitness",
+    "cover": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80"
+  },
+  {
+    "title": "Noobpreneur - Beginner Business",
+    "link": "https://www.noobpreneur.com",
+    "category": "Entrepreneurship",
+    "cover": "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80"
+  },
+  {
+    "title": "Prototypr - UX Development",
+    "link": "https://prototypr.io",
+    "category": "Design",
+    "cover": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+  },
+  {
+    "title": "Scott Hanselman - .NET & Cloud",
+    "link": "https://www.hanselman.com/blog/",
+    "category": "Programming",
+    "cover": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800&q=80"
+  },
+  {
+    "title": "Datafloq - Big Data Business",
+    "link": "https://datafloq.com",
+    "category": "Data Science",
+    "cover": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+  },
+  {
+    "title": "Barking Up The Wrong Tree - Behavior",
+    "link": "https://bakadesuyo.com",
+    "category": "Personal Development",
+    "cover": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80"
+  },
+  {
+    "title": "Hacker Noon - Tech Stories",
+    "link": "https://hackernoon.com",
+    "category": "Technology",
+    "cover": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80"
+  },
+  {
+    "title": "Money Nuggets - Women's Finance",
+    "link": "https://www.moneynuggets.com",
+    "category": "Finance",
+    "cover": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80"
+  },
+  {
+    "title": "Search Engine Journal - SEO News",
+    "link": "https://www.searchenginejournal.com",
+    "category": "Content Marketing",
+    "cover": "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=800&q=80"
+  },
+  {
+    "title": "Run Eat Repeat - Running & Nutrition",
+    "link": "https://runeatrepeat.com",
+    "category": "Health & Fitness",
+    "cover": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80"
+  },
+  {
+    "title": "ForEntrepreneurs - SaaS Models",
+    "link": "https://www.forentrepreneurs.com",
+    "category": "Entrepreneurship",
+    "cover": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80"
+  },
+  {
+    "title": "Envato Tuts+ - Design Assets",
+    "link": "https://design.tutsplus.com",
+    "category": "Design",
+    "cover": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+  },
+  {
+    "title": "Bits And Pieces - JS Frameworks",
+    "link": "https://blog.bitsrc.io",
+    "category": "Programming",
+    "cover": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&q=80"
+  },
+  {
+    "title": "O'Reilly Radar - Tech Trends",
+    "link": "https://www.oreilly.com/radar/",
+    "category": "Data Science",
+    "cover": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&q=80"
+  },
+  {
+    "title": "Classy Career Girl - Work-Life Balance",
+    "link": "https://www.classycareergirl.com/blog/",
+    "category": "Career",
+    "cover": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80"
+  },
+  {
+    "title": "Hashnode - Developer Blogging",
+    "link": "https://hashnode.com",
+    "category": "Technology",
+    "cover": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80"
+  },
+  {
+    "title": "Fit Small Business - Owner Resources",
+    "link": "https://fitsmallbusiness.com",
+    "category": "Entrepreneurship",
+    "cover": "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80"
+  },
+  {
+    "title": "UXmatters - Experience Design",
+    "link": "https://www.uxmatters.com",
+    "category": "Design",
+    "cover": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+  },
+  {
+    "title": "Undercover Recruiter - Job Search",
+    "link": "https://theundercoverrecruiter.com",
+    "category": "Career",
+    "cover": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80"
+  },
+  {
+    "title": "CareerAddict - Interview Skills",
+    "link": "https://www.careeraddict.com/advice",
+    "category": "Career",
+    "cover": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80"
+  },
+  {
+    "title": "Ms. Career Girl - Women's Career",
+    "link": "https://www.mscareergirl.com",
+    "category": "Career",
+    "cover": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80"
+  },
+  {
+    "title": "Designlab - Figma Courses",
+    "link": "https://designlab.com/blog/",
+    "category": "Design",
+    "cover": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+  },
+  {
+    "title": "Toptal Design Blog - Advanced Tutorials",
+    "link": "https://www.toptal.com/designers/blog",
+    "category": "Design",
+    "cover": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+  },
+  {
+    "title": "UX Magazine - Experience Practitioners",
+    "link": "https://uxmag.com",
+    "category": "Design",
+    "cover": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+  },
+  {
+    "title": "Brush Up - Creative Market Assets",
+    "link": "https://creativemarket.com/blog",
+    "category": "Design",
+    "cover": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+  },
+  {
+    "title": "Andrew Chen - Growth & VC",
+    "link": "https://andrewchen.com",
+    "category": "Entrepreneurship",
+    "cover": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80"
+  },
+  {
+    "title": "Feld Thoughts - Venture Capital",
+    "link": "https://feld.com",
+    "category": "Entrepreneurship",
+    "cover": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80"
+  },
+  {
+    "title": "MoneyLab - Online Business Experiments",
+    "link": "https://www.moneylab.co",
+    "category": "Entrepreneurship",
+    "cover": "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80"
+  },
+  {
+    "title": "Young Entrepreneur - Startup Tips",
+    "link": "https://www.youngentrepreneur.com",
+    "category": "Entrepreneurship",
+    "cover": "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80"
+  },
+  {
+    "title": "Interview Coach - Interview Techniques",
+    "link": "https://www.theinterviewguys.com/blog/",
+    "category": "Career",
+    "cover": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80"
+  },
+  {
+    "title": "MTD Training - Management Blog",
+    "link": "https://www.mtdtraining.com/blog/",
+    "category": "Leadership",
+    "cover": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80"
+  },
+  {
+    "title": "Harvard Business School Online - Leadership",
+    "link": "https://online.hbs.edu/blog/",
+    "category": "Leadership",
+    "cover": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80"
+  },
+  {
+    "title": "Tanveer Naseer - Leadership Blog",
+    "link": "https://www.tanveernaseer.com",
+    "category": "Leadership",
+    "cover": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80"
+  },
+  {
+    "title": "Lolly Daskal - Leadership Coaching",
+    "link": "https://www.lollydaskal.com/leadership/",
+    "category": "Leadership",
+    "cover": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80"
+  },
+  {
+    "title": "Ask a Manager - Workplace Advice",
+    "link": "https://www.askamanager.org",
+    "category": "Leadership",
+    "cover": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80"
+  },
+  {
+    "title": "Lead Change - Modern Leadership",
+    "link": "https://leadchangegroup.com",
+    "category": "Leadership",
+    "cover": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80"
+  },
+  {
+    "title": "My CBT - Cognitive Behavioral Therapy",
+    "link": "https://mycognitivebehavioraltherapy.com",
+    "category": "Psychology",
+    "cover": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&q=80"
+  },
+  {
+    "title": "SelfGrowth - Emotional Intelligence",
+    "link": "https://www.selfgrowth.com",
+    "category": "Psychology",
+    "cover": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80"
+  },
+  {
+    "title": "Wellness Blog - EI Strategies",
+    "link": "https://www.wellnessliving.com/blog/",
+    "category": "Psychology",
+    "cover": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80"
+  },
+  {
+    "title": "Melody Wilding - Emotional Regulation",
+    "link": "https://melodywilding.com/blog/",
+    "category": "Psychology",
+    "cover": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&q=80"
+  },
+  {
+    "title": "American Scientist - Emotional Intelligence",
+    "link": "https://www.americanscientist.org",
+    "category": "Psychology",
+    "cover": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80"
+  },
+  {
+    "title": "BetterUp - Mental Fitness",
+    "link": "https://www.betterup.com/blog",
+    "category": "Psychology",
+    "cover": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&q=80"
+  },
+  {
+    "title": "Harvard DCE - Emotional Intelligence",
+    "link": "https://professional.dce.harvard.edu/blog/",
+    "category": "Psychology",
+    "cover": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80"
+  },
+  {
+    "title": "HBS Online - EI in Leadership",
+    "link": "https://online.hbs.edu/blog/",
+    "category": "Psychology",
+    "cover": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80"
+  }
+]
