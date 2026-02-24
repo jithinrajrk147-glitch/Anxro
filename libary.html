@@ -307,8 +307,9 @@
         async function init() {
             feather.replace();
             updateOnlineStatus(); // check online state first
-            const sections = ['audio', 'textbook', 'papers', 'blog', 'courses'];
+            const sections = ['audio', 'textbook', 'papers', 'courses'];
             
+            // Load regular sections
             for (const s of sections) {
                 try {
                     const res = await fetch(`${s}.json`);
@@ -319,12 +320,58 @@
                     showToast(`Failed to load ${s}`, true);
                 }
             }
+
+            // Load BOTH blog.json and blogs.json and combine them
+            try {
+                const [blogRes, blogsRes] = await Promise.all([
+                    fetch('blog.json'),
+                    fetch('blogs.json')
+                ]);
+                
+                let blogData = [];
+                let blogsData = [];
+                
+                if (blogRes.ok) {
+                    blogData = await blogRes.json();
+                }
+                if (blogsRes.ok) {
+                    blogsData = await blogsRes.json();
+                }
+                
+                // Normalize blogs.json format to match blog.json
+                const normalizedBlogsData = blogsData.map(item => ({
+                    title: item.title,
+                    file: item.link,  // Convert 'link' to 'file'
+                    cover: item.cover,
+                    imf: item.category  // Convert 'category' to 'imf'
+                }));
+                
+                // Combine both arrays
+                APP_DATA.blog = [...blogData, ...normalizedBlogsData];
+                
+                // Shuffle for randomization
+                APP_DATA.blog = shuffleArray(APP_DATA.blog);
+                
+            } catch (e) {
+                showToast('Failed to load blog data', true);
+            }
+            
             render();
             setupSeek();
             setupAudioListeners();
 
             // set initial icon srcs according to current state
             updateIcons(!audio.paused && !audio.ended);
+        }
+
+        // Shuffle array helper
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
         }
 
         function render(filter = "") {
@@ -551,7 +598,7 @@
 
         // fetch only the JSON data (used on retry/online)
         async function fetchAllData() {
-            const sections = ['audio', 'textbook', 'papers', 'blog', 'courses'];
+            const sections = ['audio', 'textbook', 'papers', 'courses'];
             for (const s of sections) {
                 try {
                     const res = await fetch(`${s}.json`);
@@ -561,6 +608,39 @@
                     showToast(`Failed to load ${s}`, true);
                 }
             }
+
+            // Reload both blog files
+            try {
+                const [blogRes, blogsRes] = await Promise.all([
+                    fetch('blog.json'),
+                    fetch('blogs.json')
+                ]);
+                
+                let blogData = [];
+                let blogsData = [];
+                
+                if (blogRes.ok) {
+                    blogData = await blogRes.json();
+                }
+                if (blogsRes.ok) {
+                    blogsData = await blogsRes.json();
+                }
+                
+                // Normalize blogs.json format
+                const normalizedBlogsData = blogsData.map(item => ({
+                    title: item.title,
+                    file: item.link,
+                    cover: item.cover,
+                    imf: item.category
+                }));
+                
+                // Combine and shuffle
+                APP_DATA.blog = shuffleArray([...blogData, ...normalizedBlogsData]);
+                
+            } catch (e) {
+                showToast('Failed to reload blog data', true);
+            }
+
             render();
         }
 
