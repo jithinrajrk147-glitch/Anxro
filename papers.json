@@ -1,39 +1,255 @@
 [
   {
+    "title": "Demystifying Artificial Intelligence: A Comprehensive Guide",
+    "file": "https://www.researchgate.net/publication/393698439_Demystifying_Artificial_Intelligence_A_Comprehensive_Guide_to_Foundational_AI_Techniques_and_Their_Applications",
+    "imf": "AI Research",
+    "cover": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80"
+  },
+  {
+    "title": "Deep Learning: Comprehensive Overview on Techniques & Applications",
+    "file": "https://pubmed.ncbi.nlm.nih.gov/34426802/",
+    "imf": "AI Research",
+    "cover": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80"
+  },
+  {
+    "title": "Explainable AI: From Classical Models to LLMs",
+    "file": "https://arxiv.org/abs/2412.00800",
+    "imf": "AI Research",
+    "cover": "https://images.unsplash.com/photo-1655720828018-edd2daec9349?w=800&q=80"
+  },
+  {
+    "title": "A Decade of Deep Learning: The Magnificent Seven",
+    "file": "https://arxiv.org/abs/2412.16188",
+    "imf": "AI Research",
+    "cover": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&q=80"
+  },
+  {
     "title": "Attention Is All You Need - Transformer Paper",
     "file": "https://arxiv.org/pdf/1706.03762.pdf",
     "imf": "AI Research",
-    "cover": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80"
+    "cover": "https://images.unsplash.com/photo-1676277791608-ac52e1ddfb5c?w=800&q=80"
   },
   {
     "title": "GPT-3 Language Models Paper",
     "file": "https://arxiv.org/pdf/2005.14165.pdf",
     "imf": "AI Research",
-    "cover": "https://images.unsplash.com/photo-1676277791608-ac52e1ddfb5c?w=800&q=80"
+    "cover": "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=80"
   },
   {
     "title": "BERT Pre-training Paper",
     "file": "https://arxiv.org/pdf/1810.04805.pdf",
     "imf": "AI Research",
-    "cover": "https://images.unsplash.com/photo-1655720828018-edd2daec9349?w=800&q=80"
+    "cover": "https://images.unsplash.com/photo-1655720033654-a4239dd42d10?w=800&q=80"
+  },
+  {
+    "title": "Stable Diffusion Paper",
+    "file": "https://arxiv.org/pdf/2112.10752.pdf",
+    "imf": "AI Research",
+    "cover": "https://images.unsplash.com/photo-1686191128892-c0557e5e8d49?w=800&q=80"
+  },
+  {
+    "title": "ResNet Deep Residual Learning",
+    "file": "https://arxiv.org/pdf/1512.03385.pdf",
+    "imf": "AI Research",
+    "cover": "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=800&q=80"
+  },
+  {
+    "title": "GAN - Generative Adversarial Networks",
+    "file": "https://arxiv.org/pdf/1406.2661.pdf",
+    "imf": "AI Research",
+    "cover": "https://images.unsplash.com/photo-1620825937374-87fc7d6bddc2?w=800&q=80"
+  },
+  {
+    "title": "YOLO Object Detection",
+    "file": "https://arxiv.org/pdf/1506.02640.pdf",
+    "imf": "AI Research",
+    "cover": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80"
+  },
+  {
+    "title": "AlphaGo Paper",
+    "file": "https://storage.googleapis.com/deepmind-media/alphago/AlphaGoNaturePaper.pdf",
+    "imf": "AI Research",
+    "cover": "https://images.unsplash.com/photo-1528819622765-d6bcf132f793?w=800&q=80"
+  },
+  {
+    "title": "Data Science and Machine Learning: Mathematical Methods",
+    "file": "https://people.smp.uq.edu.au/DirkKroese/DSML/DSML.pdf",
+    "imf": "ML Education",
+    "cover": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+  },
+  {
+    "title": "Pattern Recognition and Machine Learning",
+    "file": "https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf",
+    "imf": "ML Education",
+    "cover": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&q=80"
+  },
+  {
+    "title": "The Hundred-Page Machine Learning Book",
+    "file": "http://ema.cri-info.cm/wp-content/uploads/2019/07/2019BurkovTheHundred-pageMachineLearning.pdf",
+    "imf": "ML Education",
+    "cover": "https://images.unsplash.com/photo-1516110833967-0b5716ca1387?w=800&q=80"
+  },
+  {
+    "title": "Machine Learning by Tom Mitchell",
+    "file": "https://www.cs.cmu.edu/~tom/files/MachineLearningTomMitchell.pdf",
+    "imf": "ML Education",
+    "cover": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80"
   },
   {
     "title": "Deep Learning Book - Chapter 1",
     "file": "https://www.deeplearningbook.org/contents/intro.pdf",
     "imf": "ML Education",
-    "cover": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80"
+    "cover": "https://images.unsplash.com/photo-1509228627152-72ae9ae6848d?w=800&q=80"
   },
   {
     "title": "Neural Networks and Deep Learning",
     "file": "http://neuralnetworksanddeeplearning.com/chap1.pdf",
     "imf": "ML Education",
-    "cover": "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=800&q=80"
+    "cover": "https://images.unsplash.com/photo-1655720408747-7f1e4c6a0e1e?w=800&q=80"
+  },
+  {
+    "title": "Reinforcement Learning Introduction",
+    "file": "http://incompleteideas.net/book/RLbook2020.pdf",
+    "imf": "ML Education",
+    "cover": "https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=800&q=80"
+  },
+  {
+    "title": "Machine Learning Yearning",
+    "file": "https://github.com/ajaymache/machine-learning-yearning/raw/master/full%20book/machine-learning-yearning.pdf",
+    "imf": "ML Education",
+    "cover": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=800&q=80"
+  },
+  {
+    "title": "Big Book of Chart Patterns",
+    "file": "https://www.slideshare.net/slideshow/big-book-of-chart-patternspdf/252082434",
+    "imf": "Trading",
+    "cover": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80"
+  },
+  {
+    "title": "Classic Chart Patterns - Josh Trade",
+    "file": "https://www.scribd.com/document/642653769/josh-trade-classic-chart-patterns",
+    "imf": "Trading",
+    "cover": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=800&q=80"
+  },
+  {
+    "title": "Identifying Chart Patterns - Fidelity",
+    "file": "https://www.fidelity.com/bin-public/060_www_fidelity_com/documents/learning-center/Idenitfying-Chart-Patterns.pdf",
+    "imf": "Trading",
+    "cover": "https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=800&q=80"
+  },
+  {
+    "title": "24 Chart Patterns & Candlesticks Cheat Sheet",
+    "file": "https://timonandmati.com/wp-content/uploads/2022/06/CandleandBreakoutPatternCheatSheetGuide.pdf",
+    "imf": "Trading",
+    "cover": "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?w=800&q=80"
+  },
+  {
+    "title": "Trade Chart Patterns Like the Pros",
+    "file": "https://carlosandcompany.com/wp-content/uploads/2021/01/TRADE-CHART-PATTERNS-GUIDE.pdf",
+    "imf": "Trading",
+    "cover": "https://images.unsplash.com/photo-1611095790444-1dfa35e37b52?w=800&q=80"
+  },
+  {
+    "title": "42 Chart Patterns Layouts",
+    "file": "https://www.strike.money/wp-content/uploads/2023/09/Chart-Pattern-PDF-Free-Download-1.pdf",
+    "imf": "Trading",
+    "cover": "https://images.unsplash.com/photo-1642790551116-18e150f248e5?w=800&q=80"
+  },
+  {
+    "title": "Technical Analysis of Stock Trends - 9th Edition",
+    "file": "https://vdthangmeomeo.files.wordpress.com/2014/08/edwards-magee-technical-analysis-of-stock-trends-9th-edition.pdf",
+    "imf": "Trading",
+    "cover": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+  },
+  {
+    "title": "Fundamentals of Investments - Technical Analysis",
+    "file": "https://www.srcc.edu/sites/default/files/B.Com(Hons)_IIIyearVIsem_FundamentalsofInvestments_Week2_DrKanuJain.pdf",
+    "imf": "Trading",
+    "cover": "https://images.unsplash.com/photo-1559526324-593bc073d938?w=800&q=80"
+  },
+  {
+    "title": "Market-Share Analysis and Competitive Strategy",
+    "file": "https://www.anderson.ucla.edu/faculty/lee.cooper/MCI_Book/BOOKI2010.pdf",
+    "imf": "Market Management",
+    "cover": "https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=800&q=80"
+  },
+  {
+    "title": "A Concise Guide to Market Research",
+    "file": "https://educons.edu.rs/wp-content/uploads/2020/05/2019A-Concise-Guide-To-Market-Research.pdf",
+    "imf": "Market Management",
+    "cover": "https://images.unsplash.com/photo-1543286386-713bdd548da4?w=800&q=80"
+  },
+  {
+    "title": "Social Media Marketing Guide - Sprout Social",
+    "file": "https://media.sproutsocial.com/uploads/2020/02/Sprout-Social-Media-Marketing-Guide-gated.pdf",
+    "imf": "Social Media Growth",
+    "cover": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80"
+  },
+  {
+    "title": "Developing a Social Media Strategy",
+    "file": "https://www.efna.net/wp-content/uploads/2020/12/Developing-a-Social-Media-Strategy.pdf",
+    "imf": "Social Media Growth",
+    "cover": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80"
+  },
+  {
+    "title": "Social Media Growth Guide - Paradym",
+    "file": "https://www.paradym.com/wp-content/uploads/2019/01/Social-Media-Growth-Guide-by-Paradym.pdf",
+    "imf": "Social Media Growth",
+    "cover": "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=800&q=80"
+  },
+  {
+    "title": "Social Media Strategy Guide - Missouri Jobs",
+    "file": "https://jobs.mo.gov/sites/g/files/zuston471/files/media/pdf/2022/07/social_media_strategy_guide.pdf",
+    "imf": "Social Media Growth",
+    "cover": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80"
+  },
+  {
+    "title": "Social Media Marketing - ETSU Honors",
+    "file": "https://dc.etsu.edu/cgi/viewcontent.cgi?article=1956&context=honors",
+    "imf": "Social Media Growth",
+    "cover": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80"
+  },
+  {
+    "title": "The Definitive Guide to Social Media Marketing - Marketo",
+    "file": "https://engage.marketo.com/rs/460-TDH-945/images/The-Definitive-Guide-to-Social-Media-Marketing-Marketo.pdf",
+    "imf": "Social Media Growth",
+    "cover": "https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=800&q=80"
+  },
+  {
+    "title": "Social Media Best Practices - SJSU",
+    "file": "https://www.sjsu.edu/ajeep/docs/Social%20Media.pdf",
+    "imf": "Social Media Growth",
+    "cover": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80"
   },
   {
     "title": "Python for Data Analysis",
     "file": "https://wesmckinney.com/book/python-basics.pdf",
     "imf": "Programming",
     "cover": "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=800&q=80"
+  },
+  {
+    "title": "Python Crash Course",
+    "file": "https://edu.anarcho-copy.org/Programming%20Languages/Python/Python%20Crash%20Course.pdf",
+    "imf": "Programming",
+    "cover": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&q=80"
+  },
+  {
+    "title": "JavaScript The Good Parts",
+    "file": "https://andersonguelphjs.github.io/OReilly_JavaScript_The_Good_Parts_May_2008.pdf",
+    "imf": "Programming",
+    "cover": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800&q=80"
+  },
+  {
+    "title": "Clean Code Principles",
+    "file": "https://thixalongmy.haugiang.gov.vn/media/1175/clean_code.pdf",
+    "imf": "Programming",
+    "cover": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&q=80"
+  },
+  {
+    "title": "Design Patterns Book",
+    "file": "https://github.com/TushaarGVS/Design-Patterns-Mentorship/raw/master/Erich%20Gamma%2C%20Richard%20Helm%2C%20Ralph%20Johnson%2C%20John%20M.%20Vlissides-Design%20Patterns_%20Elements%20of%20Reusable%20Object-Oriented%20Software%20%20-Addison-Wesley%20Professional%20(1994).pdf",
+    "imf": "Programming",
+    "cover": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80"
   },
   {
     "title": "Git Pro Book - Getting Started",
@@ -100,72 +316,6 @@
     "file": "https://ai.google.dev/docs",
     "imf": "AI API",
     "cover": "https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=800&q=80"
-  },
-  {
-    "title": "Stable Diffusion Paper",
-    "file": "https://arxiv.org/pdf/2112.10752.pdf",
-    "imf": "AI Research",
-    "cover": "https://images.unsplash.com/photo-1686191128892-c0557e5e8d49?w=800&q=80"
-  },
-  {
-    "title": "ResNet Deep Residual Learning",
-    "file": "https://arxiv.org/pdf/1512.03385.pdf",
-    "imf": "AI Research",
-    "cover": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&q=80"
-  },
-  {
-    "title": "GAN - Generative Adversarial Networks",
-    "file": "https://arxiv.org/pdf/1406.2661.pdf",
-    "imf": "AI Research",
-    "cover": "https://images.unsplash.com/photo-1620825937374-87fc7d6bddc2?w=800&q=80"
-  },
-  {
-    "title": "YOLO Object Detection",
-    "file": "https://arxiv.org/pdf/1506.02640.pdf",
-    "imf": "AI Research",
-    "cover": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80"
-  },
-  {
-    "title": "AlphaGo Paper",
-    "file": "https://storage.googleapis.com/deepmind-media/alphago/AlphaGoNaturePaper.pdf",
-    "imf": "AI Research",
-    "cover": "https://images.unsplash.com/photo-1528819622765-d6bcf132f793?w=800&q=80"
-  },
-  {
-    "title": "Reinforcement Learning Introduction",
-    "file": "http://incompleteideas.net/book/RLbook2020.pdf",
-    "imf": "ML Education",
-    "cover": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80"
-  },
-  {
-    "title": "Machine Learning Yearning",
-    "file": "https://github.com/ajaymache/machine-learning-yearning/raw/master/full%20book/machine-learning-yearning.pdf",
-    "imf": "ML Education",
-    "cover": "https://images.unsplash.com/photo-1509228627152-72ae9ae6848d?w=800&q=80"
-  },
-  {
-    "title": "Python Crash Course",
-    "file": "https://edu.anarcho-copy.org/Programming%20Languages/Python/Python%20Crash%20Course.pdf",
-    "imf": "Programming",
-    "cover": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&q=80"
-  },
-  {
-    "title": "JavaScript The Good Parts",
-    "file": "https://andersonguelphjs.github.io/OReilly_JavaScript_The_Good_Parts_May_2008.pdf",
-    "imf": "Programming",
-    "cover": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800&q=80"
-  },
-  {
-    "title": "Clean Code Principles",
-    "file": "https://thixalongmy.haugiang.gov.vn/media/1175/clean_code.pdf",
-    "imf": "Programming",
-    "cover": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&q=80"
-  },
-  {
-    "title": "Design Patterns Book",
-    "file": "https://github.com/TushaarGVS/Design-Patterns-Mentorship/raw/master/Erich%20Gamma%2C%20Richard%20Helm%2C%20Ralph%20Johnson%2C%20John%20M.%20Vlissides-Design%20Patterns_%20Elements%20of%20Reusable%20Object-Oriented%20Software%20%20-Addison-Wesley%20Professional%20(1994).pdf",
-    "imf": "Programming",
-    "cover": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80"
   },
   {
     "title": "AWS Well-Architected Framework",
@@ -246,429 +396,15 @@
     "cover": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
   },
   {
-    "title": "Bayesian Methods",
-    "file": "https://arxiv.org/pdf/1206.1901.pdf",
-    "imf": "Statistics",
-    "cover": "https://images.unsplash.com/photo-1509228627152-72ae9ae6848d?w=800&q=80"
-  },
-  {
-    "title": "Time Series Analysis",
-    "file": "https://arxiv.org/pdf/1302.6613.pdf",
-    "imf": "Data Science",
-    "cover": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80"
-  },
-  {
-    "title": "Natural Language Processing",
-    "file": "https://web.stanford.edu/~jurafsky/slp3/ed3book.pdf",
-    "imf": "NLP",
-    "cover": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&q=80"
-  },
-  {
-    "title": "Computer Vision Algorithms",
-    "file": "http://szeliski.org/Book/drafts/SzeliskiBook_20100903_draft.pdf",
-    "imf": "Computer Vision",
-    "cover": "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=800&q=80"
-  },
-  {
-    "title": "Speech Recognition Deep Learning",
-    "file": "https://arxiv.org/pdf/1303.5778.pdf",
+    "title": "Journal of Machine Learning Research (JMLR)",
+    "file": "https://www.jmlr.org",
     "imf": "AI Research",
-    "cover": "https://images.unsplash.com/photo-1589903308904-1010c2294adc?w=800&q=80"
-  },
-  {
-    "title": "Recommender Systems",
-    "file": "https://arxiv.org/pdf/1707.07435.pdf",
-    "imf": "ML Application",
-    "cover": "https://images.unsplash.com/photo-1556155092-490a1ba16284?w=800&q=80"
-  },
-  {
-    "title": "Anomaly Detection Methods",
-    "file": "https://arxiv.org/pdf/1901.03407.pdf",
-    "imf": "ML Application",
-    "cover": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
-  },
-  {
-    "title": "Transfer Learning Survey",
-    "file": "https://arxiv.org/pdf/1808.01974.pdf",
-    "imf": "ML Technique",
-    "cover": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80"
-  },
-  {
-    "title": "Meta-Learning Overview",
-    "file": "https://arxiv.org/pdf/1810.03548.pdf",
-    "imf": "ML Technique",
-    "cover": "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=800&q=80"
-  },
-  {
-    "title": "Few-Shot Learning",
-    "file": "https://arxiv.org/pdf/1904.05046.pdf",
-    "imf": "ML Technique",
-    "cover": "https://images.unsplash.com/photo-1655720828018-edd2daec9349?w=800&q=80"
-  },
-  {
-    "title": "AutoML Survey",
-    "file": "https://arxiv.org/pdf/1908.00709.pdf",
-    "imf": "ML Technique",
-    "cover": "https://images.unsplash.com/photo-1655720408747-7f1e4c6a0e1e?w=800&q=80"
-  },
-  {
-    "title": "Neural Architecture Search",
-    "file": "https://arxiv.org/pdf/1808.05377.pdf",
-    "imf": "ML Technique",
-    "cover": "https://images.unsplash.com/photo-1655720033654-a4239dd42d10?w=800&q=80"
-  },
-  {
-    "title": "Explainable AI Methods",
-    "file": "https://arxiv.org/pdf/1910.10045.pdf",
-    "imf": "AI Ethics",
-    "cover": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80"
-  },
-  {
-    "title": "AI Fairness and Bias",
-    "file": "https://arxiv.org/pdf/1908.09635.pdf",
-    "imf": "AI Ethics",
-    "cover": "https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=800&q=80"
-  },
-  {
-    "title": "Responsible AI Practices",
-    "file": "https://ai.google/static/documents/responsible-ai-practices.pdf",
-    "imf": "AI Ethics",
     "cover": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80"
   },
   {
-    "title": "Federated Learning",
-    "file": "https://arxiv.org/pdf/1602.05629.pdf",
-    "imf": "ML Technique",
-    "cover": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=800&q=80"
-  },
-  {
-    "title": "Edge AI Computing",
-    "file": "https://arxiv.org/pdf/1905.10083.pdf",
-    "imf": "AI Application",
-    "cover": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80"
-  },
-  {
-    "title": "Quantum Machine Learning",
-    "file": "https://arxiv.org/pdf/1611.09347.pdf",
-    "imf": "Emerging Tech",
+    "title": "arXiv Machine Learning Section",
+    "file": "https://arxiv.org/list/stat.ML/recent",
+    "imf": "AI Research",
     "cover": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&q=80"
-  },
-  {
-    "title": "Graph Neural Networks",
-    "file": "https://arxiv.org/pdf/1901.00596.pdf",
-    "imf": "AI Research",
-    "cover": "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=800&q=80"
-  },
-  {
-    "title": "Attention Mechanisms Survey",
-    "file": "https://arxiv.org/pdf/1902.02181.pdf",
-    "imf": "AI Research",
-    "cover": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80"
-  },
-  {
-    "title": "Vision Transformers",
-    "file": "https://arxiv.org/pdf/2010.11929.pdf",
-    "imf": "AI Research",
-    "cover": "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=800&q=80"
-  },
-  {
-    "title": "CLIP - Contrastive Learning",
-    "file": "https://arxiv.org/pdf/2103.00020.pdf",
-    "imf": "AI Research",
-    "cover": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80"
-  },
-  {
-    "title": "Diffusion Models",
-    "file": "https://arxiv.org/pdf/2006.11239.pdf",
-    "imf": "AI Research",
-    "cover": "https://images.unsplash.com/photo-1686191128892-c0557e5e8d49?w=800&q=80"
-  },
-  {
-    "title": "Large Language Models Survey",
-    "file": "https://arxiv.org/pdf/2303.18223.pdf",
-    "imf": "LLM Research",
-    "cover": "https://images.unsplash.com/photo-1676277791608-ac52e1ddfb5c?w=800&q=80"
-  },
-  {
-    "title": "Prompt Engineering Guide",
-    "file": "https://arxiv.org/pdf/2107.13586.pdf",
-    "imf": "LLM Technique",
-    "cover": "https://images.unsplash.com/photo-1655720828018-edd2daec9349?w=800&q=80"
-  },
-  {
-    "title": "Chain-of-Thought Prompting",
-    "file": "https://arxiv.org/pdf/2201.11903.pdf",
-    "imf": "LLM Technique",
-    "cover": "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=80"
-  },
-  {
-    "title": "Retrieval Augmented Generation",
-    "file": "https://arxiv.org/pdf/2005.11401.pdf",
-    "imf": "LLM Technique",
-    "cover": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=800&q=80"
-  },
-  {
-    "title": "LLM Fine-tuning Methods",
-    "file": "https://arxiv.org/pdf/2303.15647.pdf",
-    "imf": "LLM Technique",
-    "cover": "https://images.unsplash.com/photo-1655720408747-7f1e4c6a0e1e?w=800&q=80"
-  },
-  {
-    "title": "LoRA - Low-Rank Adaptation",
-    "file": "https://arxiv.org/pdf/2106.09685.pdf",
-    "imf": "LLM Technique",
-    "cover": "https://images.unsplash.com/photo-1655720033654-a4239dd42d10?w=800&q=80"
-  },
-  {
-    "title": "RLHF - Reinforcement Learning from Human Feedback",
-    "file": "https://arxiv.org/pdf/2203.02155.pdf",
-    "imf": "LLM Technique",
-    "cover": "https://images.unsplash.com/photo-1620825937374-87fc7d6bddc2?w=800&q=80"
-  },
-  {
-    "title": "LangChain Framework Overview",
-    "file": "https://arxiv.org/pdf/2308.04014.pdf",
-    "imf": "LLM Framework",
-    "cover": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=800&q=80"
-  },
-  {
-    "title": "Vector Databases for AI",
-    "file": "https://arxiv.org/pdf/2309.11564.pdf",
-    "imf": "AI Infrastructure",
-    "cover": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80"
-  },
-  {
-    "title": "LLM Agents Architecture",
-    "file": "https://arxiv.org/pdf/2308.11432.pdf",
-    "imf": "AI Agents",
-    "cover": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80"
-  },
-  {
-    "title": "Multi-Agent Systems",
-    "file": "https://arxiv.org/pdf/2308.10848.pdf",
-    "imf": "AI Agents",
-    "cover": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80"
-  },
-  {
-    "title": "Tool Learning with LLMs",
-    "file": "https://arxiv.org/pdf/2304.08354.pdf",
-    "imf": "LLM Application",
-    "cover": "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=800&q=80"
-  },
-  {
-    "title": "Code Generation with LLMs",
-    "file": "https://arxiv.org/pdf/2107.03374.pdf",
-    "imf": "LLM Application",
-    "cover": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&q=80"
-  },
-  {
-    "title": "LLM for Data Analysis",
-    "file": "https://arxiv.org/pdf/2305.13269.pdf",
-    "imf": "LLM Application",
-    "cover": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
-  },
-  {
-    "title": "Multimodal Learning",
-    "file": "https://arxiv.org/pdf/2206.06488.pdf",
-    "imf": "AI Research",
-    "cover": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80"
-  },
-  {
-    "title": "Text-to-Image Generation",
-    "file": "https://arxiv.org/pdf/2209.14792.pdf",
-    "imf": "Generative AI",
-    "cover": "https://images.unsplash.com/photo-1686191128892-c0557e5e8d49?w=800&q=80"
-  },
-  {
-    "title": "Text-to-Video Synthesis",
-    "file": "https://arxiv.org/pdf/2304.08818.pdf",
-    "imf": "Generative AI",
-    "cover": "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80"
-  },
-  {
-    "title": "Audio Generation Models",
-    "file": "https://arxiv.org/pdf/2301.12503.pdf",
-    "imf": "Generative AI",
-    "cover": "https://images.unsplash.com/photo-1589903308904-1010c2294adc?w=800&q=80"
-  },
-  {
-    "title": "3D Generation from Text",
-    "file": "https://arxiv.org/pdf/2303.05371.pdf",
-    "imf": "Generative AI",
-    "cover": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80"
-  },
-  {
-    "title": "AI for Drug Discovery",
-    "file": "https://arxiv.org/pdf/2201.08648.pdf",
-    "imf": "AI Application",
-    "cover": "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&q=80"
-  },
-  {
-    "title": "AI in Healthcare",
-    "file": "https://arxiv.org/pdf/1903.10073.pdf",
-    "imf": "AI Application",
-    "cover": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80"
-  },
-  {
-    "title": "Autonomous Vehicles AI",
-    "file": "https://arxiv.org/pdf/1906.05113.pdf",
-    "imf": "AI Application",
-    "cover": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800&q=80"
-  },
-  {
-    "title": "AI for Climate Change",
-    "file": "https://arxiv.org/pdf/1906.05433.pdf",
-    "imf": "AI Application",
-    "cover": "https://images.unsplash.com/photo-1569163139394-de4798aa62b6?w=800&q=80"
-  },
-  {
-    "title": "AI in Finance Trading",
-    "file": "https://arxiv.org/pdf/2106.14024.pdf",
-    "imf": "Trading AI",
-    "cover": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80"
-  },
-  {
-    "title": "Algorithmic Trading Strategies",
-    "file": "https://arxiv.org/pdf/1911.10107.pdf",
-    "imf": "Trading",
-    "cover": "https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=800&q=80"
-  },
-  {
-    "title": "Deep Reinforcement Learning for Trading",
-    "file": "https://arxiv.org/pdf/1911.10107.pdf",
-    "imf": "Trading AI",
-    "cover": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=800&q=80"
-  },
-  {
-    "title": "Sentiment Analysis for Stock Prediction",
-    "file": "https://arxiv.org/pdf/1812.07437.pdf",
-    "imf": "Trading AI",
-    "cover": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
-  },
-  {
-    "title": "Portfolio Optimization ML",
-    "file": "https://arxiv.org/pdf/1909.10233.pdf",
-    "imf": "Trading AI",
-    "cover": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80"
-  },
-  {
-    "title": "Cryptocurrency Price Prediction",
-    "file": "https://arxiv.org/pdf/2103.08691.pdf",
-    "imf": "Trading AI",
-    "cover": "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=800&q=80"
-  },
-  {
-    "title": "Risk Management in Trading",
-    "file": "https://arxiv.org/pdf/2001.09403.pdf",
-    "imf": "Trading",
-    "cover": "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=800&q=80"
-  },
-  {
-    "title": "Market Microstructure",
-    "file": "https://arxiv.org/pdf/1901.05332.pdf",
-    "imf": "Trading",
-    "cover": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80"
-  },
-  {
-    "title": "High-Frequency Trading",
-    "file": "https://arxiv.org/pdf/1602.01789.pdf",
-    "imf": "Trading",
-    "cover": "https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=800&q=80"
-  },
-  {
-    "title": "Behavioral Finance",
-    "file": "https://arxiv.org/pdf/1710.00553.pdf",
-    "imf": "Finance Psychology",
-    "cover": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80"
-  },
-  {
-    "title": "Cognitive Biases in Decision Making",
-    "file": "https://arxiv.org/pdf/1907.11093.pdf",
-    "imf": "Psychology",
-    "cover": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&q=80"
-  },
-  {
-    "title": "Growth Mindset Research",
-    "file": "https://www.apa.org/pubs/journals/releases/edu-edu0000034.pdf",
-    "imf": "Psychology",
-    "cover": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=800&q=80"
-  },
-  {
-    "title": "Emotional Intelligence",
-    "file": "https://www.researchgate.net/publication/327426626_Emotional_Intelligence.pdf",
-    "imf": "Psychology",
-    "cover": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80"
-  },
-  {
-    "title": "Habit Formation Science",
-    "file": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3505409/pdf/nihms-411729.pdf",
-    "imf": "Psychology",
-    "cover": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80"
-  },
-  {
-    "title": "Persuasion Psychology",
-    "file": "https://www.influenceatwork.com/wp-content/uploads/2012/02/E_Brand_principles.pdf",
-    "imf": "Psychology",
-    "cover": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80"
-  },
-  {
-    "title": "Flow State Research",
-    "file": "https://www.researchgate.net/publication/224927532_Flow_The_Psychology_of_Optimal_Experience.pdf",
-    "imf": "Psychology",
-    "cover": "https://images.unsplash.com/photo-1499728603263-13726abce5fd?w=800&q=80"
-  },
-  {
-    "title": "Memory and Learning",
-    "file": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4181487/pdf/nihms-629361.pdf",
-    "imf": "Psychology",
-    "cover": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80"
-  },
-  {
-    "title": "Motivation Theory",
-    "file": "https://selfdeterminationtheory.org/SDT/documents/2000_RyanDeci_SDT.pdf",
-    "imf": "Psychology",
-    "cover": "https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=800&q=80"
-  },
-  {
-    "title": "Social Influence",
-    "file": "https://www.researchgate.net/publication/232538797_Social_Influence.pdf",
-    "imf": "Psychology",
-    "cover": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80"
-  },
-  {
-    "title": "Stress and Performance",
-    "file": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5579396/pdf/DialoguesClinNeurosci-19-91.pdf",
-    "imf": "Psychology",
-    "cover": "https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=800&q=80"
-  },
-  {
-    "title": "Startup Business Models",
-    "file": "https://www.strategyzer.com/hubfs/resources/the-business-model-canvas.pdf",
-    "imf": "Business",
-    "cover": "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80"
-  },
-  {
-    "title": "Lean Startup Methodology",
-    "file": "http://theleanstartup.com/principles",
-    "imf": "Business",
-    "cover": "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&q=80"
-  },
-  {
-    "title": "Product-Market Fit",
-    "file": "https://web.stanford.edu/class/ee204/ProductMarketFit.html",
-    "imf": "Business",
-    "cover": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
-  },
-  {
-    "title": "Growth Hacking Strategies",
-    "file": "https://www.growthhackers.com/growth-studies",
-    "imf": "Business",
-    "cover": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
-  },
-  {
-    "title": "SaaS Metrics Guide",
-    "file": "https://www.forentrepreneurs.com/saas-metrics-2/",
-    "imf": "Business",
-    "cover": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
   }
 ]
