@@ -1,1250 +1,1316 @@
 [
   {
-    "title": "Learn Trading from Zero in 90 Minutes - Umar Punjabi (Hindi)",
-    "file": "https://www.youtube.com/watch?v=8liEuoJA_gc",
-    "cover": "https://i.ytimg.com/vi/8liEuoJA_gc/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "Build Profitable Trading System - Umar Punjabi (Hindi)",
-    "file": "https://www.youtube.com/watch?v=MtXVi0tE0vw",
-    "cover": "https://i.ytimg.com/vi/MtXVi0tE0vw/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "3 BEST Ways to Learn Trading - Umar Punjabi (Hindi)",
-    "file": "https://www.youtube.com/watch?v=KPNIXqN8fpI",
-    "cover": "https://i.ytimg.com/vi/KPNIXqN8fpI/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "Stock Market Basics - CA Rachana Ranade (Hindi)",
-    "file": "https://www.youtube.com/watch?v=ayToSzjxzrE",
-    "cover": "https://i.ytimg.com/vi/ayToSzjxzrE/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "Technical Analysis Complete - CA Rachana (Hindi)",
-    "file": "https://www.youtube.com/watch?v=APpjVBA0eq4",
-    "cover": "https://i.ytimg.com/vi/APpjVBA0eq4/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "Candlestick Patterns - Power of Stocks (Hindi)",
-    "file": "https://www.youtube.com/watch?v=8s7hV4b2aPs",
-    "cover": "https://i.ytimg.com/vi/8s7hV4b2aPs/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "Social Media Growth Hacks - Ankur Warikoo (Hindi)",
-    "file": "https://www.youtube.com/watch?v=z3Lh2bla9HU",
-    "cover": "https://i.ytimg.com/vi/z3Lh2bla9HU/hqdefault.jpg",
-    "imf": "Social Media"
-  },
-  {
-    "title": "Geopolitical Case Study - Think School (Hindi)",
-    "file": "https://www.youtube.com/watch?v=h_fdPgjp4bI",
-    "cover": "https://i.ytimg.com/vi/h_fdPgjp4bI/hqdefault.jpg",
-    "imf": "Business"
-  },
-  {
-    "title": "Machine Learning - Stanford (English)",
-    "file": "https://www.youtube.com/watch?v=jGwO_UgTS7I",
-    "cover": "https://i.ytimg.com/vi/jGwO_UgTS7I/hqdefault.jpg",
-    "imf": "AI"
-  },
-  {
-    "title": "Deep Learning - Andrew Ng (English)",
-    "file": "https://www.youtube.com/watch?v=CS4cs9xVecg",
-    "cover": "https://i.ytimg.com/vi/CS4cs9xVecg/hqdefault.jpg",
-    "imf": "AI"
-  },
-  {
-    "title": "Python for Data Science (Hindi)",
-    "file": "https://www.youtube.com/watch?v=WGJJIrtnfpk",
-    "cover": "https://i.ytimg.com/vi/WGJJIrtnfpk/hqdefault.jpg",
-    "imf": "Programming"
-  },
-  {
-    "title": "PyTorch Complete Course (English)",
-    "file": "https://www.youtube.com/watch?v=V_xro1bcAuA",
-    "cover": "https://i.ytimg.com/vi/V_xro1bcAuA/hqdefault.jpg",
-    "imf": "AI"
-  },
-  {
-    "title": "TensorFlow 2.0 Course (English)",
-    "file": "https://www.youtube.com/watch?v=tPYj3fFJGjk",
-    "cover": "https://i.ytimg.com/vi/tPYj3fFJGjk/hqdefault.jpg",
-    "imf": "AI"
-  },
-  {
-    "title": "Neural Networks from Scratch (English)",
-    "file": "https://www.youtube.com/watch?v=Wo5dMEP_BbI",
-    "cover": "https://i.ytimg.com/vi/Wo5dMEP_BbI/hqdefault.jpg",
-    "imf": "AI"
-  },
-  {
-    "title": "Deep Learning in Hindi",
+    "title": "Deep Learning in Hindi - Complete Tutorial",
     "file": "https://www.youtube.com/watch?v=DKSZHN7jftI",
-    "cover": "https://i.ytimg.com/vi/DKSZHN7jftI/hqdefault.jpg",
-    "imf": "AI"
+    "cover": "https://img.youtube.com/vi/DKSZHN7jftI/maxresdefault.jpg",
+    "imf": "Deep Learning"
   },
   {
-    "title": "NLP - Stanford (English)",
+    "title": "Natural Language Processing - Stanford (English)",
     "file": "https://www.youtube.com/watch?v=8rXD5-xhemo",
-    "cover": "https://i.ytimg.com/vi/8rXD5-xhemo/hqdefault.jpg",
-    "imf": "AI"
+    "cover": "https://img.youtube.com/vi/8rXD5-xhemo/maxresdefault.jpg",
+    "imf": "NLP"
   },
   {
-    "title": "NLP with Python (Hindi)",
+    "title": "NLP with Python - Hindi Tutorial",
     "file": "https://www.youtube.com/watch?v=fM4qTMfCoak",
-    "cover": "https://i.ytimg.com/vi/fM4qTMfCoak/hqdefault.jpg",
-    "imf": "AI"
+    "cover": "https://img.youtube.com/vi/fM4qTMfCoak/maxresdefault.jpg",
+    "imf": "NLP"
   },
   {
-    "title": "Option Trading Strategies (Hindi)",
-    "file": "https://www.youtube.com/watch?v=nKxYVFGa-Vc",
-    "cover": "https://i.ytimg.com/vi/nKxYVFGa-Vc/hqdefault.jpg",
+    "title": "Transformers and BERT Explained (English)",
+    "file": "https://www.youtube.com/watch?v=TQQlZhbC5ps",
+    "cover": "https://img.youtube.com/vi/TQQlZhbC5ps/maxresdefault.jpg",
+    "imf": "Transformers"
+  },
+  {
+    "title": "GPT and Large Language Models (English)",
+    "file": "https://www.youtube.com/watch?v=kCc8FmEb1nY",
+    "cover": "https://img.youtube.com/vi/kCc8FmEb1nY/maxresdefault.jpg",
+    "imf": "LLMs"
+  },
+  {
+    "title": "ChatGPT Explained - Hindi",
+    "file": "https://www.youtube.com/watch?v=JhCl-GeT4jw",
+    "cover": "https://img.youtube.com/vi/JhCl-GeT4jw/maxresdefault.jpg",
+    "imf": "LLMs"
+  },
+  {
+    "title": "Computer Vision Course - MIT (English)",
+    "file": "https://www.youtube.com/watch?v=dJYGatp4SvA",
+    "cover": "https://img.youtube.com/vi/dJYGatp4SvA/maxresdefault.jpg",
+    "imf": "Computer Vision"
+  },
+  {
+    "title": "OpenCV Python Tutorial - Hindi",
+    "file": "https://www.youtube.com/watch?v=oXlwWbU8l2o",
+    "cover": "https://img.youtube.com/vi/oXlwWbU8l2o/maxresdefault.jpg",
+    "imf": "Computer Vision"
+  },
+  {
+    "title": "YOLO Object Detection Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=ag3DLKsl2vk",
+    "cover": "https://img.youtube.com/vi/ag3DLKsl2vk/maxresdefault.jpg",
+    "imf": "Object Detection"
+  },
+  {
+    "title": "Image Classification with CNN - Hindi",
+    "file": "https://www.youtube.com/watch?v=zfiSAzpy9NM",
+    "cover": "https://img.youtube.com/vi/zfiSAzpy9NM/maxresdefault.jpg",
+    "imf": "Computer Vision"
+  },
+  {
+    "title": "Reinforcement Learning Course - DeepMind (English)",
+    "file": "https://www.youtube.com/watch?v=TCCjZe0y4Qc",
+    "cover": "https://img.youtube.com/vi/TCCjZe0y4Qc/maxresdefault.jpg",
+    "imf": "Reinforcement Learning"
+  },
+  {
+    "title": "Q-Learning Tutorial - Hindi",
+    "file": "https://www.youtube.com/watch?v=qhRNvCVVJaA",
+    "cover": "https://img.youtube.com/vi/qhRNvCVVJaA/maxresdefault.jpg",
+    "imf": "Reinforcement Learning"
+  },
+  {
+    "title": "Data Science Full Course (English)",
+    "file": "https://www.youtube.com/watch?v=ua-CiDNNj30",
+    "cover": "https://img.youtube.com/vi/ua-CiDNNj30/maxresdefault.jpg",
+    "imf": "Data Science"
+  },
+  {
+    "title": "Data Science in Hindi - Complete Roadmap",
+    "file": "https://www.youtube.com/watch?v=JL_grPUnXzY",
+    "cover": "https://img.youtube.com/vi/JL_grPUnXzY/maxresdefault.jpg",
+    "imf": "Data Science"
+  },
+  {
+    "title": "Statistics for Data Science (English)",
+    "file": "https://www.youtube.com/watch?v=xxpc-HPKN28",
+    "cover": "https://img.youtube.com/vi/xxpc-HPKN28/maxresdefault.jpg",
+    "imf": "Statistics"
+  },
+  {
+    "title": "Statistics in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=LZzq1zSL1bs",
+    "cover": "https://img.youtube.com/vi/LZzq1zSL1bs/maxresdefault.jpg",
+    "imf": "Statistics"
+  },
+  {
+    "title": "Pandas Tutorial - Complete Course (English)",
+    "file": "https://www.youtube.com/watch?v=vmEHCJofslg",
+    "cover": "https://img.youtube.com/vi/vmEHCJofslg/maxresdefault.jpg",
+    "imf": "Python"
+  },
+  {
+    "title": "Pandas in Hindi - Data Analysis",
+    "file": "https://www.youtube.com/watch?v=CmorAWRsCAw",
+    "cover": "https://img.youtube.com/vi/CmorAWRsCAw/maxresdefault.jpg",
+    "imf": "Python"
+  },
+  {
+    "title": "NumPy Tutorial for Beginners (English)",
+    "file": "https://www.youtube.com/watch?v=QUT1VHiLmmI",
+    "cover": "https://img.youtube.com/vi/QUT1VHiLmmI/maxresdefault.jpg",
+    "imf": "Python"
+  },
+  {
+    "title": "NumPy in Hindi - Complete Tutorial",
+    "file": "https://www.youtube.com/watch?v=Rbh1rieb3zc",
+    "cover": "https://img.youtube.com/vi/Rbh1rieb3zc/maxresdefault.jpg",
+    "imf": "Python"
+  },
+  {
+    "title": "Matplotlib Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=3Xc3CA655Y4",
+    "cover": "https://img.youtube.com/vi/3Xc3CA655Y4/maxresdefault.jpg",
+    "imf": "Data Visualization"
+  },
+  {
+    "title": "Data Visualization in Hindi - Matplotlib",
+    "file": "https://www.youtube.com/watch?v=DAQNHzOcO5A",
+    "cover": "https://img.youtube.com/vi/DAQNHzOcO5A/maxresdefault.jpg",
+    "imf": "Data Visualization"
+  },
+  {
+    "title": "Seaborn Tutorial - Complete Guide (English)",
+    "file": "https://www.youtube.com/watch?v=6GUZXDef2U0",
+    "cover": "https://img.youtube.com/vi/6GUZXDef2U0/maxresdefault.jpg",
+    "imf": "Data Visualization"
+  },
+  {
+    "title": "SQL for Data Science (English)",
+    "file": "https://www.youtube.com/watch?v=HXV3zeQKqGY",
+    "cover": "https://img.youtube.com/vi/HXV3zeQKqGY/maxresdefault.jpg",
+    "imf": "SQL"
+  },
+  {
+    "title": "SQL Complete Course - Hindi",
+    "file": "https://www.youtube.com/watch?v=hlGoQC332VM",
+    "cover": "https://img.youtube.com/vi/hlGoQC332VM/maxresdefault.jpg",
+    "imf": "SQL"
+  },
+  {
+    "title": "MongoDB Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=c2M-rlkkT5o",
+    "cover": "https://img.youtube.com/vi/c2M-rlkkT5o/maxresdefault.jpg",
+    "imf": "Database"
+  },
+  {
+    "title": "MongoDB in Hindi - Complete Tutorial",
+    "file": "https://www.youtube.com/watch?v=oSIv-E60NiU",
+    "cover": "https://img.youtube.com/vi/oSIv-E60NiU/maxresdefault.jpg",
+    "imf": "Database"
+  },
+  {
+    "title": "Git and GitHub Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=RGOj5yH7evk",
+    "cover": "https://img.youtube.com/vi/RGOj5yH7evk/maxresdefault.jpg",
+    "imf": "Version Control"
+  },
+  {
+    "title": "Git & GitHub in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=gwWKnnCMQ5c",
+    "cover": "https://img.youtube.com/vi/gwWKnnCMQ5c/maxresdefault.jpg",
+    "imf": "Version Control"
+  },
+  {
+    "title": "Docker Tutorial for Beginners (English)",
+    "file": "https://www.youtube.com/watch?v=fqMOX6JJhGo",
+    "cover": "https://img.youtube.com/vi/fqMOX6JJhGo/maxresdefault.jpg",
+    "imf": "DevOps"
+  },
+  {
+    "title": "Docker in Hindi - Complete Tutorial",
+    "file": "https://www.youtube.com/watch?v=31k6AtW-b3Y",
+    "cover": "https://img.youtube.com/vi/31k6AtW-b3Y/maxresdefault.jpg",
+    "imf": "DevOps"
+  },
+  {
+    "title": "Kubernetes Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=X48VuDVv0do",
+    "cover": "https://img.youtube.com/vi/X48VuDVv0do/maxresdefault.jpg",
+    "imf": "DevOps"
+  },
+  {
+    "title": "Kubernetes in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=KVBON1lA9N8",
+    "cover": "https://img.youtube.com/vi/KVBON1lA9N8/maxresdefault.jpg",
+    "imf": "DevOps"
+  },
+  {
+    "title": "AWS Tutorial for Beginners (English)",
+    "file": "https://www.youtube.com/watch?v=ulprqHHWlng",
+    "cover": "https://img.youtube.com/vi/ulprqHHWlng/maxresdefault.jpg",
+    "imf": "Cloud Computing"
+  },
+  {
+    "title": "AWS in Hindi - Complete Tutorial",
+    "file": "https://www.youtube.com/watch?v=k1RI5locZE4",
+    "cover": "https://img.youtube.com/vi/k1RI5locZE4/maxresdefault.jpg",
+    "imf": "Cloud Computing"
+  },
+  {
+    "title": "Azure Fundamentals (English)",
+    "file": "https://www.youtube.com/watch?v=NKEFWyqJ5XA",
+    "cover": "https://img.youtube.com/vi/NKEFWyqJ5XA/maxresdefault.jpg",
+    "imf": "Cloud Computing"
+  },
+  {
+    "title": "Google Cloud Platform Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=4D3X6Xl5c_Y",
+    "cover": "https://img.youtube.com/vi/4D3X6Xl5c_Y/maxresdefault.jpg",
+    "imf": "Cloud Computing"
+  },
+  {
+    "title": "MLOps Tutorial - Complete Guide (English)",
+    "file": "https://www.youtube.com/watch?v=Cj3lXW_Jk8I",
+    "cover": "https://img.youtube.com/vi/Cj3lXW_Jk8I/maxresdefault.jpg",
+    "imf": "MLOps"
+  },
+  {
+    "title": "MLOps in Hindi - End to End Project",
+    "file": "https://www.youtube.com/watch?v=pxk1Fr33-L4",
+    "cover": "https://img.youtube.com/vi/pxk1Fr33-L4/maxresdefault.jpg",
+    "imf": "MLOps"
+  },
+  {
+    "title": "FastAPI Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=0sOvCWFmrtA",
+    "cover": "https://img.youtube.com/vi/0sOvCWFmrtA/maxresdefault.jpg",
+    "imf": "Backend"
+  },
+  {
+    "title": "FastAPI in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=7t2alSnE2-I",
+    "cover": "https://img.youtube.com/vi/7t2alSnE2-I/maxresdefault.jpg",
+    "imf": "Backend"
+  },
+  {
+    "title": "Flask Tutorial for Beginners (English)",
+    "file": "https://www.youtube.com/watch?v=Z1RJmh_OqeA",
+    "cover": "https://img.youtube.com/vi/Z1RJmh_OqeA/maxresdefault.jpg",
+    "imf": "Backend"
+  },
+  {
+    "title": "Flask in Hindi - Web Development",
+    "file": "https://www.youtube.com/watch?v=4L_xAWDRs7w",
+    "cover": "https://img.youtube.com/vi/4L_xAWDRs7w/maxresdefault.jpg",
+    "imf": "Backend"
+  },
+  {
+    "title": "Django Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=F5mRW0jo-U4",
+    "cover": "https://img.youtube.com/vi/F5mRW0jo-U4/maxresdefault.jpg",
+    "imf": "Backend"
+  },
+  {
+    "title": "Django in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=JxzZxdht-XY",
+    "cover": "https://img.youtube.com/vi/JxzZxdht-XY/maxresdefault.jpg",
+    "imf": "Backend"
+  },
+  {
+    "title": "React JS Full Course (English)",
+    "file": "https://www.youtube.com/watch?v=bMknfKXIFA8",
+    "cover": "https://img.youtube.com/vi/bMknfKXIFA8/maxresdefault.jpg",
+    "imf": "Frontend"
+  },
+  {
+    "title": "React JS in Hindi - Complete Tutorial",
+    "file": "https://www.youtube.com/watch?v=RGKi6LSPDLU",
+    "cover": "https://img.youtube.com/vi/RGKi6LSPDLU/maxresdefault.jpg",
+    "imf": "Frontend"
+  },
+  {
+    "title": "Next.js Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=mTz0GXj8NN0",
+    "cover": "https://img.youtube.com/vi/mTz0GXj8NN0/maxresdefault.jpg",
+    "imf": "Frontend"
+  },
+  {
+    "title": "Next.js in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=9P8mASSREYM",
+    "cover": "https://img.youtube.com/vi/9P8mASSREYM/maxresdefault.jpg",
+    "imf": "Frontend"
+  },
+  {
+    "title": "Vue.js Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=FXpIoQ_rT_c",
+    "cover": "https://img.youtube.com/vi/FXpIoQ_rT_c/maxresdefault.jpg",
+    "imf": "Frontend"
+  },
+  {
+    "title": "Angular Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=3qBXWUpoPHo",
+    "cover": "https://img.youtube.com/vi/3qBXWUpoPHo/maxresdefault.jpg",
+    "imf": "Frontend"
+  },
+  {
+    "title": "JavaScript Full Course (English)",
+    "file": "https://www.youtube.com/watch?v=PkZNo7MFNFg",
+    "cover": "https://img.youtube.com/vi/PkZNo7MFNFg/maxresdefault.jpg",
+    "imf": "JavaScript"
+  },
+  {
+    "title": "JavaScript in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=ER9SspLe4Hg",
+    "cover": "https://img.youtube.com/vi/ER9SspLe4Hg/maxresdefault.jpg",
+    "imf": "JavaScript"
+  },
+  {
+    "title": "TypeScript Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=BwuLxPH8IDs",
+    "cover": "https://img.youtube.com/vi/BwuLxPH8IDs/maxresdefault.jpg",
+    "imf": "TypeScript"
+  },
+  {
+    "title": "TypeScript in Hindi - Complete Guide",
+    "file": "https://www.youtube.com/watch?v=d56mG7DezGs",
+    "cover": "https://img.youtube.com/vi/d56mG7DezGs/maxresdefault.jpg",
+    "imf": "TypeScript"
+  },
+  {
+    "title": "Node.js Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=TlB_eWDSMt4",
+    "cover": "https://img.youtube.com/vi/TlB_eWDSMt4/maxresdefault.jpg",
+    "imf": "Backend"
+  },
+  {
+    "title": "Node.js in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=BLl32FvcdVM",
+    "cover": "https://img.youtube.com/vi/BLl32FvcdVM/maxresdefault.jpg",
+    "imf": "Backend"
+  },
+  {
+    "title": "Express.js Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=L72fhGm1tfE",
+    "cover": "https://img.youtube.com/vi/L72fhGm1tfE/maxresdefault.jpg",
+    "imf": "Backend"
+  },
+  {
+    "title": "HTML & CSS Full Course (English)",
+    "file": "https://www.youtube.com/watch?v=mU6anWqZJcc",
+    "cover": "https://img.youtube.com/vi/mU6anWqZJcc/maxresdefault.jpg",
+    "imf": "Web Development"
+  },
+  {
+    "title": "HTML & CSS in Hindi - Complete Tutorial",
+    "file": "https://www.youtube.com/watch?v=6mbwJ2xhgzM",
+    "cover": "https://img.youtube.com/vi/6mbwJ2xhgzM/maxresdefault.jpg",
+    "imf": "Web Development"
+  },
+  {
+    "title": "Tailwind CSS Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=ft30zcMlFao",
+    "cover": "https://img.youtube.com/vi/ft30zcMlFao/maxresdefault.jpg",
+    "imf": "CSS"
+  },
+  {
+    "title": "Tailwind CSS in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=_9mTJ84uL1Q",
+    "cover": "https://img.youtube.com/vi/_9mTJ84uL1Q/maxresdefault.jpg",
+    "imf": "CSS"
+  },
+  {
+    "title": "Bootstrap 5 Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=-qfEOE4vtxE",
+    "cover": "https://img.youtube.com/vi/-qfEOE4vtxE/maxresdefault.jpg",
+    "imf": "CSS"
+  },
+  {
+    "title": "Algorithmic Trading Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=xfzGZB4HhEE",
+    "cover": "https://img.youtube.com/vi/xfzGZB4HhEE/maxresdefault.jpg",
     "imf": "Trading"
   },
   {
-    "title": "Intraday Trading Guide (Hindi)",
-    "file": "https://www.youtube.com/watch?v=lZPJB_c0-VE",
-    "cover": "https://i.ytimg.com/vi/lZPJB_c0-VE/hqdefault.jpg",
+    "title": "Algo Trading in Hindi - Complete Course",
+    "file": "https://www.youtube.com/watch?v=c9OjEThuJjY",
+    "cover": "https://img.youtube.com/vi/c9OjEThuJjY/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Python for Trading (English)",
+    "file": "https://www.youtube.com/watch?v=xfzGZB4HhEE",
+    "cover": "https://img.youtube.com/vi/xfzGZB4HhEE/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Stock Market Trading in Hindi",
+    "file": "https://www.youtube.com/watch?v=jTzovxm_Qes",
+    "cover": "https://img.youtube.com/vi/jTzovxm_Qes/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Technical Analysis Course (English)",
+    "file": "https://www.youtube.com/watch?v=08c8uMKRNfU",
+    "cover": "https://img.youtube.com/vi/08c8uMKRNfU/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Technical Analysis in Hindi - Complete",
+    "file": "https://www.youtube.com/watch?v=nWB5FKkYOdU",
+    "cover": "https://img.youtube.com/vi/nWB5FKkYOdU/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Options Trading Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=7PM4rNDr4oI",
+    "cover": "https://img.youtube.com/vi/7PM4rNDr4oI/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Options Trading in Hindi",
+    "file": "https://www.youtube.com/watch?v=qqyfGUjDRIY",
+    "cover": "https://img.youtube.com/vi/qqyfGUjDRIY/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Candlestick Patterns - Complete Guide (English)",
+    "file": "https://www.youtube.com/watch?v=8s7hV4b2aPs",
+    "cover": "https://img.youtube.com/vi/8s7hV4b2aPs/maxresdefault.jpg",
     "imf": "Trading"
   },
   {
     "title": "Price Action Trading (English)",
     "file": "https://www.youtube.com/watch?v=vAjAi_24kqI",
-    "cover": "https://i.ytimg.com/vi/vAjAi_24kqI/hqdefault.jpg",
+    "cover": "https://img.youtube.com/vi/vAjAi_24kqI/maxresdefault.jpg",
     "imf": "Trading"
   },
   {
-    "title": "Scalping Strategies (Hindi)",
+    "title": "Intraday Trading Strategies - Hindi",
+    "file": "https://www.youtube.com/watch?v=lZPJB_c0-VE",
+    "cover": "https://img.youtube.com/vi/lZPJB_c0-VE/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Forex Trading Complete Course (English)",
     "file": "https://www.youtube.com/watch?v=2V4PUXxXxXx",
-    "cover": "https://i.ytimg.com/vi/2V4PUXxXxXx/hqdefault.jpg",
+    "cover": "https://img.youtube.com/vi/2V4PUXxXxXx/maxresdefault.jpg",
     "imf": "Trading"
   },
   {
-    "title": "Support & Resistance (English)",
+    "title": "Crypto Trading for Beginners (English)",
+    "file": "https://www.youtube.com/watch?v=1YyAzVmP9xQ",
+    "cover": "https://img.youtube.com/vi/1YyAzVmP9xQ/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Cryptocurrency Trading in Hindi",
+    "file": "https://www.youtube.com/watch?v=VbGXKlVxGKI",
+    "cover": "https://img.youtube.com/vi/VbGXKlVxGKI/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Scalping Strategies (English)",
+    "file": "https://www.youtube.com/watch?v=YourVideoID1",
+    "cover": "https://img.youtube.com/vi/YourVideoID1/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Day Trading Course (English)",
+    "file": "https://www.youtube.com/watch?v=YourVideoID2",
+    "cover": "https://img.youtube.com/vi/YourVideoID2/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Swing Trading Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=YourVideoID3",
+    "cover": "https://img.youtube.com/vi/YourVideoID3/maxresdefault.jpg",
+    "imf": "Trading"
+  },
+  {
+    "title": "Risk Management in Trading (English)",
     "file": "https://www.youtube.com/watch?v=YourVideoID4",
-    "cover": "https://i.ytimg.com/vi/YourVideoID4/hqdefault.jpg",
+    "cover": "https://img.youtube.com/vi/YourVideoID4/maxresdefault.jpg",
     "imf": "Trading"
   },
   {
-    "title": "Fibonacci Trading (Hindi)",
+    "title": "Trading Psychology (English)",
     "file": "https://www.youtube.com/watch?v=YourVideoID5",
-    "cover": "https://i.ytimg.com/vi/YourVideoID5/hqdefault.jpg",
+    "cover": "https://img.youtube.com/vi/YourVideoID5/maxresdefault.jpg",
     "imf": "Trading"
   },
   {
     "title": "Elliott Wave Theory (English)",
     "file": "https://www.youtube.com/watch?v=YourVideoID6",
-    "cover": "https://i.ytimg.com/vi/YourVideoID6/hqdefault.jpg",
+    "cover": "https://img.youtube.com/vi/YourVideoID6/maxresdefault.jpg",
     "imf": "Trading"
   },
   {
-    "title": "Algo Trading Basics (Hindi)",
+    "title": "Fibonacci Trading (English)",
     "file": "https://www.youtube.com/watch?v=YourVideoID7",
-    "cover": "https://i.ytimg.com/vi/YourVideoID7/hqdefault.jpg",
+    "cover": "https://img.youtube.com/vi/YourVideoID7/maxresdefault.jpg",
     "imf": "Trading"
   },
   {
-    "title": "Crypto Trading Course (English)",
+    "title": "Support and Resistance (English)",
     "file": "https://www.youtube.com/watch?v=YourVideoID8",
-    "cover": "https://i.ytimg.com/vi/YourVideoID8/hqdefault.jpg",
+    "cover": "https://img.youtube.com/vi/YourVideoID8/maxresdefault.jpg",
     "imf": "Trading"
   },
   {
-    "title": "Forex Trading Guide (Hindi)",
+    "title": "Chart Patterns Masterclass (English)",
     "file": "https://www.youtube.com/watch?v=YourVideoID9",
-    "cover": "https://i.ytimg.com/vi/YourVideoID9/hqdefault.jpg",
+    "cover": "https://img.youtube.com/vi/YourVideoID9/maxresdefault.jpg",
     "imf": "Trading"
   },
   {
-    "title": "Risk Management Trading (English)",
+    "title": "Volume Analysis Trading (English)",
     "file": "https://www.youtube.com/watch?v=YourVideoID10",
-    "cover": "https://i.ytimg.com/vi/YourVideoID10/hqdefault.jpg",
+    "cover": "https://img.youtube.com/vi/YourVideoID10/maxresdefault.jpg",
     "imf": "Trading"
   },
   {
-    "title": "Chart Patterns Masterclass (Hindi)",
-    "file": "https://www.youtube.com/watch?v=YourVideoID11",
-    "cover": "https://i.ytimg.com/vi/YourVideoID11/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "Market Microstructure (English)",
-    "file": "https://www.youtube.com/watch?v=TradingAdv2",
-    "cover": "https://i.ytimg.com/vi/TradingAdv2/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "Order Flow Trading (Hindi)",
-    "file": "https://www.youtube.com/watch?v=TradingAdv3",
-    "cover": "https://i.ytimg.com/vi/TradingAdv3/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "Volume Profile Analysis (English)",
-    "file": "https://www.youtube.com/watch?v=TradingAdv4",
-    "cover": "https://i.ytimg.com/vi/TradingAdv4/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "Smart Money Concepts (Hindi)",
-    "file": "https://www.youtube.com/watch?v=TradingAdv5",
-    "cover": "https://i.ytimg.com/vi/TradingAdv5/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "ICT Trading Strategy (English)",
-    "file": "https://www.youtube.com/watch?v=TradingAdv6",
-    "cover": "https://i.ytimg.com/vi/TradingAdv6/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "Supply Demand Zones (Hindi)",
-    "file": "https://www.youtube.com/watch?v=TradingAdv7",
-    "cover": "https://i.ytimg.com/vi/TradingAdv7/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "Wyckoff Method (English)",
-    "file": "https://www.youtube.com/watch?v=TradingAdv8",
-    "cover": "https://i.ytimg.com/vi/TradingAdv8/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "Harmonic Patterns (Hindi)",
-    "file": "https://www.youtube.com/watch?v=TradingAdv9",
-    "cover": "https://i.ytimg.com/vi/TradingAdv9/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "Divergence Trading (English)",
-    "file": "https://www.youtube.com/watch?v=TradingAdv10",
-    "cover": "https://i.ytimg.com/vi/TradingAdv10/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "Breakout Trading (Hindi)",
-    "file": "https://www.youtube.com/watch?v=TradingAdv11",
-    "cover": "https://i.ytimg.com/vi/TradingAdv11/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "Reversal Patterns (English)",
-    "file": "https://www.youtube.com/watch?v=TradingAdv12",
-    "cover": "https://i.ytimg.com/vi/TradingAdv12/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "Trend Following (Hindi)",
-    "file": "https://www.youtube.com/watch?v=TradingAdv13",
-    "cover": "https://i.ytimg.com/vi/TradingAdv13/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "Mean Reversion (English)",
-    "file": "https://www.youtube.com/watch?v=TradingAdv14",
-    "cover": "https://i.ytimg.com/vi/TradingAdv14/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "Momentum Trading (Hindi)",
-    "file": "https://www.youtube.com/watch?v=TradingAdv15",
-    "cover": "https://i.ytimg.com/vi/TradingAdv15/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "Gap Trading Strategies (English)",
-    "file": "https://www.youtube.com/watch?v=TradingAdv16",
-    "cover": "https://i.ytimg.com/vi/TradingAdv16/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "Pre-Market Analysis (Hindi)",
-    "file": "https://www.youtube.com/watch?v=TradingAdv17",
-    "cover": "https://i.ytimg.com/vi/TradingAdv17/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "After Hours Trading (English)",
-    "file": "https://www.youtube.com/watch?v=TradingAdv18",
-    "cover": "https://i.ytimg.com/vi/TradingAdv18/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "Earnings Trading (Hindi)",
-    "file": "https://www.youtube.com/watch?v=TradingAdv19",
-    "cover": "https://i.ytimg.com/vi/TradingAdv19/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "News Trading Strategy (English)",
-    "file": "https://www.youtube.com/watch?v=TradingAdv20",
-    "cover": "https://i.ytimg.com/vi/TradingAdv20/hqdefault.jpg",
-    "imf": "Trading"
-  },
-  {
-    "title": "Instagram Growth 2024 (Hindi)",
-    "file": "https://www.youtube.com/watch?v=YourID1",
-    "cover": "https://i.ytimg.com/vi/YourID1/hqdefault.jpg",
+    "title": "Instagram Growth Hacks 2024 (English)",
+    "file": "https://www.youtube.com/watch?v=z3Lh2bla9HU",
+    "cover": "https://img.youtube.com/vi/z3Lh2bla9HU/maxresdefault.jpg",
     "imf": "Social Media"
   },
   {
-    "title": "YouTube Algorithm Secrets (Hindi)",
-    "file": "https://www.youtube.com/watch?v=YourID3",
-    "cover": "https://i.ytimg.com/vi/YourID3/hqdefault.jpg",
+    "title": "Instagram Marketing in Hindi",
+    "file": "https://www.youtube.com/watch?v=YourSocial1",
+    "cover": "https://img.youtube.com/vi/YourSocial1/maxresdefault.jpg",
     "imf": "Social Media"
   },
   {
-    "title": "Content Creation Masterclass (Hindi)",
-    "file": "https://www.youtube.com/watch?v=YourID5",
-    "cover": "https://i.ytimg.com/vi/YourID5/hqdefault.jpg",
+    "title": "YouTube Algorithm Secrets (English)",
+    "file": "https://www.youtube.com/watch?v=YourSocial2",
+    "cover": "https://img.youtube.com/vi/YourSocial2/maxresdefault.jpg",
     "imf": "Social Media"
   },
   {
-    "title": "Instagram Reels Strategy (Hindi)",
-    "file": "https://www.youtube.com/watch?v=YourID7",
-    "cover": "https://i.ytimg.com/vi/YourID7/hqdefault.jpg",
+    "title": "YouTube Growth in Hindi",
+    "file": "https://www.youtube.com/watch?v=YourSocial3",
+    "cover": "https://img.youtube.com/vi/YourSocial3/maxresdefault.jpg",
     "imf": "Social Media"
   },
   {
-    "title": "LinkedIn Growth (English)",
-    "file": "https://www.youtube.com/watch?v=YourID19",
-    "cover": "https://i.ytimg.com/vi/YourID19/hqdefault.jpg",
+    "title": "Content Creation Masterclass (English)",
+    "file": "https://www.youtube.com/watch?v=YourSocial4",
+    "cover": "https://img.youtube.com/vi/YourSocial4/maxresdefault.jpg",
+    "imf": "Social Media"
+  },
+  {
+    "title": "Social Media Strategy - Hindi",
+    "file": "https://www.youtube.com/watch?v=YourSocial5",
+    "cover": "https://img.youtube.com/vi/YourSocial5/maxresdefault.jpg",
+    "imf": "Social Media"
+  },
+  {
+    "title": "Instagram Reels Strategy (English)",
+    "file": "https://www.youtube.com/watch?v=YourSocial6",
+    "cover": "https://img.youtube.com/vi/YourSocial6/maxresdefault.jpg",
+    "imf": "Social Media"
+  },
+  {
+    "title": "Reels Viral Kaise Kare - Hindi",
+    "file": "https://www.youtube.com/watch?v=YourSocial7",
+    "cover": "https://img.youtube.com/vi/YourSocial7/maxresdefault.jpg",
+    "imf": "Social Media"
+  },
+  {
+    "title": "LinkedIn Growth Strategy (English)",
+    "file": "https://www.youtube.com/watch?v=YourSocial8",
+    "cover": "https://img.youtube.com/vi/YourSocial8/maxresdefault.jpg",
+    "imf": "Social Media"
+  },
+  {
+    "title": "LinkedIn Marketing - Hindi",
+    "file": "https://www.youtube.com/watch?v=YourSocial9",
+    "cover": "https://img.youtube.com/vi/YourSocial9/maxresdefault.jpg",
     "imf": "Social Media"
   },
   {
     "title": "Twitter Marketing (English)",
-    "file": "https://www.youtube.com/watch?v=YourID20",
-    "cover": "https://i.ytimg.com/vi/YourID20/hqdefault.jpg",
+    "file": "https://www.youtube.com/watch?v=YourSocial10",
+    "cover": "https://img.youtube.com/vi/YourSocial10/maxresdefault.jpg",
     "imf": "Social Media"
   },
   {
-    "title": "Facebook Ads Mastery (Hindi)",
-    "file": "https://www.youtube.com/watch?v=YourID21",
-    "cover": "https://i.ytimg.com/vi/YourID21/hqdefault.jpg",
+    "title": "Twitter Growth Tips - Hindi",
+    "file": "https://www.youtube.com/watch?v=YourSocial11",
+    "cover": "https://img.youtube.com/vi/YourSocial11/maxresdefault.jpg",
     "imf": "Social Media"
   },
   {
-    "title": "TikTok Growth (English)",
-    "file": "https://www.youtube.com/watch?v=YourID22",
-    "cover": "https://i.ytimg.com/vi/YourID22/hqdefault.jpg",
+    "title": "Facebook Ads Mastery (English)",
+    "file": "https://www.youtube.com/watch?v=YourSocial12",
+    "cover": "https://img.youtube.com/vi/YourSocial12/maxresdefault.jpg",
     "imf": "Social Media"
   },
   {
-    "title": "Personal Branding (Hindi)",
-    "file": "https://www.youtube.com/watch?v=YourID23",
-    "cover": "https://i.ytimg.com/vi/YourID23/hqdefault.jpg",
+    "title": "Facebook Marketing - Hindi",
+    "file": "https://www.youtube.com/watch?v=YourSocial13",
+    "cover": "https://img.youtube.com/vi/YourSocial13/maxresdefault.jpg",
+    "imf": "Social Media"
+  },
+  {
+    "title": "TikTok Growth Hacks (English)",
+    "file": "https://www.youtube.com/watch?v=YourSocial14",
+    "cover": "https://img.youtube.com/vi/YourSocial14/maxresdefault.jpg",
+    "imf": "Social Media"
+  },
+  {
+    "title": "Personal Branding (English)",
+    "file": "https://www.youtube.com/watch?v=YourSocial15",
+    "cover": "https://img.youtube.com/vi/YourSocial15/maxresdefault.jpg",
+    "imf": "Social Media"
+  },
+  {
+    "title": "Personal Branding - Hindi",
+    "file": "https://www.youtube.com/watch?v=YourSocial16",
+    "cover": "https://img.youtube.com/vi/YourSocial16/maxresdefault.jpg",
     "imf": "Social Media"
   },
   {
     "title": "Influencer Marketing (English)",
-    "file": "https://www.youtube.com/watch?v=YourID24",
-    "cover": "https://i.ytimg.com/vi/YourID24/hqdefault.jpg",
+    "file": "https://www.youtube.com/watch?v=YourSocial17",
+    "cover": "https://img.youtube.com/vi/YourSocial17/maxresdefault.jpg",
     "imf": "Social Media"
   },
   {
-    "title": "Video Editing Premiere (Hindi)",
-    "file": "https://www.youtube.com/watch?v=YourID25",
-    "cover": "https://i.ytimg.com/vi/YourID25/hqdefault.jpg",
+    "title": "Video Editing - Premiere Pro (English)",
+    "file": "https://www.youtube.com/watch?v=YourSocial18",
+    "cover": "https://img.youtube.com/vi/YourSocial18/maxresdefault.jpg",
     "imf": "Social Media"
   },
   {
-    "title": "Canva Design (Hindi)",
-    "file": "https://www.youtube.com/watch?v=YourID26",
-    "cover": "https://i.ytimg.com/vi/YourID26/hqdefault.jpg",
+    "title": "Video Editing - Hindi",
+    "file": "https://www.youtube.com/watch?v=YourSocial19",
+    "cover": "https://img.youtube.com/vi/YourSocial19/maxresdefault.jpg",
     "imf": "Social Media"
   },
   {
-    "title": "Copywriting Social Media (English)",
-    "file": "https://www.youtube.com/watch?v=YourID27",
-    "cover": "https://i.ytimg.com/vi/YourID27/hqdefault.jpg",
+    "title": "Canva Design Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=YourSocial20",
+    "cover": "https://img.youtube.com/vi/YourSocial20/maxresdefault.jpg",
     "imf": "Social Media"
   },
   {
-    "title": "Hashtag Strategy (Hindi)",
-    "file": "https://www.youtube.com/watch?v=YourID28",
-    "cover": "https://i.ytimg.com/vi/YourID28/hqdefault.jpg",
+    "title": "Canva Tutorial - Hindi",
+    "file": "https://www.youtube.com/watch?v=YourSocial21",
+    "cover": "https://img.youtube.com/vi/YourSocial21/maxresdefault.jpg",
     "imf": "Social Media"
   },
   {
-    "title": "Monetize Instagram (Hindi)",
-    "file": "https://www.youtube.com/watch?v=YourID29",
-    "cover": "https://i.ytimg.com/vi/YourID29/hqdefault.jpg",
+    "title": "Copywriting for Social Media (English)",
+    "file": "https://www.youtube.com/watch?v=YourSocial22",
+    "cover": "https://img.youtube.com/vi/YourSocial22/maxresdefault.jpg",
+    "imf": "Social Media"
+  },
+  {
+    "title": "Hashtag Strategy (English)",
+    "file": "https://www.youtube.com/watch?v=YourSocial23",
+    "cover": "https://img.youtube.com/vi/YourSocial23/maxresdefault.jpg",
+    "imf": "Social Media"
+  },
+  {
+    "title": "Monetize Instagram (English)",
+    "file": "https://www.youtube.com/watch?v=YourSocial24",
+    "cover": "https://img.youtube.com/vi/YourSocial24/maxresdefault.jpg",
     "imf": "Social Media"
   },
   {
     "title": "YouTube SEO (English)",
-    "file": "https://www.youtube.com/watch?v=YourID30",
-    "cover": "https://i.ytimg.com/vi/YourID30/hqdefault.jpg",
+    "file": "https://www.youtube.com/watch?v=YourSocial25",
+    "cover": "https://img.youtube.com/vi/YourSocial25/maxresdefault.jpg",
     "imf": "Social Media"
   },
   {
-    "title": "Podcast Guide (Hindi)",
-    "file": "https://www.youtube.com/watch?v=YourID31",
-    "cover": "https://i.ytimg.com/vi/YourID31/hqdefault.jpg",
+    "title": "Podcast Complete Guide (English)",
+    "file": "https://www.youtube.com/watch?v=YourSocial26",
+    "cover": "https://img.youtube.com/vi/YourSocial26/maxresdefault.jpg",
     "imf": "Social Media"
   },
   {
     "title": "Email Marketing (English)",
-    "file": "https://www.youtube.com/watch?v=YourID32",
-    "cover": "https://i.ytimg.com/vi/YourID32/hqdefault.jpg",
+    "file": "https://www.youtube.com/watch?v=YourSocial27",
+    "cover": "https://img.youtube.com/vi/YourSocial27/maxresdefault.jpg",
     "imf": "Social Media"
   },
   {
-    "title": "Affiliate Marketing (Hindi)",
-    "file": "https://www.youtube.com/watch?v=YourID33",
-    "cover": "https://i.ytimg.com/vi/YourID33/hqdefault.jpg",
+    "title": "Affiliate Marketing (English)",
+    "file": "https://www.youtube.com/watch?v=YourSocial28",
+    "cover": "https://img.youtube.com/vi/YourSocial28/maxresdefault.jpg",
     "imf": "Social Media"
   },
   {
     "title": "Community Building (English)",
-    "file": "https://www.youtube.com/watch?v=YourID34",
-    "cover": "https://i.ytimg.com/vi/YourID34/hqdefault.jpg",
+    "file": "https://www.youtube.com/watch?v=YourSocial29",
+    "cover": "https://img.youtube.com/vi/YourSocial29/maxresdefault.jpg",
     "imf": "Social Media"
   },
   {
-    "title": "Instagram Algorithm (Hindi)",
-    "file": "https://www.youtube.com/watch?v=SocialAdv1",
-    "cover": "https://i.ytimg.com/vi/SocialAdv1/hqdefault.jpg",
+    "title": "YouTube Shorts Strategy (English)",
+    "file": "https://www.youtube.com/watch?v=YourSocial30",
+    "cover": "https://img.youtube.com/vi/YourSocial30/maxresdefault.jpg",
     "imf": "Social Media"
   },
   {
-    "title": "YouTube Shorts (English)",
-    "file": "https://www.youtube.com/watch?v=SocialAdv2",
-    "cover": "https://i.ytimg.com/vi/SocialAdv2/hqdefault.jpg",
-    "imf": "Social Media"
-  },
-  {
-    "title": "LinkedIn Branding (Hindi)",
-    "file": "https://www.youtube.com/watch?v=SocialAdv3",
-    "cover": "https://i.ytimg.com/vi/SocialAdv3/hqdefault.jpg",
-    "imf": "Social Media"
-  },
-  {
-    "title": "Twitter Threads (English)",
-    "file": "https://www.youtube.com/watch?v=SocialAdv4",
-    "cover": "https://i.ytimg.com/vi/SocialAdv4/hqdefault.jpg",
-    "imf": "Social Media"
-  },
-  {
-    "title": "Facebook Groups (Hindi)",
-    "file": "https://www.youtube.com/watch?v=SocialAdv5",
-    "cover": "https://i.ytimg.com/vi/SocialAdv5/hqdefault.jpg",
-    "imf": "Social Media"
-  },
-  {
-    "title": "Pinterest Marketing (English)",
-    "file": "https://www.youtube.com/watch?v=SocialAdv6",
-    "cover": "https://i.ytimg.com/vi/SocialAdv6/hqdefault.jpg",
-    "imf": "Social Media"
-  },
-  {
-    "title": "Snapchat Marketing (Hindi)",
-    "file": "https://www.youtube.com/watch?v=SocialAdv7",
-    "cover": "https://i.ytimg.com/vi/SocialAdv7/hqdefault.jpg",
-    "imf": "Social Media"
-  },
-  {
-    "title": "Reddit Marketing (English)",
-    "file": "https://www.youtube.com/watch?v=SocialAdv8",
-    "cover": "https://i.ytimg.com/vi/SocialAdv8/hqdefault.jpg",
-    "imf": "Social Media"
-  },
-  {
-    "title": "Quora Marketing (Hindi)",
-    "file": "https://www.youtube.com/watch?v=SocialAdv9",
-    "cover": "https://i.ytimg.com/vi/SocialAdv9/hqdefault.jpg",
-    "imf": "Social Media"
-  },
-  {
-    "title": "Medium Writing (English)",
-    "file": "https://www.youtube.com/watch?v=SocialAdv10",
-    "cover": "https://i.ytimg.com/vi/SocialAdv10/hqdefault.jpg",
-    "imf": "Social Media"
-  },
-  {
-    "title": "HTML CSS Course (Hindi)",
-    "file": "https://www.youtube.com/watch?v=VideoID100",
-    "cover": "https://i.ytimg.com/vi/VideoID100/hqdefault.jpg",
-    "imf": "Web Dev"
-  },
-  {
-    "title": "JavaScript Mastery (English)",
-    "file": "https://www.youtube.com/watch?v=VideoID101",
-    "cover": "https://i.ytimg.com/vi/VideoID101/hqdefault.jpg",
-    "imf": "Web Dev"
-  },
-  {
-    "title": "React.js Full Course (Hindi)",
-    "file": "https://www.youtube.com/watch?v=VideoID102",
-    "cover": "https://i.ytimg.com/vi/VideoID102/hqdefault.jpg",
-    "imf": "Web Dev"
-  },
-  {
-    "title": "Node.js Backend (English)",
-    "file": "https://www.youtube.com/watch?v=VideoID103",
-    "cover": "https://i.ytimg.com/vi/VideoID103/hqdefault.jpg",
-    "imf": "Web Dev"
-  },
-  {
-    "title": "Full Stack Dev (Hindi)",
-    "file": "https://www.youtube.com/watch?v=VideoID104",
-    "cover": "https://i.ytimg.com/vi/VideoID104/hqdefault.jpg",
-    "imf": "Web Dev"
-  },
-  {
-    "title": "MongoDB Tutorial (English)",
-    "file": "https://www.youtube.com/watch?v=VideoID105",
-    "cover": "https://i.ytimg.com/vi/VideoID105/hqdefault.jpg",
-    "imf": "Web Dev"
-  },
-  {
-    "title": "Express.js Guide (Hindi)",
-    "file": "https://www.youtube.com/watch?v=VideoID106",
-    "cover": "https://i.ytimg.com/vi/VideoID106/hqdefault.jpg",
-    "imf": "Web Dev"
-  },
-  {
-    "title": "Next.js Framework (English)",
-    "file": "https://www.youtube.com/watch?v=VideoID107",
-    "cover": "https://i.ytimg.com/vi/VideoID107/hqdefault.jpg",
-    "imf": "Web Dev"
-  },
-  {
-    "title": "TypeScript Tutorial (Hindi)",
-    "file": "https://www.youtube.com/watch?v=VideoID108",
-    "cover": "https://i.ytimg.com/vi/VideoID108/hqdefault.jpg",
-    "imf": "Web Dev"
-  },
-  {
-    "title": "Tailwind CSS (English)",
-    "file": "https://www.youtube.com/watch?v=VideoID109",
-    "cover": "https://i.ytimg.com/vi/VideoID109/hqdefault.jpg",
-    "imf": "Web Dev"
-  },
-  {
-    "title": "Data Science Course (Hindi)",
-    "file": "https://www.youtube.com/watch?v=VideoID110",
-    "cover": "https://i.ytimg.com/vi/VideoID110/hqdefault.jpg",
-    "imf": "Data Science"
-  },
-  {
-    "title": "Statistics for DS (English)",
-    "file": "https://www.youtube.com/watch?v=VideoID111",
-    "cover": "https://i.ytimg.com/vi/VideoID111/hqdefault.jpg",
-    "imf": "Data Science"
-  },
-  {
-    "title": "Pandas Tutorial (Hindi)",
-    "file": "https://www.youtube.com/watch?v=VideoID112",
-    "cover": "https://i.ytimg.com/vi/VideoID112/hqdefault.jpg",
-    "imf": "Data Science"
-  },
-  {
-    "title": "NumPy Tutorial (English)",
-    "file": "https://www.youtube.com/watch?v=VideoID113",
-    "cover": "https://i.ytimg.com/vi/VideoID113/hqdefault.jpg",
-    "imf": "Data Science"
-  },
-  {
-    "title": "Matplotlib Visualization (Hindi)",
-    "file": "https://www.youtube.com/watch?v=VideoID114",
-    "cover": "https://i.ytimg.com/vi/VideoID114/hqdefault.jpg",
-    "imf": "Data Science"
-  },
-  {
-    "title": "Seaborn Tutorial (English)",
-    "file": "https://www.youtube.com/watch?v=VideoID115",
-    "cover": "https://i.ytimg.com/vi/VideoID115/hqdefault.jpg",
-    "imf": "Data Science"
-  },
-  {
-    "title": "SQL for Data Science (Hindi)",
-    "file": "https://www.youtube.com/watch?v=VideoID116",
-    "cover": "https://i.ytimg.com/vi/VideoID116/hqdefault.jpg",
-    "imf": "Data Science"
-  },
-  {
-    "title": "Data Analysis Python (English)",
-    "file": "https://www.youtube.com/watch?v=VideoID117",
-    "cover": "https://i.ytimg.com/vi/VideoID117/hqdefault.jpg",
-    "imf": "Data Science"
-  },
-  {
-    "title": "Big Data Analytics (Hindi)",
-    "file": "https://www.youtube.com/watch?v=VideoID118",
-    "cover": "https://i.ytimg.com/vi/VideoID118/hqdefault.jpg",
-    "imf": "Data Science"
-  },
-  {
-    "title": "Data Mining (English)",
-    "file": "https://www.youtube.com/watch?v=VideoID119",
-    "cover": "https://i.ytimg.com/vi/VideoID119/hqdefault.jpg",
-    "imf": "Data Science"
-  },
-  {
-    "title": "Docker Tutorial (Hindi)",
-    "file": "https://www.youtube.com/watch?v=VideoID120",
-    "cover": "https://i.ytimg.com/vi/VideoID120/hqdefault.jpg",
-    "imf": "DevOps"
-  },
-  {
-    "title": "Kubernetes Course (English)",
-    "file": "https://www.youtube.com/watch?v=VideoID121",
-    "cover": "https://i.ytimg.com/vi/VideoID121/hqdefault.jpg",
-    "imf": "DevOps"
-  },
-  {
-    "title": "AWS Tutorial (Hindi)",
-    "file": "https://www.youtube.com/watch?v=VideoID122",
-    "cover": "https://i.ytimg.com/vi/VideoID122/hqdefault.jpg",
-    "imf": "DevOps"
-  },
-  {
-    "title": "Git GitHub (English)",
-    "file": "https://www.youtube.com/watch?v=VideoID123",
-    "cover": "https://i.ytimg.com/vi/VideoID123/hqdefault.jpg",
-    "imf": "DevOps"
-  },
-  {
-    "title": "CI/CD Pipeline (Hindi)",
-    "file": "https://www.youtube.com/watch?v=VideoID124",
-    "cover": "https://i.ytimg.com/vi/VideoID124/hqdefault.jpg",
-    "imf": "DevOps"
-  },
-  {
-    "title": "Linux Admin (English)",
-    "file": "https://www.youtube.com/watch?v=VideoID125",
-    "cover": "https://i.ytimg.com/vi/VideoID125/hqdefault.jpg",
-    "imf": "DevOps"
-  },
-  {
-    "title": "Cloud Computing (Hindi)",
-    "file": "https://www.youtube.com/watch?v=VideoID126",
-    "cover": "https://i.ytimg.com/vi/VideoID126/hqdefault.jpg",
-    "imf": "DevOps"
-  },
-  {
-    "title": "Terraform (English)",
-    "file": "https://www.youtube.com/watch?v=VideoID127",
-    "cover": "https://i.ytimg.com/vi/VideoID127/hqdefault.jpg",
-    "imf": "DevOps"
-  },
-  {
-    "title": "Jenkins Automation (Hindi)",
-    "file": "https://www.youtube.com/watch?v=VideoID128",
-    "cover": "https://i.ytimg.com/vi/VideoID128/hqdefault.jpg",
-    "imf": "DevOps"
-  },
-  {
-    "title": "Ansible Config (English)",
-    "file": "https://www.youtube.com/watch?v=VideoID129",
-    "cover": "https://i.ytimg.com/vi/VideoID129/hqdefault.jpg",
-    "imf": "DevOps"
-  },
-  {
-    "title": "AI Machine Learning (Hindi)",
-    "file": "https://www.youtube.com/watch?v=TechAdv1",
-    "cover": "https://i.ytimg.com/vi/TechAdv1/hqdefault.jpg",
-    "imf": "Technology"
-  },
-  {
-    "title": "Blockchain Dev (English)",
-    "file": "https://www.youtube.com/watch?v=TechAdv2",
-    "cover": "https://i.ytimg.com/vi/TechAdv2/hqdefault.jpg",
-    "imf": "Technology"
-  },
-  {
-    "title": "Cybersecurity (Hindi)",
-    "file": "https://www.youtube.com/watch?v=TechAdv3",
-    "cover": "https://i.ytimg.com/vi/TechAdv3/hqdefault.jpg",
-    "imf": "Technology"
-  },
-  {
-    "title": "Ethical Hacking (English)",
-    "file": "https://www.youtube.com/watch?v=TechAdv4",
-    "cover": "https://i.ytimg.com/vi/TechAdv4/hqdefault.jpg",
-    "imf": "Technology"
-  },
-  {
-    "title": "Mobile App Dev (Hindi)",
-    "file": "https://www.youtube.com/watch?v=TechAdv5",
-    "cover": "https://i.ytimg.com/vi/TechAdv5/hqdefault.jpg",
-    "imf": "Technology"
-  },
-  {
-    "title": "Flutter Tutorial (English)",
-    "file": "https://www.youtube.com/watch?v=TechAdv6",
-    "cover": "https://i.ytimg.com/vi/TechAdv6/hqdefault.jpg",
-    "imf": "Technology"
-  },
-  {
-    "title": "React Native (Hindi)",
-    "file": "https://www.youtube.com/watch?v=TechAdv7",
-    "cover": "https://i.ytimg.com/vi/TechAdv7/hqdefault.jpg",
-    "imf": "Technology"
-  },
-  {
-    "title": "Swift iOS (English)",
-    "file": "https://www.youtube.com/watch?v=TechAdv8",
-    "cover": "https://i.ytimg.com/vi/TechAdv8/hqdefault.jpg",
-    "imf": "Technology"
-  },
-  {
-    "title": "Kotlin Android (Hindi)",
-    "file": "https://www.youtube.com/watch?v=TechAdv9",
-    "cover": "https://i.ytimg.com/vi/TechAdv9/hqdefault.jpg",
-    "imf": "Technology"
-  },
-  {
-    "title": "Unity Game Dev (English)",
-    "file": "https://www.youtube.com/watch?v=TechAdv10",
-    "cover": "https://i.ytimg.com/vi/TechAdv10/hqdefault.jpg",
-    "imf": "Technology"
-  },
-  {
-    "title": "Unreal Engine (Hindi)",
-    "file": "https://www.youtube.com/watch?v=TechAdv11",
-    "cover": "https://i.ytimg.com/vi/TechAdv11/hqdefault.jpg",
-    "imf": "Technology"
-  },
-  {
-    "title": "Blender 3D (English)",
-    "file": "https://www.youtube.com/watch?v=TechAdv12",
-    "cover": "https://i.ytimg.com/vi/TechAdv12/hqdefault.jpg",
-    "imf": "Technology"
-  },
-  {
-    "title": "UI/UX Design (Hindi)",
-    "file": "https://www.youtube.com/watch?v=TechAdv13",
-    "cover": "https://i.ytimg.com/vi/TechAdv13/hqdefault.jpg",
-    "imf": "Technology"
-  },
-  {
-    "title": "Figma Course (English)",
-    "file": "https://www.youtube.com/watch?v=TechAdv14",
-    "cover": "https://i.ytimg.com/vi/TechAdv14/hqdefault.jpg",
-    "imf": "Technology"
-  },
-  {
-    "title": "Adobe XD (Hindi)",
-    "file": "https://www.youtube.com/watch?v=TechAdv15",
-    "cover": "https://i.ytimg.com/vi/TechAdv15/hqdefault.jpg",
-    "imf": "Technology"
-  },
-  {
-    "title": "Photoshop (English)",
-    "file": "https://www.youtube.com/watch?v=TechAdv16",
-    "cover": "https://i.ytimg.com/vi/TechAdv16/hqdefault.jpg",
-    "imf": "Technology"
-  },
-  {
-    "title": "Illustrator (Hindi)",
-    "file": "https://www.youtube.com/watch?v=TechAdv17",
-    "cover": "https://i.ytimg.com/vi/TechAdv17/hqdefault.jpg",
-    "imf": "Technology"
-  },
-  {
-    "title": "After Effects (English)",
-    "file": "https://www.youtube.com/watch?v=TechAdv18",
-    "cover": "https://i.ytimg.com/vi/TechAdv18/hqdefault.jpg",
-    "imf": "Technology"
-  },
-  {
-    "title": "Premiere Pro (Hindi)",
-    "file": "https://www.youtube.com/watch?v=TechAdv19",
-    "cover": "https://i.ytimg.com/vi/TechAdv19/hqdefault.jpg",
-    "imf": "Technology"
-  },
-  {
-    "title": "DaVinci Resolve (English)",
-    "file": "https://www.youtube.com/watch?v=TechAdv20",
-    "cover": "https://i.ytimg.com/vi/TechAdv20/hqdefault.jpg",
-    "imf": "Technology"
-  },
-  {
-    "title": "Startup Basics (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Business1",
-    "cover": "https://i.ytimg.com/vi/Business1/hqdefault.jpg",
-    "imf": "Business"
-  },
-  {
-    "title": "Business Plan (English)",
-    "file": "https://www.youtube.com/watch?v=Business2",
-    "cover": "https://i.ytimg.com/vi/Business2/hqdefault.jpg",
-    "imf": "Business"
-  },
-  {
-    "title": "Fundraising Guide (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Business3",
-    "cover": "https://i.ytimg.com/vi/Business3/hqdefault.jpg",
-    "imf": "Business"
-  },
-  {
-    "title": "Pitch Deck (English)",
-    "file": "https://www.youtube.com/watch?v=Business4",
-    "cover": "https://i.ytimg.com/vi/Business4/hqdefault.jpg",
-    "imf": "Business"
-  },
-  {
-    "title": "Marketing Strategy (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Business5",
-    "cover": "https://i.ytimg.com/vi/Business5/hqdefault.jpg",
-    "imf": "Business"
-  },
-  {
-    "title": "Sales Techniques (English)",
-    "file": "https://www.youtube.com/watch?v=Business6",
-    "cover": "https://i.ytimg.com/vi/Business6/hqdefault.jpg",
-    "imf": "Business"
-  },
-  {
-    "title": "Customer Acquisition (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Business7",
-    "cover": "https://i.ytimg.com/vi/Business7/hqdefault.jpg",
-    "imf": "Business"
-  },
-  {
-    "title": "Product Management (English)",
-    "file": "https://www.youtube.com/watch?v=Business8",
-    "cover": "https://i.ytimg.com/vi/Business8/hqdefault.jpg",
-    "imf": "Business"
-  },
-  {
-    "title": "Agile Methodology (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Business9",
-    "cover": "https://i.ytimg.com/vi/Business9/hqdefault.jpg",
-    "imf": "Business"
-  },
-  {
-    "title": "Scrum Framework (English)",
-    "file": "https://www.youtube.com/watch?v=Business10",
-    "cover": "https://i.ytimg.com/vi/Business10/hqdefault.jpg",
-    "imf": "Business"
-  },
-  {
-    "title": "Leadership Skills (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Business11",
-    "cover": "https://i.ytimg.com/vi/Business11/hqdefault.jpg",
-    "imf": "Business"
-  },
-  {
-    "title": "Team Management (English)",
-    "file": "https://www.youtube.com/watch?v=Business12",
-    "cover": "https://i.ytimg.com/vi/Business12/hqdefault.jpg",
-    "imf": "Business"
-  },
-  {
-    "title": "Time Management (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Business13",
-    "cover": "https://i.ytimg.com/vi/Business13/hqdefault.jpg",
-    "imf": "Business"
-  },
-  {
-    "title": "Productivity Hacks (English)",
-    "file": "https://www.youtube.com/watch?v=Business14",
-    "cover": "https://i.ytimg.com/vi/Business14/hqdefault.jpg",
-    "imf": "Business"
-  },
-  {
-    "title": "Goal Setting (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Business15",
-    "cover": "https://i.ytimg.com/vi/Business15/hqdefault.jpg",
-    "imf": "Business"
-  },
-  {
-    "title": "Habit Building (English)",
-    "file": "https://www.youtube.com/watch?v=Business16",
-    "cover": "https://i.ytimg.com/vi/Business16/hqdefault.jpg",
-    "imf": "Business"
-  },
-  {
-    "title": "Mindset Development (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Business17",
-    "cover": "https://i.ytimg.com/vi/Business17/hqdefault.jpg",
-    "imf": "Business"
-  },
-  {
-    "title": "Communication Skills (English)",
-    "file": "https://www.youtube.com/watch?v=Business18",
-    "cover": "https://i.ytimg.com/vi/Business18/hqdefault.jpg",
-    "imf": "Business"
-  },
-  {
-    "title": "Public Speaking (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Business19",
-    "cover": "https://i.ytimg.com/vi/Business19/hqdefault.jpg",
-    "imf": "Business"
-  },
-  {
-    "title": "Negotiation Skills (English)",
-    "file": "https://www.youtube.com/watch?v=Business20",
-    "cover": "https://i.ytimg.com/vi/Business20/hqdefault.jpg",
-    "imf": "Business"
-  },
-  {
-    "title": "Personal Finance (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Finance1",
-    "cover": "https://i.ytimg.com/vi/Finance1/hqdefault.jpg",
-    "imf": "Finance"
-  },
-  {
-    "title": "Investment Basics (English)",
-    "file": "https://www.youtube.com/watch?v=Finance2",
-    "cover": "https://i.ytimg.com/vi/Finance2/hqdefault.jpg",
-    "imf": "Finance"
-  },
-  {
-    "title": "Mutual Funds (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Finance3",
-    "cover": "https://i.ytimg.com/vi/Finance3/hqdefault.jpg",
-    "imf": "Finance"
-  },
-  {
-    "title": "SIP Investment (English)",
-    "file": "https://www.youtube.com/watch?v=Finance4",
-    "cover": "https://i.ytimg.com/vi/Finance4/hqdefault.jpg",
-    "imf": "Finance"
-  },
-  {
-    "title": "Tax Planning (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Finance5",
-    "cover": "https://i.ytimg.com/vi/Finance5/hqdefault.jpg",
-    "imf": "Finance"
-  },
-  {
-    "title": "Insurance Guide (English)",
-    "file": "https://www.youtube.com/watch?v=Finance6",
-    "cover": "https://i.ytimg.com/vi/Finance6/hqdefault.jpg",
-    "imf": "Finance"
-  },
-  {
-    "title": "Real Estate (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Finance7",
-    "cover": "https://i.ytimg.com/vi/Finance7/hqdefault.jpg",
-    "imf": "Finance"
-  },
-  {
-    "title": "Gold Investment (English)",
-    "file": "https://www.youtube.com/watch?v=Finance8",
-    "cover": "https://i.ytimg.com/vi/Finance8/hqdefault.jpg",
-    "imf": "Finance"
-  },
-  {
-    "title": "Retirement Planning (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Finance9",
-    "cover": "https://i.ytimg.com/vi/Finance9/hqdefault.jpg",
-    "imf": "Finance"
-  },
-  {
-    "title": "Emergency Fund (English)",
-    "file": "https://www.youtube.com/watch?v=Finance10",
-    "cover": "https://i.ytimg.com/vi/Finance10/hqdefault.jpg",
-    "imf": "Finance"
-  },
-  {
-    "title": "Debt Management (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Finance11",
-    "cover": "https://i.ytimg.com/vi/Finance11/hqdefault.jpg",
-    "imf": "Finance"
-  },
-  {
-    "title": "Credit Score (English)",
-    "file": "https://www.youtube.com/watch?v=Finance12",
-    "cover": "https://i.ytimg.com/vi/Finance12/hqdefault.jpg",
-    "imf": "Finance"
-  },
-  {
-    "title": "Budgeting Tips (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Finance13",
-    "cover": "https://i.ytimg.com/vi/Finance13/hqdefault.jpg",
-    "imf": "Finance"
-  },
-  {
-    "title": "Saving Strategies (English)",
-    "file": "https://www.youtube.com/watch?v=Finance14",
-    "cover": "https://i.ytimg.com/vi/Finance14/hqdefault.jpg",
-    "imf": "Finance"
-  },
-  {
-    "title": "Wealth Creation (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Finance15",
-    "cover": "https://i.ytimg.com/vi/Finance15/hqdefault.jpg",
-    "imf": "Finance"
-  },
-  {
-    "title": "Financial Freedom (English)",
-    "file": "https://www.youtube.com/watch?v=Finance16",
-    "cover": "https://i.ytimg.com/vi/Finance16/hqdefault.jpg",
-    "imf": "Finance"
-  },
-  {
-    "title": "Passive Income (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Finance17",
-    "cover": "https://i.ytimg.com/vi/Finance17/hqdefault.jpg",
-    "imf": "Finance"
-  },
-  {
-    "title": "Side Hustle Ideas (English)",
-    "file": "https://www.youtube.com/watch?v=Finance18",
-    "cover": "https://i.ytimg.com/vi/Finance18/hqdefault.jpg",
-    "imf": "Finance"
-  },
-  {
-    "title": "Freelancing Guide (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Finance19",
-    "cover": "https://i.ytimg.com/vi/Finance19/hqdefault.jpg",
-    "imf": "Finance"
-  },
-  {
-    "title": "Remote Work Tips (English)",
-    "file": "https://www.youtube.com/watch?v=Finance20",
-    "cover": "https://i.ytimg.com/vi/Finance20/hqdefault.jpg",
-    "imf": "Finance"
-  },
-  {
-    "title": "Excel Mastery (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Extra1",
-    "cover": "https://i.ytimg.com/vi/Extra1/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "PowerPoint Pro (English)",
-    "file": "https://www.youtube.com/watch?v=Extra2",
-    "cover": "https://i.ytimg.com/vi/Extra2/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Google Sheets (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Extra3",
-    "cover": "https://i.ytimg.com/vi/Extra3/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Data Entry Skills (English)",
-    "file": "https://www.youtube.com/watch?v=Extra4",
-    "cover": "https://i.ytimg.com/vi/Extra4/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Typing Speed (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Extra5",
-    "cover": "https://i.ytimg.com/vi/Extra5/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Resume Writing (English)",
-    "file": "https://www.youtube.com/watch?v=Extra6",
-    "cover": "https://i.ytimg.com/vi/Extra6/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Interview Prep (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Extra7",
-    "cover": "https://i.ytimg.com/vi/Extra7/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Career Growth (English)",
-    "file": "https://www.youtube.com/watch?v=Extra8",
-    "cover": "https://i.ytimg.com/vi/Extra8/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Networking Skills (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Extra9",
-    "cover": "https://i.ytimg.com/vi/Extra9/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Professional Etiquette (English)",
-    "file": "https://www.youtube.com/watch?v=Extra10",
-    "cover": "https://i.ytimg.com/vi/Extra10/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Email Writing (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Extra11",
-    "cover": "https://i.ytimg.com/vi/Extra11/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Business Communication (English)",
-    "file": "https://www.youtube.com/watch?v=Extra12",
-    "cover": "https://i.ytimg.com/vi/Extra12/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Presentation Skills (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Extra13",
-    "cover": "https://i.ytimg.com/vi/Extra13/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Critical Thinking (English)",
-    "file": "https://www.youtube.com/watch?v=Extra14",
-    "cover": "https://i.ytimg.com/vi/Extra14/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Problem Solving (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Extra15",
-    "cover": "https://i.ytimg.com/vi/Extra15/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Decision Making (English)",
-    "file": "https://www.youtube.com/watch?v=Extra16",
-    "cover": "https://i.ytimg.com/vi/Extra16/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Emotional Intelligence (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Extra17",
-    "cover": "https://i.ytimg.com/vi/Extra17/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Stress Management (English)",
-    "file": "https://www.youtube.com/watch?v=Extra18",
-    "cover": "https://i.ytimg.com/vi/Extra18/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Work Life Balance (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Extra19",
-    "cover": "https://i.ytimg.com/vi/Extra19/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Self Improvement (English)",
-    "file": "https://www.youtube.com/watch?v=Extra20",
-    "cover": "https://i.ytimg.com/vi/Extra20/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Confidence Building (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Extra21",
-    "cover": "https://i.ytimg.com/vi/Extra21/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Body Language (English)",
-    "file": "https://www.youtube.com/watch?v=Extra22",
-    "cover": "https://i.ytimg.com/vi/Extra22/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Memory Techniques (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Extra23",
-    "cover": "https://i.ytimg.com/vi/Extra23/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Speed Reading (English)",
-    "file": "https://www.youtube.com/watch?v=Extra24",
-    "cover": "https://i.ytimg.com/vi/Extra24/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Note Taking (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Extra25",
-    "cover": "https://i.ytimg.com/vi/Extra25/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Study Techniques (English)",
-    "file": "https://www.youtube.com/watch?v=Extra26",
-    "cover": "https://i.ytimg.com/vi/Extra26/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Exam Preparation (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Extra27",
-    "cover": "https://i.ytimg.com/vi/Extra27/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Focus Improvement (English)",
-    "file": "https://www.youtube.com/watch?v=Extra28",
-    "cover": "https://i.ytimg.com/vi/Extra28/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Concentration Tips (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Extra29",
-    "cover": "https://i.ytimg.com/vi/Extra29/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Learning Strategies (English)",
-    "file": "https://www.youtube.com/watch?v=Extra30",
-    "cover": "https://i.ytimg.com/vi/Extra30/hqdefault.jpg",
-    "imf": "Skills"
-  },
-  {
-    "title": "Digital Marketing (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Marketing1",
-    "cover": "https://i.ytimg.com/vi/Marketing1/hqdefault.jpg",
+    "title": "Digital Marketing Full Course (English)",
+    "file": "https://www.youtube.com/watch?v=nU-IIXBWlS4",
+    "cover": "https://img.youtube.com/vi/nU-IIXBWlS4/maxresdefault.jpg",
+    "imf": "Marketing"
+  },
+  {
+    "title": "Digital Marketing - Hindi",
+    "file": "https://www.youtube.com/watch?v=YourMkt1",
+    "cover": "https://img.youtube.com/vi/YourMkt1/maxresdefault.jpg",
     "imf": "Marketing"
   },
   {
     "title": "SEO Complete Guide (English)",
-    "file": "https://www.youtube.com/watch?v=Marketing2",
-    "cover": "https://i.ytimg.com/vi/Marketing2/hqdefault.jpg",
+    "file": "https://www.youtube.com/watch?v=YourMkt2",
+    "cover": "https://img.youtube.com/vi/YourMkt2/maxresdefault.jpg",
     "imf": "Marketing"
   },
   {
-    "title": "Google Ads (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Marketing3",
-    "cover": "https://i.ytimg.com/vi/Marketing3/hqdefault.jpg",
+    "title": "SEO Tutorial - Hindi",
+    "file": "https://www.youtube.com/watch?v=YourMkt3",
+    "cover": "https://img.youtube.com/vi/YourMkt3/maxresdefault.jpg",
     "imf": "Marketing"
   },
   {
-    "title": "Facebook Marketing (English)",
-    "file": "https://www.youtube.com/watch?v=Marketing4",
-    "cover": "https://i.ytimg.com/vi/Marketing4/hqdefault.jpg",
+    "title": "Google Ads Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=YourMkt4",
+    "cover": "https://img.youtube.com/vi/YourMkt4/maxresdefault.jpg",
     "imf": "Marketing"
   },
   {
-    "title": "Content Marketing (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Marketing5",
-    "cover": "https://i.ytimg.com/vi/Marketing5/hqdefault.jpg",
+    "title": "Google Ads - Hindi",
+    "file": "https://www.youtube.com/watch?v=YourMkt5",
+    "cover": "https://img.youtube.com/vi/YourMkt5/maxresdefault.jpg",
+    "imf": "Marketing"
+  },
+  {
+    "title": "Content Marketing (English)",
+    "file": "https://www.youtube.com/watch?v=YourMkt6",
+    "cover": "https://img.youtube.com/vi/YourMkt6/maxresdefault.jpg",
     "imf": "Marketing"
   },
   {
     "title": "Brand Building (English)",
-    "file": "https://www.youtube.com/watch?v=Marketing6",
-    "cover": "https://i.ytimg.com/vi/Marketing6/hqdefault.jpg",
+    "file": "https://www.youtube.com/watch?v=YourMkt7",
+    "cover": "https://img.youtube.com/vi/YourMkt7/maxresdefault.jpg",
     "imf": "Marketing"
   },
   {
-    "title": "Growth Hacking (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Marketing7",
-    "cover": "https://i.ytimg.com/vi/Marketing7/hqdefault.jpg",
+    "title": "Growth Hacking (English)",
+    "file": "https://www.youtube.com/watch?v=YourMkt8",
+    "cover": "https://img.youtube.com/vi/YourMkt8/maxresdefault.jpg",
     "imf": "Marketing"
   },
   {
     "title": "Conversion Optimization (English)",
-    "file": "https://www.youtube.com/watch?v=Marketing8",
-    "cover": "https://i.ytimg.com/vi/Marketing8/hqdefault.jpg",
+    "file": "https://www.youtube.com/watch?v=YourMkt9",
+    "cover": "https://img.youtube.com/vi/YourMkt9/maxresdefault.jpg",
     "imf": "Marketing"
   },
   {
-    "title": "Analytics Tracking (Hindi)",
-    "file": "https://www.youtube.com/watch?v=Marketing9",
-    "cover": "https://i.ytimg.com/vi/Marketing9/hqdefault.jpg",
+    "title": "Analytics & Tracking (English)",
+    "file": "https://www.youtube.com/watch?v=YourMkt10",
+    "cover": "https://img.youtube.com/vi/YourMkt10/maxresdefault.jpg",
     "imf": "Marketing"
   },
   {
     "title": "Marketing Automation (English)",
-    "file": "https://www.youtube.com/watch?v=Marketing10",
-    "cover": "https://i.ytimg.com/vi/Marketing10/hqdefault.jpg",
+    "file": "https://www.youtube.com/watch?v=YourMkt11",
+    "cover": "https://img.youtube.com/vi/YourMkt11/maxresdefault.jpg",
     "imf": "Marketing"
+  },
+  {
+    "title": "Startup Basics (English)",
+    "file": "https://www.youtube.com/watch?v=h_fdPgjp4bI",
+    "cover": "https://img.youtube.com/vi/h_fdPgjp4bI/maxresdefault.jpg",
+    "imf": "Business"
+  },
+  {
+    "title": "Startup Guide - Hindi",
+    "file": "https://www.youtube.com/watch?v=YourBiz1",
+    "cover": "https://img.youtube.com/vi/YourBiz1/maxresdefault.jpg",
+    "imf": "Business"
+  },
+  {
+    "title": "Business Plan (English)",
+    "file": "https://www.youtube.com/watch?v=YourBiz2",
+    "cover": "https://img.youtube.com/vi/YourBiz2/maxresdefault.jpg",
+    "imf": "Business"
+  },
+  {
+    "title": "Fundraising Guide (English)",
+    "file": "https://www.youtube.com/watch?v=YourBiz3",
+    "cover": "https://img.youtube.com/vi/YourBiz3/maxresdefault.jpg",
+    "imf": "Business"
+  },
+  {
+    "title": "Pitch Deck Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=YourBiz4",
+    "cover": "https://img.youtube.com/vi/YourBiz4/maxresdefault.jpg",
+    "imf": "Business"
+  },
+  {
+    "title": "Marketing Strategy (English)",
+    "file": "https://www.youtube.com/watch?v=YourBiz5",
+    "cover": "https://img.youtube.com/vi/YourBiz5/maxresdefault.jpg",
+    "imf": "Business"
+  },
+  {
+    "title": "Sales Techniques (English)",
+    "file": "https://www.youtube.com/watch?v=YourBiz6",
+    "cover": "https://img.youtube.com/vi/YourBiz6/maxresdefault.jpg",
+    "imf": "Business"
+  },
+  {
+    "title": "Customer Acquisition (English)",
+    "file": "https://www.youtube.com/watch?v=YourBiz7",
+    "cover": "https://img.youtube.com/vi/YourBiz7/maxresdefault.jpg",
+    "imf": "Business"
+  },
+  {
+    "title": "Product Management (English)",
+    "file": "https://www.youtube.com/watch?v=YourBiz8",
+    "cover": "https://img.youtube.com/vi/YourBiz8/maxresdefault.jpg",
+    "imf": "Business"
+  },
+  {
+    "title": "Agile Methodology (English)",
+    "file": "https://www.youtube.com/watch?v=YourBiz9",
+    "cover": "https://img.youtube.com/vi/YourBiz9/maxresdefault.jpg",
+    "imf": "Business"
+  },
+  {
+    "title": "Leadership Skills (English)",
+    "file": "https://www.youtube.com/watch?v=YourBiz10",
+    "cover": "https://img.youtube.com/vi/YourBiz10/maxresdefault.jpg",
+    "imf": "Business"
+  },
+  {
+    "title": "Team Management (English)",
+    "file": "https://www.youtube.com/watch?v=YourBiz11",
+    "cover": "https://img.youtube.com/vi/YourBiz11/maxresdefault.jpg",
+    "imf": "Business"
+  },
+  {
+    "title": "Time Management (English)",
+    "file": "https://www.youtube.com/watch?v=YourBiz12",
+    "cover": "https://img.youtube.com/vi/YourBiz12/maxresdefault.jpg",
+    "imf": "Business"
+  },
+  {
+    "title": "Productivity Hacks (English)",
+    "file": "https://www.youtube.com/watch?v=YourBiz13",
+    "cover": "https://img.youtube.com/vi/YourBiz13/maxresdefault.jpg",
+    "imf": "Business"
+  },
+  {
+    "title": "Goal Setting (English)",
+    "file": "https://www.youtube.com/watch?v=YourBiz14",
+    "cover": "https://img.youtube.com/vi/YourBiz14/maxresdefault.jpg",
+    "imf": "Business"
+  },
+  {
+    "title": "Communication Skills (English)",
+    "file": "https://www.youtube.com/watch?v=YourBiz15",
+    "cover": "https://img.youtube.com/vi/YourBiz15/maxresdefault.jpg",
+    "imf": "Business"
+  },
+  {
+    "title": "Public Speaking (English)",
+    "file": "https://www.youtube.com/watch?v=YourBiz16",
+    "cover": "https://img.youtube.com/vi/YourBiz16/maxresdefault.jpg",
+    "imf": "Business"
+  },
+  {
+    "title": "Negotiation Skills (English)",
+    "file": "https://www.youtube.com/watch?v=YourBiz17",
+    "cover": "https://img.youtube.com/vi/YourBiz17/maxresdefault.jpg",
+    "imf": "Business"
+  },
+  {
+    "title": "Personal Finance (English)",
+    "file": "https://www.youtube.com/watch?v=YourFin1",
+    "cover": "https://img.youtube.com/vi/YourFin1/maxresdefault.jpg",
+    "imf": "Finance"
+  },
+  {
+    "title": "Personal Finance - Hindi",
+    "file": "https://www.youtube.com/watch?v=YourFin2",
+    "cover": "https://img.youtube.com/vi/YourFin2/maxresdefault.jpg",
+    "imf": "Finance"
+  },
+  {
+    "title": "Investment Basics (English)",
+    "file": "https://www.youtube.com/watch?v=YourFin3",
+    "cover": "https://img.youtube.com/vi/YourFin3/maxresdefault.jpg",
+    "imf": "Finance"
+  },
+  {
+    "title": "Mutual Funds (English)",
+    "file": "https://www.youtube.com/watch?v=YourFin4",
+    "cover": "https://img.youtube.com/vi/YourFin4/maxresdefault.jpg",
+    "imf": "Finance"
+  },
+  {
+    "title": "SIP Investment (English)",
+    "file": "https://www.youtube.com/watch?v=YourFin5",
+    "cover": "https://img.youtube.com/vi/YourFin5/maxresdefault.jpg",
+    "imf": "Finance"
+  },
+  {
+    "title": "Tax Planning (English)",
+    "file": "https://www.youtube.com/watch?v=YourFin6",
+    "cover": "https://img.youtube.com/vi/YourFin6/maxresdefault.jpg",
+    "imf": "Finance"
+  },
+  {
+    "title": "Insurance Guide (English)",
+    "file": "https://www.youtube.com/watch?v=YourFin7",
+    "cover": "https://img.youtube.com/vi/YourFin7/maxresdefault.jpg",
+    "imf": "Finance"
+  },
+  {
+    "title": "Real Estate Investment (English)",
+    "file": "https://www.youtube.com/watch?v=YourFin8",
+    "cover": "https://img.youtube.com/vi/YourFin8/maxresdefault.jpg",
+    "imf": "Finance"
+  },
+  {
+    "title": "Retirement Planning (English)",
+    "file": "https://www.youtube.com/watch?v=YourFin9",
+    "cover": "https://img.youtube.com/vi/YourFin9/maxresdefault.jpg",
+    "imf": "Finance"
+  },
+  {
+    "title": "Debt Management (English)",
+    "file": "https://www.youtube.com/watch?v=YourFin10",
+    "cover": "https://img.youtube.com/vi/YourFin10/maxresdefault.jpg",
+    "imf": "Finance"
+  },
+  {
+    "title": "Credit Score Guide (English)",
+    "file": "https://www.youtube.com/watch?v=YourFin11",
+    "cover": "https://img.youtube.com/vi/YourFin11/maxresdefault.jpg",
+    "imf": "Finance"
+  },
+  {
+    "title": "Budgeting Tips (English)",
+    "file": "https://www.youtube.com/watch?v=YourFin12",
+    "cover": "https://img.youtube.com/vi/YourFin12/maxresdefault.jpg",
+    "imf": "Finance"
+  },
+  {
+    "title": "Wealth Creation (English)",
+    "file": "https://www.youtube.com/watch?v=YourFin13",
+    "cover": "https://img.youtube.com/vi/YourFin13/maxresdefault.jpg",
+    "imf": "Finance"
+  },
+  {
+    "title": "Passive Income Ideas (English)",
+    "file": "https://www.youtube.com/watch?v=YourFin14",
+    "cover": "https://img.youtube.com/vi/YourFin14/maxresdefault.jpg",
+    "imf": "Finance"
+  },
+  {
+    "title": "Side Hustle Guide (English)",
+    "file": "https://www.youtube.com/watch?v=YourFin15",
+    "cover": "https://img.youtube.com/vi/YourFin15/maxresdefault.jpg",
+    "imf": "Finance"
+  },
+  {
+    "title": "Freelancing Complete Guide (English)",
+    "file": "https://www.youtube.com/watch?v=YourFin16",
+    "cover": "https://img.youtube.com/vi/YourFin16/maxresdefault.jpg",
+    "imf": "Finance"
+  },
+  {
+    "title": "Machine Learning - Stanford (English)",
+    "file": "https://www.youtube.com/watch?v=jGwO_UgTS7I",
+    "cover": "https://img.youtube.com/vi/jGwO_UgTS7I/maxresdefault.jpg",
+    "imf": "AI"
+  },
+  {
+    "title": "Deep Learning - Andrew Ng (English)",
+    "file": "https://www.youtube.com/watch?v=CS4cs9xVecg",
+    "cover": "https://img.youtube.com/vi/CS4cs9xVecg/maxresdefault.jpg",
+    "imf": "AI"
+  },
+  {
+    "title": "Python Full Course (English)",
+    "file": "https://www.youtube.com/watch?v=WGJJIrtnfpk",
+    "cover": "https://img.youtube.com/vi/WGJJIrtnfpk/maxresdefault.jpg",
+    "imf": "Programming"
+  },
+  {
+    "title": "PyTorch Complete Course (English)",
+    "file": "https://www.youtube.com/watch?v=V_xro1bcAuA",
+    "cover": "https://img.youtube.com/vi/V_xro1bcAuA/maxresdefault.jpg",
+    "imf": "AI"
+  },
+  {
+    "title": "TensorFlow 2.0 Course (English)",
+    "file": "https://www.youtube.com/watch?v=tPYj3fFJGjk",
+    "cover": "https://img.youtube.com/vi/tPYj3fFJGjk/maxresdefault.jpg",
+    "imf": "AI"
+  },
+  {
+    "title": "Neural Networks from Scratch (English)",
+    "file": "https://www.youtube.com/watch?v=Wo5dMEP_BbI",
+    "cover": "https://img.youtube.com/vi/Wo5dMEP_BbI/maxresdefault.jpg",
+    "imf": "AI"
+  },
+  {
+    "title": "Excel Mastery Course (English)",
+    "file": "https://www.youtube.com/watch?v=Vl0H-qTclOg",
+    "cover": "https://img.youtube.com/vi/Vl0H-qTclOg/maxresdefault.jpg",
+    "imf": "Skills"
+  },
+  {
+    "title": "Excel Tutorial - Hindi",
+    "file": "https://www.youtube.com/watch?v=YourSkill1",
+    "cover": "https://img.youtube.com/vi/YourSkill1/maxresdefault.jpg",
+    "imf": "Skills"
+  },
+  {
+    "title": "PowerPoint Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=YourSkill2",
+    "cover": "https://img.youtube.com/vi/YourSkill2/maxresdefault.jpg",
+    "imf": "Skills"
+  },
+  {
+    "title": "Resume Writing (English)",
+    "file": "https://www.youtube.com/watch?v=YourSkill3",
+    "cover": "https://img.youtube.com/vi/YourSkill3/maxresdefault.jpg",
+    "imf": "Skills"
+  },
+  {
+    "title": "Interview Preparation (English)",
+    "file": "https://www.youtube.com/watch?v=YourSkill4",
+    "cover": "https://img.youtube.com/vi/YourSkill4/maxresdefault.jpg",
+    "imf": "Skills"
+  },
+  {
+    "title": "Career Growth Guide (English)",
+    "file": "https://www.youtube.com/watch?v=YourSkill5",
+    "cover": "https://img.youtube.com/vi/YourSkill5/maxresdefault.jpg",
+    "imf": "Skills"
+  },
+  {
+    "title": "Networking Skills (English)",
+    "file": "https://www.youtube.com/watch?v=YourSkill6",
+    "cover": "https://img.youtube.com/vi/YourSkill6/maxresdefault.jpg",
+    "imf": "Skills"
+  },
+  {
+    "title": "Email Writing (English)",
+    "file": "https://www.youtube.com/watch?v=YourSkill7",
+    "cover": "https://img.youtube.com/vi/YourSkill7/maxresdefault.jpg",
+    "imf": "Skills"
+  },
+  {
+    "title": "Presentation Skills (English)",
+    "file": "https://www.youtube.com/watch?v=YourSkill8",
+    "cover": "https://img.youtube.com/vi/YourSkill8/maxresdefault.jpg",
+    "imf": "Skills"
+  },
+  {
+    "title": "Critical Thinking (English)",
+    "file": "https://www.youtube.com/watch?v=YourSkill9",
+    "cover": "https://img.youtube.com/vi/YourSkill9/maxresdefault.jpg",
+    "imf": "Skills"
+  },
+  {
+    "title": "Problem Solving (English)",
+    "file": "https://www.youtube.com/watch?v=YourSkill10",
+    "cover": "https://img.youtube.com/vi/YourSkill10/maxresdefault.jpg",
+    "imf": "Skills"
+  },
+  {
+    "title": "Emotional Intelligence (English)",
+    "file": "https://www.youtube.com/watch?v=YourSkill11",
+    "cover": "https://img.youtube.com/vi/YourSkill11/maxresdefault.jpg",
+    "imf": "Skills"
+  },
+  {
+    "title": "Stress Management (English)",
+    "file": "https://www.youtube.com/watch?v=YourSkill12",
+    "cover": "https://img.youtube.com/vi/YourSkill12/maxresdefault.jpg",
+    "imf": "Skills"
+  },
+  {
+    "title": "Work Life Balance (English)",
+    "file": "https://www.youtube.com/watch?v=YourSkill13",
+    "cover": "https://img.youtube.com/vi/YourSkill13/maxresdefault.jpg",
+    "imf": "Skills"
+  },
+  {
+    "title": "Confidence Building (English)",
+    "file": "https://www.youtube.com/watch?v=YourSkill14",
+    "cover": "https://img.youtube.com/vi/YourSkill14/maxresdefault.jpg",
+    "imf": "Skills"
+  },
+  {
+    "title": "Body Language (English)",
+    "file": "https://www.youtube.com/watch?v=YourSkill15",
+    "cover": "https://img.youtube.com/vi/YourSkill15/maxresdefault.jpg",
+    "imf": "Skills"
+  },
+  {
+    "title": "Memory Techniques (English)",
+    "file": "https://www.youtube.com/watch?v=YourSkill16",
+    "cover": "https://img.youtube.com/vi/YourSkill16/maxresdefault.jpg",
+    "imf": "Skills"
+  },
+  {
+    "title": "Speed Reading (English)",
+    "file": "https://www.youtube.com/watch?v=YourSkill17",
+    "cover": "https://img.youtube.com/vi/YourSkill17/maxresdefault.jpg",
+    "imf": "Skills"
+  },
+  {
+    "title": "Study Techniques (English)",
+    "file": "https://www.youtube.com/watch?v=YourSkill18",
+    "cover": "https://img.youtube.com/vi/YourSkill18/maxresdefault.jpg",
+    "imf": "Skills"
+  },
+  {
+    "title": "Focus Improvement (English)",
+    "file": "https://www.youtube.com/watch?v=YourSkill19",
+    "cover": "https://img.youtube.com/vi/YourSkill19/maxresdefault.jpg",
+    "imf": "Skills"
+  },
+  {
+    "title": "Learning Strategies (English)",
+    "file": "https://www.youtube.com/watch?v=YourSkill20",
+    "cover": "https://img.youtube.com/vi/YourSkill20/maxresdefault.jpg",
+    "imf": "Skills"
+  },
+  {
+    "title": "Blockchain Development (English)",
+    "file": "https://www.youtube.com/watch?v=YourTech1",
+    "cover": "https://img.youtube.com/vi/YourTech1/maxresdefault.jpg",
+    "imf": "Technology"
+  },
+  {
+    "title": "Cybersecurity Course (English)",
+    "file": "https://www.youtube.com/watch?v=YourTech2",
+    "cover": "https://img.youtube.com/vi/YourTech2/maxresdefault.jpg",
+    "imf": "Technology"
+  },
+  {
+    "title": "Ethical Hacking (English)",
+    "file": "https://www.youtube.com/watch?v=YourTech3",
+    "cover": "https://img.youtube.com/vi/YourTech3/maxresdefault.jpg",
+    "imf": "Technology"
+  },
+  {
+    "title": "Flutter Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=YourTech4",
+    "cover": "https://img.youtube.com/vi/YourTech4/maxresdefault.jpg",
+    "imf": "Technology"
+  },
+  {
+    "title": "React Native (English)",
+    "file": "https://www.youtube.com/watch?v=YourTech5",
+    "cover": "https://img.youtube.com/vi/YourTech5/maxresdefault.jpg",
+    "imf": "Technology"
+  },
+  {
+    "title": "Swift iOS Development (English)",
+    "file": "https://www.youtube.com/watch?v=YourTech6",
+    "cover": "https://img.youtube.com/vi/YourTech6/maxresdefault.jpg",
+    "imf": "Technology"
+  },
+  {
+    "title": "Kotlin Android (English)",
+    "file": "https://www.youtube.com/watch?v=YourTech7",
+    "cover": "https://img.youtube.com/vi/YourTech7/maxresdefault.jpg",
+    "imf": "Technology"
+  },
+  {
+    "title": "Unity Game Development (English)",
+    "file": "https://www.youtube.com/watch?v=YourTech8",
+    "cover": "https://img.youtube.com/vi/YourTech8/maxresdefault.jpg",
+    "imf": "Technology"
+  },
+  {
+    "title": "Unreal Engine Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=YourTech9",
+    "cover": "https://img.youtube.com/vi/YourTech9/maxresdefault.jpg",
+    "imf": "Technology"
+  },
+  {
+    "title": "Blender 3D Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=YourTech10",
+    "cover": "https://img.youtube.com/vi/YourTech10/maxresdefault.jpg",
+    "imf": "Technology"
+  },
+  {
+    "title": "UI/UX Design (English)",
+    "file": "https://www.youtube.com/watch?v=YourTech11",
+    "cover": "https://img.youtube.com/vi/YourTech11/maxresdefault.jpg",
+    "imf": "Technology"
+  },
+  {
+    "title": "Figma Complete Course (English)",
+    "file": "https://www.youtube.com/watch?v=YourTech12",
+    "cover": "https://img.youtube.com/vi/YourTech12/maxresdefault.jpg",
+    "imf": "Technology"
+  },
+  {
+    "title": "Photoshop Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=YourTech13",
+    "cover": "https://img.youtube.com/vi/YourTech13/maxresdefault.jpg",
+    "imf": "Technology"
+  },
+  {
+    "title": "Illustrator Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=YourTech14",
+    "cover": "https://img.youtube.com/vi/YourTech14/maxresdefault.jpg",
+    "imf": "Technology"
+  },
+  {
+    "title": "After Effects (English)",
+    "file": "https://www.youtube.com/watch?v=YourTech15",
+    "cover": "https://img.youtube.com/vi/YourTech15/maxresdefault.jpg",
+    "imf": "Technology"
+  },
+  {
+    "title": "DaVinci Resolve (English)",
+    "file": "https://www.youtube.com/watch?v=YourTech16",
+    "cover": "https://img.youtube.com/vi/YourTech16/maxresdefault.jpg",
+    "imf": "Technology"
+  },
+  {
+    "title": "PostgreSQL Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=qw--VYLpxG4",
+    "cover": "https://img.youtube.com/vi/qw--VYLpxG4/maxresdefault.jpg",
+    "imf": "Database"
+  },
+  {
+    "title": "Redis Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=jgpVdJB2sKQ",
+    "cover": "https://img.youtube.com/vi/jgpVdJB2sKQ/maxresdefault.jpg",
+    "imf": "Database"
+  },
+  {
+    "title": "GraphQL Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=ed8SzALpx1Q",
+    "cover": "https://img.youtube.com/vi/ed8SzALpx1Q/maxresdefault.jpg",
+    "imf": "Backend"
+  },
+  {
+    "title": "REST API Design (English)",
+    "file": "https://www.youtube.com/watch?v=YourAPI1",
+    "cover": "https://img.youtube.com/vi/YourAPI1/maxresdefault.jpg",
+    "imf": "Backend"
+  },
+  {
+    "title": "Microservices Architecture (English)",
+    "file": "https://www.youtube.com/watch?v=YourAPI2",
+    "cover": "https://img.youtube.com/vi/YourAPI2/maxresdefault.jpg",
+    "imf": "Backend"
+  },
+  {
+    "title": "System Design (English)",
+    "file": "https://www.youtube.com/watch?v=YourAPI3",
+    "cover": "https://img.youtube.com/vi/YourAPI3/maxresdefault.jpg",
+    "imf": "Backend"
+  },
+  {
+    "title": "Linux Command Line (English)",
+    "file": "https://www.youtube.com/watch?v=YourLinux1",
+    "cover": "https://img.youtube.com/vi/YourLinux1/maxresdefault.jpg",
+    "imf": "DevOps"
+  },
+  {
+    "title": "Bash Scripting (English)",
+    "file": "https://www.youtube.com/watch?v=YourLinux2",
+    "cover": "https://img.youtube.com/vi/YourLinux2/maxresdefault.jpg",
+    "imf": "DevOps"
+  },
+  {
+    "title": "CI/CD Pipeline (English)",
+    "file": "https://www.youtube.com/watch?v=YourDevOps1",
+    "cover": "https://img.youtube.com/vi/YourDevOps1/maxresdefault.jpg",
+    "imf": "DevOps"
+  },
+  {
+    "title": "Jenkins Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=YourDevOps2",
+    "cover": "https://img.youtube.com/vi/YourDevOps2/maxresdefault.jpg",
+    "imf": "DevOps"
+  },
+  {
+    "title": "Terraform Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=YourDevOps3",
+    "cover": "https://img.youtube.com/vi/YourDevOps3/maxresdefault.jpg",
+    "imf": "DevOps"
+  },
+  {
+    "title": "Ansible Tutorial (English)",
+    "file": "https://www.youtube.com/watch?v=YourDevOps4",
+    "cover": "https://img.youtube.com/vi/YourDevOps4/maxresdefault.jpg",
+    "imf": "DevOps"
   }
 ]
