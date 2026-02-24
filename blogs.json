@@ -1126,5 +1126,257 @@
     "link": "https://online.hbs.edu/blog/",
     "category": "Psychology",
     "cover": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80"
+  },
+  {
+    "title": "BigTrends - US Market Commentary",
+    "link": "https://bigtrends.com",
+    "category": "Trading",
+    "cover": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80"
+  },
+  {
+    "title": "GetTogetherFinance - Stock Trading Courses",
+    "link": "https://www.gettogetherfinance.com/blog/",
+    "category": "Trading",
+    "cover": "https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=800&q=80"
+  },
+  {
+    "title": "Shanky's Technical Analysis",
+    "link": "https://stockcharts.com/school/",
+    "category": "Trading",
+    "cover": "https://images.unsplash.com/photo-1611095790444-1dfa35e37b52?w=800&q=80"
+  },
+  {
+    "title": "TradingView Blog - Chart Analysis",
+    "link": "https://www.tradingview.com/blog/",
+    "category": "Trading",
+    "cover": "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?w=800&q=80"
+  },
+  {
+    "title": "Investopedia - Trading Education",
+    "link": "https://www.investopedia.com",
+    "category": "Trading",
+    "cover": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+  },
+  {
+    "title": "BabyPips - Forex Trading School",
+    "link": "https://www.babypips.com",
+    "category": "Trading",
+    "cover": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800&q=80"
+  },
+  {
+    "title": "DailyFX - Market Analysis",
+    "link": "https://www.dailyfx.com",
+    "category": "Trading",
+    "cover": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80"
+  },
+  {
+    "title": "Benzinga - Stock Market News",
+    "link": "https://www.benzinga.com",
+    "category": "Trading",
+    "cover": "https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=800&q=80"
+  },
+  {
+    "title": "The Motley Fool - Investment Advice",
+    "link": "https://www.fool.com",
+    "category": "Trading",
+    "cover": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+  },
+  {
+    "title": "Seeking Alpha - Stock Analysis",
+    "link": "https://seekingalpha.com",
+    "category": "Trading",
+    "cover": "https://images.unsplash.com/photo-1611095790444-1dfa35e37b52?w=800&q=80"
+  },
+  {
+    "title": "MarketWatch - Financial News",
+    "link": "https://www.marketwatch.com",
+    "category": "Trading",
+    "cover": "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?w=800&q=80"
+  },
+  {
+    "title": "Barron's - Investment Insights",
+    "link": "https://www.barrons.com",
+    "category": "Trading",
+    "cover": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800&q=80"
+  },
+  {
+    "title": "CoinGecko Blog - Crypto Data",
+    "link": "https://www.coingecko.com/learn",
+    "category": "Cryptocurrency",
+    "cover": "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?w=800&q=80"
+  },
+  {
+    "title": "Decrypt - Crypto News",
+    "link": "https://decrypt.co",
+    "category": "Cryptocurrency",
+    "cover": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80"
+  },
+  {
+    "title": "CryptoSlate - Blockchain Research",
+    "link": "https://cryptoslate.com",
+    "category": "Cryptocurrency",
+    "cover": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&q=80"
+  },
+  {
+    "title": "Bitcoin Magazine - BTC News",
+    "link": "https://bitcoinmagazine.com",
+    "category": "Cryptocurrency",
+    "cover": "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=800&q=80"
+  },
+  {
+    "title": "Ethereum Blog - ETH Updates",
+    "link": "https://blog.ethereum.org",
+    "category": "Cryptocurrency",
+    "cover": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80"
+  },
+  {
+    "title": "Messari - Crypto Research",
+    "link": "https://messari.io/research",
+    "category": "Cryptocurrency",
+    "cover": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80"
+  },
+  {
+    "title": "Delphi Digital - Crypto Analysis",
+    "link": "https://members.delphidigital.io/reports",
+    "category": "Cryptocurrency",
+    "cover": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&q=80"
+  },
+  {
+    "title": "Glassnode Insights - On-Chain Analytics",
+    "link": "https://insights.glassnode.com",
+    "category": "Cryptocurrency",
+    "cover": "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?w=800&q=80"
+  },
+  {
+    "title": "Nansen - Blockchain Intelligence",
+    "link": "https://www.nansen.ai/research",
+    "category": "Cryptocurrency",
+    "cover": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80"
+  },
+  {
+    "title": "The Defiant - DeFi News",
+    "link": "https://thedefiant.io",
+    "category": "Cryptocurrency",
+    "cover": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&q=80"
+  },
+  {
+    "title": "Later Blog - Instagram Marketing",
+    "link": "https://later.com/blog/",
+    "category": "Social Media",
+    "cover": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80"
+  },
+  {
+    "title": "Tailwind - Pinterest Strategy",
+    "link": "https://www.tailwindapp.com/blog",
+    "category": "Social Media",
+    "cover": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80"
+  },
+  {
+    "title": "Influencer Marketing Hub",
+    "link": "https://influencermarketinghub.com/blog/",
+    "category": "Social Media",
+    "cover": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80"
+  },
+  {
+    "title": "Social Media Week - Industry News",
+    "link": "https://socialmediaweek.org/blog/",
+    "category": "Social Media",
+    "cover": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80"
+  },
+  {
+    "title": "Adweek - Advertising Trends",
+    "link": "https://www.adweek.com",
+    "category": "Social Media",
+    "cover": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80"
+  },
+  {
+    "title": "Convince & Convert - Social Strategy",
+    "link": "https://www.convinceandconvert.com/blog/",
+    "category": "Social Media",
+    "cover": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80"
+  },
+  {
+    "title": "Simply Measured - Analytics",
+    "link": "https://simplymeasured.com/blog/",
+    "category": "Social Media",
+    "cover": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80"
+  },
+  {
+    "title": "Socialbakers - Platform Insights",
+    "link": "https://www.socialbakers.com/blog",
+    "category": "Social Media",
+    "cover": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80"
+  },
+  {
+    "title": "CoSchedule Blog - Content Calendar",
+    "link": "https://coschedule.com/blog",
+    "category": "Social Media",
+    "cover": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80"
+  },
+  {
+    "title": "Sendible - Multi-Platform Management",
+    "link": "https://www.sendible.com/insights",
+    "category": "Social Media",
+    "cover": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80"
+  },
+  {
+    "title": "Anthropic Blog - Claude AI",
+    "link": "https://www.anthropic.com/news",
+    "category": "AI & ML",
+    "cover": "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=80"
+  },
+  {
+    "title": "Meta AI Blog - Research",
+    "link": "https://ai.meta.com/blog/",
+    "category": "AI & ML",
+    "cover": "https://images.unsplash.com/photo-1655720828018-edd2daec9349?w=800&q=80"
+  },
+  {
+    "title": "Microsoft Research AI",
+    "link": "https://www.microsoft.com/en-us/research/blog/",
+    "category": "AI & ML",
+    "cover": "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=800&q=80"
+  },
+  {
+    "title": "NVIDIA AI Blog",
+    "link": "https://blogs.nvidia.com/blog/category/deep-learning/",
+    "category": "AI & ML",
+    "cover": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80"
+  },
+  {
+    "title": "Stability AI Blog",
+    "link": "https://stability.ai/news",
+    "category": "AI & ML",
+    "cover": "https://images.unsplash.com/photo-1686191128892-c0557e5e8d49?w=800&q=80"
+  },
+  {
+    "title": "Cohere AI Blog",
+    "link": "https://cohere.com/blog",
+    "category": "AI & ML",
+    "cover": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=800&q=80"
+  },
+  {
+    "title": "AI Alignment Forum",
+    "link": "https://www.alignmentforum.org",
+    "category": "AI & ML",
+    "cover": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&q=80"
+  },
+  {
+    "title": "Papers With Code",
+    "link": "https://paperswithcode.com",
+    "category": "AI & ML",
+    "cover": "https://images.unsplash.com/photo-1655720033654-a4239dd42d10?w=800&q=80"
+  },
+  {
+    "title": "The Gradient - AI Research",
+    "link": "https://thegradient.pub",
+    "category": "AI & ML",
+    "cover": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80"
+  },
+  {
+    "title": "Import AI Newsletter",
+    "link": "https://jack-clark.net",
+    "category": "AI & ML",
+    "cover": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80"
   }
 ]
