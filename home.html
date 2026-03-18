@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emerald Perfect Fixed</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* ── TOKENS ── */
+:root {
+  --bg: #010d08;
+  --surface: #064e3b;
+  --surface-bright: #059669;
+  --surface-card: #0a1f14;
+  --accent: #10b981;
+  --accent-glow: rgba(16,185,129,0.22);
+  --text: #ecfdf5;
+  --text-dim: #6ee7b7;
+  --text-muted: #34795a;
+  --border: rgba(16,185,129,0.14);
+  --nav-height: 56px;
+}
+
+[data-theme="light"] {
+  --bg: #f0fdf4;
+  --surface: #10b981;
+  --surface-bright: #059669;
+  --surface-card: #ffffff;
+  --accent: #064e3b;
+  --accent-glow: rgba(6,78,59,0.12);
+  --text: #0a1f14;
+  --text-dim: #065f46;
+  --text-muted: #6ee7b7;
+  --border: rgba(6,78,59,0.12);
+}
+
+/* ── RESET ── */
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  transition: background 0.35s, color 0.35s;
+  overflow-x: hidden;
+  padding-bottom: 100px;
+}
+
+/* Dot grid texture */
+body::before {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image: radial-gradient(circle, rgba(16,185,129,0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ── TOP BAR ── */
+.top-bar {
+  height: var(--nav-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  background: rgba(1,13,8,0.9);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  position: sticky; top: 0; z-index: 1000;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 0 var(--border), 0 4px 24px rgba(0,0,0,0.4);
+}
+[data-theme="light"] .top-bar {
+  background: rgba(240,253,244,0.92);
+}
+
+.logo-center {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; justify-content: center;
+  height: 100%;
+}
+.logo-center iframe { pointer-events: none; }
+
+.hamburger {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: rgba(16,185,129,0.1);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; cursor: pointer; color: var(--accent);
+  transition: background 0.2s;
+  position: relative; z-index: 10;
+}
+.hamburger:active { background: rgba(16,185,129,0.2); }
+
+.profile-circle {
+  width: 36px; height: 36px;
+  border-radius: 11px;
+  background: var(--surface-bright);
+  border: 1.5px solid rgba(255,255,255,0.15);
+  overflow: hidden; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  position: relative; z-index: 10;
+}
+.profile-circle img {
+  width: 100%; height: 100%; object-fit: cover;
+  transform: rotate(0deg) !important;
+  image-orientation: from-image;
+}
+
+/* ── MENU DROPDOWN ── */
+.menu {
+  display: none;
+  position: absolute;
+  top: calc(var(--nav-height) + 6px);
+  left: 12px;
+  background: #0d2018;
+  border-radius: 16px;
+  width: 210px;
+  flex-direction: column;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.6);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  z-index: 999;
+  animation: menuDrop 0.2s cubic-bezier(0.2,0.8,0.2,1);
+}
+[data-theme="light"] .menu { background: #fff; }
+
+@keyframes menuDrop { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+
+.menu a, .menu-item {
+  padding: 13px 18px; color: var(--text);
+  text-decoration: none; font-size: 13px; font-weight: 500;
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  transition: background 0.15s;
+}
+.menu a:active, .menu-item:active { background: var(--accent-glow); }
+.menu a:last-of-type, .menu-item:last-child { border-bottom: none; }
+
+/* ── SWITCH ── */
+.switch { position: relative; width: 36px; height: 20px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+  position: absolute; cursor: pointer; inset: 0;
+  background: rgba(255,255,255,0.15); border-radius: 20px; transition: .3s;
+}
+.slider:before {
+  position: absolute; content: ""; height: 14px; width: 14px;
+  left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: .3s;
+}
+input:checked + .slider { background: var(--accent); }
+input:checked + .slider:before { transform: translateX(16px); }
+
+/* ── AD BOX ── */
+.ad-box {
+  margin: 14px 14px 0;
+  height: 72px;
+  background: linear-gradient(135deg, var(--surface), var(--surface-bright));
+  border-radius: 16px;
+  display: flex; justify-content: center; align-items: center;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  position: relative; z-index: 1;
+}
+.ad-box img { height: 100%; width: 100%; object-fit: cover; }
+
+/* ── QUOTE ── */
+.quote-area {
+  padding: 14px 18px 6px; text-align: center;
+  position: relative; z-index: 1;
+}
+.quote-mark {
+  font-family: 'Syne', sans-serif;
+  font-size: 36px; line-height: 0.5;
+  color: var(--accent); opacity: 0.3;
+  margin-bottom: 4px; display: block;
+}
+.message-text {
+  font-size: 13.5px; font-weight: 500; font-style: italic;
+  opacity: 0.85; line-height: 1.55; color: var(--text);
+}
+.message-author {
+  font-size: 10px; font-weight: 700;
+  color: var(--accent); text-transform: uppercase;
+  letter-spacing: 1px; margin-top: 6px;
+}
+
+/* ── SECTION HEADER ── */
+.section-hdr {
+  display: flex; align-items: baseline; justify-content: space-between;
+  padding: 16px 16px 8px;
+  position: relative; z-index: 1;
+}
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px; font-weight: 800; letter-spacing: -0.3px;
+}
+.section-sub {
+  font-size: 11px; color: var(--text-muted); font-weight: 500;
+}
+
+/* ── TOOLS GRID ── */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  padding: 0 14px 6px;
+  position: relative; z-index: 1;
+}
+
+.tool-item {
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 4px 9px;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  position: relative;
+}
+.tool-item:active { transform: scale(0.92); box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+
+/* Proper PNG fit — contain so logos don't get cropped */
+.tool-item img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35));
+  transition: transform 0.18s ease;
+  flex-shrink: 0;
+}
+.tool-item:active img { transform: scale(0.94); }
+
+/* Tool name label */
+.tool-name {
+  font-size: 9.5px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text);
+  opacity: 0.75;
+  line-height: 1.2;
+  width: 100%;
+  padding: 0 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.1px;
+}
+
+/* Subtle inner glow */
+.tool-item::after {
+  content: '';
+  position: absolute; inset: 0; border-radius: 18px;
+  background: linear-gradient(135deg, rgba(16,185,129,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* ── PROGRESS CARD ── */
+.progress-section {
+  padding: 6px 14px 0;
+  position: relative; z-index: 1;
+}
+
+.progress-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 18px 18px 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Ambient glow blob */
+.progress-card::before {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 120px; height: 120px;
+  background: radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.prog-top {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 16px;
+}
+.prog-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px; font-weight: 800; letter-spacing: -0.2px;
+}
+.prog-badge {
+  font-size: 10px; font-weight: 700;
+  background: rgba(16,185,129,0.12);
+  color: var(--accent);
+  border: 1px solid rgba(16,185,129,0.2);
+  padding: 4px 10px; border-radius: 999px;
+  letter-spacing: 0.3px;
+}
+
+/* Stat row */
+.prog-stats {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 10px; margin-bottom: 18px;
+}
+.prog-stat {
+  background: rgba(16,185,129,0.06);
+  border: 1px solid rgba(16,185,129,0.1);
+  border-radius: 14px; padding: 12px 10px;
+  text-align: center;
+}
+.prog-stat-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px; font-weight: 800; line-height: 1;
+  color: var(--accent);
+}
+.prog-stat-lbl {
+  font-size: 10px; font-weight: 500;
+  color: var(--text-muted); margin-top: 4px;
+  text-transform: uppercase; letter-spacing: 0.4px;
+}
+
+/* Progress bars */
+.prog-bars { display: flex; flex-direction: column; gap: 10px; }
+.prog-bar-row {
+  display: flex; flex-direction: column; gap: 5px;
+}
+.prog-bar-top {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.prog-bar-label { font-size: 12px; font-weight: 500; }
+.prog-bar-pct { font-size: 11px; color: var(--accent); font-weight: 700; }
+.prog-bar-bg {
+  height: 5px; background: rgba(16,185,129,0.1);
+  border-radius: 3px; overflow: hidden;
+}
+.prog-bar-fill {
+  height: 100%; border-radius: 3px;
+  background: linear-gradient(90deg, var(--accent) 0%, #34d399 100%);
+  box-shadow: 0 0 6px rgba(16,185,129,0.4);
+  transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* Streak row */
+.prog-streak-row {
+  display: flex; gap: 8px; margin-top: 14px;
+}
+.prog-streak {
+  flex: 1; display: flex; align-items: center; gap: 9px;
+  background: rgba(16,185,129,0.06);
+  border: 1px solid rgba(16,185,129,0.1);
+  border-radius: 13px; padding: 10px 12px;
+}
+.prog-streak-icon { font-size: 20px; line-height: 1; }
+.prog-streak-info {}
+.prog-streak-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px; font-weight: 800; line-height: 1;
+  color: var(--accent);
+}
+.prog-streak-lbl {
+  font-size: 10px; color: var(--text-muted);
+  font-weight: 500; margin-top: 1px;
+}
+
+/* ── CONTENT CARDS ── */
+.content-stack {
+  padding: 6px 14px 20px;
+  display: flex; flex-direction: column; gap: 12px;
+  position: relative; z-index: 1;
+}
+
+.chart-card {
+  background: var(--surface-card);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: transform 0.18s ease;
+}
+.chart-card:active { transform: scale(0.98); }
+.chart-card img {
+  width: 100%; height: 150px; object-fit: cover;
+  display: block;
+}
+.card-info { padding: 13px 14px 15px; }
+.card-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px; font-weight: 800;
+  color: var(--text); letter-spacing: -0.2px;
+}
+.card-desc { font-size: 12px; color: var(--text-dim); margin-top: 4px; line-height: 1.45; }
+
+</style>
+</head>
+<body>
+
+<!-- ── TOP BAR ── -->
+<nav class="top-bar">
+  <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+
+  <div class="logo-center">
+    <iframe src="ANXRO.html" width="200" height="60" style="border:none;" allowtransparency="true" scrolling="no"></iframe>
+  </div>
+
+  <div class="profile-circle" onclick="window.location.href='profile.html'" style="cursor:pointer;">
+    <img src="https://via.placeholder.com/50" id="homeAvatar" alt="Profile">
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const savedProfile = JSON.parse(localStorage.getItem('userProfile'));
+      if (savedProfile && savedProfile.avatar) {
+        document.getElementById('homeAvatar').src = savedProfile.avatar;
+      }
+    });
+  </script>
+
+  <div class="menu" id="menu">
+    <a href="help.html">Help</a>
+    <a href="terms.html">Terms</a>
+    <div class="menu-item">
+      <span>Dark Mode</span>
+      <label class="switch">
+        <input type="checkbox" id="themeToggle" onchange="applyTheme()">
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+</nav>
+
+<!-- ── AD BOX ── -->
+<div class="ad-box"><img src="ad.png"></div>
+
+<!-- ── QUOTE ── -->
+<div class="quote-area">
+  <span class="quote-mark">"</span>
+  <div class="message-text" id="quoteText">Loading…</div>
+  <div class="message-author" id="quoteAuthor"></div>
+</div>
+
+<!-- ── TOOLS ── -->
+<div class="section-hdr">
+  <span class="section-title">Tools</span>
+  <span class="section-sub">Quick access</span>
+</div>
+<div class="tools-grid" id="toolsGrid"></div>
+
+<!-- ── PROGRESS CARD ── -->
+<div class="progress-section">
+  <div class="section-hdr" style="padding:14px 2px 10px;">
+    <span class="section-title">Your Progress</span>
+    <span class="section-sub" id="prog-date"></span>
+  </div>
+  <div class="progress-card">
+    <div class="prog-top">
+      <div class="prog-title">Learning Journey</div>
+      <div class="prog-badge" id="prog-level">Level 1</div>
+    </div>
+
+    <!-- Stats row -->
+    <div class="prog-stats">
+      <div class="prog-stat">
+        <div class="prog-stat-val" id="stat-sessions">0</div>
+        <div class="prog-stat-lbl">Sessions</div>
+      </div>
+      <div class="prog-stat">
+        <div class="prog-stat-val" id="stat-tools">0</div>
+        <div class="prog-stat-lbl">Tools Used</div>
+      </div>
+      <div class="prog-stat">
+        <div class="prog-stat-val" id="stat-days">0</div>
+        <div class="prog-stat-lbl">Days Active</div>
+      </div>
+    </div>
+
+    <!-- Progress bars -->
+    <div class="prog-bars">
+      <div class="prog-bar-row">
+        <div class="prog-bar-top">
+          <span class="prog-bar-label">Library Explored</span>
+          <span class="prog-bar-pct" id="pct-lib">0%</span>
+        </div>
+        <div class="prog-bar-bg"><div class="prog-bar-fill" id="bar-lib" style="width:0%"></div></div>
+      </div>
+      <div class="prog-bar-row">
+        <div class="prog-bar-top">
+          <span class="prog-bar-label">Lab Resources</span>
+          <span class="prog-bar-pct" id="pct-lab">0%</span>
+        </div>
+        <div class="prog-bar-bg"><div class="prog-bar-fill" id="bar-lab" style="width:0%"></div></div>
+      </div>
+      <div class="prog-bar-row">
+        <div class="prog-bar-top">
+          <span class="prog-bar-label">Overall Activity</span>
+          <span class="prog-bar-pct" id="pct-all">0%</span>
+        </div>
+        <div class="prog-bar-bg"><div class="prog-bar-fill" id="bar-all" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <!-- Streak row -->
+    <div class="prog-streak-row">
+      <div class="prog-streak">
+        <span class="prog-streak-icon">🔥</span>
+        <div class="prog-streak-info">
+          <div class="prog-streak-num" id="streak-days">0</div>
+          <div class="prog-streak-lbl">Day Streak</div>
+        </div>
+      </div>
+      <div class="prog-streak">
+        <span class="prog-streak-icon">⏱️</span>
+        <div class="prog-streak-info">
+          <div class="prog-streak-num" id="streak-mins">0</div>
+          <div class="prog-streak-lbl">Min Today</div>
+        </div>
+      </div>
+      <div class="prog-streak">
+        <span class="prog-streak-icon">⭐</span>
+        <div class="prog-streak-info">
+          <div class="prog-streak-num" id="streak-saved">0</div>
+          <div class="prog-streak-lbl">Saved Items</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CONTENT CARDS ── -->
+<div class="section-hdr">
+  <span class="section-title">Discover</span>
+  <span class="section-sub">Fresh picks</span>
+</div>
+<div class="content-stack" id="contentStack"></div>
+
+<!-- ── SCRIPTS ── -->
+<script>
+const UI = {
+  menu: document.getElementById('menu'),
+  themeToggle: document.getElementById('themeToggle'),
+  avatar: document.getElementById('homeAvatar'),
+  quoteText: document.getElementById('quoteText'),
+  quoteAuthor: document.getElementById('quoteAuthor'),
+  tGrid: document.getElementById('toolsGrid'),
+  cStack: document.getElementById('contentStack')
+};
+
+function toggleMenu() {
+  UI.menu.style.display = UI.menu.style.display === 'flex' ? 'none' : 'flex';
+}
+
+function applyTheme() {
+  const mode = UI.themeToggle.checked ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', mode);
+  localStorage.setItem('perfectTheme', mode);
+}
+
+// 1. Immediate Theme/Profile Load (Zero Delay)
+const savedTheme = localStorage.getItem('perfectTheme') || 'dark';
+document.documentElement.setAttribute('data-theme', savedTheme);
+UI.themeToggle.checked = (savedTheme === 'dark');
+
+const prof = JSON.parse(localStorage.getItem('userProfile'));
+if (prof?.avatar) UI.avatar.src = prof.avatar;
+
+// 2. Optimized Data Fetching
+async function loadData() {
+  try {
+    const [qRes, tRes, thumbRes] = await Promise.all([
+      fetch("text.json").then(r => r.json()),
+      fetch("tools.json").then(r => r.json()),
+      fetch("thumbnails.json").then(r => r.json())
+    ]);
+
+    // Render Quote
+    UI.quoteText.textContent = qRes.message.text;
+    UI.quoteAuthor.textContent = `~ ${qRes.message.author}`;
+
+    // Render Tools
+    UI.tGrid.innerHTML = tRes.map(t => `
+      <div class="tool-item" onclick="location.href='${t.link}'">
+        <img src="${t.image}" alt="${t.name || ''}">
+        <span class="tool-name">${t.name || ''}</span>
+      </div>
+    `).join('');
+
+    // Render Content
+    UI.cStack.innerHTML = thumbRes.map(i => `
+      <div class="chart-card" onclick="window.open('${i.link}', '_blank')">
+        <img src="${i.image}" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">${i.title}</div>
+          <div class="card-desc">${i.desc}</div>
+        </div>
+      </div>
+    `).join('');
+
+  } catch (err) {
+    console.error("Loading Error:", err);
+  }
+}
+
+loadData();
+
+// ── PROGRESS LOGIC (REAL TRACKING) ──
+(function() {
+  const todayStr = new Date().toDateString();
+  const now = Date.now();
+
+  // Load saved progress
+  let prog = JSON.parse(localStorage.getItem('homeProgress') || '{}');
+
+  // ── Defaults ──
+  if (!prog.sessions)    prog.sessions    = 0;
+  if (!prog.toolClicks)  prog.toolClicks  = {};
+  if (!prog.streak)      prog.streak      = { days: 0, lastDate: null };
+  if (!prog.activeDates) prog.activeDates = [];
+  if (!prog.todayMins)   prog.todayMins   = { date: null, totalSecs: 0 };
+
+  // ── Sessions: count once per tab (not per refresh) ──
+  if (!sessionStorage.getItem('anxro_session_counted')) {
+    prog.sessions++;
+    sessionStorage.setItem('anxro_session_counted', '1');
+  }
+
+  // ── Active dates: unique calendar days ──
+  if (!prog.activeDates.includes(todayStr)) {
+    prog.activeDates.push(todayStr);
+    if (prog.activeDates.length > 365) prog.activeDates.shift();
+  }
+
+  // ── Streak: real consecutive-day logic ──
+  const yesterday = new Date(now - 86400000).toDateString();
+  if (prog.streak.lastDate !== todayStr) {
+    if (prog.streak.lastDate === yesterday) {
+      prog.streak.days++;              // consecutive day
+    } else if (!prog.streak.lastDate) {
+      prog.streak.days = 1;            // very first visit
+    } else {
+      prog.streak.days = 1;            // missed a day — reset
+    }
+    prog.streak.lastDate = todayStr;
+  }
+
+  // ── Time tracking: real minutes on page today ──
+  if (prog.todayMins.date !== todayStr) {
+    prog.todayMins = { date: todayStr, totalSecs: 0 };
+  }
+  if (!sessionStorage.getItem('anxro_tab_start')) {
+    sessionStorage.setItem('anxro_tab_start', String(now));
+  }
+
+  // Save base state
+  localStorage.setItem('homeProgress', JSON.stringify(prog));
+
+  // Tick every 30s — accumulate real seconds for today
+  function tickTime() {
+    const tabStart = parseInt(sessionStorage.getItem('anxro_tab_start') || String(now));
+    const sessionSecs = Math.round((Date.now() - tabStart) / 1000);
+    const p2 = JSON.parse(localStorage.getItem('homeProgress') || '{}');
+    if (!p2.todayMins) p2.todayMins = { date: todayStr, totalSecs: 0 };
+    if (p2.todayMins.date !== todayStr) p2.todayMins = { date: todayStr, totalSecs: 0 };
+    p2.todayMins.totalSecs = sessionSecs;
+    localStorage.setItem('homeProgress', JSON.stringify(p2));
+    const mins = Math.min(999, Math.floor(sessionSecs / 60));
+    const el = document.getElementById('streak-mins');
+    if (el) el.textContent = mins;
+  }
+  setInterval(tickTime, 30000);
+
+  // ── Tool tracking: per unique tool name ──
+  document.addEventListener('click', (e) => {
+    const ti = e.target.closest('.tool-item');
+    if (ti) {
+      const name = ti.querySelector('.tool-name')?.textContent?.trim() || ti.dataset.tool || 'tool';
+      const p2 = JSON.parse(localStorage.getItem('homeProgress') || '{}');
+      if (!p2.toolClicks) p2.toolClicks = {};
+      p2.toolClicks[name] = (p2.toolClicks[name] || 0) + 1;
+      localStorage.setItem('homeProgress', JSON.stringify(p2));
+    }
+  });
+
+  // ── Compute display values ──
+  const uniqueToolsUsed = Object.keys(prog.toolClicks).length;
+
+  const savedFavs = JSON.parse(localStorage.getItem('favorites') || '[]');
+
+  const libProg = JSON.parse(localStorage.getItem('mlp_progress') || '{}');
+  const openedLib = Object.values(libProg.opened || {}).reduce((a, b) => a + (Array.isArray(b) ? b.length : 0), 0);
+  const libPct = Math.min(100, Math.round((openedLib / 50) * 100));
+
+  const totalTools = Math.max(document.querySelectorAll('.tool-item').length || 20, 1);
+  const labPct = Math.min(100, Math.round((uniqueToolsUsed / totalTools) * 100));
+
+  const activityScore = Math.min(100, Math.round(
+    ((Math.min(prog.sessions, 50) / 50) * 40) +
+    ((Math.min(prog.activeDates.length, 30) / 30) * 40) +
+    ((Math.min(uniqueToolsUsed, totalTools) / totalTools) * 20)
+  ));
+
+  const xp = (prog.sessions * 2) + (prog.activeDates.length * 5) + (uniqueToolsUsed * 3) + (savedFavs.length * 2);
+  const level = xp < 20 ? 1 : xp < 60 ? 2 : xp < 140 ? 3 : xp < 260 ? 4 : 5;
+
+  const minsToday = Math.min(999, Math.floor((prog.todayMins.totalSecs || 0) / 60));
+
+  // ── Render ──
+  document.getElementById('stat-sessions').textContent = prog.sessions;
+  document.getElementById('stat-tools').textContent = uniqueToolsUsed;
+  document.getElementById('stat-days').textContent = prog.activeDates.length;
+  document.getElementById('streak-days').textContent = prog.streak.days;
+  document.getElementById('streak-mins').textContent = minsToday;
+  document.getElementById('streak-saved').textContent = savedFavs.length;
+  document.getElementById('prog-level').textContent = `Level ${level}`;
+  document.getElementById('prog-date').textContent = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      document.getElementById('pct-lib').textContent = libPct + '%';
+      document.getElementById('bar-lib').style.width = libPct + '%';
+      document.getElementById('pct-lab').textContent = labPct + '%';
+      document.getElementById('bar-lab').style.width = labPct + '%';
+      document.getElementById('pct-all').textContent = activityScore + '%';
+      document.getElementById('bar-all').style.width = activityScore + '%';
+    }, 300);
+  });
+})();
+
+// Close menu on outside click
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.hamburger') && !e.target.closest('.menu')) {
+    UI.menu.style.display = 'none';
+  }
+});
+</script>
+
+</body>
+</html>
