@@ -643,10 +643,10 @@ function renderToolsGrid(allTools) {
 async function loadData() {
   try {
     const [qRes, tRes, thumbRes] = await Promise.all([
-      fetch("text.json").then(r => r.json()),
-      fetch("tools.json").then(r => r.json()),
-      fetch("thumbnails.json").then(r => r.json())
-    ]);
+  fetch("./text.json").then(r => r.json()),
+  fetch("./tools.json").then(r => r.json()),
+  fetch("./thumbnails.json").then(r => r.json())
+]);
 
     // Quote
     UI.quoteText.textContent = qRes.message.text;
