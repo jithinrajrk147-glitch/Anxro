@@ -6,10 +6,10 @@
     <title>Infinity Trader Journal</title>
     <style>
         :root {
-            --paper: #010d08;
-            --line: #064e3b;
-            --margin: #10b981;
-            --accent: #10b981;
+            --paper: #1c1209;        /* deep warm brown-black — book cover night */
+            --line: #3b2a1a;         /* aged brown — ruled lines */
+            --margin: #7c4f2a;       /* warm sienna — margin rule */
+            --accent: #c8955a;       /* antique gold-amber — accent */
             --dark: #000;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -51,16 +51,17 @@
         .book-wrapper { position: relative; width: 98%; height: 96vh; transform-style: preserve-3d; }
         
         .page {
-            width: 100%; height: 100%; background: var(--paper);
+            width: 100%; height: 100%; background: #f5ead6;   /* warm cream page */
             border-radius: 5px 15px 15px 5px; position: relative; z-index: 10;
             display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             transition: transform 0.4s ease;
         }
 
         .toolbar {
-            padding: 10px 15px; background: var(--line); border-bottom: 1px solid var(--accent);
+            padding: 10px 15px; background: #4a2e12;   /* dark chestnut */
+            border-bottom: 1px solid #7c4f2a;
             display: flex; justify-content: space-between; align-items: center;
-            border-radius: 5px 15px 0 0; z-index: 100; color: var(--accent);
+            border-radius: 5px 15px 0 0; z-index: 100; color: #e8c68a;   /* parchment text */
         }
 
         #scrollBox {
@@ -69,9 +70,10 @@
         }
         .paper-canvas-area {
             position: relative; min-height: 2500px;
+            background-color: #f5ead6;   /* cream base */
             background-image: 
-                linear-gradient(90deg, transparent 54px, var(--margin) 54px, var(--margin) 56px, transparent 56px),
-                linear-gradient(var(--line) 1px, transparent 1px);
+                linear-gradient(90deg, transparent 54px, #c8955a 54px, #c8955a 56px, transparent 56px),
+                linear-gradient(#d4b896 1px, transparent 1px);   /* warm brown lines */
             background-size: 100% 2.8rem;
         }
         
@@ -79,7 +81,7 @@
             width: 100%; height: 100%; position: absolute; top: 0; left: 0;
             background: transparent; border: none; outline: none; padding: 0 20px 0 70px;
             font-size: 1.3rem; line-height: 2.8rem; font-family: 'Courier New', monospace;
-            resize: none; z-index: 1; color: #ecfdf5;
+            resize: none; z-index: 1; color: #2c1a08;   /* dark brown ink */
         }
 
         canvas { position: absolute; top: 0; left: 0; z-index: 10; touch-action: none; }
@@ -96,14 +98,14 @@
             display: flex; flex-direction: column; gap: 15px;
         }
         .custom-modal input {
-            background: #000; border: 1px solid var(--line); color: var(--accent);
+            background: #0e0a04; border: 1px solid var(--line); color: var(--accent);
             padding: 12px; border-radius: 8px; font-size: 1rem;
         }
 
         /* Tools */
         .tool-bar {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: var(--line); padding: 5px 10px; border-radius: 50px;
+            background: #3b2a1a; padding: 5px 10px; border-radius: 50px;
             display: flex; gap: 5px; box-shadow: 0 5px 20px rgba(0,0,0,0.5); z-index: 1000;
             border: 1px solid var(--accent);
         }
@@ -111,7 +113,7 @@
             border: none; padding: 10px 14px; border-radius: 25px;
             font-weight: bold; font-size: 0.75rem; background: transparent; color: var(--accent);
         }
-        .tool-bar button.active { background: var(--accent); color: #000; }
+        .tool-bar button.active { background: var(--accent); color: #1c1209; }
 
         .page-flip-left { transform: translateX(-110%) rotateY(-20deg); opacity: 0; }
         .page-flip-right { transform: translateX(110%) rotateY(20deg); opacity: 0; }
@@ -124,7 +126,7 @@
         <h3 style="color:var(--accent)">New Journal</h3>
         <input type="number" id="inYear" placeholder="Year (e.g. 2026)">
         <input type="text" id="inTitle" placeholder="Journal Name">
-        <button onclick="saveNewBook()" style="background:var(--accent); color:#000; padding:12px; border:none; border-radius:8px; font-weight:bold">Create Book</button>
+        <button onclick="saveNewBook()" style="background:var(--accent); color:#1c1209; padding:12px; border:none; border-radius:8px; font-weight:bold">Create Book</button>
         <button onclick="closeModal()" style="color:var(--accent); background:none; border:none;">Cancel</button>
     </div>
 </div>
@@ -133,7 +135,7 @@
     <div class="custom-modal">
         <h3 style="color:var(--accent)">Select Date</h3>
         <input type="date" id="customDateInput">
-        <button onclick="confirmCustomDate()" style="background:var(--accent); color:#000; padding:12px; border:none; border-radius:8px; font-weight:bold">Go to Page</button>
+        <button onclick="confirmCustomDate()" style="background:var(--accent); color:#1c1209; padding:12px; border:none; border-radius:8px; font-weight:bold">Go to Page</button>
         <button onclick="closeDateModal()" style="color:var(--accent); background:none; border:none;">Cancel</button>
     </div>
 </div>
@@ -144,7 +146,7 @@
     <div class="menu-section">
         <h4>Library</h4>
         <div id="bookList" style="max-height: 150px; overflow-y:auto"></div>
-        <button onclick="openModal()" style="padding:10px; background:var(--accent); border:none; color:#000; border-radius:8px; width:100%; font-weight:bold; margin-top:10px">+ New Journal</button>
+        <button onclick="openModal()" style="padding:10px; background:var(--accent); border:none; color:#1c1209; border-radius:8px; width:100%; font-weight:bold; margin-top:10px">+ New Journal</button>
     </div>
 
     <div class="menu-section">
@@ -241,8 +243,8 @@
         const list = document.getElementById('bookList'); list.innerHTML = '';
         books.forEach(b => {
             const d = document.createElement('div');
-            d.style.padding='8px'; d.style.background='#064e3b'; d.style.marginBottom='5px'; d.style.borderRadius='5px'; d.style.cursor='pointer'; d.style.fontSize='0.85rem';
-            d.innerHTML = `<span style="color:#10b981">${b.t}</span><span onclick="deleteBook('${b.id}', event)" style="color:#ff4d4d; float:right">🗑</span>`;
+            d.style.padding='8px'; d.style.background='#3b2a1a'; d.style.marginBottom='5px'; d.style.borderRadius='5px'; d.style.cursor='pointer'; d.style.fontSize='0.85rem';
+            d.innerHTML = `<span style="color:#c8955a">${b.t}</span><span onclick="deleteBook('${b.id}', event)" style="color:#ff4d4d; float:right">🗑</span>`;
             d.onclick = () => loadBook(b.id);
             list.appendChild(d);
         });
@@ -296,7 +298,7 @@
         ctx.globalCompositeOperation = (mode==='erase') ? 'destination-out' : 'source-over';
         ctx.lineWidth = (mode==='erase') ? 40 : 3;
         ctx.lineCap = 'round';
-        ctx.strokeStyle = '#10b981';
+        ctx.strokeStyle = '#7c4f2a';   /* warm sienna pen ink */
         ctx.lineTo(p.x, p.y);
         ctx.stroke();
     });
