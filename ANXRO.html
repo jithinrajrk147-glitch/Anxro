@@ -15,22 +15,22 @@
         :root{--emerald-dark:#7CEB92;--image-height:40px;--pos-apart:-100px;--pos-merge:7.5px}
         *{margin:0;padding:0;box-sizing:border-box}
         body,html{height:100vh;width:100vw;display:flex;justify-content:center;align-items:center;overflow:hidden;font-family:'Arial Black',sans-serif}
-        .logo-wrapper{position:relative;z-index:10;display:flex;align-items:center;justify-content:center;gap:15px}
+        .logo-wrapper{position:relative;z-index:10;display:flex;align-items:center;justify-content:center;gap:18px}
         .text{font-family:'Bungee',sans-serif;font-size:20px;color:var(--emerald-dark);margin-top:2px;transition:transform .8s ease;will-change:transform}
-        .x-join-area{position:relative;width:16px;height:var(--image-height);display:flex;justify-content:center;align-items:center}
-        .figure{position:absolute;height:100%;width:auto;transition:transform 1.2s cubic-bezier(.34,1.56,.64,1),opacity .6s;will-change:transform,opacity;opacity:0}
+        .x-join-area{position:relative;width:19px;height:var(--image-height);display:flex;justify-content:center;align-items:center}
+        .figure{position:absolute;height:80%;width:auto;transition:transform 2s cubic-bezier(.34,1.56,.64,1),opacity .6s;will-change:transform,opacity;opacity:0}
         #fig-left{transform:translateX(var(--pos-apart))}
         #fig-right{transform:scaleX(-1) translateX(var(--pos-apart))}
-        .animate #fig-left{transform:translateX(calc(-1*var(--pos-merge)));opacity:1}
+        .animate #fig-left{transform:translateX(calc(-1.4*var(--pos-merge)));opacity:1}
         .animate #fig-right{transform:scaleX(-1) translateX(calc(-1*var(--pos-merge)));opacity:1}
     </style>
 </head>
 <body>
     <div class="logo-wrapper" id="logo-container">
-        <div class="text">AN</div>
+        <div class="text">AN </div>
         <div class="x-join-area">
-            <img src="load.png" id="fig-left" class="figure" alt="X left" width="16" height="40">
-            <img src="load.png" id="fig-right" class="figure" alt="X right" width="16" height="40">
+            <img src="load.png" id="fig-left" class="figure" alt="X left" width="1" height="37">
+            <img src="load.png" id="fig-right" class="figure" alt="X right" width="1" height="37">
         </div>
         <div class="text">RO</div>
     </div>
