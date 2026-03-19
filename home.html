@@ -670,57 +670,6 @@ async function loadData() {
     console.error("Loading Error:", err);
     // Even on error, show the Add Tools button
     UI.tGrid.innerHTML = `
-      <div class="tool-item" onclick="location.href='${tool.link}'" data-tool="${tool.name}">
-          <img src="${tool.image}" alt="${tool.name}">
-          <span class="tool-name">${tool.name}</span>
-        </div>`;
-    } else {
-      // Empty placeholder slot (invisible, keeps grid shape)
-      html += `<div class="tool-item" style="opacity:0;pointer-events:none;border:none;background:transparent;box-shadow:none;"></div>`;
-    }
-  });
-
-  // Slot 15: always the Add Tools button
-  html += `
-    <div class="tool-item add-tools-btn" onclick="location.href='toolbun.html'">
-      <div class="add-tools-icon">＋</div>
-      <span class="add-tools-label">Add Tools</span>
-    </div>`;
-
-  UI.tGrid.innerHTML = html;
-}
-
-// ── DATA FETCHING ──
-async function loadData() {
-  try {
-    const [qRes, tRes, thumbRes] = await Promise.all([
-      fetch("text.json").then(r => r.json()),
-      fetch("tools.json").then(r => r.json()),
-      fetch("thumbnails.json").then(r => r.json())
-    ]);
-
-    // Quote
-    UI.quoteText.textContent = qRes.message.text;
-    UI.quoteAuthor.textContent = `~ ${qRes.message.author}`;
-
-    // Tools grid (with pinnedTools from localStorage)
-    renderToolsGrid(tRes);
-
-    // Content cards
-    UI.cStack.innerHTML = thumbRes.map(i => `
-      <div class="chart-card" onclick="window.open('${i.link}', '_blank')">
-        <img src="${i.image}" loading="lazy">
-        <div class="card-info">
-          <div class="card-title">${i.title}</div>
-          <div class="card-desc">${i.desc}</div>
-        </div>
-      </div>
-    `).join('');
-
-  } catch (err) {
-    console.error("Loading Error:", err);
-    // Even on error, show the Add Tools button
-    UI.tGrid.innerHTML = `
       <div class="tool-item add-tools-btn" onclick="location.href='toolbun.html'">
         <div class="add-tools-icon">＋</div>
         <span class="add-tools-label">Add Tools</span>
