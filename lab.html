@@ -532,15 +532,6 @@ fetch('apps.json').then(res => {
     data = [];
     setActiveTab('tab-web', 'website');
 });
-/* Load top.json */
-fetch('top.json').then(res => res.json()
-).then(json => {
-    data = json.items || [];
-    setActiveTab('tab-web', 'website');
-}).catch(() => {
-    data = [];
-    setActiveTab('tab-web', 'website');
-});
 
 /* Load top.json */
 fetch('top.json').then(res => res.json()).then(json => {
