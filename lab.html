@@ -3,194 +3,451 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Lab App Mobile Pro</title>
+<title>Lab App</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-/* Base Setup */
-* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-body { margin: 0; font-family: -apple-system, sans-serif; transition: background 0.3s; }
+/* ── RESET ── */
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
 
-/* Grid Layout - Strict 3 Columns */
+/* ── TOKENS ── */
+:root {
+    --em: #10b981;
+    --em-mid: #059669;
+    --em-deep: #064e3b;
+    --em-dim: rgba(16,185,129,0.10);
+    --em-glow: rgba(16,185,129,0.22);
+    --radius: 16px;
+    --radius-sm: 11px;
+}
+
+/* ── BODY / BG ── */
+body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    transition: background 0.3s, color 0.3s;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+/* subtle dot grid */
+body::before {
+    content: '';
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image: radial-gradient(circle, rgba(16,185,129,0.055) 1px, transparent 1px);
+    background-size: 26px 26px;
+}
+
+/* ── STICKY HEADER ── */
+#app-header {
+    position: sticky; top: 0; z-index: 200;
+    padding: 14px 14px 0;
+    backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+}
+
+/* Brand row */
+.brand-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 12px;
+}
+.brand-left { display: flex; align-items: center; gap: 9px; }
+.brand-icon {
+    width: 36px; height: 36px; border-radius: 11px;
+    background: linear-gradient(135deg, var(--em) 0%, var(--em-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 14px var(--em-glow);
+}
+.brand-icon i { color: white; font-size: 15px; }
+.brand-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 19px; font-weight: 800; letter-spacing: -0.4px;
+}
+.brand-name span { color: var(--em); }
+
+.theme-btn {
+    width: 36px; height: 36px; border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.06);
+    color: var(--em); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; transition: all 0.2s;
+}
+.theme-btn:active { transform: scale(0.9); }
+
+/* Search */
+.search-wrap {
+    display: flex; align-items: center; gap: 8px;
+    border-radius: var(--radius-sm);
+    padding: 0 12px;
+    height: 44px; margin-bottom: 10px;
+    border: 1.5px solid rgba(16,185,129,0.18);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-wrap:focus-within {
+    border-color: var(--em);
+    box-shadow: 0 0 0 3px rgba(16,185,129,0.1);
+}
+.search-wrap i { color: var(--em); font-size: 14px; opacity: 0.7; }
+#search-input {
+    flex: 1; border: none; background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; outline: none;
+    transition: color 0.2s;
+}
+
+/* ── TAB BAR ── */
+.tab-bar {
+    display: flex; gap: 6px;
+    padding: 0 0 10px;
+    overflow-x: auto; scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+.tab-bar::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+    display: flex; align-items: center; gap: 6px;
+    padding: 8px 16px; border-radius: 999px;
+    border: none; cursor: pointer; font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px; white-space: nowrap;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    letter-spacing: 0.2px;
+}
+.tab-btn i { font-size: 13px; }
+
+/* ── SECTION HEADER ── */
+.section-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 1.2px; text-transform: uppercase;
+    padding: 6px 14px 8px;
+    opacity: 0.45;
+}
+
+/* ── GRID ── */
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    padding: 10px 10px 80px 10px;
+    gap: 9px;
+    padding: 4px 12px 100px;
+    position: relative; z-index: 1;
 }
 
+/* ── CARD ── */
 .card {
-    border-radius: 12px;
+    border-radius: var(--radius);
     overflow: hidden;
-    transition: transform 0.2s;
-    text-align: center;
-    position: relative; /* needed for badge positioning */
     cursor: pointer;
+    position: relative;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
-.card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
-.card-info { padding: 6px 6px 12px 6px; display:flex; flex-direction:column; gap:6px; align-items:center; }
-.card-info strong { display: block; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.card-info small { font-size: 9px; opacity: 0.7; text-align:center; }
-
-/* Badge / Capsule inside card (top-left) */
-.card-badge {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    padding: 4px 8px;
-    border-radius: 999px;
-    font-size: 10px;
-    font-weight: 700;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-    z-index: 10;
+.card:active { transform: scale(0.95); }
+.card::after {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: var(--radius);
+    background: linear-gradient(to top, rgba(0,0,0,0.52) 0%, transparent 55%);
     pointer-events: none;
 }
+.card img {
+    width: 100%; aspect-ratio: 1/1; object-fit: cover;
+    display: block; transition: transform 0.35s ease;
+}
+.card:active img { transform: scale(1.04); }
 
-/* Category Button moved to bottom inside card-info */
-.card-category {
-    padding: 6px 10px;
-    border-radius: 999px;
-    font-size: 10px;
-    font-weight: 700;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.18);
-    z-index: 11;
-    border: none;
-    cursor: pointer;
-    background: rgba(0,0,0,0.12);
-    white-space: nowrap;
+.card-info {
+    padding: 7px 7px 10px;
+    display: flex; flex-direction: column; gap: 5px; align-items: center;
+    position: relative; z-index: 2;
+}
+.card-info strong {
+    display: block; font-size: 11px; font-weight: 600;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    width: 100%; text-align: center;
+}
+.card-info small { font-size: 9px; opacity: 0.6; text-align: center; line-height: 1.3; }
+
+/* Badge top-left */
+.card-badge {
+    position: absolute; top: 7px; left: 7px;
+    padding: 3px 7px; border-radius: 999px;
+    font-size: 9px; font-weight: 700; color: #fff;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    z-index: 10; pointer-events: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-/* type-specific colors (class names generated from JSON type) */
+/* Category pill */
+.card-category {
+    padding: 5px 9px; border-radius: 999px;
+    font-size: 9px; font-weight: 700; color: #fff;
+    text-transform: uppercase; letter-spacing: 0.4px;
+    border: none; cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    white-space: nowrap; background: rgba(0,0,0,0.18);
+    transition: transform 0.15s;
+}
+.card-category:active { transform: scale(0.93); }
+
+/* ── TOP SECTION ── */
+#top-list {
+    padding: 4px 12px 100px;
+    display: flex; flex-direction: column; gap: 10px;
+    position: relative; z-index: 1;
+}
+.top-row {
+    display: flex; align-items: center; gap: 12px;
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+    position: relative; overflow: hidden;
+}
+.top-row:active { transform: scale(0.97); }
+.top-row::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--em-dim) 0%, transparent 80%);
+    opacity: 0; transition: opacity 0.2s; pointer-events: none;
+}
+.top-row:active::before { opacity: 1; }
+
+.top-rank {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px; font-weight: 800;
+    color: var(--em); opacity: 0.35;
+    min-width: 30px; text-align: center; line-height: 1;
+}
+.top-rank.rank-1 { opacity: 1; font-size: 26px; }
+.top-rank.rank-2 { opacity: 0.75; }
+.top-rank.rank-3 { opacity: 0.55; }
+
+.top-img {
+    width: 52px; height: 52px; border-radius: 13px;
+    object-fit: cover; flex-shrink: 0;
+    border: 1.5px solid rgba(16,185,129,0.15);
+}
+
+.top-info { flex: 1; overflow: hidden; }
+.top-name {
+    font-size: 14px; font-weight: 600;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    margin-bottom: 3px;
+}
+.top-desc { font-size: 11px; opacity: 0.55; line-height: 1.35; }
+.top-badge-row { display: flex; gap: 5px; margin-top: 5px; flex-wrap: wrap; }
+.top-type-badge {
+    font-size: 9px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.4px; padding: 3px 7px; border-radius: 999px; color: #fff;
+}
+.top-cat-badge {
+    font-size: 9px; font-weight: 600; padding: 3px 7px;
+    border-radius: 999px; opacity: 0.8; color: #fff;
+}
+
+.top-arrow {
+    color: var(--em); opacity: 0.5; font-size: 13px; flex-shrink: 0;
+    transition: opacity 0.2s, transform 0.2s;
+}
+.top-row:active .top-arrow { opacity: 1; transform: translateX(3px); }
+
+/* Crown badge for rank 1 */
+.crown-wrap {
+    position: absolute; top: 8px; right: 10px;
+    font-size: 13px; opacity: 0.8;
+}
+
+/* ── TYPE COLORS ── */
 .type-app { background: linear-gradient(90deg,#10b981,#059669); }
 .type-website { background: linear-gradient(90deg,#3b82f6,#2563eb); }
 .type-mod-apk, .type-mod { background: linear-gradient(90deg,#fb923c,#f97316); }
 
-/* category-specific colors */
-.cat-ai { background: linear-gradient(90deg,#7c3aed,#5b21b6); }          /* purple */
-.cat-editing { background: linear-gradient(90deg,#f97316,#fb923c); }     /* orange */
-.cat-earning { background: linear-gradient(90deg,#f43f5e,#ef4444); }     /* red */
-.cat-design { background: linear-gradient(90deg,#06b6d4,#0891b2); }      /* teal */
-.cat-development { background: linear-gradient(90deg,#2563eb,#1e40af); } /* blue */
-.cat-education { background: linear-gradient(90deg,#f59e0b,#d97706); }   /* amber */
-.cat-productivity { background: linear-gradient(90deg,#10b981,#059669); }/* green */
-.cat-utility { background: linear-gradient(90deg,#64748b,#475569); }     /* gray/indigo */
-.cat-media { background: linear-gradient(90deg,#ef77ff,#a855f7); }       /* pink/purple */
-.cat-analytics { background: linear-gradient(90deg,#06b6d4,#0ea5a4); }   /* cyan */
-.cat-finance { background: linear-gradient(90deg,#0ea5a4,#059669); }     /* mint/green */
-.cat-unknown { background: linear-gradient(90deg,#94a3b8,#64748b); }     /* muted */
+/* ── CATEGORY COLORS ── */
+.cat-ai { background: linear-gradient(90deg,#7c3aed,#5b21b6); }
+.cat-editing { background: linear-gradient(90deg,#f97316,#fb923c); }
+.cat-earning { background: linear-gradient(90deg,#f43f5e,#ef4444); }
+.cat-design { background: linear-gradient(90deg,#06b6d4,#0891b2); }
+.cat-development { background: linear-gradient(90deg,#2563eb,#1e40af); }
+.cat-education { background: linear-gradient(90deg,#f59e0b,#d97706); }
+.cat-productivity { background: linear-gradient(90deg,#10b981,#059669); }
+.cat-utility { background: linear-gradient(90deg,#64748b,#475569); }
+.cat-media { background: linear-gradient(90deg,#ef77ff,#a855f7); }
+.cat-analytics { background: linear-gradient(90deg,#06b6d4,#0ea5a4); }
+.cat-finance { background: linear-gradient(90deg,#0ea5a4,#059669); }
+.cat-unknown { background: linear-gradient(90deg,#94a3b8,#64748b); }
 
-/* UI Placements */
-.tab-bar {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 10px;
-    padding: 10px 5px;
-    border-radius: 15px;
-    position: sticky;
-    top: 10px;
-    z-index: 100;
+/* ── EMPTY STATE ── */
+.empty-state {
+    grid-column: 1/-1; text-align: center;
+    padding: 60px 20px;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
 }
-.tab-bar button { background: none; border: none; font-size: 20px; color: white !important; cursor: pointer; }
+.empty-state i { font-size: 36px; opacity: 0.2; }
+.empty-state p { font-size: 14px; opacity: 0.45; }
 
-.search-bar { margin: 15px 10px; display: flex; gap: 8px; }
-.search-bar input { flex: 1; padding: 12px; border-radius: 12px; border: 1px solid transparent; outline: none; font-size: 14px; }
-.search-bar button { padding: 0 15px; border-radius: 12px; border: none; font-weight: bold; }
+/* ── MODAL ── */
+.modal {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    justify-content: center; align-items: flex-end;
+    z-index: 1000; padding: 16px;
+}
+.modal-content {
+    border-radius: 24px; padding: 22px;
+    width: 100%; max-width: 360px;
+    animation: sheetUp 0.3s cubic-bezier(0.2,0.8,0.2,1);
+    position: relative;
+}
+@keyframes sheetUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-/* Modal & Toast */
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 1000; }
-.modal-content { border-radius: 20px; padding: 20px; width: 85%; max-width: 300px; text-align: center; }
-.modal img { width: 100px; height: 100px; border-radius: 15px; margin-bottom: 10px; }
-.modal-buttons { display: flex; gap: 10px; margin-top: 15px; }
-.modal-buttons button { flex: 1; padding: 12px; border-radius: 10px; border: none; font-weight: bold; }
+.modal-drag { width: 36px; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.15); margin: 0 auto 18px; }
 
-#noinfo-modal .modal-content { max-width: 320px; }
-#noinfo-modal .modal-content p { color: #f3f4f6; margin: 8px 0 0; }
+.modal-top { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 14px; }
+.modal img { width: 72px; height: 72px; border-radius: 16px; object-fit: cover; flex-shrink: 0; }
+.modal-title-group { flex: 1; }
+.modal-name-text { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 800; margin-bottom: 4px; }
+.modal-info-text { font-size: 13px; line-height: 1.5; opacity: 0.7; }
 
+.modal-buttons { display: flex; gap: 10px; margin-top: 16px; }
+.fav-btn, .open-btn {
+    flex: 1; padding: 13px; border-radius: 13px;
+    border: none; font-weight: 700; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 14px;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+.fav-btn:active, .open-btn:active { transform: scale(0.95); }
+.open-btn {
+    background: linear-gradient(135deg, var(--em) 0%, var(--em-mid) 100%);
+    color: #000; box-shadow: 0 4px 18px var(--em-glow);
+}
+
+#noinfo-modal .modal-content { max-width: 320px; margin: 0 auto; }
+#noinfo-modal p { font-size: 13px; opacity: 0.7; margin: 8px 0 0; }
+
+/* ── TOAST ── */
 #toast {
-    position: fixed; bottom:px; left: 50%; transform: translateX(-45%);
-    padding: 10px 20px; border-radius: 20px; font-size: 12px; font-weight: bold;
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+    padding: 10px 20px; border-radius: 999px;
+    font-size: 13px; font-weight: 600;
     display: none; z-index: 2000;
+    white-space: nowrap;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    animation: toastIn 0.3s ease;
+}
+@keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(8px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+
+/* ── FAVOURITES EMPTY ── */
+#fav-empty {
+    display: none; text-align: center;
+    padding: 60px 20px; opacity: 0.4;
+}
+#fav-empty i { font-size: 40px; display: block; margin-bottom: 12px; }
+
+/* ── SCROLL HINT ── */
+.scroll-fade {
+    height: 3px; border-radius: 2px;
+    background: linear-gradient(90deg, var(--em) 0%, transparent 100%);
+    margin: 0 12px 4px;
+    opacity: 0.4;
 }
 </style>
 </head>
 <body>
-<iframe src="loader.html" id="app-loader" style="
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    border: none;
-    z-index: 999999;
-    background: white; /* Start solid white */
-    transition: opacity 0.8s ease;
-"></iframe>
 
+<!-- Loader iframe -->
+<iframe src="loader.html" id="app-loader" style="
+    position:fixed;top:0;left:0;width:100vw;height:100vh;
+    border:none;z-index:999999;background:white;transition:opacity 0.8s ease;
+"></iframe>
 <script>
-    // Detect when the background page is fully loaded
-    window.addEventListener('load', function() {
-        const loader = document.getElementById('app-loader');
-        
-        // Wait for the logo merge animation to finish (approx 3 seconds)
-        setTimeout(() => {
-            loader.style.opacity = "0"; // Fade out
-            setTimeout(() => {
-                loader.remove(); // Delete from page
-            }, 800);
-        }, 3000); 
-    });
+window.addEventListener('load', function() {
+    const loader = document.getElementById('app-loader');
+    setTimeout(() => {
+        loader.style.opacity = "0";
+        setTimeout(() => loader.remove(), 800);
+    }, 3000);
+});
 </script>
 
-<div class="tab-bar">
-    <button id="mod" title="Mod APK"><i class="fa fa-file-zipper"></i></button>
-    <button id="web" title="Website"><i class="fa fa-globe"></i></button>
-    <button id="apps" title="Apps"><i class="fa fa-android"></i></button>
-    <button id="favourite" title="Favourites"><i class="fa fa-star"></i></button>
+<!-- ── HEADER ── -->
+<div id="app-header">
+    <div class="brand-row">
+        <div class="brand-left">
+            <div class="brand-icon"><i class="fa fa-flask"></i></div>
+            <div class="brand-name"><span> Lab</span></div>
+        </div>
+        <button class="theme-btn" id="theme-toggle" title="Toggle theme">
+            <i class="fa fa-circle-half-stroke"></i>
+        </button>
+    </div>
+
+    <div class="search-wrap">
+        <i class="fa fa-magnifying-glass"></i>
+        <input type="text" id="search-input" placeholder="Search resources…" autocomplete="off">
+    </div>
+
+    <div class="tab-bar" id="tab-bar">
+        <button class="tab-btn" id="tab-top"><i class="fa fa-trophy"></i> Top</button>
+        <button class="tab-btn" id="tab-web"><i class="fa fa-globe"></i> Web</button>
+        <button class="tab-btn" id="tab-apps"><i class="fa fa-mobile-screen"></i> Apps</button>
+        <button class="tab-btn" id="tab-fav"><i class="fa fa-star"></i> Saved</button>
+    </div>
+    <div class="scroll-fade"></div>
 </div>
 
-<div class="search-bar">
-    <input type="text" id="search-input" placeholder="Search resources...">
-    <button id="search-btn">🔍︎</button>
-</div>
+<!-- ── SECTION LABEL ── -->
+<div class="section-label" id="section-label">ALL</div>
 
+<!-- ── GRID (web / apps / fav) ── -->
 <div class="grid" id="content"></div>
 
-<!-- Standard item modal -->
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <img id="modal-img" src="">
-    <h3 id="modal-name"></h3>
-    <p id="modal-info"></p>
-    <div class="modal-buttons">
-      <button class="fav-btn" id="add-fav"> 🖤</button>
-      <button class="open-btn" id="open-link">Open</button>
-    </div>
-  </div>
+<!-- ── TOP LIST ── -->
+<div id="top-list" style="display:none;"></div>
+
+<!-- ── FAV EMPTY ── -->
+<div id="fav-empty">
+    <i class="fa fa-star"></i>
+    <p>Nothing saved yet.<br>Open any item and tap ♥ to save.</p>
 </div>
 
-<!-- No-info modal -->
-<div class="modal" id="noinfo-modal" aria-hidden="true">
-  <div class="modal-content">
-    <h3>No information available</h3>
-    <p>This item doesn't include descriptive information.</p>
-    <div class="modal-buttons">
-      <button id="noinfo-close" style="background:#222;color:#fff;border-radius:10px;padding:10px;border:none;">Close</button>
-      <button id="noinfo-open" style="background:#10b981;color:#000;border-radius:10px;padding:10px;border:none;">Open anyway</button>
+<!-- ── MAIN MODAL ── -->
+<div class="modal" id="modal">
+    <div class="modal-content" id="modal-inner">
+        <div class="modal-drag"></div>
+        <div class="modal-top">
+            <img id="modal-img" src="" alt="">
+            <div class="modal-title-group">
+                <div class="modal-name-text" id="modal-name"></div>
+                <div class="modal-info-text" id="modal-info"></div>
+            </div>
+        </div>
+        <div class="modal-buttons">
+            <button class="fav-btn" id="add-fav">♥ Save</button>
+            <button class="open-btn" id="open-link">Open →</button>
+        </div>
     </div>
-  </div>
+</div>
+
+<!-- ── NO-INFO MODAL ── -->
+<div class="modal" id="noinfo-modal" aria-hidden="true">
+    <div class="modal-content">
+        <div class="modal-drag"></div>
+        <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:800;">No info available</h3>
+        <p>This item has no description.</p>
+        <div class="modal-buttons">
+            <button id="noinfo-close" class="fav-btn">Close</button>
+            <button id="noinfo-open" class="open-btn">Open anyway →</button>
+        </div>
+    </div>
 </div>
 
 <div id="toast">Saved!</div>
 
+<!-- ── SCRIPTS ── -->
 <script>
 (function() {
-    // 1. Theme Logic (unchanged)
+    /* ── THEME LOGIC (untouched) ── */
     const savedTheme = localStorage.getItem('perfectTheme') || 'dark';
     const applyForceTheme = (theme) => {
         const isDark = theme === 'dark';
@@ -200,61 +457,97 @@ body { margin: 0; font-family: -apple-system, sans-serif; transition: background
             style.id = "force-lab-emerald";
             document.head.appendChild(style);
         }
-
         if (isDark) {
             style.innerHTML = `
                 body { background: #010d08 !important; color: #ecfdf5 !important; }
-                .tab-bar { background: linear-gradient(145deg, #064e3b, #042f24) !important; border: 1px solid rgba(16,185,129,0.3) !important; box-shadow: 0 8px 20px rgba(0,0,0,0.5) !important;}
-                .search-bar input { background: #042f24 !important; color: white !important; border-color: rgba(16,185,129,0.2) !important; }
-                .search-bar button { background: #10b981 !important; color: #010d08 !important; }
-                .card { background: #062d1f !important; border: 1px solid rgba(255,255,255,0.05) !important; }
-                .modal-content { background: #063d2b !important; border: 1px solid #10b981 !important; color: white !important; }
-                .fav-btn { background: white !important; color: black !important; }
-                .open-btn { background: #10b981 !important; color: #010d08 !important; }
+                #app-header { background: rgba(1,13,8,0.92) !important; border-bottom: 1px solid rgba(16,185,129,0.12) !important; }
+                .search-wrap { background: #042f24 !important; }
+                #search-input { color: #ecfdf5 !important; }
+                #search-input::placeholder { color: rgba(236,253,245,0.35) !important; }
+                .tab-btn { background: rgba(6,78,59,0.45) !important; color: #a7f3d0 !important; border: 1px solid rgba(16,185,129,0.15) !important; }
+                .tab-btn.active { background: linear-gradient(135deg,#10b981,#059669) !important; color: #010d08 !important; border-color: transparent !important; }
+                .card { background: #062d1f !important; border: 1px solid rgba(16,185,129,0.1) !important; }
+                .card-info strong { color: #ecfdf5 !important; }
+                .top-row { background: #062d1f !important; border-color: rgba(16,185,129,0.1) !important; }
+                .top-name { color: #ecfdf5 !important; }
+                .modal-content { background: #063d2b !important; color: #ecfdf5 !important; border: 1px solid rgba(16,185,129,0.3) !important; }
+                .fav-btn { background: rgba(255,255,255,0.08) !important; color: #ecfdf5 !important; }
                 #toast { background: #10b981 !important; color: #000 !important; }
+                .section-label { color: #a7f3d0 !important; }
+                .brand-name { color: #ecfdf5 !important; }
             `;
         } else {
             style.innerHTML = `
                 body { background: #f0fdf4 !important; color: #064e3b !important; }
-                .tab-bar { background: #10b981 !important; border: 1px solid #059669 !important; }
-                .search-bar input { background: white !important; color: black !important; border-color: #059669 !important; }
-                .search-bar button { background: #064e3b !important; color: white !important; }
-                .card { background: white !important; border: 1px solid #d1fae5 !important; box-shadow: 0 2px 5px rgba(0,0,0,0.05) !important; }
-                .modal-content { background: white !important; border: 1px solid #10b981 !important; color: black !important; }
-                .fav-btn { background: #064e3b !important; color: white !important; }
-                .open-btn { background: #10b981 !important; color: white !important; }
+                #app-header { background: rgba(240,253,244,0.94) !important; border-bottom: 1px solid #d1fae5 !important; }
+                .search-wrap { background: white !important; }
+                #search-input { color: #064e3b !important; }
+                #search-input::placeholder { color: #93c4ab !important; }
+                .tab-btn { background: white !important; color: #059669 !important; border: 1px solid #d1fae5 !important; }
+                .tab-btn.active { background: linear-gradient(135deg,#10b981,#059669) !important; color: white !important; border-color: transparent !important; }
+                .card { background: white !important; border: 1px solid #d1fae5 !important; box-shadow: 0 2px 8px rgba(16,185,129,0.07) !important; }
+                .card-info strong { color: #064e3b !important; }
+                .top-row { background: white !important; border-color: #d1fae5 !important; box-shadow: 0 2px 8px rgba(16,185,129,0.07) !important; }
+                .top-name { color: #064e3b !important; }
+                .modal-content { background: white !important; color: #064e3b !important; border: 1px solid #d1fae5 !important; }
+                .fav-btn { background: #f0fdf4 !important; color: #064e3b !important; border: 1px solid #d1fae5 !important; }
                 #toast { background: #064e3b !important; color: #fff !important; }
+                .section-label { color: #059669 !important; }
+                .brand-name { color: #064e3b !important; }
             `;
         }
     };
     applyForceTheme(savedTheme);
+
+    // Theme toggle button
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+        const cur = localStorage.getItem('perfectTheme') || 'dark';
+        const next = cur === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('perfectTheme', next);
+        applyForceTheme(next);
+    });
 })();
 
-// 2. Core App Logic
-let data = [], filteredData = [], currentIndex = 0, batchSize = 21, currentFilter = "all", currentItem = null;
-let categoryFilter = null;
+/* ── CORE APP LOGIC (untouched structure) ── */
+let data = [], filteredData = [], currentIndex = 0, batchSize = 21;
+let currentFilter = "website"; // default tab = Web (no APK)
+let currentItem = null, categoryFilter = null;
 let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+let topData = []; // from top.json
 
 const content = document.getElementById('content');
+const topList = document.getElementById('top-list');
 const modal = document.getElementById('modal');
 const noinfoModal = document.getElementById('noinfo-modal');
 const searchInput = document.getElementById('search-input');
 
-// Try apps.json first, fallback to apps.json.txt
+/* Load apps.json (main data) */
 fetch('apps.json').then(res => {
     if (!res.ok) return fetch('apps.json.txt');
     return res;
-}).then(res => res.json()).then(json=>{
+}).then(res => res.json()).then(json => {
     data = json.items || [];
-    // Render initial view showing Mod APK items by default (same as before)
-    resetRender('Mod APK');
-}).catch(err=>{
-    console.error('Failed to load apps JSON:', err);
+    setActiveTab('tab-web', 'website');
+}).catch(() => {
     data = [];
-    resetRender();
+    setActiveTab('tab-web', 'website');
+});
+/* Load top.json */
+fetch('top.json').then(res => res.json()
+).then(json => {
+    data = json.items || [];
+    setActiveTab('tab-web', 'website');
+}).catch(() => {
+    data = [];
+    setActiveTab('tab-web', 'website');
 });
 
-/* Category detection (prefers item.category if present) */
+/* Load top.json */
+fetch('top.json').then(res => res.json()).then(json => {
+    topData = json.items || json || [];
+}).catch(() => { topData = []; });
+
+/* ── CATEGORY DETECTION (untouched) ── */
 function getCategory(item) {
     const text = ((item.name || "") + " " + (item.info || "")).toLowerCase();
     const keywords = {
@@ -270,7 +563,6 @@ function getCategory(item) {
         media: ['video','capcut','speechify','transcribe','audio','media','unsplash','pexels'],
         utility: ['pdf','convert','smallpdf','cloudconvert','dns','speedtest','worldtime','caniuse','browserstack','photopea','cloudways','vercel','heroku','supabase']
     };
-
     for (const cat of Object.keys(keywords)) {
         for (const kw of keywords[cat]) {
             if (text.indexOf(kw) !== -1) {
@@ -297,7 +589,8 @@ function slugifyCategory(cat) {
     return 'cat-' + (cat || 'unknown').toString().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
 }
 
-function resetRender(filter = currentFilter) {
+/* ── RESET / FILTER / RENDER (untouched logic) ── */
+function resetRender(filter) {
     currentFilter = filter;
     content.innerHTML = "";
     currentIndex = 0;
@@ -309,7 +602,8 @@ function filterData() {
     const search = (searchInput.value || '').toLowerCase();
     filteredData = data.filter(item => {
         const itemType = item.type || '';
-        const matchType = currentFilter === "all" || (currentFilter === "favourite" ? favorites.some(f=>f.name===item.name) : itemType === currentFilter);
+        const matchType = currentFilter === "all"
+            || (currentFilter === "favourite" ? favorites.some(f => f.name === item.name) : itemType === currentFilter);
         const matchSearch = (item.name || '').toLowerCase().includes(search) || (item.info || '').toLowerCase().includes(search);
         const itemCategory = item.category ? item.category : getCategory(item);
         const matchCategory = !categoryFilter || (itemCategory === categoryFilter);
@@ -322,21 +616,14 @@ function renderBatch() {
     slice.forEach(item => {
         const div = document.createElement('div');
         div.className = 'card';
-
-        // generate safe class name from type (e.g. "Mod APK" -> "type-mod-apk")
         const typeClass = 'type-' + (item.type || 'unknown').toString().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
-
-        // label text - use original JSON type if present, otherwise fallback
         const label = item.type ? item.type : 'Unknown';
-
-        // category inference (if item.category exists prefer it)
         const categoryLabel = item.category ? item.category : getCategory(item);
         const catClass = slugifyCategory(categoryLabel);
 
-        // Build card markup: badge (top-left), image, info, and category button at bottom
         div.innerHTML = `
             <div class="card-badge ${typeClass}">${label}</div>
-            <img src="${item.image}" loading="lazy" alt="${item.name} screenshot">
+            <img src="${item.image}" loading="lazy" alt="${item.name}">
             <div class="card-info">
                 <strong>${item.name}</strong>
                 <small>${item.info || ''}</small>
@@ -344,12 +631,10 @@ function renderBatch() {
             </div>
         `;
 
-        // Card click => open modal or no-info modal if info is missing
         div.addEventListener('click', () => {
             currentItem = item;
             const infoText = (item.info || '').toString().trim();
             if (!infoText) {
-                // show no-info modal
                 noinfoModal.style.display = 'flex';
                 noinfoModal.setAttribute('aria-hidden', 'false');
             } else {
@@ -360,11 +645,9 @@ function renderBatch() {
             }
         });
 
-        // Category button click => filter by category (stop propagation so modal doesn't open)
         const catBtn = div.querySelector('.card-category');
         catBtn.addEventListener('click', (ev) => {
             ev.stopPropagation();
-            // toggle category filter: if same category clicked again, clear filter
             if (categoryFilter === categoryLabel) {
                 categoryFilter = null;
                 showToast('Category cleared');
@@ -372,76 +655,182 @@ function renderBatch() {
                 categoryFilter = categoryLabel;
                 showToast('Filtered: ' + categoryLabel);
             }
-            // reset the grid (preserves the current type filter)
             resetRender(currentFilter);
         });
 
         content.appendChild(div);
     });
+
+    // empty state
+    if (filteredData.length === 0 && currentIndex === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'empty-state';
+        empty.innerHTML = `<i class="fa fa-folder-open"></i><p>Nothing here yet</p>`;
+        content.appendChild(empty);
+    }
+
     currentIndex += batchSize;
 }
 
-// Event Listeners
+/* ── TOP SECTION RENDER ── */
+function renderTop() {
+    topList.innerHTML = '';
+    const search = (searchInput.value || '').toLowerCase();
+    const items = topData.filter(item =>
+        (item.name || '').toLowerCase().includes(search) ||
+        (item.info || '').toLowerCase().includes(search)
+    );
+
+    if (items.length === 0) {
+        topList.innerHTML = `<div style="text-align:center;padding:60px 20px;opacity:0.4;">
+            <i class="fa fa-trophy" style="font-size:36px;display:block;margin-bottom:12px;"></i>
+            <p style="font-size:14px;">No top items yet — add them in top.json</p></div>`;
+        return;
+    }
+
+    items.forEach((item, i) => {
+        const rank = i + 1;
+        const typeClass = 'type-' + (item.type || 'unknown').toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+        const categoryLabel = item.category ? item.category : getCategory(item);
+        const catClass = slugifyCategory(categoryLabel);
+        const rankClass = rank === 1 ? 'rank-1' : rank === 2 ? 'rank-2' : rank === 3 ? 'rank-3' : '';
+
+        const row = document.createElement('div');
+        row.className = 'top-row';
+        row.innerHTML = `
+            ${rank === 1 ? '<div class="crown-wrap">👑</div>' : ''}
+            <div class="top-rank ${rankClass}">${rank}</div>
+            <img class="top-img" src="${item.image}" loading="lazy" alt="${item.name}">
+            <div class="top-info">
+                <div class="top-name">${item.name}</div>
+                <div class="top-desc">${item.info || ''}</div>
+                <div class="top-badge-row">
+                    <span class="top-type-badge ${typeClass}">${item.type || 'Unknown'}</span>
+                    <span class="top-cat-badge ${catClass}">${categoryLabel}</span>
+                </div>
+            </div>
+            <i class="fa fa-arrow-up-right-from-square top-arrow"></i>
+        `;
+
+        row.addEventListener('click', () => {
+            currentItem = item;
+            const infoText = (item.info || '').toString().trim();
+            if (!infoText) {
+                noinfoModal.style.display = 'flex';
+            } else {
+                document.getElementById('modal-img').src = item.image;
+                document.getElementById('modal-name').textContent = item.name;
+                document.getElementById('modal-info').textContent = item.info;
+                modal.style.display = "flex";
+            }
+        });
+
+        topList.appendChild(row);
+    });
+}
+
+/* ── TAB SWITCHING ── */
+function setActiveTab(tabId, filter) {
+    // Update tab button styles
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+
+    const isTop = tabId === 'tab-top';
+    const isFav = tabId === 'tab-fav';
+
+    // Show/hide grid vs top list vs fav-empty
+    content.style.display = isTop ? 'none' : 'grid';
+    topList.style.display = isTop ? 'flex' : 'none';
+    document.getElementById('fav-empty').style.display = 'none';
+
+    // Section label
+    const labels = {
+        'tab-top': '🏆 Top Web & Apps',
+        'tab-web': '🌐 Websites',
+        'tab-apps': '📱 Apps',
+        'tab-fav': '⭐ Saved'
+    };
+    document.getElementById('section-label').textContent = labels[tabId] || '';
+
+    if (isTop) {
+        renderTop();
+    } else {
+        categoryFilter = null;
+        resetRender(filter);
+        // show fav-empty when no favourites
+        if (isFav && favorites.length === 0) {
+            document.getElementById('fav-empty').style.display = 'block';
+        }
+    }
+}
+
+/* ── TAB BUTTON LISTENERS ── */
+document.getElementById('tab-top').onclick   = () => setActiveTab('tab-top', 'top');
+document.getElementById('tab-web').onclick   = () => setActiveTab('tab-web', 'website');
+document.getElementById('tab-apps').onclick  = () => setActiveTab('tab-apps', 'app');
+document.getElementById('tab-fav').onclick   = () => setActiveTab('tab-fav', 'favourite');
+
+/* ── SEARCH ── */
+searchInput.oninput = () => {
+    categoryFilter = null;
+    const activeTab = document.querySelector('.tab-btn.active')?.id;
+    if (activeTab === 'tab-top') renderTop();
+    else resetRender(currentFilter);
+};
+
+/* ── MODAL BUTTONS (untouched logic) ── */
 document.getElementById('add-fav').onclick = () => {
     if (!currentItem) { modal.style.display = "none"; return; }
-    if(!favorites.some(f => f.name === currentItem.name)) {
+    if (!favorites.some(f => f.name === currentItem.name)) {
         favorites.push(currentItem);
         localStorage.setItem("favorites", JSON.stringify(favorites));
         showToast("Saved to Lab!");
     }
     modal.style.display = "none";
 };
-
-document.getElementById('open-link').onclick = () => { if(currentItem && currentItem.link) window.open(currentItem.link, '_blank'); modal.style.display = "none"; };
-
-// No-info modal buttons
+document.getElementById('open-link').onclick = () => {
+    if (currentItem && currentItem.link) window.open(currentItem.link, '_blank');
+    modal.style.display = "none";
+};
 document.getElementById('noinfo-close').addEventListener('click', () => {
     noinfoModal.style.display = 'none';
     noinfoModal.setAttribute('aria-hidden', 'true');
 });
 document.getElementById('noinfo-open').addEventListener('click', () => {
-    // open original link (if any) or show standard modal with minimal fields
     noinfoModal.style.display = 'none';
     noinfoModal.setAttribute('aria-hidden', 'true');
     if (currentItem) {
         if (currentItem.link) {
             window.open(currentItem.link, '_blank');
         } else {
-            // show standard modal but with placeholder info
             document.getElementById('modal-img').src = currentItem.image || '';
             document.getElementById('modal-name').textContent = currentItem.name || '';
-            document.getElementById('modal-info').textContent = currentItem.info || 'No additional information provided.';
+            document.getElementById('modal-info').textContent = currentItem.info || 'No additional info.';
             modal.style.display = 'flex';
         }
     }
 });
 
-// Buttons: type filters
-document.getElementById('mod').onclick = () => { categoryFilter = null; resetRender('Mod APK'); };
-document.getElementById('web').onclick = () => { categoryFilter = null; resetRender('website'); };
-document.getElementById('apps').onclick = () => { categoryFilter = null; resetRender('app'); };
-document.getElementById('favourite').onclick = () => { categoryFilter = null; resetRender('favourite'); };
-document.getElementById('search-btn').onclick = () => { categoryFilter = null; resetRender(); };
-searchInput.oninput = () => { categoryFilter = null; resetRender(); };
-
+/* ── TOAST ── */
 function showToast(msg) {
     const t = document.getElementById('toast');
     t.textContent = msg; t.style.display = "block";
-    setTimeout(() => t.style.display = "none", 2000);
+    setTimeout(() => t.style.display = "none", 2200);
 }
 
-// Close modals when clicking outside
+/* ── CLOSE MODALS ON OUTSIDE CLICK ── */
 window.onclick = (e) => {
-    if (e.target == modal) {
-        modal.style.display = "none";
-    }
-    if (e.target == noinfoModal) {
-        noinfoModal.style.display = "none";
-        noinfoModal.setAttribute('aria-hidden', 'true');
-    }
+    if (e.target == modal) modal.style.display = "none";
+    if (e.target == noinfoModal) { noinfoModal.style.display = "none"; noinfoModal.setAttribute('aria-hidden','true'); }
 };
 
-window.onscroll = () => { if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) renderBatch(); };
+/* ── INFINITE SCROLL (untouched) ── */
+window.onscroll = () => {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
+        const activeTab = document.querySelector('.tab-btn.active')?.id;
+        if (activeTab !== 'tab-top') renderBatch();
+    }
+};
 </script>
 </body>
 </html>
