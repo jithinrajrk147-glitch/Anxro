@@ -199,7 +199,7 @@ input:checked + .slider:before { transform: translateX(16px); }
   font-size: 11px; color: var(--text-muted); font-weight: 500;
 }
 
-/* ── TOOLS GRID ── */
+/* ── TOOLS GRID — 5 cols × 3 rows = 15 slots ── */
 .tools-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -208,6 +208,7 @@ input:checked + .slider:before { transform: translateX(16px); }
   position: relative; z-index: 1;
 }
 
+/* Each tool slot */
 .tool-item {
   border-radius: 18px;
   overflow: hidden;
@@ -223,13 +224,12 @@ input:checked + .slider:before { transform: translateX(16px); }
   border: 1px solid var(--border);
   box-shadow: 0 2px 10px rgba(0,0,0,0.25);
   position: relative;
+  min-height: 72px;
 }
 .tool-item:active { transform: scale(0.92); box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
 
-/* Proper PNG fit — contain so logos don't get cropped */
 .tool-item img {
-  width: 44px;
-  height: 44px;
+  width: 44px; height: 44px;
   object-fit: contain;
   display: block;
   filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35));
@@ -238,7 +238,6 @@ input:checked + .slider:before { transform: translateX(16px); }
 }
 .tool-item:active img { transform: scale(0.94); }
 
-/* Tool name label */
 .tool-name {
   font-size: 9.5px;
   font-weight: 600;
@@ -262,6 +261,40 @@ input:checked + .slider:before { transform: translateX(16px); }
   pointer-events: none;
 }
 
+/* ── ADD TOOLS BUTTON (15th slot style) ── */
+.tool-item.add-tools-btn {
+  background: rgba(16,185,129,0.06);
+  border: 1.5px dashed rgba(16,185,129,0.35);
+  box-shadow: none;
+  cursor: pointer;
+}
+.tool-item.add-tools-btn:active {
+  transform: scale(0.92);
+  background: rgba(16,185,129,0.12);
+}
+.tool-item.add-tools-btn::after { display: none; }
+
+.add-tools-icon {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(16,185,129,0.12);
+  border: 1.5px solid rgba(16,185,129,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  color: var(--accent);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.add-tools-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--accent);
+  opacity: 0.85;
+  text-align: center;
+  letter-spacing: 0.2px;
+}
+
 /* ── PROGRESS CARD ── */
 .progress-section {
   padding: 6px 14px 0;
@@ -277,7 +310,6 @@ input:checked + .slider:before { transform: translateX(16px); }
   position: relative;
 }
 
-/* Ambient glow blob */
 .progress-card::before {
   content: '';
   position: absolute;
@@ -304,7 +336,6 @@ input:checked + .slider:before { transform: translateX(16px); }
   letter-spacing: 0.3px;
 }
 
-/* Stat row */
 .prog-stats {
   display: grid; grid-template-columns: repeat(3,1fr);
   gap: 10px; margin-bottom: 18px;
@@ -326,14 +357,9 @@ input:checked + .slider:before { transform: translateX(16px); }
   text-transform: uppercase; letter-spacing: 0.4px;
 }
 
-/* Progress bars */
 .prog-bars { display: flex; flex-direction: column; gap: 10px; }
-.prog-bar-row {
-  display: flex; flex-direction: column; gap: 5px;
-}
-.prog-bar-top {
-  display: flex; justify-content: space-between; align-items: center;
-}
+.prog-bar-row { display: flex; flex-direction: column; gap: 5px; }
+.prog-bar-top { display: flex; justify-content: space-between; align-items: center; }
 .prog-bar-label { font-size: 12px; font-weight: 500; }
 .prog-bar-pct { font-size: 11px; color: var(--accent); font-weight: 700; }
 .prog-bar-bg {
@@ -347,10 +373,7 @@ input:checked + .slider:before { transform: translateX(16px); }
   transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
 }
 
-/* Streak row */
-.prog-streak-row {
-  display: flex; gap: 8px; margin-top: 14px;
-}
+.prog-streak-row { display: flex; gap: 8px; margin-top: 14px; }
 .prog-streak {
   flex: 1; display: flex; align-items: center; gap: 9px;
   background: rgba(16,185,129,0.06);
@@ -358,7 +381,6 @@ input:checked + .slider:before { transform: translateX(16px); }
   border-radius: 13px; padding: 10px 12px;
 }
 .prog-streak-icon { font-size: 20px; line-height: 1; }
-.prog-streak-info {}
 .prog-streak-num {
   font-family: 'Syne', sans-serif;
   font-size: 16px; font-weight: 800; line-height: 1;
@@ -441,7 +463,7 @@ input:checked + .slider:before { transform: translateX(16px); }
 
 <!-- ── QUOTE ── -->
 <div class="quote-area">
-  <span class="quote-mark">"</span>
+  <span class="quote-mark"></span>
   <div class="message-text" id="quoteText">Loading…</div>
   <div class="message-author" id="quoteAuthor"></div>
 </div>
@@ -451,7 +473,10 @@ input:checked + .slider:before { transform: translateX(16px); }
   <span class="section-title">Tools</span>
   <span class="section-sub">Quick access</span>
 </div>
-<div class="tools-grid" id="toolsGrid"></div>
+<div class="tools-grid" id="toolsGrid">
+  <!-- Slots 1–14 filled from localStorage (user-selected tools) -->
+  <!-- Slot 15 is always the "Add Tools" button -->
+</div>
 
 <!-- ── PROGRESS CARD ── -->
 <div class="progress-section">
@@ -465,7 +490,6 @@ input:checked + .slider:before { transform: translateX(16px); }
       <div class="prog-badge" id="prog-level">Level 1</div>
     </div>
 
-    <!-- Stats row -->
     <div class="prog-stats">
       <div class="prog-stat">
         <div class="prog-stat-val" id="stat-sessions">0</div>
@@ -481,7 +505,6 @@ input:checked + .slider:before { transform: translateX(16px); }
       </div>
     </div>
 
-    <!-- Progress bars -->
     <div class="prog-bars">
       <div class="prog-bar-row">
         <div class="prog-bar-top">
@@ -506,7 +529,6 @@ input:checked + .slider:before { transform: translateX(16px); }
       </div>
     </div>
 
-    <!-- Streak row -->
     <div class="prog-streak-row">
       <div class="prog-streak">
         <span class="prog-streak-icon">🔥</span>
@@ -552,6 +574,8 @@ const UI = {
   cStack: document.getElementById('contentStack')
 };
 
+const MAX_TOOLS = 14; // 14 user tools + 1 "Add" button = 15 total
+
 function toggleMenu() {
   UI.menu.style.display = UI.menu.style.display === 'flex' ? 'none' : 'flex';
 }
@@ -562,7 +586,7 @@ function applyTheme() {
   localStorage.setItem('perfectTheme', mode);
 }
 
-// 1. Immediate Theme/Profile Load (Zero Delay)
+// Immediate Theme/Profile Load
 const savedTheme = localStorage.getItem('perfectTheme') || 'dark';
 document.documentElement.setAttribute('data-theme', savedTheme);
 UI.themeToggle.checked = (savedTheme === 'dark');
@@ -570,7 +594,52 @@ UI.themeToggle.checked = (savedTheme === 'dark');
 const prof = JSON.parse(localStorage.getItem('userProfile'));
 if (prof?.avatar) UI.avatar.src = prof.avatar;
 
-// 2. Optimized Data Fetching
+// ── RENDER TOOLS GRID ──
+// New users: auto-fill first 14 tools from tools.json as defaults
+// Returning users: use their saved pinnedTools from localStorage
+// Slot 15 is always the "Add Tools" button → navigates to toolbun.html
+function renderToolsGrid(allTools) {
+  let pinned = JSON.parse(localStorage.getItem('pinnedTools') || 'null');
+
+  // First-time user — no pinnedTools saved yet → default to first 14
+  if (pinned === null) {
+    pinned = allTools.slice(0, MAX_TOOLS).map(t => t.name);
+    localStorage.setItem('pinnedTools', JSON.stringify(pinned));
+  }
+
+  // Build 14-slot array: pinned tools (in saved order) padded with empties
+  const slots = [];
+  for (let i = 0; i < MAX_TOOLS; i++) {
+    const tool = pinned[i] ? allTools.find(t => t.name === pinned[i]) : null;
+    slots.push(tool || null);
+  }
+
+  let html = '';
+
+  slots.forEach((tool, idx) => {
+    if (tool) {
+      html += `
+        <div class="tool-item" onclick="location.href='${tool.link}'" data-tool="${tool.name}">
+          <img src="${tool.image}" alt="${tool.name}">
+          <span class="tool-name">${tool.name}</span>
+        </div>`;
+    } else {
+      // Empty placeholder slot (invisible, keeps grid shape)
+      html += `<div class="tool-item" style="opacity:0;pointer-events:none;border:none;background:transparent;box-shadow:none;"></div>`;
+    }
+  });
+
+  // Slot 15: always the Add Tools button
+  html += `
+    <div class="tool-item add-tools-btn" onclick="location.href='toolbun.html'">
+      <div class="add-tools-icon">＋</div>
+      <span class="add-tools-label">Add Tools</span>
+    </div>`;
+
+  UI.tGrid.innerHTML = html;
+}
+
+// ── DATA FETCHING ──
 async function loadData() {
   try {
     const [qRes, tRes, thumbRes] = await Promise.all([
@@ -579,19 +648,14 @@ async function loadData() {
       fetch("thumbnails.json").then(r => r.json())
     ]);
 
-    // Render Quote
+    // Quote
     UI.quoteText.textContent = qRes.message.text;
     UI.quoteAuthor.textContent = `~ ${qRes.message.author}`;
 
-    // Render Tools
-    UI.tGrid.innerHTML = tRes.map(t => `
-      <div class="tool-item" onclick="location.href='${t.link}'">
-        <img src="${t.image}" alt="${t.name || ''}">
-        <span class="tool-name">${t.name || ''}</span>
-      </div>
-    `).join('');
+    // Tools grid (with pinnedTools from localStorage)
+    renderToolsGrid(tRes);
 
-    // Render Content
+    // Content cards
     UI.cStack.innerHTML = thumbRes.map(i => `
       <div class="chart-card" onclick="window.open('${i.link}', '_blank')">
         <img src="${i.image}" loading="lazy">
@@ -604,52 +668,103 @@ async function loadData() {
 
   } catch (err) {
     console.error("Loading Error:", err);
+    // Even on error, show the Add Tools button
+    UI.tGrid.innerHTML = `
+      <div class="tool-item" onclick="location.href='${tool.link}'" data-tool="${tool.name}">
+          <img src="${tool.image}" alt="${tool.name}">
+          <span class="tool-name">${tool.name}</span>
+        </div>`;
+    } else {
+      // Empty placeholder slot (invisible, keeps grid shape)
+      html += `<div class="tool-item" style="opacity:0;pointer-events:none;border:none;background:transparent;box-shadow:none;"></div>`;
+    }
+  });
+
+  // Slot 15: always the Add Tools button
+  html += `
+    <div class="tool-item add-tools-btn" onclick="location.href='toolbun.html'">
+      <div class="add-tools-icon">＋</div>
+      <span class="add-tools-label">Add Tools</span>
+    </div>`;
+
+  UI.tGrid.innerHTML = html;
+}
+
+// ── DATA FETCHING ──
+async function loadData() {
+  try {
+    const [qRes, tRes, thumbRes] = await Promise.all([
+      fetch("text.json").then(r => r.json()),
+      fetch("tools.json").then(r => r.json()),
+      fetch("thumbnails.json").then(r => r.json())
+    ]);
+
+    // Quote
+    UI.quoteText.textContent = qRes.message.text;
+    UI.quoteAuthor.textContent = `~ ${qRes.message.author}`;
+
+    // Tools grid (with pinnedTools from localStorage)
+    renderToolsGrid(tRes);
+
+    // Content cards
+    UI.cStack.innerHTML = thumbRes.map(i => `
+      <div class="chart-card" onclick="window.open('${i.link}', '_blank')">
+        <img src="${i.image}" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">${i.title}</div>
+          <div class="card-desc">${i.desc}</div>
+        </div>
+      </div>
+    `).join('');
+
+  } catch (err) {
+    console.error("Loading Error:", err);
+    // Even on error, show the Add Tools button
+    UI.tGrid.innerHTML = `
+      <div class="tool-item add-tools-btn" onclick="location.href='toolbun.html'">
+        <div class="add-tools-icon">＋</div>
+        <span class="add-tools-label">Add Tools</span>
+      </div>`;
   }
 }
 
 loadData();
 
-// ── PROGRESS LOGIC (REAL TRACKING) ──
+// ── PROGRESS LOGIC ──
 (function() {
   const todayStr = new Date().toDateString();
   const now = Date.now();
 
-  // Load saved progress
   let prog = JSON.parse(localStorage.getItem('homeProgress') || '{}');
 
-  // ── Defaults ──
   if (!prog.sessions)    prog.sessions    = 0;
   if (!prog.toolClicks)  prog.toolClicks  = {};
   if (!prog.streak)      prog.streak      = { days: 0, lastDate: null };
   if (!prog.activeDates) prog.activeDates = [];
   if (!prog.todayMins)   prog.todayMins   = { date: null, totalSecs: 0 };
 
-  // ── Sessions: count once per tab (not per refresh) ──
   if (!sessionStorage.getItem('anxro_session_counted')) {
     prog.sessions++;
     sessionStorage.setItem('anxro_session_counted', '1');
   }
 
-  // ── Active dates: unique calendar days ──
   if (!prog.activeDates.includes(todayStr)) {
     prog.activeDates.push(todayStr);
     if (prog.activeDates.length > 365) prog.activeDates.shift();
   }
 
-  // ── Streak: real consecutive-day logic ──
   const yesterday = new Date(now - 86400000).toDateString();
   if (prog.streak.lastDate !== todayStr) {
     if (prog.streak.lastDate === yesterday) {
-      prog.streak.days++;              // consecutive day
+      prog.streak.days++;
     } else if (!prog.streak.lastDate) {
-      prog.streak.days = 1;            // very first visit
+      prog.streak.days = 1;
     } else {
-      prog.streak.days = 1;            // missed a day — reset
+      prog.streak.days = 1;
     }
     prog.streak.lastDate = todayStr;
   }
 
-  // ── Time tracking: real minutes on page today ──
   if (prog.todayMins.date !== todayStr) {
     prog.todayMins = { date: todayStr, totalSecs: 0 };
   }
@@ -657,10 +772,8 @@ loadData();
     sessionStorage.setItem('anxro_tab_start', String(now));
   }
 
-  // Save base state
   localStorage.setItem('homeProgress', JSON.stringify(prog));
 
-  // Tick every 30s — accumulate real seconds for today
   function tickTime() {
     const tabStart = parseInt(sessionStorage.getItem('anxro_tab_start') || String(now));
     const sessionSecs = Math.round((Date.now() - tabStart) / 1000);
@@ -675,10 +788,9 @@ loadData();
   }
   setInterval(tickTime, 30000);
 
-  // ── Tool tracking: per unique tool name ──
   document.addEventListener('click', (e) => {
     const ti = e.target.closest('.tool-item');
-    if (ti) {
+    if (ti && !ti.classList.contains('add-tools-btn')) {
       const name = ti.querySelector('.tool-name')?.textContent?.trim() || ti.dataset.tool || 'tool';
       const p2 = JSON.parse(localStorage.getItem('homeProgress') || '{}');
       if (!p2.toolClicks) p2.toolClicks = {};
@@ -687,16 +799,12 @@ loadData();
     }
   });
 
-  // ── Compute display values ──
   const uniqueToolsUsed = Object.keys(prog.toolClicks).length;
-
   const savedFavs = JSON.parse(localStorage.getItem('favorites') || '[]');
-
   const libProg = JSON.parse(localStorage.getItem('mlp_progress') || '{}');
   const openedLib = Object.values(libProg.opened || {}).reduce((a, b) => a + (Array.isArray(b) ? b.length : 0), 0);
   const libPct = Math.min(100, Math.round((openedLib / 50) * 100));
-
-  const totalTools = Math.max(document.querySelectorAll('.tool-item').length || 20, 1);
+  const totalTools = MAX_TOOLS;
   const labPct = Math.min(100, Math.round((uniqueToolsUsed / totalTools) * 100));
 
   const activityScore = Math.min(100, Math.round(
@@ -707,10 +815,8 @@ loadData();
 
   const xp = (prog.sessions * 2) + (prog.activeDates.length * 5) + (uniqueToolsUsed * 3) + (savedFavs.length * 2);
   const level = xp < 20 ? 1 : xp < 60 ? 2 : xp < 140 ? 3 : xp < 260 ? 4 : 5;
-
   const minsToday = Math.min(999, Math.floor((prog.todayMins.totalSecs || 0) / 60));
 
-  // ── Render ──
   document.getElementById('stat-sessions').textContent = prog.sessions;
   document.getElementById('stat-tools').textContent = uniqueToolsUsed;
   document.getElementById('stat-days').textContent = prog.activeDates.length;
