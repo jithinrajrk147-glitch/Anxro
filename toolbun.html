@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Tools | Anxro</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --bg: #010d08;
+  --surface: #064e3b;
+  --surface-bright: #059669;
+  --surface-card: #0a1f14;
+  --accent: #10b981;
+  --accent-glow: rgba(16,185,129,0.22);
+  --text: #ecfdf5;
+  --text-dim: #6ee7b7;
+  --text-muted: #34795a;
+  --border: rgba(16,185,129,0.14);
+  --nav-height: 56px;
+}
+[data-theme="light"] {
+  --bg: #f0fdf4;
+  --surface: #10b981;
+  --surface-bright: #059669;
+  --surface-card: #ffffff;
+  --accent: #064e3b;
+  --accent-glow: rgba(6,78,59,0.12);
+  --text: #0a1f14;
+  --text-dim: #065f46;
+  --text-muted: #6ee7b7;
+  --border: rgba(6,78,59,0.12);
+}
+
+*, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+  padding-bottom: 110px;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image: radial-gradient(circle, rgba(16,185,129,0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ── TOP BAR ── */
+.top-bar {
+  height: var(--nav-height);
+  display: flex; align-items: center;
+  padding: 0 14px;
+  background: rgba(1,13,8,0.92);
+  backdrop-filter: blur(20px);
+  position: sticky; top: 0; z-index: 100;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  gap: 10px;
+}
+[data-theme="light"] .top-bar { background: rgba(240,253,244,0.94); }
+
+.back-btn {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: rgba(16,185,129,0.1);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; cursor: pointer; color: var(--accent);
+  flex-shrink: 0;
+  transition: background 0.2s;
+  text-decoration: none;
+}
+.back-btn:active { background: rgba(16,185,129,0.22); }
+
+.top-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px; font-weight: 800;
+  flex: 1; text-align: center;
+  letter-spacing: -0.3px;
+}
+
+.slot-badge {
+  font-size: 11px; font-weight: 700;
+  background: rgba(16,185,129,0.12);
+  color: var(--accent);
+  border: 1px solid rgba(16,185,129,0.25);
+  padding: 4px 10px; border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── PINNED PREVIEW BAR ── */
+.pinned-bar {
+  background: var(--surface-card);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 14px;
+  position: sticky; top: var(--nav-height); z-index: 99;
+}
+
+.pinned-label {
+  font-size: 10px; font-weight: 700;
+  color: var(--text-muted); text-transform: uppercase;
+  letter-spacing: 0.8px; margin-bottom: 8px;
+}
+
+.pinned-slots {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.pinned-slot {
+  height: 40px; border-radius: 10px;
+  background: rgba(16,185,129,0.05);
+  border: 1.5px dashed rgba(16,185,129,0.2);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.pinned-slot.filled {
+  border-style: solid;
+  border-color: rgba(16,185,129,0.35);
+  background: rgba(16,185,129,0.08);
+  cursor: pointer;
+}
+.pinned-slot.filled:active { opacity: 0.7; }
+
+.pinned-slot img {
+  width: 26px; height: 26px; object-fit: contain;
+}
+
+.pinned-slot .remove-x {
+  position: absolute; top: 1px; right: 2px;
+  font-size: 9px; color: var(--accent); opacity: 0.6;
+  line-height: 1;
+}
+
+.pinned-slot.filled:hover .remove-x,
+.pinned-slot.filled:active .remove-x { opacity: 1; }
+
+/* Row 2 of pinned (slots 8-14) */
+.pinned-slots-2 {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-top: 6px;
+}
+
+/* ── SAVE BUTTON ── */
+.save-btn {
+  display: block; width: calc(100% - 28px);
+  margin: 12px 14px 0;
+  padding: 14px;
+  background: var(--accent);
+  color: #010d08;
+  font-family: 'Syne', sans-serif;
+  font-size: 14px; font-weight: 800;
+  border: none; border-radius: 14px;
+  cursor: pointer;
+  letter-spacing: 0.2px;
+  transition: opacity 0.2s, transform 0.15s;
+  position: sticky; bottom: 14px; z-index: 98;
+  box-shadow: 0 4px 20px rgba(16,185,129,0.35);
+}
+.save-btn:active { transform: scale(0.97); opacity: 0.85; }
+
+/* ── SEARCH ── */
+.search-wrap {
+  padding: 14px 14px 6px;
+  position: relative; z-index: 1;
+}
+.search-input {
+  width: 100%;
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 14px 10px 38px;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-input:focus { border-color: rgba(16,185,129,0.45); }
+.search-icon {
+  position: absolute; left: 26px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px; opacity: 0.4; pointer-events: none;
+}
+
+/* ── FILTER TABS ── */
+.filter-row {
+  display: flex; gap: 7px;
+  padding: 0 14px 10px;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  position: relative; z-index: 1;
+}
+.filter-row::-webkit-scrollbar { display: none; }
+
+.filter-chip {
+  flex-shrink: 0;
+  padding: 6px 13px; border-radius: 999px;
+  font-size: 11px; font-weight: 700;
+  background: rgba(16,185,129,0.07);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.filter-chip.active {
+  background: var(--accent);
+  color: #010d08;
+  border-color: var(--accent);
+}
+.filter-chip:active { opacity: 0.7; }
+
+/* ── TOOLS LIST ── */
+.tools-section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px; font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.6px;
+  padding: 6px 16px 8px;
+  position: relative; z-index: 1;
+}
+
+.tools-all-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 0 14px 8px;
+  position: relative; z-index: 1;
+}
+
+.tool-pick-item {
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 6px 10px;
+  cursor: pointer;
+  background: var(--surface-card);
+  border: 1.5px solid var(--border);
+  transition: all 0.18s ease;
+  position: relative;
+  overflow: hidden;
+  min-height: 80px;
+}
+
+.tool-pick-item::before {
+  content: '';
+  position: absolute; inset: 0; border-radius: 16px;
+  background: linear-gradient(135deg, rgba(16,185,129,0.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.tool-pick-item.pinned {
+  border-color: var(--accent);
+  background: rgba(16,185,129,0.1);
+}
+
+.tool-pick-item:active { transform: scale(0.93); }
+
+.tool-pick-item img {
+  width: 40px; height: 40px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+  flex-shrink: 0;
+}
+
+.tool-pick-name {
+  font-size: 9.5px; font-weight: 600;
+  text-align: center; color: var(--text);
+  opacity: 0.8; width: 100%;
+  padding: 0 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  letter-spacing: 0.1px;
+}
+
+/* Checkmark when pinned */
+.pin-check {
+  position: absolute;
+  top: 5px; right: 6px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  color: #010d08;
+  font-weight: 900;
+  line-height: 1;
+}
+.tool-pick-item.pinned .pin-check { display: flex; }
+
+/* Full slot warning */
+.full-toast {
+  position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: #1a2e1a;
+  border: 1px solid rgba(16,185,129,0.3);
+  color: var(--text-dim);
+  font-size: 13px; font-weight: 600;
+  padding: 11px 20px; border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  z-index: 200;
+  opacity: 0; pointer-events: none;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+.full-toast.show {
+  opacity: 1; transform: translateX(-50%) translateY(0);
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center; padding: 40px 20px;
+  color: var(--text-muted);
+  font-size: 13px; font-weight: 500;
+  display: none;
+}
+.empty-state-icon { font-size: 32px; margin-bottom: 10px; }
+
+</style>
+</head>
+<body>
+
+<!-- ── TOP BAR ── -->
+<nav class="top-bar">
+  <a class="back-btn" href="home.html" onclick="history.back(); return false;">&#8592;</a>
+  <span class="top-title">Add Tools</span>
+  <div class="slot-badge" id="slotBadge">0 / 14</div>
+</nav>
+
+<!-- ── PINNED PREVIEW ── -->
+<div class="pinned-bar">
+  <div class="pinned-label">Pinned to Home (tap to remove)</div>
+  <!-- Row 1: slots 1–7 -->
+  <div class="pinned-slots" id="pinnedRow1"></div>
+  <!-- Row 2: slots 8–14 -->
+  <div class="pinned-slots-2" id="pinnedRow2"></div>
+</div>
+
+<!-- ── SAVE BUTTON ── -->
+<button class="save-btn" onclick="saveAndGoHome()">✓ Save &amp; Go Home</button>
+
+<!-- ── SEARCH ── -->
+<div class="search-wrap">
+  <span class="search-icon">🔍</span>
+  <input class="search-input" id="searchInput" type="text" placeholder="Search tools…" oninput="filterTools()">
+</div>
+
+<!-- ── FILTER TABS ── -->
+<div class="filter-row" id="filterRow">
+  <div class="filter-chip active" data-cat="all" onclick="setCategory('all', this)">All</div>
+</div>
+
+<!-- ── ALL TOOLS GRID ── -->
+<div class="tools-section-title">All Tools — tap to pin / unpin</div>
+<div class="tools-all-grid" id="allToolsGrid"></div>
+<div class="empty-state" id="emptyState">
+  <div class="empty-state-icon">🔍</div>
+  No tools match your search
+</div>
+
+<!-- ── TOAST ── -->
+<div class="full-toast" id="fullToast">14 slots full — remove a tool first</div>
+
+<script>
+const MAX_PINS = 14;
+let allTools = [];
+let pinned = JSON.parse(localStorage.getItem('pinnedTools') || '[]'); // array of tool names
+let activeCategory = 'all';
+let searchQuery = '';
+
+// ── INIT ──
+async function init() {
+  try {
+    allTools = await fetch('tools.json').then(r => r.json());
+  } catch(e) {
+    // Fallback demo tools so page is never blank
+    allTools = [];
+    console.warn('tools.json not found, showing empty state.');
+  }
+
+  buildCategoryTabs();
+  renderPinnedBar();
+  renderAllTools();
+}
+
+// ── CATEGORY TABS ──
+function buildCategoryTabs() {
+  const cats = ['All', ...new Set(allTools.map(t => t.category || 'General').filter(Boolean))];
+  const row = document.getElementById('filterRow');
+  row.innerHTML = '';
+  cats.forEach((cat, i) => {
+    const chip = document.createElement('div');
+    chip.className = 'filter-chip' + (i === 0 ? ' active' : '');
+    chip.dataset.cat = cat.toLowerCase();
+    chip.textContent = cat;
+    chip.onclick = () => setCategory(cat.toLowerCase(), chip);
+    row.appendChild(chip);
+  });
+}
+
+function setCategory(cat, el) {
+  activeCategory = cat;
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  renderAllTools();
+}
+
+// ── SEARCH ──
+function filterTools() {
+  searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
+  renderAllTools();
+}
+
+// ── RENDER PINNED BAR ──
+function renderPinnedBar() {
+  const row1 = document.getElementById('pinnedRow1');
+  const row2 = document.getElementById('pinnedRow2');
+  row1.innerHTML = '';
+  row2.innerHTML = '';
+
+  for (let i = 0; i < 14; i++) {
+    const name = pinned[i];
+    const tool = name ? allTools.find(t => t.name === name) : null;
+    const slot = document.createElement('div');
+    slot.className = 'pinned-slot' + (tool ? ' filled' : '');
+    slot.dataset.idx = i;
+
+    if (tool) {
+      slot.innerHTML = `<img src="${tool.image}" alt="${tool.name}"><span class="remove-x">✕</span>`;
+      slot.onclick = () => unpinAt(i);
+      slot.title = tool.name;
+    }
+
+    if (i < 7) row1.appendChild(slot);
+    else row2.appendChild(slot);
+  }
+
+  // Update badge
+  document.getElementById('slotBadge').textContent = `${pinned.length} / 14`;
+}
+
+// ── RENDER ALL TOOLS ──
+function renderAllTools() {
+  const grid = document.getElementById('allToolsGrid');
+  const empty = document.getElementById('emptyState');
+
+  let filtered = allTools.filter(t => {
+    const matchCat = activeCategory === 'all' || (t.category || 'general').toLowerCase() === activeCategory;
+    const matchSearch = !searchQuery || t.name.toLowerCase().includes(searchQuery);
+    return matchCat && matchSearch;
+  });
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  grid.innerHTML = filtered.map(t => {
+    const isPinned = pinned.includes(t.name);
+    return `
+      <div class="tool-pick-item${isPinned ? ' pinned' : ''}" data-name="${t.name}" onclick="togglePin('${t.name}')">
+        <div class="pin-check">✓</div>
+        <img src="${t.image}" alt="${t.name}">
+        <span class="tool-pick-name">${t.name}</span>
+      </div>`;
+  }).join('');
+}
+
+// ── PIN / UNPIN ──
+function togglePin(name) {
+  if (pinned.includes(name)) {
+    // Unpin
+    pinned = pinned.filter(n => n !== name);
+  } else {
+    // Pin
+    if (pinned.length >= MAX_PINS) {
+      showToast();
+      return;
+    }
+    pinned.push(name);
+  }
+  renderPinnedBar();
+  renderAllTools();
+}
+
+function unpinAt(idx) {
+  pinned.splice(idx, 1);
+  renderPinnedBar();
+  renderAllTools();
+}
+
+// ── TOAST ──
+let toastTimer;
+function showToast() {
+  const t = document.getElementById('fullToast');
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ── SAVE ──
+function saveAndGoHome() {
+  localStorage.setItem('pinnedTools', JSON.stringify(pinned));
+  // Go back to home — try history first, fallback to home.html
+  if (document.referrer && document.referrer.includes('home')) {
+    history.back();
+  } else {
+    window.location.href = 'home.html';
+  }
+}
+
+// ── START ──
+init();
+</script>
+</body>
+</html>
