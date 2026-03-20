@@ -1,1164 +1,695 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>DevPad</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0e0e14;
+  --s1: #16161f;
+  --s2: #1e1e2a;
+  --br: #2c2c3e;
+  --a:  #f0a500;
+  --a2: #ffd080;
+  --t:  #e4e4f0;
+  --m:  #5a5a78;
+  --cy: #00c9be;
+  --pu: #9b6dff;
+  --rd: #ff5f7e;
+  --gn: #3dffc0;
+  --fh: 'Outfit', sans-serif;
+  --fm: 'DM Mono', monospace;
+}
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html,body { height:100%; background:var(--bg); color:var(--t); font-family:var(--fh); overflow:hidden; }
 
-        :root {
-            --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --primary-solid: #6366f1;
-            --bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            --surface: #ffffff;
-            --text: #1e293b;
-            --border: #e2e8f0;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-        }
+/* APP SHELL */
+#app { display:flex; flex-direction:column; height:100dvh; max-width:480px; margin:0 auto; }
 
-        [data-theme="dark"] {
-            --bg: #0f172a;
-            --surface: #1e293b;
-            --text: #f1f5f9;
-            --border: #334155;
-        }
+/* TOP BAR */
+#bar {
+  display:flex; align-items:center; padding:12px 16px 10px;
+  background:var(--s1); border-bottom:1px solid var(--br); flex-shrink:0;
+  gap:10px;
+}
+#bar .logo { font-size:17px; font-weight:800; letter-spacing:-.4px;
+  background:linear-gradient(90deg,var(--a),var(--pu)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+#bar .page-title { flex:1; font-size:14px; font-weight:700; color:var(--t); min-width:0;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+#new-btn {
+  width:32px; height:32px; border-radius:9px; background:var(--a); border:none;
+  color:#000; font-size:20px; font-weight:700; cursor:pointer; display:flex;
+  align-items:center; justify-content:center; flex-shrink:0; transition:opacity .15s;
+}
+#new-btn:active { opacity:.7; }
+#new-btn.hidden { display:none; }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            height: 100vh;
-            overflow: hidden;
-            min-height: 100vh;
-        }
+/* PANELS */
+.panel { display:none; flex:1; flex-direction:column; overflow:hidden; }
+.panel.on { display:flex; }
 
-        .app {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-        }
+/* ── NOTES ── */
+#notes-list-wrap { flex:1; overflow-y:auto; padding:10px 14px; }
+#notes-list-wrap::-webkit-scrollbar { display:none; }
 
-        .header {
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+.note-card {
+  background:var(--s1); border:1px solid var(--br); border-radius:12px;
+  padding:13px 14px; margin-bottom:10px; cursor:pointer; transition:border-color .15s;
+  animation: fadeUp .2s ease;
+}
+@keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+.note-card:active { border-color:var(--a); }
+.note-card .nc-title { font-size:14px; font-weight:700; margin-bottom:4px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.note-card .nc-preview { font-size:12px; color:var(--m); line-height:1.5;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.note-card .nc-foot { display:flex; justify-content:space-between; align-items:center; margin-top:8px; }
+.note-card .nc-date { font-family:var(--fm); font-size:10px; color:var(--m); }
+.tag { display:inline-block; font-size:9px; font-family:var(--fm); font-weight:500;
+  padding:2px 7px; border-radius:5px; text-transform:uppercase; letter-spacing:.5px; }
+.tag-note    { background:rgba(0,201,190,.15); color:var(--cy); }
+.tag-feature { background:rgba(155,109,255,.15); color:var(--pu); }
+.tag-idea    { background:rgba(240,165,0,.15); color:var(--a2); }
+.tag-bug     { background:rgba(255,95,126,.15); color:var(--rd); }
 
-        .btn {
-            padding: 8px 12px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            background: var(--primary);
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
-        }
+.empty-state { text-align:center; padding:60px 20px; color:var(--m); }
+.empty-state .es-icon { font-size:40px; margin-bottom:12px; }
+.empty-state p { font-size:13px; line-height:1.6; }
 
-        .btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-        }
+/* NOTE EDITOR */
+#note-editor { display:none; flex:1; flex-direction:column; overflow:hidden; }
+#note-editor.on { display:flex; }
+#ed-top {
+  display:flex; align-items:center; gap:8px; padding:10px 14px;
+  border-bottom:1px solid var(--br); flex-shrink:0;
+}
+#ed-back {
+  width:32px; height:32px; border-radius:9px; background:var(--s2);
+  border:1px solid var(--br); color:var(--t); font-size:16px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+}
+#ed-title { flex:1; background:transparent; border:none; outline:none;
+  font-family:var(--fh); font-size:15px; font-weight:700; color:var(--t); min-width:0; }
+#ed-title::placeholder { color:var(--m); }
+#ed-tag { padding:5px 9px; border-radius:7px; border:1px solid var(--br);
+  background:var(--s2); color:var(--t); font-family:var(--fm); font-size:11px; outline:none; }
+#ed-del { width:32px; height:32px; border-radius:9px; background:transparent;
+  border:1px solid var(--br); color:var(--m); font-size:15px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; }
+#ed-del:active { background:var(--rd); color:#fff; border-color:var(--rd); }
 
-        .btn-icon {
-            padding: 8px;
-            background: var(--bg);
-            color: var(--text);
-            border: 1px solid var(--border);
-        }
+#ed-fmt {
+  display:flex; gap:6px; padding:8px 14px; overflow-x:auto; flex-shrink:0;
+  border-bottom:1px solid var(--br); scrollbar-width:none;
+}
+#ed-fmt::-webkit-scrollbar { display:none; }
+.fb { padding:5px 10px; border-radius:7px; border:1px solid var(--br);
+  background:var(--s2); color:var(--m); font-family:var(--fm); font-size:11px;
+  cursor:pointer; white-space:nowrap; flex-shrink:0; transition:all .1s; }
+.fb:active { background:var(--a); color:#000; border-color:var(--a); }
 
-        .btn-danger {
-            background: var(--danger);
-        }
+#ed-body { flex:1; padding:14px 16px; outline:none; overflow-y:auto;
+  font-family:var(--fm); font-size:13px; line-height:1.9; color:var(--t);
+  border:none; background:transparent; resize:none; }
+#ed-body::placeholder { color:var(--m); }
+#ed-body::-webkit-scrollbar { display:none; }
 
-        .search {
-            flex: 1;
-            padding: 8px 12px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: var(--bg);
-            color: var(--text);
-            font-size: 16px;
-        }
+#ed-status { padding:6px 16px; display:flex; gap:14px;
+  font-family:var(--fm); font-size:10px; color:var(--m);
+  border-top:1px solid var(--br); flex-shrink:0; }
+#ed-status span { color:var(--cy); }
 
-        .main {
-            flex: 1;
-            display: flex;
-            overflow: hidden;
-        }
+/* ── SLIDES ── */
+#slides-wrap { flex:1; display:flex; flex-direction:column; overflow:hidden; }
 
-        .sidebar {
-            width: 280px;
-            background: var(--surface);
-            border-right: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-            position: absolute;
-            height: calc(100vh - 60px);
-            z-index: 100;
-        }
+#slide-canvas {
+  flex:1; margin:14px; border-radius:14px; border:1px solid var(--br);
+  background:var(--s1); padding:28px 22px; display:flex; flex-direction:column;
+  gap:14px; position:relative; overflow:hidden;
+}
+#slide-canvas::before {
+  content:''; position:absolute; top:-50px; right:-50px; width:150px; height:150px;
+  border-radius:50%; background:radial-gradient(circle,rgba(155,109,255,.12),transparent 70%); pointer-events:none;
+}
+#sl-head { background:transparent; border:none; outline:none; border-bottom:1.5px solid var(--br);
+  padding-bottom:10px; font-family:var(--fh); font-size:20px; font-weight:800;
+  color:var(--a); width:100%; }
+#sl-head::placeholder { color:rgba(240,165,0,.3); }
+#sl-body { flex:1; background:transparent; border:none; outline:none; resize:none;
+  font-family:var(--fm); font-size:12.5px; color:var(--t); line-height:1.9; width:100%; }
+#sl-body::placeholder { color:var(--m); }
+#sl-num { position:absolute; bottom:10px; right:14px;
+  font-family:var(--fm); font-size:10px; color:var(--m); }
 
-        .sidebar.open {
-            transform: translateX(0);
-        }
+#slide-thumbs {
+  display:flex; gap:8px; padding:0 14px 10px; overflow-x:auto; flex-shrink:0;
+  scrollbar-width:none;
+}
+#slide-thumbs::-webkit-scrollbar { display:none; }
+.sthumb {
+  flex-shrink:0; width:72px; height:44px; border-radius:8px; border:1.5px solid var(--br);
+  background:var(--s2); cursor:pointer; display:flex; align-items:center; justify-content:center;
+  flex-direction:column; padding:5px; overflow:hidden; transition:border-color .15s;
+}
+.sthumb.active { border-color:var(--a); }
+.sthumb p { font-size:7px; color:var(--m); line-height:1.3; text-align:center;
+  width:100%; overflow:hidden; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; }
+.sthumb .stn { font-family:var(--fm); font-size:7px; color:var(--a); font-weight:700; margin-bottom:2px; }
 
-        .notes-list {
-            flex: 1;
-            overflow-y: auto;
-            padding: 8px;
-        }
+#slides-ctrl {
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  padding:10px 14px; border-top:1px solid var(--br); flex-shrink:0;
+}
+.sc-btn { flex:1; padding:9px 0; border-radius:9px; border:1px solid var(--br);
+  background:var(--s2); color:var(--t); font-family:var(--fh); font-size:12px;
+  font-weight:600; cursor:pointer; transition:all .1s; }
+.sc-btn:active { background:var(--a); color:#000; border-color:var(--a); }
+.sc-btn.del:active { background:var(--rd); color:#fff; border-color:var(--rd); }
+#sl-counter { font-family:var(--fm); font-size:12px; color:var(--m);
+  min-width:46px; text-align:center; flex-shrink:0; }
 
-        .note {
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            cursor: pointer;
-            border: 1px solid var(--border);
-            background: var(--bg);
-            position: relative;
-        }
+/* ── SHEET ── */
+#sheet-wrap { flex:1; overflow:auto; -webkit-overflow-scrolling:touch; }
+#sheet-wrap::-webkit-scrollbar { display:none; }
+#sh-table { border-collapse:collapse; }
+#sh-table th, #sh-table td { border:1px solid var(--br); }
 
-        .note.active {
-            background: var(--primary-solid);
-            color: white;
-            border-color: var(--primary-solid);
-        }
+.sh-corner { background:var(--s1); width:36px; min-width:36px; position:sticky; top:0; left:0; z-index:4; }
+.sh-col { background:var(--s1); min-width:80px; padding:5px 4px; text-align:center;
+  font-family:var(--fm); font-size:10px; color:var(--m); position:sticky; top:0; z-index:2; font-weight:700; }
+.sh-row { background:var(--s1); min-width:36px; text-align:center;
+  font-family:var(--fm); font-size:10px; color:var(--m); position:sticky; left:0; z-index:1; }
+.sh-cell { min-width:80px; height:30px; background:var(--bg); padding:0; }
+.sh-cell input { width:100%; height:100%; padding:0 6px; background:transparent;
+  border:none; outline:none; font-family:var(--fm); font-size:11.5px; color:var(--t); }
+.sh-cell.focus { background:rgba(155,109,255,.12); outline:1.5px solid var(--pu); outline-offset:-1.5px; z-index:1; }
+.sh-cell.formula input { color:var(--cy); }
 
-        .note-title {
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
+#sh-bar { display:flex; align-items:center; gap:8px; padding:8px 12px;
+  border-top:1px solid var(--br); flex-shrink:0; background:var(--s1); }
+#sh-ref { width:48px; text-align:center; font-family:var(--fm); font-size:11px;
+  color:var(--cy); background:var(--s2); border:1px solid var(--br); border-radius:6px; padding:5px 4px; }
+#sh-formula { flex:1; background:var(--s2); border:1px solid var(--br); border-radius:6px;
+  padding:5px 9px; font-family:var(--fm); font-size:11px; color:var(--t); outline:none; }
+#sh-formula:focus { border-color:var(--a); }
+#sh-stats { padding:4px 14px; font-family:var(--fm); font-size:10px; color:var(--m);
+  display:flex; gap:12px; flex-shrink:0; }
+#sh-stats span { color:var(--gn); }
 
-        .note-preview {
-            font-size: 12px;
-            opacity: 0.7;
-            line-height: 1.3;
-        }
+/* ── TOOLS ── */
+#tools-wrap { flex:1; overflow-y:auto; padding:12px 14px; }
+#tools-wrap::-webkit-scrollbar { display:none; }
+.tool-card {
+  background:var(--s1); border:1px solid var(--br); border-radius:12px;
+  padding:14px; margin-bottom:10px;
+}
+.tool-card h3 { font-size:13px; font-weight:700; margin-bottom:10px; display:flex; align-items:center; gap:7px; }
+.tool-card h3 .icon { font-size:16px; }
+.tool-row { display:flex; gap:8px; margin-bottom:8px; flex-wrap:wrap; }
+.tool-input { flex:1; min-width:0; padding:8px 10px; border-radius:8px;
+  border:1px solid var(--br); background:var(--s2); color:var(--t);
+  font-family:var(--fm); font-size:12px; outline:none; }
+.tool-input:focus { border-color:var(--a); }
+.tool-btn { padding:8px 14px; border-radius:8px; border:none; background:var(--a);
+  color:#000; font-family:var(--fh); font-size:12px; font-weight:700; cursor:pointer; white-space:nowrap; }
+.tool-btn:active { opacity:.8; }
+.tool-btn.sec { background:var(--s2); color:var(--t); border:1px solid var(--br); }
+.tool-output { background:var(--s2); border-radius:8px; padding:10px 12px;
+  font-family:var(--fm); font-size:12px; color:var(--cy); line-height:1.7;
+  min-height:38px; word-break:break-all; white-space:pre-wrap; }
 
-        .note-meta {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 8px;
-            font-size: 12px;
-        }
-
-        .note-delete {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: var(--danger);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            font-size: 12px;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-
-        .note:hover .note-delete {
-            opacity: 1;
-        }
-
-        .editor {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            background: var(--surface);
-        }
-
-        .editor-header {
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .title-input {
-            flex: 1;
-            padding: 8px 12px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            background: var(--bg);
-            color: var(--text);
-            font-size: 16px;
-            font-weight: 600;
-            min-width: 200px;
-        }
-
-        .mode-toggle {
-            display: flex;
-            background: var(--bg);
-            border-radius: 6px;
-            padding: 2px;
-        }
-
-        .mode-btn {
-            padding: 6px 12px;
-            border: none;
-            background: transparent;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .mode-btn.active {
-            background: var(--primary-solid);
-            color: white;
-        }
-
-        .editor-content {
-            flex: 1;
-            position: relative;
-        }
-
-        .text-editor {
-            width: 100%;
-            height: 100%;
-            padding: 16px;
-            border: none;
-            outline: none;
-            resize: none;
-            font-family: inherit;
-            font-size: 16px;
-            line-height: 1.5;
-            background: transparent;
-            color: var(--text);
-        }
-
-        .canvas-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            display: none;
-        }
-
-        .canvas-container.active {
-            display: block;
-        }
-
-        .drawing-canvas {
-            width: 100%;
-            height: calc(100% - 60px);
-            margin-top: 60px;
-            cursor: crosshair;
-            background: #fafafa;
-            border-radius: 0 0 8px 8px;
-        }
-
-        .canvas-toolbar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            overflow-x: auto;
-            z-index: 10;
-        }
-
-        .tool-section {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            white-space: nowrap;
-        }
-
-        .tool-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text);
-            opacity: 0.7;
-            margin-right: 4px;
-        }
-
-        .tool-group {
-            display: flex;
-            gap: 4px;
-            flex-wrap: wrap;
-        }
-
-        .tool-btn {
-            padding: 6px 8px;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            background: var(--bg);
-            cursor: pointer;
-            font-size: 12px;
-            transition: all 0.2s;
-        }
-
-        .tool-btn.active {
-            background: var(--primary-solid);
-            color: white;
-            border-color: var(--primary-solid);
-            transform: scale(1.05);
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
-        }
-
-        .color-picker {
-            display: flex;
-            gap: 4px;
-            align-items: center;
-        }
-
-        .color {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.2s;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-        }
-
-        .color.active {
-            border-color: var(--text);
-            transform: scale(1.1);
-        }
-
-        .size-control {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .size-slider {
-            width: 80px;
-        }
-
-        .font-controls {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .font-select {
-            padding: 4px 8px;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            background: var(--bg);
-            color: var(--text);
-            font-size: 12px;
-        }
-
-        .text-input {
-            padding: 6px 8px;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            background: var(--bg);
-            color: var(--text);
-            font-size: 12px;
-            width: 120px;
-        }
-
-        .toolbar-separator {
-            width: 1px;
-            height: 30px;
-            background: var(--border);
-            margin: 0 4px;
-        }
-
-        .empty {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #64748b;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 99;
-            display: none;
-        }
-
-        .overlay.open {
-            display: block;
-        }
-
-        .modal {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--surface);
-            border-radius: 12px;
-            padding: 20px;
-            z-index: 101;
-            min-width: 280px;
-            display: none;
-        }
-
-        .modal.open {
-            display: block;
-        }
-
-        .modal input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: var(--bg);
-            color: var(--text);
-            font-size: 16px;
-            margin: 12px 0;
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 8px;
-            justify-content: flex-end;
-            margin-top: 16px;
-        }
-
-        @media (min-width: 768px) {
-            .sidebar {
-                position: relative;
-                transform: translateX(0);
-                height: auto;
-            }
-        }
-
-        @media (max-width: 767px) {
-            .sidebar {
-                width: 100%;
-            }
-            
-            .header {
-                padding: 8px 12px;
-            }
-            
-            .btn, .search {
-                font-size: 14px;
-            }
-
-            .canvas-toolbar {
-                padding: 8px 12px;
-                gap: 12px;
-            }
-
-            .tool-section {
-                min-width: max-content;
-            }
-        }
-    </style>
+/* ── BOTTOM NAV ── */
+#nav {
+  display:flex; background:var(--s1); border-top:1px solid var(--br);
+  flex-shrink:0; padding-bottom:env(safe-area-inset-bottom);
+}
+.nav-btn {
+  flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:9px 0 7px; cursor:pointer; border:none; background:transparent;
+  color:var(--m); font-family:var(--fh); font-size:9px; font-weight:600;
+  letter-spacing:.3px; transition:color .15s; gap:4px;
+}
+.nav-btn .ni { font-size:20px; }
+.nav-btn.active { color:var(--a); }
+</style>
 </head>
-<body data-theme="light">
-    <div class="app">
-        <div class="header">
-            <button class="btn btn-icon" onclick="toggleSidebar()">☰</button>
-            <input type="text" class="search" placeholder="Search..." id="search">
-            <button class="btn" onclick="createNote()">+</button>
-            <button class="btn btn-icon" onclick="toggleTheme()">🌙</button>
-        </div>
+<body>
+<div id="app">
 
-        <div class="main">
-            <div class="sidebar" id="sidebar">
-                <div class="notes-list" id="notesList"></div>
-            </div>
+  <div id="bar">
+    <div class="logo">✦ DevPad</div>
+    <div class="page-title" id="page-title">Notes</div>
+    <button id="new-btn" onclick="handleNew()">+</button>
+  </div>
 
-            <div class="editor">
-                <div class="editor-header" id="editorHeader" style="display: none;">
-                    <input type="text" class="title-input" id="titleInput" placeholder="Note title...">
-                    
-                    <div class="mode-toggle">
-                        <button class="mode-btn active" onclick="switchMode('text')">📝</button>
-                        <button class="mode-btn" onclick="switchMode('draw')">🎨</button>
-                    </div>
-                    
-                    <button class="btn btn-icon" onclick="togglePin()" id="pinBtn">📌</button>
-                    <button class="btn btn-icon" onclick="setReminder()" id="reminderBtn">⏰</button>
-                    <button class="btn btn-danger" onclick="deleteCurrentNote()">🗑️</button>
-                </div>
-
-                <div class="editor-content">
-                    <div class="empty" id="empty">
-                        <div style="font-size: 48px; margin-bottom: 16px;">📝</div>
-                        <h3>No notes yet</h3>
-                        <p>Tap + to create your first note</p>
-                    </div>
-
-                    <textarea class="text-editor" id="textEditor" placeholder="Start typing..." style="display: none;"></textarea>
-
-                    <div class="canvas-container" id="canvasContainer">
-                        <canvas class="drawing-canvas" id="canvas"></canvas>
-                        <div class="canvas-toolbar">
-                            <div class="tool-section">
-                                <div class="tool-label">Tools:</div>
-                                <div class="tool-group">
-                                    <button class="tool-btn active" data-tool="pen" onclick="setTool('pen')">✏️</button>
-                                    <button class="tool-btn" data-tool="brush" onclick="setTool('brush')">🖌️</button>
-                                    <button class="tool-btn" data-tool="marker" onclick="setTool('marker')">🖊️</button>
-                                    <button class="tool-btn" data-tool="highlighter" onclick="setTool('highlighter')">🖍️</button>
-                                    <button class="tool-btn" data-tool="eraser" onclick="setTool('eraser')">🧽</button>
-                                    <button class="tool-btn" data-tool="spray" onclick="setTool('spray')">💨</button>
-                                    <button class="tool-btn" data-tool="text" onclick="setTool('text')">📝</button>
-                                </div>
-                            </div>
-
-                            <div class="toolbar-separator"></div>
-
-                            <div class="tool-section">
-                                <div class="tool-label">Colors:</div>
-                                <div class="color-picker">
-                                    <div class="color active" style="background: #000" data-color="#000"></div>
-                                    <div class="color" style="background: #fff; border: 1px solid #ccc" data-color="#fff"></div>
-                                    <div class="color" style="background: #ef4444" data-color="#ef4444"></div>
-                                    <div class="color" style="background: #f97316" data-color="#f97316"></div>
-                                    <div class="color" style="background: #f59e0b" data-color="#f59e0b"></div>
-                                    <div class="color" style="background: #eab308" data-color="#eab308"></div>
-                                    <div class="color" style="background: #84cc16" data-color="#84cc16"></div>
-                                    <div class="color" style="background: #10b981" data-color="#10b981"></div>
-                                    <div class="color" style="background: #06b6d4" data-color="#06b6d4"></div>
-                                    <div class="color" style="background: #3b82f6" data-color="#3b82f6"></div>
-                                    <div class="color" style="background: #6366f1" data-color="#6366f1"></div>
-                                    <div class="color" style="background: #8b5cf6" data-color="#8b5cf6"></div>
-                                    <div class="color" style="background: #a855f7" data-color="#a855f7"></div>
-                                    <div class="color" style="background: #ec4899" data-color="#ec4899"></div>
-                                    <div class="color" style="background: #f43f5e" data-color="#f43f5e"></div>
-                                    <div class="color" style="background: #64748b" data-color="#64748b"></div>
-                                </div>
-                            </div>
-
-                            <div class="toolbar-separator"></div>
-
-                            <div class="tool-section">
-                                <div class="tool-label">Size:</div>
-                                <div class="size-control">
-                                    <input type="range" class="size-slider" min="1" max="50" value="3" id="brushSize">
-                                    <span id="sizeDisplay">3px</span>
-                                </div>
-                            </div>
-
-                            <div class="toolbar-separator" id="fontSeparator" style="display: none;"></div>
-
-                            <div class="tool-section" id="fontControls" style="display: none;">
-                                <div class="tool-label">Font:</div>
-                                <div class="font-controls">
-                                    <select class="font-select" id="fontFamily">
-                                        <option value="Arial">Arial</option>
-                                        <option value="Times New Roman">Times</option>
-                                        <option value="Courier New">Courier</option>
-                                        <option value="Georgia">Georgia</option>
-                                        <option value="Verdana">Verdana</option>
-                                    </select>
-                                    <input type="text" class="text-input" id="textInput" placeholder="Type text...">
-                                </div>
-                            </div>
-
-                            <div class="toolbar-separator"></div>
-
-                            <div class="tool-section">
-                                <button class="btn btn-icon" onclick="clearCanvas()">🗑️ Clear</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- NOTES LIST -->
+  <div id="p-notes" class="panel on">
+    <div id="notes-list-wrap">
+      <div id="notes-list"></div>
     </div>
-
-    <div class="overlay" id="overlay" onclick="closeModal()"></div>
-    
-    <div class="modal" id="reminderModal">
-        <h3>Set Reminder</h3>
-        <input type="datetime-local" id="reminderTime">
-        <div class="modal-actions">
-            <button class="btn btn-icon" onclick="closeModal()">Cancel</button>
-            <button class="btn" onclick="saveReminder()">Set</button>
-        </div>
+    <!-- editor sits inside panel, hidden by default -->
+    <div id="note-editor">
+      <div id="ed-top">
+        <button id="ed-back" onclick="closeEditor()">←</button>
+        <input id="ed-title" placeholder="Title…" oninput="saveNote()">
+        <select id="ed-tag" onchange="saveNote()">
+          <option value="note">note</option>
+          <option value="feature">feature</option>
+          <option value="idea">idea</option>
+          <option value="bug">bug</option>
+        </select>
+        <button id="ed-del" onclick="deleteNote()">🗑</button>
+      </div>
+      <div id="ed-fmt">
+        <div class="fb" onclick="ins('## ')">H2</div>
+        <div class="fb" onclick="ins('- ')">• List</div>
+        <div class="fb" onclick="ins('[ ] ')">☐ Todo</div>
+        <div class="fb" onclick="ins('`code`')">code</div>
+        <div class="fb" onclick="ins('---\n')">─ HR</div>
+        <div class="fb" onclick="insDate()">📅 Date</div>
+        <div class="fb" onclick="ins('> ')">❝ Quote</div>
+      </div>
+      <textarea id="ed-body" placeholder="Write here…" oninput="saveNote()"></textarea>
+      <div id="ed-status">
+        Words: <span id="sw">0</span> &nbsp; Chars: <span id="sc">0</span>
+      </div>
     </div>
+  </div>
 
-    <script>
-        let notes = JSON.parse(localStorage.getItem('notes') || '[]');
-        let currentNote = null;
-        let currentMode = 'text';
-        let canvas, ctx;
-        let isDrawing = false;
-        let currentColor = '#000';
-        let currentTool = 'pen';
-        let currentSize = 3;
-        let isAddingText = false;
+  <!-- SLIDES -->
+  <div id="p-slides" class="panel">
+    <div id="slides-wrap">
+      <div id="slide-canvas">
+        <input id="sl-head" placeholder="Slide heading…" oninput="syncSlide()">
+        <textarea id="sl-body" placeholder="• Key points&#10;• Feature notes&#10;• Ideas"></textarea>
+        <div id="sl-num">1/1</div>
+      </div>
+      <div id="slide-thumbs"></div>
+    </div>
+    <div id="slides-ctrl">
+      <button class="sc-btn" onclick="prevSlide()">← Prev</button>
+      <div id="sl-counter">1 / 1</div>
+      <button class="sc-btn" onclick="nextSlide()">Next →</button>
+      <button class="sc-btn" onclick="addSlide()">+ Add</button>
+      <button class="sc-btn del" onclick="delSlide()">Del</button>
+    </div>
+  </div>
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            initCanvas();
-            loadNotes();
-            setupEvents();
-            checkReminders();
-            setInterval(checkReminders, 60000);
-        });
+  <!-- SHEET -->
+  <div id="p-sheet" class="panel">
+    <div id="sheet-wrap">
+      <table id="sh-table"></table>
+    </div>
+    <div id="sh-bar">
+      <input id="sh-ref" value="A1" readonly>
+      <input id="sh-formula" placeholder="value / =A1+B1" oninput="fbarInput()" onkeydown="fbarKey(event)">
+    </div>
+    <div id="sh-stats">
+      Sum: <span id="sum-v">—</span> &nbsp; Avg: <span id="avg-v">—</span>
+    </div>
+  </div>
 
-        function initCanvas() {
-            canvas = document.getElementById('canvas');
-            ctx = canvas.getContext('2d');
-            
-            // Optimize canvas for smooth drawing
-            ctx.imageSmoothingEnabled = true;
-            ctx.imageSmoothingQuality = 'high';
-            
-            function resize() {
-                const container = document.getElementById('canvasContainer');
-                if (container.offsetWidth > 0 && container.offsetHeight > 0) {
-                    const oldData = canvas.toDataURL();
-                    canvas.width = container.offsetWidth;
-                    canvas.height = container.offsetHeight - 60;
-                    
-                    // Restore drawing after resize
-                    if (oldData !== 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==') {
-                        const img = new Image();
-                        img.onload = () => ctx.drawImage(img, 0, 0);
-                        img.src = oldData;
-                    }
-                    
-                    setupCanvasStyle();
-                }
-            }
-            
-            function setupCanvasStyle() {
-                ctx.lineCap = 'round';
-                ctx.lineJoin = 'round';
-                ctx.strokeStyle = currentColor;
-                ctx.lineWidth = currentSize;
-                ctx.imageSmoothingEnabled = true;
-            }
-            
-            setupCanvasStyle();
-            setTimeout(resize, 100);
-            window.addEventListener('resize', resize);
-            
-            // Optimized mouse events
-            canvas.addEventListener('mousedown', startDrawing, { passive: false });
-            canvas.addEventListener('mousemove', draw, { passive: false });
-            canvas.addEventListener('mouseup', stopDrawing);
-            canvas.addEventListener('mouseleave', stopDrawing);
-            
-            // Optimized touch events
-            canvas.addEventListener('touchstart', startDrawing, { passive: false });
-            canvas.addEventListener('touchmove', draw, { passive: false });
-            canvas.addEventListener('touchend', stopDrawing, { passive: false });
-            canvas.addEventListener('touchcancel', stopDrawing);
-        }
+  <!-- TOOLS -->
+  <div id="p-tools" class="panel">
+    <div id="tools-wrap">
 
-        function setupEvents() {
-            document.getElementById('search').addEventListener('input', e => filterNotes(e.target.value));
-            document.getElementById('textEditor').addEventListener('input', saveNote);
-            document.getElementById('titleInput').addEventListener('input', saveNote);
-            
-            document.querySelectorAll('.color').forEach(c => {
-                c.addEventListener('click', function() {
-                    document.querySelector('.color.active').classList.remove('active');
-                    this.classList.add('active');
-                    currentColor = this.dataset.color;
-                });
-            });
-            
-            document.getElementById('brushSize').addEventListener('input', function() {
-                currentSize = this.value;
-                document.getElementById('sizeDisplay').textContent = this.value + 'px';
-            });
-        }
+      <!-- Word Counter -->
+      <div class="tool-card">
+        <h3><span class="icon">🔢</span>Word Counter</h3>
+        <textarea class="tool-input" id="wc-in" rows="3" placeholder="Paste text here…" oninput="wordCount()" style="width:100%;resize:none;"></textarea>
+        <div class="tool-output" id="wc-out">Words: 0 &nbsp; Chars: 0 &nbsp; Lines: 0</div>
+      </div>
 
-        function setTool(tool) {
-            currentTool = tool;
-            document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
-            document.querySelector(`[data-tool="${tool}"]`).classList.add('active');
-            
-            // Show/hide font controls
-            const fontControls = document.getElementById('fontControls');
-            const fontSeparator = document.getElementById('fontSeparator');
-            fontControls.style.display = tool === 'text' ? 'flex' : 'none';
-            fontSeparator.style.display = tool === 'text' ? 'block' : 'none';
-            
-            // Update cursor
-            canvas.style.cursor = tool === 'text' ? 'text' : 'crosshair';
-        }
+      <!-- Case Converter -->
+      <div class="tool-card">
+        <h3><span class="icon">🔡</span>Case Converter</h3>
+        <div class="tool-row">
+          <input class="tool-input" id="cc-in" placeholder="Enter text…">
+        </div>
+        <div class="tool-row">
+          <button class="tool-btn" onclick="cc('upper')">UPPER</button>
+          <button class="tool-btn" onclick="cc('lower')">lower</button>
+          <button class="tool-btn" onclick="cc('title')">Title</button>
+          <button class="tool-btn" onclick="cc('camel')">camelCase</button>
+        </div>
+        <div class="tool-output" id="cc-out">—</div>
+      </div>
 
-        let lastX = 0;
-        let lastY = 0;
+      <!-- JSON Formatter -->
+      <div class="tool-card">
+        <h3><span class="icon">{ }</span>JSON Format</h3>
+        <textarea class="tool-input" id="jf-in" rows="3" placeholder='{"key":"value"}' style="width:100%;resize:none;"></textarea>
+        <div class="tool-row">
+          <button class="tool-btn" onclick="fmtJSON()">Format</button>
+          <button class="tool-btn sec" onclick="minJSON()">Minify</button>
+        </div>
+        <div class="tool-output" id="jf-out" style="max-height:120px;overflow:auto;">—</div>
+      </div>
 
-        function startDrawing(e) {
-            e.preventDefault();
-            
-            const rect = canvas.getBoundingClientRect();
-            const scaleX = canvas.width / rect.width;
-            const scaleY = canvas.height / rect.height;
-            
-            const x = ((e.clientX || e.touches?.[0]?.clientX) - rect.left) * scaleX;
-            const y = ((e.clientY || e.touches?.[0]?.clientY) - rect.top) * scaleY;
-            
-            lastX = x;
-            lastY = y;
-            
-            if (currentTool === 'text') {
-                addText(x, y);
-                return;
-            }
-            
-            isDrawing = true;
-            
-            // Set tool properties with better performance
-            ctx.globalCompositeOperation = currentTool === 'eraser' ? 'destination-out' : 'source-over';
-            ctx.strokeStyle = currentColor;
-            ctx.fillStyle = currentColor;
-            ctx.lineCap = 'round';
-            ctx.lineJoin = 'round';
-            
-            if (currentTool === 'pen') {
-                ctx.globalAlpha = 1;
-                ctx.lineWidth = currentSize;
-            } else if (currentTool === 'brush') {
-                ctx.globalAlpha = 0.8;
-                ctx.lineWidth = currentSize * 2;
-            } else if (currentTool === 'marker') {
-                ctx.globalAlpha = 0.9;
-                ctx.lineWidth = currentSize * 1.5;
-                ctx.lineCap = 'square';
-            } else if (currentTool === 'highlighter') {
-                ctx.globalAlpha = 0.3;
-                ctx.lineWidth = currentSize * 4;
-                ctx.lineCap = 'square';
-            } else if (currentTool === 'eraser') {
-                ctx.globalAlpha = 1;
-                ctx.lineWidth = currentSize * 3;
-            } else if (currentTool === 'spray') {
-                ctx.globalAlpha = 0.1;
-                drawSpray(x, y);
-                return;
-            }
-            
-            // Start the path
-            ctx.beginPath();
-            ctx.moveTo(x, y);
-            ctx.lineTo(x, y);
-            ctx.stroke();
-        }
+      <!-- Timestamp -->
+      <div class="tool-card">
+        <h3><span class="icon">⏱</span>Timestamp</h3>
+        <div class="tool-row">
+          <button class="tool-btn" onclick="nowTs()">Now</button>
+          <input class="tool-input" id="ts-in" placeholder="Unix timestamp…" type="number">
+          <button class="tool-btn sec" onclick="tsConvert()">→ Date</button>
+        </div>
+        <div class="tool-output" id="ts-out">—</div>
+      </div>
 
-        function draw(e) {
-            if (!isDrawing || currentTool === 'text') return;
-            e.preventDefault();
-            
-            const rect = canvas.getBoundingClientRect();
-            const scaleX = canvas.width / rect.width;
-            const scaleY = canvas.height / rect.height;
-            
-            const x = ((e.clientX || e.touches?.[0]?.clientX) - rect.left) * scaleX;
-            const y = ((e.clientY || e.touches?.[0]?.clientY) - rect.top) * scaleY;
-            
-            if (currentTool === 'spray') {
-                drawSpray(x, y);
-                return;
-            }
-            
-            // Smooth line drawing using quadratic curves
-            ctx.beginPath();
-            ctx.moveTo(lastX, lastY);
-            
-            const midX = (lastX + x) / 2;
-            const midY = (lastY + y) / 2;
-            ctx.quadraticCurveTo(lastX, lastY, midX, midY);
-            ctx.stroke();
-            
-            lastX = x;
-            lastY = y;
-        }
+      <!-- Color Picker -->
+      <div class="tool-card">
+        <h3><span class="icon">🎨</span>Color Tools</h3>
+        <div class="tool-row" style="align-items:center;">
+          <input type="color" id="cp-pick" value="#f0a500" oninput="colorInfo()" style="width:44px;height:36px;border:none;border-radius:8px;cursor:pointer;background:none;">
+          <div class="tool-output" id="cp-out" style="flex:1;">—</div>
+        </div>
+      </div>
 
-        function drawSpray(x, y) {
-            for (let i = 0; i < 20; i++) {
-                const offsetX = (Math.random() - 0.5) * currentSize * 4;
-                const offsetY = (Math.random() - 0.5) * currentSize * 4;
-                ctx.fillRect(x + offsetX, y + offsetY, 1, 1);
-            }
-        }
+      <!-- Base64 -->
+      <div class="tool-card">
+        <h3><span class="icon">🔐</span>Base64</h3>
+        <div class="tool-row">
+          <input class="tool-input" id="b64-in" placeholder="Text to encode…">
+        </div>
+        <div class="tool-row">
+          <button class="tool-btn" onclick="b64Enc()">Encode</button>
+          <button class="tool-btn sec" onclick="b64Dec()">Decode</button>
+        </div>
+        <div class="tool-output" id="b64-out">—</div>
+      </div>
 
-        function stopDrawing() {
-            if (isDrawing) {
-                isDrawing = false;
-                ctx.globalCompositeOperation = 'source-over';
-                ctx.globalAlpha = 1;
-                
-                // Only save after drawing is complete to reduce lag
-                requestAnimationFrame(() => {
-                    saveNote();
-                });
-            }
-        }
+      <!-- Calc -->
+      <div class="tool-card">
+        <h3><span class="icon">🧮</span>Quick Calc</h3>
+        <div class="tool-row">
+          <input class="tool-input" id="calc-in" placeholder="e.g. 12 * 8 + 5%" onkeydown="if(event.key==='Enter')doCalc()">
+          <button class="tool-btn" onclick="doCalc()">=</button>
+        </div>
+        <div class="tool-output" id="calc-out">—</div>
+      </div>
 
-        function addText(x, y) {
-            const text = document.getElementById('textInput').value;
-            if (!text) return;
-            
-            const fontSize = currentSize * 4;
-            const fontFamily = document.getElementById('fontFamily').value;
-            
-            ctx.font = `${fontSize}px ${fontFamily}`;
-            ctx.fillStyle = currentColor;
-            ctx.globalAlpha = 1;
-            ctx.globalCompositeOperation = 'source-over';
-            ctx.fillText(text, x, y);
-            
-            document.getElementById('textInput').value = '';
-            saveNote();
-        }
+    </div>
+  </div>
 
+  <!-- BOTTOM NAV -->
+  <div id="nav">
+    <button class="nav-btn active" onclick="go('notes',this)" id="nb-notes">
+      <div class="ni">📝</div>Notes
+    </button>
+    <button class="nav-btn" onclick="go('slides',this)" id="nb-slides">
+      <div class="ni">🎞</div>Slides
+    </button>
+    <button class="nav-btn" onclick="go('sheet',this)" id="nb-sheet">
+      <div class="ni">📊</div>Sheet
+    </button>
+    <button class="nav-btn" onclick="go('tools',this)" id="nb-tools">
+      <div class="ni">🔧</div>Tools
+    </button>
+  </div>
 
+</div>
 
-        function createNote() {
-            const note = {
-                id: Date.now(),
-                title: 'New Note',
-                content: '',
-                drawing: '',
-                created: new Date(),
-                pinned: false,
-                reminder: null
-            };
-            
-            notes.unshift(note);
-            saveNotes();
-            loadNotes();
-            selectNote(note.id);
-            closeSidebar();
-        }
-
-        function selectNote(id) {
-            currentNote = notes.find(n => n.id === id);
-            if (!currentNote) return;
-            
-            document.getElementById('empty').style.display = 'none';
-            document.getElementById('editorHeader').style.display = 'flex';
-            document.getElementById('titleInput').value = currentNote.title;
-            
-            if (currentMode === 'text') {
-                document.getElementById('textEditor').style.display = 'block';
-                document.getElementById('textEditor').value = currentNote.content;
-                document.getElementById('canvasContainer').classList.remove('active');
-            } else {
-                document.getElementById('textEditor').style.display = 'none';
-                document.getElementById('canvasContainer').classList.add('active');
-                loadDrawing();
-            }
-            
-            updateButtons();
-            updateActiveNote();
-        }
-
-        function updateButtons() {
-            document.getElementById('pinBtn').style.opacity = currentNote.pinned ? '1' : '0.5';
-            document.getElementById('reminderBtn').style.opacity = currentNote.reminder ? '1' : '0.5';
-        }
-
-        function updateActiveNote() {
-            document.querySelectorAll('.note').forEach(n => n.classList.remove('active'));
-            document.querySelector(`[data-id="${currentNote.id}"]`)?.classList.add('active');
-        }
-
-        function switchMode(mode) {
-            currentMode = mode;
-            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-            document.querySelector(`[onclick="switchMode('${mode}')"]`).classList.add('active');
-            
-            if (currentNote) {
-                if (mode === 'text') {
-                    document.getElementById('textEditor').style.display = 'block';
-                    document.getElementById('canvasContainer').classList.remove('active');
-                } else {
-                    document.getElementById('textEditor').style.display = 'none';
-                    document.getElementById('canvasContainer').classList.add('active');
-                    loadDrawing();
-                }
-            }
-        }
-
-        let saveTimeout;
-        
-        function saveNote() {
-            if (!currentNote) return;
-            
-            currentNote.title = document.getElementById('titleInput').value || 'Untitled';
-            
-            if (currentMode === 'text') {
-                currentNote.content = document.getElementById('textEditor').value;
-            } else {
-                currentNote.drawing = canvas.toDataURL();
-            }
-            
-            // Debounce saving to reduce lag
-            clearTimeout(saveTimeout);
-            saveTimeout = setTimeout(() => {
-                saveNotes();
-                loadNotes();
-            }, 500);
-        }
-
-        function loadDrawing() {
-            if (currentNote?.drawing) {
-                const img = new Image();
-                img.onload = () => {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    ctx.drawImage(img, 0, 0);
-                };
-                img.src = currentNote.drawing;
-            } else {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-            }
-        }
-
-        function clearCanvas() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            saveNote();
-        }
-
-        function togglePin() {
-            if (!currentNote) return;
-            currentNote.pinned = !currentNote.pinned;
-            updateButtons();
-            saveNotes();
-            loadNotes();
-        }
-
-        function setReminder() {
-            if (!currentNote) return;
-            
-            if (currentNote.reminder) {
-                currentNote.reminder = null;
-                updateButtons();
-                saveNotes();
-                loadNotes();
-            } else {
-                document.getElementById('reminderModal').classList.add('open');
-                document.getElementById('overlay').classList.add('open');
-            }
-        }
-
-        function saveReminder() {
-            const time = document.getElementById('reminderTime').value;
-            if (time && currentNote) {
-                currentNote.reminder = time;
-                updateButtons();
-                saveNotes();
-                loadNotes();
-                closeModal();
-            }
-        }
-
-        function deleteNote(id, event) {
-            if (event) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            
-            const noteToDelete = notes.find(n => n.id === id);
-            if (!noteToDelete) return;
-            
-            if (!confirm(`Delete "${noteToDelete.title}"?`)) return;
-            
-            notes = notes.filter(n => n.id !== id);
-            
-            if (currentNote && currentNote.id === id) {
-                currentNote = null;
-                document.getElementById('empty').style.display = 'flex';
-                document.getElementById('editorHeader').style.display = 'none';
-                document.getElementById('textEditor').style.display = 'none';
-                document.getElementById('canvasContainer').classList.remove('active');
-            }
-            
-            saveNotes();
-            loadNotes();
-        }
-
-        function deleteCurrentNote() {
-            if (!currentNote || !confirm('Delete this note?')) return;
-            
-            notes = notes.filter(n => n.id !== currentNote.id);
-            currentNote = null;
-            document.getElementById('empty').style.display = 'flex';
-            document.getElementById('editorHeader').style.display = 'none';
-            document.getElementById('textEditor').style.display = 'none';
-            document.getElementById('canvasContainer').classList.remove('active');
-            
-            saveNotes();
-            loadNotes();
-        }
-
-        function loadNotes() {
-            const list = document.getElementById('notesList');
-            const sorted = [...notes].sort((a, b) => {
-                if (a.pinned && !b.pinned) return -1;
-                if (!a.pinned && b.pinned) return 1;
-                return new Date(b.created) - new Date(a.created);
-            });
-            
-            list.innerHTML = sorted.map(note => `
-                <div class="note" data-id="${note.id}" onclick="selectNote(${note.id})">
-                    <button class="note-delete" onclick="deleteNote(${note.id}, event)">×</button>
-                    <div class="note-title">${note.title}</div>
-                    <div class="note-preview">${note.content.substring(0, 50) || 'No content'}</div>
-                    <div class="note-meta">
-                        ${note.pinned ? '📌' : ''}
-                        ${note.reminder ? '⏰' : ''}
-                        <span>${new Date(note.created).toLocaleDateString()}</span>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function filterNotes(query) {
-            document.querySelectorAll('.note').forEach(note => {
-                const text = note.textContent.toLowerCase();
-                note.style.display = text.includes(query.toLowerCase()) ? 'block' : 'none';
-            });
-        }
-
-        function checkReminders() {
-            const now = new Date();
-            notes.forEach(note => {
-                if (note.reminder && new Date(note.reminder) <= now) {
-                    alert(`⏰ ${note.title}`);
-                    note.reminder = null;
-                    saveNotes();
-                    loadNotes();
-                }
-            });
-        }
-
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('open');
-            document.getElementById('overlay').classList.toggle('open');
-        }
-
-        function closeSidebar() {
-            document.getElementById('sidebar').classList.remove('open');
-            document.getElementById('overlay').classList.remove('open');
-        }
-
-        function toggleTheme() {
-            const current = document.body.getAttribute('data-theme');
-            const newTheme = current === 'dark' ? 'light' : 'dark';
-            document.body.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        }
-
-        function closeModal() {
-            document.getElementById('reminderModal').classList.remove('open');
-            document.getElementById('overlay').classList.remove('open');
-        }
-
-        function saveNotes() {
-            localStorage.setItem('notes', JSON.stringify(notes));
-        }
-
-        // Load saved theme
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        document.body.setAttribute('data-theme', savedTheme);
-    </script>
 <script>
-    (function() {
-    // 1. Theme Detection & Sync
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    document.body.setAttribute('data-theme', savedTheme);
+// ── STORAGE ──
+const KEY = 'dvp2';
+let D = { notes:[], slides:[{h:'',b:''}], si:0, sheet:{} };
+function ld() { try { const r=localStorage.getItem(KEY); if(r) D={...D,...JSON.parse(r)}; } catch(e){} }
+function sv() { localStorage.setItem(KEY,JSON.stringify(D)); }
+ld();
 
-    const applyForceTheme = (theme) => {
-        const isDark = theme === 'dark';
-        let style = document.getElementById("force-emerald-notes");
-        if (!style) {
-            style = document.createElement('style');
-            style.id = "force-emerald-notes";
-            document.head.appendChild(style);
+// ── NAV ──
+let curTab = 'notes';
+function go(tab, btn) {
+  curTab = tab;
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('p-'+tab).classList.add('on');
+  btn.classList.add('active');
+  const titles={notes:'Notes',slides:'Slides',sheet:'Sheet',tools:'Tools'};
+  document.getElementById('page-title').textContent = titles[tab];
+  document.getElementById('new-btn').classList.toggle('hidden', tab!=='notes' && tab!=='slides');
+  if(tab==='slides') renderSlides();
+  if(tab==='sheet') buildSheet();
+  closeEditor();
+}
+
+function handleNew() {
+  if(curTab==='notes') newNote();
+  else if(curTab==='slides') addSlide();
+}
+
+// ── NOTES ──
+let curNoteId = null;
+function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2); }
+
+function newNote(){
+  const n={id:uid(),title:'',body:'',tag:'note',ts:Date.now()};
+  D.notes.unshift(n); sv(); renderNotes(); openNote(n.id);
+}
+
+function renderNotes(){
+  const el=document.getElementById('notes-list');
+  if(!D.notes.length){
+    el.innerHTML=`<div class="empty-state"><div class="es-icon">📝</div><p>No notes yet.<br>Tap + to create your first note.</p></div>`;
+    return;
+  }
+  el.innerHTML=D.notes.map(n=>`
+    <div class="note-card" onclick="openNote('${n.id}')">
+      <div class="nc-title">${n.title||'Untitled'}</div>
+      <div class="nc-preview">${n.body||'No content'}</div>
+      <div class="nc-foot">
+        <div class="nc-date">${fmt(n.ts)}</div>
+        <div class="tag tag-${n.tag}">${n.tag}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function fmt(ts){ const d=new Date(ts); return d.toLocaleDateString('en-IN',{day:'numeric',month:'short'}); }
+
+function openNote(id){
+  curNoteId=id;
+  const n=D.notes.find(x=>x.id===id); if(!n) return;
+  document.getElementById('notes-list-wrap').style.display='none';
+  document.getElementById('note-editor').classList.add('on');
+  document.getElementById('new-btn').classList.add('hidden');
+  document.getElementById('ed-title').value=n.title;
+  document.getElementById('ed-body').value=n.body;
+  document.getElementById('ed-tag').value=n.tag||'note';
+  updStats();
+}
+
+function closeEditor(){
+  document.getElementById('notes-list-wrap').style.display='';
+  document.getElementById('note-editor').classList.remove('on');
+  if(curTab==='notes') document.getElementById('new-btn').classList.remove('hidden');
+  curNoteId=null; renderNotes();
+}
+
+function saveNote(){
+  if(!curNoteId) return;
+  const n=D.notes.find(x=>x.id===curNoteId); if(!n) return;
+  n.title=document.getElementById('ed-title').value||'Untitled';
+  n.body=document.getElementById('ed-body').value;
+  n.tag=document.getElementById('ed-tag').value;
+  n.ts=Date.now(); sv(); updStats();
+}
+
+function deleteNote(){
+  if(!confirm('Delete this note?')) return;
+  D.notes=D.notes.filter(x=>x.id!==curNoteId); sv(); closeEditor();
+}
+
+function updStats(){
+  const b=document.getElementById('ed-body').value;
+  document.getElementById('sw').textContent=b.trim()?b.trim().split(/\s+/).length:0;
+  document.getElementById('sc').textContent=b.length;
+}
+
+function ins(t){
+  const ta=document.getElementById('ed-body');
+  const s=ta.selectionStart;
+  ta.value=ta.value.slice(0,s)+t+ta.value.slice(ta.selectionEnd);
+  ta.selectionStart=ta.selectionEnd=s+t.length;
+  ta.focus(); saveNote();
+}
+function insDate(){ ins('\n📅 '+new Date().toLocaleDateString('en-IN',{year:'numeric',month:'long',day:'numeric'})+'\n'); }
+
+// ── SLIDES ──
+function renderSlides(){
+  const slides=D.slides; const i=D.si;
+  // canvas
+  document.getElementById('sl-head').value=slides[i]?.h||'';
+  document.getElementById('sl-body').value=slides[i]?.b||'';
+  document.getElementById('sl-num').textContent=(i+1)+'/'+slides.length;
+  document.getElementById('sl-counter').textContent=(i+1)+' / '+slides.length;
+  // thumbs
+  const tw=document.getElementById('slide-thumbs');
+  tw.innerHTML=slides.map((s,idx)=>`
+    <div class="sthumb ${idx===i?'active':''}" onclick="goSlide(${idx})">
+      <div class="stn">${idx+1}</div>
+      <p>${(s.h||'Slide '+(idx+1)).slice(0,20)}</p>
+    </div>
+  `).join('');
+  // auto-scroll thumb
+  const active=tw.querySelectorAll('.sthumb')[i];
+  if(active) active.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
+}
+
+function syncSlide(){
+  D.slides[D.si]={h:document.getElementById('sl-head').value,b:document.getElementById('sl-body').value};
+  sv(); renderSlides();
+}
+document.getElementById('sl-body').addEventListener('input',syncSlide);
+
+function goSlide(i){ syncSlide(); D.si=i; renderSlides(); }
+function prevSlide(){ if(D.si>0){syncSlide();D.si--;renderSlides();} }
+function nextSlide(){ if(D.si<D.slides.length-1){syncSlide();D.si++;renderSlides();} }
+function addSlide(){ syncSlide(); D.slides.splice(D.si+1,0,{h:'',b:''}); D.si++; sv(); renderSlides(); }
+function delSlide(){
+  if(D.slides.length<=1) return;
+  D.slides.splice(D.si,1);
+  if(D.si>=D.slides.length) D.si--;
+  sv(); renderSlides();
+}
+
+// ── SHEET ──
+const ROWS=30, COLS=10;
+let cellFocus=null;
+function colL(i){ let s=''; i++; while(i>0){s=String.fromCharCode(64+(i%26||26))+s;i=Math.floor((i-1)/26);} return s; }
+function ck(r,c){ return colL(c)+(r+1); }
+
+function buildSheet(){
+  const t=document.getElementById('sh-table');
+  t.innerHTML='';
+  // header
+  const hr=document.createElement('tr');
+  const co=document.createElement('th'); co.className='sh-corner'; hr.appendChild(co);
+  for(let c=0;c<COLS;c++){
+    const th=document.createElement('th'); th.className='sh-col'; th.textContent=colL(c); hr.appendChild(th);
+  }
+  t.appendChild(hr);
+  // rows
+  for(let r=0;r<ROWS;r++){
+    const tr=document.createElement('tr');
+    const rh=document.createElement('td'); rh.className='sh-row'; rh.textContent=r+1; tr.appendChild(rh);
+    for(let c=0;c<COLS;c++){
+      const td=document.createElement('td'); td.className='sh-cell';
+      const inp=document.createElement('input');
+      inp.value=D.sheet[ck(r,c)]||'';
+      if(inp.value.startsWith('=')) td.classList.add('formula');
+      inp.addEventListener('focus',()=>{
+        if(cellFocus) cellFocus.closest('.sh-cell').classList.remove('focus');
+        cellFocus=inp; td.classList.add('focus');
+        document.getElementById('sh-ref').value=ck(r,c);
+        document.getElementById('sh-formula').value=inp.value;
+        updSheetStats();
+      });
+      inp.addEventListener('input',()=>{
+        const k=ck(r,c);
+        if(inp.value) D.sheet[k]=inp.value; else delete D.sheet[k];
+        td.classList.toggle('formula',inp.value.startsWith('='));
+        document.getElementById('sh-formula').value=inp.value;
+        sv(); updSheetStats();
+      });
+      inp.addEventListener('keydown',e=>{
+        const nav={ArrowUp:[-1,0],ArrowDown:[1,0],ArrowLeft:[0,-1],ArrowRight:[0,1],Enter:[1,0],Tab:[0,1]};
+        if(nav[e.key]){
+          e.preventDefault();
+          const [dr,dc]=nav[e.key];
+          const nr=Math.max(0,Math.min(ROWS-1,r+dr)), nc=Math.max(0,Math.min(COLS-1,c+dc));
+          const next=document.querySelector(`.sh-cell[data-r="${nr}"][data-c="${nc}"] input`);
+          if(next) next.focus();
         }
+      });
+      td.dataset.r=r; td.dataset.c=c; inp.dataset.r=r; inp.dataset.c=c;
+      td.appendChild(inp); tr.appendChild(td);
+    }
+    t.appendChild(tr);
+  }
+}
 
-        if (isDark) {
-            style.innerHTML = `
-                :root {
-                    --bg: #010d08 !important;
-                    --surface: #064e3b !important;
-                    --text: #ecfdf5 !important;
-                    --border: #065f46 !important;
-                    --primary-solid: #10b981 !important;
-                    --primary: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
-                }
-                body { background: #010d08 !important; }
-                .header { background: #010d08 !important; border-bottom: 2px solid #065f46 !important; }
-                .sidebar, .editor-header, .canvas-toolbar { background: #064e3b !important; border-color: #065f46 !important; }
-                .note { background: #010d08 !important; border-color: #065f46 !important; }
-                .note.active { background: #10b981 !important; color: #010d08 !important; }
-                .note-preview { color: #34d399 !important; }
-                .btn { box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2) !important; color: #010d08 !important; font-weight: 800 !important; }
-                .search, .title-input, .text-editor, .mode-toggle { background: #010d08 !important; border-color: #059669 !important; color: #fff !important; }
-                .drawing-canvas { background: #010d08 !important; }
-                .tool-btn { background: #010d08 !important; border-color: #059669 !important; color: #10b981 !important; }
-                .tool-btn.active { background: #10b981 !important; color: #010d08 !important; }
-                .modal { background: #064e3b !important; color: #fff !important; border: 1px solid #10b981 !important; }
-            `;
-        } else {
-            style.innerHTML = `
-                :root {
-                    --bg: #f0fdf4 !important;
-                    --surface: #ffffff !important;
-                    --text: #000000 !important;
-                    --border: #059669 !important;
-                    --primary-solid: #059669 !important;
-                }
-                body { background: #f0fdf4 !important; color: #000000 !important; }
-                .note-title, .note-preview, .title-input, .text-editor, h3, p, span { color: #000000 !important; font-weight: 600 !important; }
-                .note-preview { opacity: 0.8 !important; }
-                .note { border: 1px solid #059669 !important; background: #ffffff !important; }
-                .note.active { background: #059669 !important; color: #ffffff !important; }
-                .note.active .note-preview { color: #ffffff !important; }
-                .btn { background: #059669 !important; color: #ffffff !important; }
-                .search, .title-input, .text-editor { border-color: #059669 !important; background: #ffffff !important; color: #000000 !important; }
-                .mode-btn { color: #000000 !important; }
-                .mode-btn.active { color: #ffffff !important; }
-            `;
-        }
-    };
+function fbarInput(){
+  if(!cellFocus) return;
+  cellFocus.value=document.getElementById('sh-formula').value;
+  const r=+cellFocus.dataset.r, c=+cellFocus.dataset.c;
+  const k=ck(r,c);
+  if(cellFocus.value) D.sheet[k]=cellFocus.value; else delete D.sheet[k];
+  cellFocus.closest('.sh-cell').classList.toggle('formula',cellFocus.value.startsWith('='));
+  sv(); updSheetStats();
+}
+function fbarKey(e){ if(e.key==='Enter'&&cellFocus) cellFocus.focus(); }
 
-    applyForceTheme(savedTheme);
+function updSheetStats(){
+  const vals=Object.values(D.sheet).map(v=>parseFloat(v)).filter(x=>!isNaN(x));
+  if(!vals.length){ document.getElementById('sum-v').textContent='—'; document.getElementById('avg-v').textContent='—'; return; }
+  const s=vals.reduce((a,b)=>a+b,0);
+  document.getElementById('sum-v').textContent=s.toLocaleString('en-IN');
+  document.getElementById('avg-v').textContent=(s/vals.length).toFixed(2);
+}
 
-    // Patch the existing toggleTheme function to refresh our styles
-    const originalToggle = window.toggleTheme;
-    window.toggleTheme = function() {
-        originalToggle();
-        const newTheme = document.body.getAttribute('data-theme');
-        applyForceTheme(newTheme);
-    };
-})();
-(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98755e9ba2213d25',t:'MTc1OTI1MjYwMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+// ── TOOLS ──
+function wordCount(){
+  const t=document.getElementById('wc-in').value;
+  const w=t.trim()?t.trim().split(/\s+/).length:0;
+  document.getElementById('wc-out').textContent=`Words: ${w}   Chars: ${t.length}   Lines: ${t.split('\n').length}`;
+}
+
+function cc(type){
+  let t=document.getElementById('cc-in').value;
+  if(type==='upper') t=t.toUpperCase();
+  else if(type==='lower') t=t.toLowerCase();
+  else if(type==='title') t=t.replace(/\w\S*/g,s=>s[0].toUpperCase()+s.slice(1).toLowerCase());
+  else if(type==='camel') t=t.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g,(_,c)=>c.toUpperCase());
+  document.getElementById('cc-out').textContent=t||'—';
+}
+
+function fmtJSON(){
+  try { document.getElementById('jf-out').textContent=JSON.stringify(JSON.parse(document.getElementById('jf-in').value),null,2); }
+  catch(e){ document.getElementById('jf-out').textContent='❌ Invalid JSON'; }
+}
+function minJSON(){
+  try { document.getElementById('jf-out').textContent=JSON.stringify(JSON.parse(document.getElementById('jf-in').value)); }
+  catch(e){ document.getElementById('jf-out').textContent='❌ Invalid JSON'; }
+}
+
+function nowTs(){
+  const n=Date.now();
+  document.getElementById('ts-in').value=Math.floor(n/1000);
+  document.getElementById('ts-out').textContent=new Date(n).toLocaleString('en-IN');
+}
+function tsConvert(){
+  const v=document.getElementById('ts-in').value;
+  if(!v) return;
+  const ms=v.length===10?+v*1000:+v;
+  document.getElementById('ts-out').textContent=new Date(ms).toLocaleString('en-IN');
+}
+
+function colorInfo(){
+  const h=document.getElementById('cp-pick').value;
+  const r=parseInt(h.slice(1,3),16),g=parseInt(h.slice(3,5),16),b=parseInt(h.slice(5,7),16);
+  document.getElementById('cp-out').textContent=`HEX: ${h.toUpperCase()}\nRGB: rgb(${r}, ${g}, ${b})`;
+}
+colorInfo();
+
+function b64Enc(){ try{document.getElementById('b64-out').textContent=btoa(unescape(encodeURIComponent(document.getElementById('b64-in').value)));}catch(e){document.getElementById('b64-out').textContent='Error';} }
+function b64Dec(){ try{document.getElementById('b64-out').textContent=decodeURIComponent(escape(atob(document.getElementById('b64-in').value)));}catch(e){document.getElementById('b64-out').textContent='Invalid base64';} }
+
+function doCalc(){
+  try{
+    let expr=document.getElementById('calc-in').value.replace(/(\d+(\.\d+)?)%/g,'($1/100)');
+    const r=Function('"use strict";return('+expr+')')();
+    document.getElementById('calc-out').textContent='= '+r.toLocaleString('en-IN');
+  } catch(e){ document.getElementById('calc-out').textContent='❌ Invalid expression'; }
+}
+
+// ── INIT ──
+renderNotes();
+renderSlides();
+buildSheet();
+</script>
+</body>
 </html>
