@@ -142,7 +142,7 @@
         .main-content {
             height: 100vh;
             overflow-y: auto;
-            padding: 168px 14px 130px;
+            padding: 168px 14px 100px;
             -webkit-overflow-scrolling: touch;
         }
         .section { display: none; animation: sectionIn 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
@@ -227,6 +227,14 @@
             letter-spacing: 0.4px;
             margin-top: 7px;
             border: 1px solid rgba(0,255,157,0.12);
+            cursor: pointer;
+            transition: background 0.18s, border-color 0.18s, box-shadow 0.18s;
+            user-select: none;
+        }
+        .item-capsule:active, .item-capsule.capsule-active {
+            background: rgba(0,255,157,0.22);
+            border-color: rgba(0,255,157,0.5);
+            box-shadow: 0 0 0 2px rgba(0,255,157,0.12);
         }
 
         /* ── BLOG LIST ── */
@@ -475,7 +483,7 @@
         /* ── MINI PLAYER ── */
         #miniPlayer {
             position: fixed;
-            bottom: calc(var(--mini-gap) + var(--safe-bottom));
+            bottom: calc(16px + var(--safe-bottom));
             left: 12px; right: 12px; height: 66px;
             background: rgba(18, 18, 18, 0.97);
             backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
@@ -507,7 +515,7 @@
         .mini-subtitle { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
 
         /* ── FULL PLAYER MODAL ── */
-        .modal-overlay {
+        .modal-overlay{
             position: fixed; inset: 0;
             background: #000; z-index: 1000;
             display: none; flex-direction: column;
@@ -515,7 +523,7 @@
             animation: slideUp 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         #fullAudioPlayer.modal-overlay {
-            padding: var(--safe-top) 22px calc(var(--safe-bottom) + var(--gap));
+            padding: calc(var(--safe-top) + 10px) 22px calc(var(--safe-bottom) + 22px);
             background: linear-gradient(160deg, #080f0a 0%, #050505 100%);
         }
         @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
@@ -693,7 +701,7 @@
     <div class="search-container">
         <div class="search-input-wrapper">
             <i data-feather="search" class="search-icon"></i>
-            <input type="search" id="searchInput" placeholder="Search everything..." onkeyup="globalSearch()">
+            <input type="search" id="searchInput" placeholder="Search or press the capsule..." onkeyup="globalSearch()">
         </div>
     </div>
     <nav class="nav-bar">
@@ -933,6 +941,7 @@
     if (!PROGRESS.streak) PROGRESS.streak = { days: 0, lastDate: null };
     if (!PROGRESS.weeklyData) PROGRESS.weeklyData = [0, 0, 0, 0, 0, 0, 0];
     if (!PROGRESS.totalMins) PROGRESS.totalMins = 0;
+    if (!PROGRESS.activityLog) PROGRESS.activityLog = [];
 
     function saveProgress() {
         const toStore = {
@@ -940,7 +949,8 @@
             audioPlayed: PROGRESS.audioPlayed,
             streak: PROGRESS.streak,
             weeklyData: PROGRESS.weeklyData,
-            totalMins: PROGRESS.totalMins
+            totalMins: PROGRESS.totalMins,
+            activityLog: PROGRESS.activityLog
         };
         localStorage.setItem('mlp_progress', JSON.stringify(toStore));
     }
@@ -950,6 +960,13 @@
         if (!PROGRESS.opened[type].includes(title)) {
             PROGRESS.opened[type].push(title);
         }
+        // keep audioPlayed in sync with opened.audio
+        if (type === 'audio' && !PROGRESS.audioPlayed.includes(title)) {
+            PROGRESS.audioPlayed.push(title);
+        }
+        // always log every open event (including re-opens) for recent activity
+        PROGRESS.activityLog.push({ type, title });
+        if (PROGRESS.activityLog.length > 50) PROGRESS.activityLog.shift(); // keep last 50
         // update streak
         const today = new Date().toDateString();
         if (PROGRESS.streak.lastDate !== today) {
@@ -965,6 +982,9 @@
         const dayIdx = new Date().getDay();
         PROGRESS.weeklyData[dayIdx] = (PROGRESS.weeklyData[dayIdx] || 0) + 1;
         saveProgress();
+        // refresh progress tab live if it's visible
+        const progSection = document.getElementById('progress-section');
+        if (progSection && progSection.classList.contains('active')) renderProgress();
     }
 
     // SVG icons for play/pause
@@ -983,7 +1003,7 @@
                 if (!res.ok) throw new Error(`HTTP error ${res.status}`);
                 APP_DATA[s] = await res.json();
             } catch (e) {
-                showToast(`Failed to load ${s}`, true);
+                showToast(`Failed to load${s}`, true);
             }
         }
         render();
@@ -993,38 +1013,94 @@
         renderProgress();
     }
 
+    // ── CAPSULE FILTER STATE ──
+    let activeCapsuleFilter = null; // null = no filter active
+
+    // Smart fuzzy match: handles case, extra spaces, and common spelling mistakes (Levenshtein distance ≤ 2)
+    function capsuleMatch(capsuleText, filterText) {
+        if (!capsuleText || !filterText) return false;
+        const a = capsuleText.toLowerCase().replace(/\s+/g, ' ').trim();
+        const b = filterText.toLowerCase().replace(/\s+/g, ' ').trim();
+        if (a === b) return true;
+        if (a.includes(b) || b.includes(a)) return true;
+        // Levenshtein distance for typo tolerance
+        return levenshtein(a, b) <= 2;
+    }
+
+    function levenshtein(a, b) {
+        if (Math.abs(a.length - b.length) > 3) return 99; // short-circuit large diffs
+        const dp = Array.from({length: a.length + 1}, (_, i) => [i]);
+        for (let j = 0; j <= b.length; j++) dp[0][j] = j;
+        for (let i = 1; i <= a.length; i++) {
+            for (let j = 1; j <= b.length; j++) {
+                dp[i][j] = a[i-1] === b[j-1]
+                    ? dp[i-1][j-1]
+                    : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+            }
+        }
+        return dp[a.length][b.length];
+    }
+
+    function filterByCapsule(capsuleText, el) {
+        // If already active, toggle off
+        if (activeCapsuleFilter === capsuleText) {
+            activeCapsuleFilter = null;
+        } else {
+            activeCapsuleFilter = capsuleText;
+        }
+        // Clear search input so they don't conflict
+        document.getElementById('searchInput').value = '';
+        render('');
+        // Stop card click from firing
+        event.stopPropagation();
+    }
+
     function render(filter = "") {
         const term = filter.toLowerCase();
         ['audio', 'textbook', 'papers', 'courses'].forEach(key => {
             const grid = document.getElementById(`${key}-grid`);
-            const items = (APP_DATA[key] || []).filter(i => (i.title || '').toLowerCase().includes(term));
+            let items = (APP_DATA[key] || []).filter(i => (i.title || '').toLowerCase().includes(term));
+            // Apply capsule filter if active
+            if (activeCapsuleFilter) {
+                items = items.filter(i => capsuleMatch(i.imf || '', activeCapsuleFilter));
+            }
             const cntEl = document.getElementById(`${key}-count`);
             if (cntEl) cntEl.textContent = items.length + ' items';
             grid.innerHTML = items.map(item => {
                 const hasImf = (key === 'papers' || key === 'courses');
-                const capsule = hasImf && item.imf ? `<div class="item-capsule">${escapeHtml(item.imf)}</div>` : '';
+                const isActiveCapsule = activeCapsuleFilter && capsuleMatch(item.imf || '', activeCapsuleFilter);
+                const capsule = hasImf && item.imf
+                    ? `<div class="item-capsule${isActiveCapsule ? ' capsule-active' : ''}" onclick="filterByCapsule('${escapeJs(item.imf)}', this)">${escapeHtml(item.imf)}</div>`
+                    : '';
                 const cover = item.cover || '';
                 const file = item.file || '';
                 const title = item.title || '';
                 return `
                 <div class="media-card" onclick="openItem('${key}', '${file}', '${escapeJs(title)}', '${cover}')">
-  <div class="card-img-wrap"><img src="${cover}" loading="lazy" alt="${escapeHtml(title)}"></div>
+                    <div class="card-img-wrap"><img src="${cover}" loading="lazy" alt="${escapeHtml(title)}"></div>
                     <div class="card-info">
                         <div class="card-title">${escapeHtml(title)}</div>
                         ${capsule}
                     </div>
                 </div>`;
             }).join('');
-            if (items.length === 0 && filter) {
+            const isEmpty = items.length === 0 && (filter || activeCapsuleFilter);
+            if (isEmpty) {
                 grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">🔍</div><h3>No results</h3><p>Try a different keyword</p></div>`;
             }
         });
 
-        const blogItems = (APP_DATA.blog || []).filter(i => (i.title || '').toLowerCase().includes(term));
+        let blogItems = (APP_DATA.blog || []).filter(i => (i.title || '').toLowerCase().includes(term));
+        if (activeCapsuleFilter) {
+            blogItems = blogItems.filter(i => capsuleMatch(i.imf || '', activeCapsuleFilter));
+        }
         const blogCnt = document.getElementById('blog-count');
         if (blogCnt) blogCnt.textContent = blogItems.length + ' posts';
         document.getElementById('blog-list').innerHTML = blogItems.map(item => {
-            const imf = item.imf ? `<div class="item-capsule">${escapeHtml(item.imf)}</div>` : '';
+            const isActiveCapsule = activeCapsuleFilter && capsuleMatch(item.imf || '', activeCapsuleFilter);
+            const imf = item.imf
+                ? `<div class="item-capsule${isActiveCapsule ? ' capsule-active' : ''}" onclick="filterByCapsule('${escapeJs(item.imf)}', this)">${escapeHtml(item.imf)}</div>`
+                : '';
             const file = item.file || '';
             const title = item.title || '';
             return `
@@ -1037,7 +1113,7 @@
                 <i data-feather="arrow-right" class="blog-arrow" style="width:16px; height:16px;"></i>
             </div>`;
         }).join('');
-        if (blogItems.length === 0 && filter) {
+        if (blogItems.length === 0 && (filter || activeCapsuleFilter)) {
             document.getElementById('blog-list').innerHTML = `<div class="empty-state"><div class="empty-state-icon">🔍</div><h3>No results</h3><p>Try a different keyword</p></div>`;
         }
         feather.replace();
@@ -1091,7 +1167,7 @@
             </div>`;
         }).join('');
 
-        // Goals
+        // Goals — repeat when completed (cycle through completions)
         const goalDefs = [
             { name: 'Open 5 Books', key: 'textbook', target: 5, icon: '📖' },
             { name: 'Listen to 3 Audio Tracks', key: 'audio', target: 3, icon: '🎧' },
@@ -1099,13 +1175,21 @@
             { name: 'Complete a Course', key: 'courses', target: 1, icon: '🎓' },
         ];
         document.getElementById('goals-list').innerHTML = goalDefs.map(g => {
-            const done = Math.min((PROGRESS.opened[g.key] || []).length, g.target);
-            const pctG = Math.round((done / g.target) * 100);
+            const total = (PROGRESS.opened[g.key] || []).length;
+            const completions = Math.floor(total / g.target);
+            const done = total % g.target; // progress within current cycle
+            const pctG = completions > 0 && done === 0
+                ? 100  // just completed, show full before resetting
+                : Math.round((done / g.target) * 100);
+            const completedBadge = completions > 0
+                ? `<span style="font-size:10px;color:var(--primary);font-weight:700;margin-left:6px;">×${completions} ✓</span>`
+                : '';
+            const displayDone = completions > 0 && done === 0 ? g.target : done;
             return `
             <div class="goal-item">
                 <div class="goal-top">
-                    <div class="goal-name">${g.icon} ${g.name}</div>
-                    <div class="goal-frac">${done}/${g.target}</div>
+                    <div class="goal-name">${g.icon} ${g.name}${completedBadge}</div>
+                    <div class="goal-frac">${displayDone}/${g.target}</div>
                 </div>
                 <div class="goal-bar-bg">
                     <div class="goal-bar-fill" style="width:${pctG}%"></div>
@@ -1113,17 +1197,20 @@
             </div>`;
         }).join('');
 
-        // Recent activity (last 10 opened items across all types)
+        // Recent activity — build with per-item timestamps using PROGRESS.activityLog
         const typeLabel = { audio:'audio', textbook:'book', papers:'paper', blog:'blog', courses:'course' };
         const badgeClass = { audio:'badge-audio', textbook:'badge-book', papers:'badge-paper', blog:'badge-paper', courses:'badge-course' };
-        let allActivity = [];
-        ['audio','textbook','papers','blog','courses'].forEach(k => {
-            (PROGRESS.opened[k] || []).forEach(title => {
-                allActivity.push({ type: k, title });
+        // Fall back: if no activityLog yet, rebuild from opened (legacy)
+        let recentLog = (PROGRESS.activityLog || []).slice(-10).reverse();
+        if (recentLog.length === 0) {
+            // legacy fallback — interleave all types in order
+            let allActivity = [];
+            ['audio','textbook','papers','blog','courses'].forEach(k => {
+                (PROGRESS.opened[k] || []).forEach(title => allActivity.push({ type: k, title }));
             });
-        });
-        const recent = allActivity.slice(-10).reverse();
-        if (recent.length === 0) {
+            recentLog = allActivity.slice(-10).reverse();
+        }
+        if (recentLog.length === 0) {
             document.getElementById('recent-activity').innerHTML = `
             <div class="empty-state" style="padding:40px 20px;">
                 <div class="empty-state-icon">📭</div>
@@ -1131,7 +1218,7 @@
                 <p>Start exploring the library!</p>
             </div>`;
         } else {
-            document.getElementById('recent-activity').innerHTML = recent.map(item => `
+            document.getElementById('recent-activity').innerHTML = recentLog.map(item => `
             <div class="activity-item">
                 <div class="activity-thumb-icon">
                     <i data-feather="${item.type === 'audio' ? 'headphones' : item.type === 'textbook' ? 'book' : item.type === 'papers' ? 'file-text' : item.type === 'courses' ? 'monitor' : 'rss'}"></i>
@@ -1226,7 +1313,7 @@
     function openFullAudio() { document.getElementById('fullAudioPlayer').style.display = 'flex'; }
     function closeFullAudio() { document.getElementById('fullAudioPlayer').style.display = 'none'; }
     function closeDoc() { document.getElementById('docViewer').style.display = 'none'; document.getElementById('docFrame').src = ""; }
-    function globalSearch() { render(document.getElementById('searchInput').value); }
+    function globalSearch() { activeCapsuleFilter = null; render(document.getElementById('searchInput').value); }
 
     function escapeHtml(str) {
         if (!str) return '';
@@ -1244,11 +1331,6 @@
             document.getElementById('m-title').innerText = document.getElementById('fa-title').innerText = title || '';
             document.getElementById('miniPlayer').style.display = 'flex';
             audio.src = file || '';
-            // Track unique audio plays
-            if (!PROGRESS.audioPlayed.includes(title)) {
-                PROGRESS.audioPlayed.push(title);
-                saveProgress();
-            }
             audio.play().catch(() => {
                 updateIcons(false);
                 showToast('Tap play to start audio');
@@ -1327,5 +1409,3 @@
 </script>
 </body>
 </html>
-
-                 
