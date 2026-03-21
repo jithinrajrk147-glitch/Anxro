@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+i<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -483,7 +483,9 @@
         /* ── MINI PLAYER ── */
         #miniPlayer {
             position: fixed;
-            bottom: calc(16px + var(--safe-bottom));
+            bottom: calc(70px + var(--safe-bottom)); /* Increase 36px to whatever looks best */
+ /* Increase 36px to whatever looks best */
+
             left: 12px; right: 12px; height: 66px;
             background: rgba(18, 18, 18, 0.97);
             backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
@@ -512,10 +514,8 @@
         .mini-art { width: 46px; height: 46px; border-radius: 11px; object-fit: cover; margin-right: 12px; }
         .mini-info { flex: 1; overflow: hidden; }
         .mini-title { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .mini-subtitle { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
-
-        /* ── FULL PLAYER MODAL ── */
-        .modal-overlay{
+        .mini-subtitle { font-size: 11px; color: var(--text-muted); margin-top: 2px; }/* ── FULL PLAYER MODAL ── */
+        .modal-overlay {
             position: fixed; inset: 0;
             background: #000; z-index: 1000;
             display: none; flex-direction: column;
@@ -523,7 +523,8 @@
             animation: slideUp 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         #fullAudioPlayer.modal-overlay {
-            padding: calc(var(--safe-top) + 10px) 22px calc(var(--safe-bottom) + 22px);
+            padding: calc(var(--safe-top) + 10px) 22px calc(var(--safe-bottom) + 70px); /* Increase 50px to push content up more */
+
             background: linear-gradient(160deg, #080f0a 0%, #050505 100%);
         }
         @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
@@ -1001,9 +1002,8 @@
             try {
                 const res = await fetch(`${s}.json`);
                 if (!res.ok) throw new Error(`HTTP error ${res.status}`);
-                APP_DATA[s] = await res.json();
-            } catch (e) {
-                showToast(`Failed to load${s}`, true);
+                APP_DATA[s] = await res.json();} catch (e) {
+                showToast(`Failed to load ${s}`, true);
             }
         }
         render();
