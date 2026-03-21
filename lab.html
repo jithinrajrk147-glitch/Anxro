@@ -290,7 +290,7 @@ body::before {
     display: none; position: fixed; inset: 0;
     background: rgba(0,0,0,0.75);
     backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-    justify-content: center; align-items: flex-end;
+    justify-content: center; align-items: center;
     z-index: 1000; padding: 16px;
 }
 .modal-content {
@@ -323,11 +323,11 @@ body::before {
 }
 
 #noinfo-modal .modal-content { max-width: 320px; margin: 0 auto; }
-#noinfo-modal p { font-size: 13px; opacity: 0.7; margin: 8px 0 0; }
+#noinfo-modalp { font-size: 13px; opacity: 0.7; margin: 8px 0 0; }
 
 /* ── TOAST ── */
 #toast {
-    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
     padding: 10px 20px; border-radius: 999px;
     font-size: 13px; font-weight: 600;
     display: none; z-index: 2000;
@@ -335,7 +335,7 @@ body::before {
     box-shadow: 0 8px 24px rgba(0,0,0,0.25);
     animation: toastIn 0.3s ease;
 }
-@keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(8px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+@keyframes toastIn { from { opacity: 0; transform: translate(-50%, -50%) scale(0.88); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
 
 /* ── FAVOURITES EMPTY ── */
 #fav-empty {
@@ -552,8 +552,7 @@ function getCategory(item) {
         analytics: ['analytics','ahrefs','semrush','google analytics','fathom','insight','seo'],
         finance: ['quickbooks','stripe','paypal','payments','payment','invoice','accounting','hubspot','financial','stripe dashboard','shopify'],
         media: ['video','capcut','speechify','transcribe','audio','media','unsplash','pexels'],
-        utility: ['pdf','convert','smallpdf','cloudconvert','dns','speedtest','worldtime','caniuse','browserstack','photopea','cloudways','vercel','heroku','supabase']
-    };
+        utility: ['pdf','convert','smallpdf','cloudconvert','dns','speedtest','worldtime','caniuse','browserstack','photopea','cloudways','vercel','heroku','supabase']};
     for (const cat of Object.keys(keywords)) {
         for (const kw of keywords[cat]) {
             if (text.indexOf(kw) !== -1) {
@@ -618,7 +617,7 @@ function renderBatch() {
             <div class="card-info">
                 <strong>${item.name}</strong>
                 <small>${item.info || ''}</small>
-                <button class="card-category ${catClass}" aria-label="Filter by ${categoryLabel}">${categoryLabel}</button>
+                <button class="card-category ${catClass}" aria-label="Filter by ${categoryLabel}">${item.capsule || categoryLabel}</button>
             </div>
         `;
 
@@ -805,8 +804,12 @@ document.getElementById('noinfo-open').addEventListener('click', () => {
 /* ── TOAST ── */
 function showToast(msg) {
     const t = document.getElementById('toast');
-    t.textContent = msg; t.style.display = "block";
-    setTimeout(() => t.style.display = "none", 2200);
+    t.style.display = "none";
+    void t.offsetWidth;
+    t.textContent = msg;
+    t.style.display = "block";
+    clearTimeout(t._hide);
+    t._hide = setTimeout(() => t.style.display = "none", 2200);
 }
 
 /* ── CLOSE MODALS ON OUTSIDE CLICK ── */
