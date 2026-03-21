@@ -311,8 +311,7 @@ input:checked + .slider:before { transform: translateX(16px); }
 }
 
 .progress-card::before {
-  content: '';
-  position: absolute;
+  content: '';position: absolute;
   top: -30px; right: -30px;
   width: 120px; height: 120px;
   background: radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%);
@@ -577,7 +576,7 @@ const UI = {
 const MAX_TOOLS = 14; // 14 user tools + 1 "Add" button = 15 total
 
 function toggleMenu() {
-  UI.menu.style.display = UI.menu.style.display === 'flex' ? 'none' : 'flex';
+  UI.menu.style.display= UI.menu.style.display === 'flex' ? 'none' : 'flex';
 }
 
 function applyTheme() {
@@ -641,12 +640,12 @@ function renderToolsGrid(allTools) {
 
 // ── DATA FETCHING ──
 async function loadData() {
-  try {const [qRes, tRes, thumbRes] = await Promise.all([
-  fetch("./text.json").then(r => r.json()),
-  fetch("./tools.json").then(r => r.json()),
-  fetch("./thumbnails.json").then(r => r.json())
-]);
-    
+  try {
+    const [qRes, tRes, thumbRes] = await Promise.all([
+      fetch("text.json").then(r => r.json()),
+      fetch("tools.json").then(r => r.json()),
+      fetch("thumbnails.json").then(r => r.json())
+    ]);
 
     // Quote
     UI.quoteText.textContent = qRes.message.text;
