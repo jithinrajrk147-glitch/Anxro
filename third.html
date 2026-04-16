@@ -176,12 +176,6 @@ iframe {
         <span class="text">Home</span>
       </a>
     </li>
-    <li class="list" data-page="paper libary.html">
-      <a>
-        <img src="library.png" alt="Trade" class="icon">
-        <span class="text">Trade</span>
-      </a>
-    </li>
     <li class="list" data-page="libary.html">
       <a>
         <img src="library.png" alt="Library" class="icon">
@@ -213,7 +207,6 @@ const nav = document.querySelector('.navigation');
 const mainPages = [
     "home.html", 
     "libary.html", 
-    "libary.html", 
     "lab.html", 
     "ai.html"
 ];
@@ -227,7 +220,7 @@ function updateNavVisibility() {
         // Only show nav if the page is one of the 5 main menu items
         if (mainPages.includes(currentPage)) {
             nav.style.display = "flex";
-            
+
             // Auto-update the active bubble if you navigate via ppscript
             list.forEach(item => {
                 if(item.dataset.page === currentPage) {
