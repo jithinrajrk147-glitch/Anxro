@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>YouTube Player + Movable Notes</title>
+<title>YouTube Player + Bottom Notes</title>
 <script src="https://unpkg.com/feather-icons"></script>
 <style>
   :root{
@@ -14,30 +14,23 @@
     --panel-border: rgba(255,255,255,0.06);
     --glass: rgba(255,255,255,0.03);
     --radius:12px;
-    --safe-min-side:150px;
-    --default-side:360px;
     --default-bottom:40vh;
   }
 
-  /* Reset & layout */
   *{box-sizing:border-box}
   html,body{height:100%;margin:0;background:var(--bg);color:#fff;font-family:Inter,-apple-system,Segoe UI,Roboto,Arial}
-  .app { display:flex; width:100vw; height:100vh; gap:12px; padding:12px; align-items:stretch; position:relative; }
+  .app { display:flex; flex-direction:column; width:100vw; height:100vh; gap:0; align-items:stretch; position:relative; }
 
-  /* Video area */
   .video-wrap {
     flex:1 1 auto;
-    min-width:0;
+    min-height:0;
     position:relative;
-    background:linear-gradient(180deg,#000,#050505);
-    border-radius:12px;
+    background:#000;
     overflow:hidden;
-    box-shadow: 0 6px 30px rgba(0,0,0,0.6);
   }
-  .player { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:#000; }
+  .player { position:absolute; inset:0; }
   .player iframe { width:100%; height:100%; border:0; display:block; }
 
-  /* Controls */
   .controls { position:absolute; right:18px; bottom:18px; display:flex; gap:10px; z-index:40; }
   .btn {
     background:var(--glass);
@@ -52,34 +45,30 @@
     font-size:13px;
     backdrop-filter: blur(6px);
   }
-  .btn.small{ padding:6px 8px; font-size:12px }
 
-  /* Notes panel (docked by default) */
   .notes {
-    width: var(--default-side);
-    min-width: var(--safe-min-side);
-    max-width:80vw;
+    width:100%;
+    height:var(--default-bottom);
+    min-height:120px;
+    max-height:80vh;
     background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-left:1px solid var(--panel-border);
+    border-top:1px solid var(--panel-border);
     display:flex;
     flex-direction:column;
-    border-radius:10px;
-    overflow:hidden;
     position:relative;
-    transition: box-shadow 200ms ease, transform 180ms ease;
   }
 
   .note-head {
-    padding:12px 14px;
+    padding:10px 14px;
     border-bottom:1px solid var(--panel-border);
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:10px;
-    cursor:default;
     user-select:none;
   }
-  .note-title{ font-weight:700; letter-spacing:0.6px; color:#fff }
+  .note-title{ font-weight:700; color:#fff }
+  .video-id{ color:var(--muted); font-size:12px }
   .note-actions{ display:flex; gap:6px; align-items:center }
 
   .note-body { flex:1; display:flex; flex-direction:column; min-height:0; position:relative; }
@@ -94,46 +83,15 @@
     outline:none;
     font-size:14px;
     line-height:1.45;
-    min-height:120px;
   }
 
-  /* Resizer (docked: vertical handle on left) */
   .resizer {
-    width:10px;
-    cursor:ew-resize;
-    position:absolute;
-    left:-10px;
-    top:0;
-    bottom:0;
-    z-index:40;
-    touch-action:none;
+    left:0; top:-5px; height:10px; width:100%; cursor:ns-resize;
+    position:absolute; z-index:40; touch-action:none;
   }
-  .resizer .bar { width:2px; height:40px; background:rgba(255,255,255,0.06); margin:auto; margin-top:calc(50% - 20px); border-radius:2px; opacity:0.7 }
-
-  /* Floating (undocked) variant */
-  .notes.floating {
-    position: absolute;
-    right:24px;
-    top:24px;
-    width:360px;
-    height:60vh;
-    border-radius:12px;
-    z-index:90;
-    box-shadow:0 20px 60px rgba(0,0,0,0.65);
-    transform: translateY(0);
-  }
-  .notes.floating .note-head { cursor:grab; touch-action:none; }
-  .notes.floating .resizer { left:auto; right:8px; bottom:8px; top:auto; height:12px; width:12px; cursor:nwse-resize; }
-  .notes.floating .resizer .bar{ display:none; }
-
-  /* Stacked / mobile mode: notes at bottom */
-  .stacked { flex-direction:column; align-items:stretch; gap:12px; padding:12px; }
-  .stacked .notes { width:100%; height: var(--default-bottom); min-height:120px; border-left:0; border-top:1px solid var(--panel-border); border-radius:10px; }
-  .stacked .resizer { left:0; top:-10px; height:10px; width:100%; cursor:ns-resize; }
-  .stacked .resizer .bar { height:2px; width:40px; margin:8px auto; }
+  .resizer .bar { height:2px; width:40px; background:rgba(255,255,255,0.15); margin:4px auto; border-radius:2px; }
 
   @media (max-width:920px){
-    .notes{ width:100%; min-width:120px; max-width:100% }
     .controls{ right:12px; bottom:12px }
   }
 </style>
@@ -146,25 +104,23 @@
     </div>
 
     <div class="controls" role="group" aria-label="Player controls">
-      <button class="btn" id="undockToggle" title="Undock / Dock notes"><i data-feather="move"></i><span style="margin-left:6px">Undock</span></button>
-      <button class="btn" id="openNotebook" title="Open Notebook (separate page)"><i data-feather="book"></i><span style="margin-left:6px">Notebook</span></button>
-      <button class="btn" id="fullscreenBtn" title="Fullscreen"><i data-feather="maximize"></i><span style="margin-left:6px">Full</span></button>
       <button class="btn" id="notesToggle" title="Toggle notes"><i data-feather="edit-3"></i><span style="margin-left:6px">Notes</span></button>
+
     </div>
   </div>
 
-  <aside class="notes" id="notes" aria-label="Notes panel" role="complementary">
+  <aside class="notes" id="notes" aria-label="Notes panel">
     <div class="resizer" id="resizer" aria-hidden="true"><div class="bar"></div></div>
 
     <div class="note-head" id="noteHead">
       <div style="display:flex;align-items:center;gap:8px">
-        <div class="note-title">Candle Notes</div>
-        <div style="color:var(--muted);font-size:13px">Autosaves locally</div>
+        <div class="note-title">Notes</div>
+        <div class="video-id" id="videoIdLabel"></div>
       </div>
       <div class="note-actions">
         <button class="btn small" id="saveBtn">Save</button>
-        <button class="btn small" id="exportBtn" title="Export notes">Export</button>
-        <button class="btn small" id="closeBtn" title="Close notes"><i data-feather="x"></i></button>
+        <button class="btn small" id="exportBtn">Export</button>
+        <button class="btn small" id="ytbookBtn" title="View all notes">All Notes</button>
       </div>
     </div>
 
@@ -181,6 +137,7 @@
   const params = new URLSearchParams(location.search);
   const videoParam = params.get('video') || params.get('v') || '';
   const iframe = document.getElementById('ytIframe');
+  const videoIdLabel = document.getElementById('videoIdLabel');
 
   function extractYoutubeId(input){
     if(!input) return null;
@@ -193,134 +150,49 @@
     if(m) return m[1];
     return null;
   }
-  const id = extractYoutubeId(videoParam);
-  if(id){
-    iframe.src = `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1&iv_load_policy=3`;
+  
+  const videoId = extractYoutubeId(videoParam) || 'default';
+  videoIdLabel.textContent = videoId === 'default' ? 'No video' : videoId;
+  
+  // No YouTube badges/logos: modestbranding=1, controls=1, rel=0, iv_load_policy=3
+  if(videoId !== 'default'){
+    iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&iv_load_policy=3&controls=1&disablekb=0`;
   }
 
   // ---------- Elements ----------
-  const app = document.getElementById('app');
   const notes = document.getElementById('notes');
-  const noteHead = document.getElementById('noteHead');
   const resizer = document.getElementById('resizer');
-  const undockToggle = document.getElementById('undockToggle');
-  const openNotebook = document.getElementById('openNotebook');
   const fullscreenBtn = document.getElementById('fullscreenBtn');
   const notesToggle = document.getElementById('notesToggle');
-  const closeBtn = document.getElementById('closeBtn');
   const saveBtn = document.getElementById('saveBtn');
   const exportBtn = document.getElementById('exportBtn');
+  const ytbookBtn = document.getElementById('ytbookBtn');
   const textPad = document.getElementById('textPad');
 
-  // ---------- Storage keys ----------
-  const TXT_KEY = 'candle_notes_text_v3';
-  const FLOAT_KEY = 'candle_notes_floating_v3';
-  const SIDE_W_KEY = 'candle_notes_sidewidth_v3';
-  const SIDE_H_KEY = 'candle_notes_sideheight_v3';
-  const POS_LEFT = 'candle_notes_left_v3';
-  const POS_TOP = 'candle_notes_top_v3';
-
-  // ---------- State ----------
-  let floating = localStorage.getItem(FLOAT_KEY) === 'true';
-  let dragging = false;
-  let dragOffset = {x:0,y:0};
-  let resizing = false;
-  let resizeStart = null;
-
-  // ---------- Responsive helper ----------
-  function isWide(){ return window.matchMedia('(min-width:920px)').matches; }
-
-  // ---------- Apply float/docked state ----------
-  function applyFloatingState(){
-    if(floating){
-      notes.classList.add('floating');
-      // restore position & size
-      const left = localStorage.getItem(POS_LEFT);
-      const top = localStorage.getItem(POS_TOP);
-      const w = localStorage.getItem(SIDE_W_KEY);
-      const h = localStorage.getItem(SIDE_H_KEY);
-      if(w) notes.style.width = w;
-      if(h) notes.style.height = h;
-      if(left && top){ notes.style.left = left; notes.style.top = top; notes.style.right = ''; }
-      else { notes.style.right = '24px'; notes.style.top = '24px'; }
-      noteHead.style.cursor = 'grab';
-    } else {
-      notes.classList.remove('floating');
-      // restore width when docked
-      const w = localStorage.getItem(SIDE_W_KEY);
-      notes.style.width = w || '';
-      notes.style.left = ''; notes.style.top = ''; notes.style.height = '';
-      noteHead.style.cursor = 'default';
-    }
-  }
-  applyFloatingState();
-
-  // Toggle undock/dock
-  function toggleFloating(){
-    floating = !floating;
-    localStorage.setItem(FLOAT_KEY, floating ? 'true' : 'false');
-    applyFloatingState();
-  }
-  undockToggle.addEventListener('click', toggleFloating);
-
-  // ---------- Dragging when floating ----------
-  noteHead.addEventListener('pointerdown', (e)=>{
-    if(!floating) return;
-    dragging = true;
-    noteHead.setPointerCapture(e.pointerId);
-    const rect = notes.getBoundingClientRect();
-    dragOffset.x = e.clientX - rect.left;
-    dragOffset.y = e.clientY - rect.top;
-    noteHead.style.cursor = 'grabbing';
-  });
-  window.addEventListener('pointermove', (e)=>{
-    if(!dragging) return;
-    const x = Math.max(8, Math.min(window.innerWidth - 80, e.clientX - dragOffset.x));
-    const y = Math.max(8, Math.min(window.innerHeight - 80, e.clientY - dragOffset.y));
-    notes.style.left = x + 'px';
-    notes.style.top = y + 'px';
-  });
-  window.addEventListener('pointerup', (e)=>{
-    if(dragging){
-      dragging = false;
-      try{ noteHead.releasePointerCapture(e.pointerId); }catch{}
-      noteHead.style.cursor = 'grab';
-      // persist
-      localStorage.setItem(POS_LEFT, notes.style.left);
-      localStorage.setItem(POS_TOP, notes.style.top);
-    }
-  });
+  // ---------- Storage keys - per video ----------
+  const TXT_KEY = `yt_notes_text_${videoId}`;
+  const HEIGHT_KEY = 'yt_notes_height_v1';
+  const ALL_NOTES_KEY = 'yt_notes_index_v1';
 
   // ---------- Resizing ----------
+  let resizing = false;
+  let resizeStart = null;
+  
   resizer.addEventListener('pointerdown', (e)=>{
     resizing = true;
     resizer.setPointerCapture(e.pointerId);
-    resizeStart = {x:e.clientX, y:e.clientY, w:notes.offsetWidth, h:notes.offsetHeight};
+    resizeStart = {y:e.clientY, h:notes.offsetHeight};
     document.body.style.userSelect = 'none';
   });
+  
   window.addEventListener('pointermove', (e)=>{
     if(!resizing) return;
-    if(floating){
-      const dx = e.clientX - resizeStart.x;
-      const dy = e.clientY - resizeStart.y;
-      const newW = Math.max(220, resizeStart.w + dx);
-      const newH = Math.max(160, resizeStart.h + dy);
-      notes.style.width = newW + 'px';
-      notes.style.height = newH + 'px';
-      localStorage.setItem(SIDE_W_KEY, notes.style.width);
-      localStorage.setItem(SIDE_H_KEY, notes.style.height);
-    } else if(app.classList.contains('stacked')) {
-      // stack (mobile): vertical resize: change height
-      const newHeight = Math.max(120, Math.min(window.innerHeight * 0.85, window.innerHeight - e.clientY));
-      notes.style.height = newHeight + 'px';
-      localStorage.setItem(SIDE_H_KEY, notes.style.height);
-    } else {
-      // docked: adjust width
-      const newWidth = Math.max(150, Math.min(window.innerWidth*0.85, window.innerWidth - e.clientX));
-      notes.style.width = newWidth + 'px';
-      localStorage.setItem(SIDE_W_KEY, notes.style.width);
-    }
+    const dy = resizeStart.y - e.clientY;
+    const newHeight = Math.max(120, Math.min(window.innerHeight * 0.85, resizeStart.h + dy));
+    notes.style.height = newHeight + 'px';
+    localStorage.setItem(HEIGHT_KEY, notes.style.height);
   });
+  
   window.addEventListener('pointerup', (e)=>{
     if(resizing){
       resizing = false;
@@ -329,48 +201,38 @@
     }
   });
 
-  // ---------- Layout responsiveness ----------
-  function handleResponsiveLayout(){
-    if(isWide()){
-      app.classList.remove('stacked');
-      // if previously stacked height saved and not floating, clear it
-      const savedW = localStorage.getItem(SIDE_W_KEY);
-      if(savedW && !floating) notes.style.width = savedW;
-      notes.style.height = '';
-    } else {
-      app.classList.add('stacked');
-      // stacked: notes at bottom full width
-      notes.style.width = '100%';
-      const savedH = localStorage.getItem(SIDE_H_KEY);
-      notes.style.height = savedH || 'var(--default-bottom)';
-      // when small screens we default to docked (not floating)
-      if(floating){
-        floating = false;
-        localStorage.setItem(FLOAT_KEY, 'false');
-        applyFloatingState();
-      }
-    }
-  }
-  window.addEventListener('resize', handleResponsiveLayout);
-  handleResponsiveLayout(); // initial
+  // Restore height
+  const savedH = localStorage.getItem(HEIGHT_KEY);
+  if(savedH) notes.style.height = savedH;
 
-  // ---------- Notes: autosave, export, sync ----------
-  const SAVE_DEBOUNCE = 350;
+  // ---------- Notes: autosave per video ----------
+  const SAVE_DEBOUNCE = 400;
   let saveTimer = null;
+  
+  function saveNote(){
+    const text = textPad.value || '';
+    localStorage.setItem(TXT_KEY, text);
+    
+    // Update index of all videos with notes
+    let index = JSON.parse(localStorage.getItem(ALL_NOTES_KEY) || '{}');
+    if(text.trim()){
+      index[videoId] = { updated: Date.now(), preview: text.slice(0,100) };
+    } else {
+      delete index[videoId];
+    }
+    localStorage.setItem(ALL_NOTES_KEY, JSON.stringify(index));
+  }
+  
   function scheduleSave(){
     if(saveTimer) clearTimeout(saveTimer);
-    saveTimer = setTimeout(()=> {
-      localStorage.setItem(TXT_KEY, textPad.value || '');
-    }, SAVE_DEBOUNCE);
+    saveTimer = setTimeout(saveNote, SAVE_DEBOUNCE);
   }
+  
   textPad.addEventListener('input', scheduleSave);
-
-  // load existing saved text
-  const savedText = localStorage.getItem(TXT_KEY);
-  if(savedText) textPad.value = savedText;
+  textPad.value = localStorage.getItem(TXT_KEY) || '';
 
   saveBtn.addEventListener('click', ()=>{
-    localStorage.setItem(TXT_KEY, textPad.value || '');
+    saveNote();
     saveBtn.textContent = 'Saved';
     setTimeout(()=> saveBtn.textContent = 'Save', 900);
   });
@@ -378,32 +240,22 @@
   exportBtn.addEventListener('click', ()=>{
     const blob = new Blob([textPad.value || ''], {type:'text/plain;charset=utf-8'});
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a'); a.href = url; a.download = 'notes.txt'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    const a = document.createElement('a'); 
+    a.href = url; 
+    a.download = `notes_${videoId}.txt`; 
+    document.body.appendChild(a); 
+    a.click(); 
+    a.remove(); 
+    URL.revokeObjectURL(url);
   });
 
-  // sync across tabs/windows (storage event)
-  window.addEventListener('storage', (e)=>{
-    if(e.key === TXT_KEY){
-      if(e.newValue !== textPad.value) textPad.value = e.newValue || '';
-    } else if(e.key === FLOAT_KEY){
-      floating = e.newValue === 'true';
-      applyFloatingState();
-    } else if(e.key === SIDE_W_KEY && !floating && isWide()){
-      notes.style.width = e.newValue || '';
-    } else if(e.key === SIDE_H_KEY && app.classList.contains('stacked')){
-      notes.style.height = e.newValue || '';
-    }
+  ytbookBtn.addEventListener('click', ()=>{
+    window.open('ytbook.html', 'ytbook', 'width=900,height=700');
   });
 
   // ---------- Controls ----------
   notesToggle.addEventListener('click', ()=> {
     notes.style.display = (notes.style.display === 'none') ? '' : 'none';
-  });
-  closeBtn.addEventListener('click', ()=> { notes.style.display = 'none'; });
-
-  openNotebook.addEventListener('click', ()=>{
-    const url = new URL('notes-notebook.html', location.href).toString();
-    window.open(url, 'candle-notebook', 'width=900,height=700');
   });
 
   fullscreenBtn.addEventListener('click', async ()=>{
@@ -413,19 +265,13 @@
     }catch(e){ console.warn('fullscreen failed', e); }
   });
 
-  // keyboard shortcuts
+  // Keyboard shortcuts
   document.addEventListener('keydown', (e)=>{
-    if(e.key === 'Escape'){
-      if(document.fullscreenElement) document.exitFullscreen();
-      else notes.style.display = 'none';
-    }
-    if((e.ctrlKey || e.metaKey) && e.key === '/') {
-      notes.style.display = (notes.style.display === 'none') ? '' : 'none';
-    }
+    if(e.key === 'Escape' && document.fullscreenElement) document.exitFullscreen();
     if((e.ctrlKey || e.metaKey) && e.key === 's'){ e.preventDefault(); saveBtn.click(); }
+    if((e.ctrlKey || e.metaKey) && e.key === 'n'){ e.preventDefault(); notesToggle.click(); }
   });
 
-  // final: ensure icons reflect state
   feather.replace();
 </script>
 </body>
