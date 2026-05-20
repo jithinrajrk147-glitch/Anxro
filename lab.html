@@ -17,8 +17,8 @@
     --em-deep: #064e3b;
     --em-dim: rgba(16,185,129,0.10);
     --em-glow: rgba(16,185,129,0.22);
-    --radius: 16px;
-    --radius-sm: 11px;
+    --radius: 12px;
+    --radius-sm: 9px;
 }
 
 /* ── BODY / BG ── */
@@ -27,8 +27,9 @@ body {
     transition: background 0.3s, color 0.3s;
     min-height: 100vh;
     overflow-x: hidden;
+    background: #0a0a0a;
+    color: #f5f5f5;
 }
-/* subtle dot grid */
 body::before {
     content: '';
     position: fixed; inset: 0; pointer-events: none; z-index: 0;
@@ -36,39 +37,94 @@ body::before {
     background-size: 26px 26px;
 }
 
+/* ── LOADING OVERLAY ── */
+.loading-overlay {
+    position: fixed;
+    inset: 0;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: none;
+}
+
+.loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    animation: slideIn 0.4s ease-out;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(16,185,129,0.15);
+    border-top: 3px solid var(--em);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    box-shadow: 0 0 20px rgba(16,185,129,0.3);
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.loading-text {
+    font-size: 13px;
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
 /* ── STICKY HEADER ── */
 #app-header {
     position: sticky; top: 0; z-index: 200;
-    padding: 14px 14px 0;
+    padding: 12px 12px 0;
     backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+    background: rgba(10,10,10,0.7);
+    border-bottom: 1px solid rgba(16,185,129,0.1);
 }
 
 /* Brand row */
 .brand-row {
     display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
-.brand-left { display: flex; align-items: center; gap: 9px; }
+.brand-left { display: flex; align-items: center; gap: 8px; }
 .brand-icon {
-    width: 36px; height: 36px; border-radius: 11px;
+    width: 32px; height: 32px; border-radius: 9px;
     background: linear-gradient(135deg, var(--em) 0%, var(--em-deep) 100%);
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 14px var(--em-glow);
+    box-shadow: 0 3px 10px var(--em-glow);
 }
-.brand-icon i { color: white; font-size: 15px; }
+.brand-icon i { color: white; font-size: 13px; }
 .brand-name {
     font-family: 'Syne', sans-serif;
-    font-size: 19px; font-weight: 800; letter-spacing: -0.4px;
+    font-size: 16px; font-weight: 800; letter-spacing: -0.3px;
+    color: #f5f5f5;
 }
 .brand-name span { color: var(--em); }
 
 .theme-btn {
-    width: 36px; height: 36px; border-radius: 10px;
+    width: 32px; height: 32px; border-radius: 8px;
     border: 1px solid rgba(255,255,255,0.1);
     background: rgba(255,255,255,0.06);
     color: var(--em); cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    font-size: 15px; transition: all 0.2s;
+    font-size: 13px; transition: all 0.2s;
 }
 .theme-btn:active { transform: scale(0.9); }
 
@@ -76,132 +132,223 @@ body::before {
 .search-wrap {
     display: flex; align-items: center; gap: 8px;
     border-radius: var(--radius-sm);
-    padding: 0 12px;
-    height: 44px; margin-bottom: 10px;
+    padding: 0 11px;
+    height: 40px; margin-bottom: 8px;
     border: 1.5px solid rgba(16,185,129,0.18);
+    background: rgba(255,255,255,0.03);
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 .search-wrap:focus-within {
     border-color: var(--em);
-    box-shadow: 0 0 0 3px rgba(16,185,129,0.1);
+    box-shadow: 0 0 0 2px rgba(16,185,129,0.1);
 }
-.search-wrap i { color: var(--em); font-size: 14px; opacity: 0.7; }
+.search-wrap i { color: var(--em); font-size: 12px; opacity: 0.7; }
 #search-input {
     flex: 1; border: none; background: transparent;
     font-family: 'DM Sans', sans-serif;
-    font-size: 14px; outline: none;
+    font-size: 13px; outline: none;
     transition: color 0.2s;
+    color: #f5f5f5;
+}
+#search-input::placeholder {
+    color: rgba(245,245,245,0.3);
 }
 
 /* ── TAB BAR ── */
 .tab-bar {
     display: flex; gap: 6px;
-    padding: 0 0 10px;
+    padding: 0 0 8px;
     overflow-x: auto; scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
 }
 .tab-bar::-webkit-scrollbar { display: none; }
 
 .tab-btn {
-    display: flex; align-items: center; gap: 6px;
-    padding: 8px 16px; border-radius: 999px;
+    display: flex; align-items: center; gap: 5px;
+    padding: 7px 14px; border-radius: 999px;
     border: none; cursor: pointer; font-weight: 600;
     font-family: 'DM Sans', sans-serif;
-    font-size: 12.5px; white-space: nowrap;
+    font-size: 11px; white-space: nowrap;
     transition: all 0.2s;
     flex-shrink: 0;
     letter-spacing: 0.2px;
+    background: rgba(255,255,255,0.05);
+    color: rgba(245,245,245,0.6);
 }
-.tab-btn i { font-size: 13px; }
+.tab-btn i { font-size: 11px; }
+.tab-btn.active {
+    background: var(--em);
+    color: #fff;
+}
 
 /* ── SECTION HEADER ── */
 .section-label {
     font-family: 'Syne', sans-serif;
-    font-size: 11px; font-weight: 700;
-    letter-spacing: 1.2px; text-transform: uppercase;
-    padding: 6px 14px 8px;
-    opacity: 0.45;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 5px 12px 6px;
+    opacity: 0.4;
+    color: var(--em);
 }
 
-/* ── GRID ── */
+/* ── GRID (5 COLUMNS) ── */
 .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 9px;
-    padding: 4px 12px 100px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 7px;
+    padding: 3px 9px 40px;
     position: relative; z-index: 1;
 }
 
-/* ── CARD ── */
+/* ── CARD (SMALL) ── */
 .card {
     border-radius: var(--radius);
     overflow: hidden;
     cursor: pointer;
     position: relative;
     transition: transform 0.18s ease, box-shadow 0.18s ease;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(16,185,129,0.1);
+    aspect-ratio: 1/1;
+    display: flex;
+    flex-direction: column;
 }
-.card:active { transform: scale(0.95); }
+.card:active { transform: scale(0.92); }
 .card::after {
     content: '';
     position: absolute; inset: 0;
     border-radius: var(--radius);
-    background: linear-gradient(to top, rgba(0,0,0,0.52) 0%, transparent 55%);
+    background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 60%);
     pointer-events: none;
+    z-index: 2;
 }
 .card img {
-    width: 100%; aspect-ratio: 1/1; object-fit: cover;
-    display: block; transition: transform 0.35s ease;
+    width: 100%; 
+    height: 65%;
+    object-fit: cover;
+    display: block; 
+    transition: transform 0.3s ease;
 }
-.card:active img { transform: scale(1.04); }
+.card:active img { transform: scale(1.03); }
 
 .card-info {
-    padding: 7px 7px 10px;
-    display: flex; flex-direction: column; gap: 5px; align-items: center;
-    position: relative; z-index: 2;
+    padding: 3px 3px 3px;
+    display: flex; 
+    flex-direction: column; 
+    gap: 2px; 
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    position: relative; 
+    z-index: 3;
+    width: 100%;
 }
 .card-info strong {
-    display: block; font-size: 11px; font-weight: 600;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    width: 100%; text-align: center;
+    display: block; 
+    font-size: 8px; 
+    font-weight: 600;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    width: 100%; 
+    text-align: center;
+    color: #f5f5f5;
+    line-height: 1.2;
 }
-.card-info small { font-size: 9px; opacity: 0.6; text-align: center; line-height: 1.3; }
+.card-info small { 
+    display: none;
+}
+
+/* ── CAPSULE SYSTEM ── */
+.card-capsule {
+    padding: 2px 6px;
+    border-radius: 999px;
+    font-size: 6px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 4;
+    position: relative;
+    white-space: nowrap;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.card-capsule:active {
+    transform: scale(0.9);
+}
+
+/* Capsule colors based on type */
+.capsule-cyan {
+    background: rgba(34,211,238,0.8);
+    color: #000;
+    box-shadow: 0 2px 8px rgba(34,211,238,0.3);
+}
+
+.capsule-blue {
+    background: rgba(59,130,246,0.8);
+    box-shadow: 0 2px 8px rgba(59,130,246,0.3);
+}
+
+.capsule-purple {
+    background: rgba(168,85,247,0.8);
+    box-shadow: 0 2px 8px rgba(168,85,247,0.3);
+}
+
+.capsule-green {
+    background: rgba(16,185,129,0.8);
+    box-shadow: 0 2px 8px rgba(16,185,129,0.3);
+}
+
+.capsule-pink {
+    background: rgba(236,72,153,0.8);
+    box-shadow: 0 2px 8px rgba(236,72,153,0.3);
+}
+
+.capsule-red {
+    background: rgba(239,68,68,0.8);
+    box-shadow: 0 2px 8px rgba(239,68,68,0.3);
+}
+
+.capsule-yellow {
+    background: rgba(234,179,8,0.8);
+    color: #000;
+    box-shadow: 0 2px 8px rgba(234,179,8,0.3);
+}
+
+.capsule-orange {
+    background: rgba(249,115,22,0.8);
+    box-shadow: 0 2px 8px rgba(249,115,22,0.3);
+}
 
 /* Badge top-left */
 .card-badge {
-    position: absolute; top: 7px; left: 7px;
-    padding: 3px 7px; border-radius: 999px;
-    font-size: 9px; font-weight: 700; color: #fff;
-    text-transform: uppercase; letter-spacing: 0.5px;
+    position: absolute; top: 4px; left: 4px;
+    padding: 2px 5px; border-radius: 999px;
+    font-size: 7px; font-weight: 700; color: #fff;
+    text-transform: uppercase; letter-spacing: 0.3px;
     z-index: 10; pointer-events: none;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
-
-/* Category pill */
-.card-category {
-    padding: 5px 9px; border-radius: 999px;
-    font-size: 9px; font-weight: 700; color: #fff;
-    text-transform: uppercase; letter-spacing: 0.4px;
-    border: none; cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    white-space: nowrap; background: rgba(0,0,0,0.18);
-    transition: transform 0.15s;
-}
-.card-category:active { transform: scale(0.93); }
 
 /* ── TOP SECTION ── */
 #top-list {
-    padding: 4px 12px 100px;
-    display: flex; flex-direction: column; gap: 10px;
+    padding: 3px 9px 40px;
+    display: flex; flex-direction: column; gap: 8px;
     position: relative; z-index: 1;
 }
 .top-row {
-    display: flex; align-items: center; gap: 12px;
+    display: flex; align-items: center; gap: 10px;
     border-radius: var(--radius);
-    padding: 12px 14px;
+    padding: 10px 12px;
     cursor: pointer;
     transition: all 0.2s;
-    border: 1px solid transparent;
-    position: relative; overflow: hidden;
+    border: 1px solid rgba(16,185,129,0.15);
+    position: relative; 
+    overflow: hidden;
+    background: rgba(255,255,255,0.04);
 }
 .top-row:active { transform: scale(0.97); }
 .top-row::before {
@@ -214,444 +361,840 @@ body::before {
 
 .top-rank {
     font-family: 'Syne', sans-serif;
-    font-size: 22px; font-weight: 800;
+    font-size: 18px; font-weight: 800;
     color: var(--em); opacity: 0.35;
-    min-width: 30px; text-align: center; line-height: 1;
+    min-width: 28px; text-align: center; line-height: 1;
 }
-.top-rank.rank-1 { opacity: 1; font-size: 26px; }
+.top-rank.rank-1 { opacity: 1; font-size: 22px; }
 .top-rank.rank-2 { opacity: 0.75; }
 .top-rank.rank-3 { opacity: 0.55; }
 
 .top-img {
-    width: 52px; height: 52px; border-radius: 13px;
+    width: 44px; height: 44px; border-radius: 10px;
     object-fit: cover; flex-shrink: 0;
-    border: 1.5px solid rgba(16,185,129,0.15);
+    border: 1.2px solid rgba(16,185,129,0.15);
 }
 
-.top-info { flex: 1; overflow: hidden; }
+.top-info {
+    flex: 1; min-width: 0;
+}
 .top-name {
-    font-size: 14px; font-weight: 600;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    margin-bottom: 3px;
+    font-size: 13px; font-weight: 600; margin-bottom: 2px;
+    color: #f5f5f5;
 }
-.top-desc { font-size: 11px; opacity: 0.55; line-height: 1.35; }
-.top-badge-row { display: flex; gap: 5px; margin-top: 5px; flex-wrap: wrap; }
-.top-type-badge {
-    font-size: 9px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.4px; padding: 3px 7px; border-radius: 999px; color: #fff;
-}
-.top-cat-badge {
-    font-size: 9px; font-weight: 600; padding: 3px 7px;
-    border-radius: 999px; opacity: 0.8; color: #fff;
+.top-desc {
+    font-size: 11px; opacity: 0.5; line-height: 1.3;
+    color: rgba(245,245,245,0.6);
 }
 
-.top-arrow {
-    color: var(--em); opacity: 0.5; font-size: 13px; flex-shrink: 0;
-    transition: opacity 0.2s, transform 0.2s;
+.top-capsule {
+    padding: 2px 6px;
+    border-radius: 999px;
+    font-size: 7px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    border: 1px solid rgba(255,255,255,0.2);
+    margin-top: 4px;
+    display: inline-block;
 }
-.top-row:active .top-arrow { opacity: 1; transform: translateX(3px); }
 
-/* Crown badge for rank 1 */
-.crown-wrap {
-    position: absolute; top: 8px; right: 10px;
-    font-size: 13px; opacity: 0.8;
+.top-capsule:active {
+    transform: scale(0.9);
 }
 
-/* ── TYPE COLORS ── */
-.type-app { background: linear-gradient(90deg,#10b981,#059669); }
-.type-website { background: linear-gradient(90deg,#3b82f6,#2563eb); }
-.type-mod-apk, .type-mod { background: linear-gradient(90deg,#fb923c,#f97316); }
-
-/* ── CATEGORY COLORS ── */
-.cat-ai { background: linear-gradient(90deg,#7c3aed,#5b21b6); }
-.cat-editing { background: linear-gradient(90deg,#f97316,#fb923c); }
-.cat-earning { background: linear-gradient(90deg,#f43f5e,#ef4444); }
-.cat-design { background: linear-gradient(90deg,#06b6d4,#0891b2); }
-.cat-development { background: linear-gradient(90deg,#2563eb,#1e40af); }
-.cat-education { background: linear-gradient(90deg,#f59e0b,#d97706); }
-.cat-productivity { background: linear-gradient(90deg,#10b981,#059669); }
-.cat-utility { background: linear-gradient(90deg,#64748b,#475569); }
-.cat-media { background: linear-gradient(90deg,#ef77ff,#a855f7); }
-.cat-analytics { background: linear-gradient(90deg,#06b6d4,#0ea5a4); }
-.cat-finance { background: linear-gradient(90deg,#0ea5a4,#059669); }
-.cat-unknown { background: linear-gradient(90deg,#94a3b8,#64748b); }
-
-/* ── EMPTY STATE ── */
-.empty-state {
-    grid-column: 1/-1; text-align: center;
-    padding: 60px 20px;
-    display: flex; flex-direction: column; align-items: center; gap: 10px;
+/* Top capsule colors by type */
+.top-capsule.capsule-cyan {
+    background: rgba(34,211,238,0.8);
+    color: #000;
+    box-shadow: 0 2px 8px rgba(34,211,238,0.3);
 }
-.empty-state i { font-size: 36px; opacity: 0.2; }
-.empty-state p { font-size: 14px; opacity: 0.45; }
+
+.top-capsule.capsule-blue {
+    background: rgba(59,130,246,0.8);
+    box-shadow: 0 2px 8px rgba(59,130,246,0.3);
+}
+
+.top-capsule.capsule-purple {
+    background: rgba(168,85,247,0.8);
+    box-shadow: 0 2px 8px rgba(168,85,247,0.3);
+}
+
+.top-capsule.capsule-green {
+    background: rgba(16,185,129,0.8);
+    box-shadow: 0 2px 8px rgba(16,185,129,0.3);
+}
+
+.top-capsule.capsule-pink {
+    background: rgba(236,72,153,0.8);
+    box-shadow: 0 2px 8px rgba(236,72,153,0.3);
+}
+
+.top-capsule.capsule-red {
+    background: rgba(239,68,68,0.8);
+    box-shadow: 0 2px 8px rgba(239,68,68,0.3);
+}
+
+.top-capsule.capsule-yellow {
+    background: rgba(234,179,8,0.8);
+    color: #000;
+    box-shadow: 0 2px 8px rgba(234,179,8,0.3);
+}
+
+.top-capsule.capsule-orange {
+    background: rgba(249,115,22,0.8);
+    box-shadow: 0 2px 8px rgba(249,115,22,0.3);
+}
 
 /* ── MODAL ── */
-.modal {
-    display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,0.75);
-    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-    justify-content: center; align-items: center;
-    z-index: 1000; padding: 16px;
+#item-modal {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+    display: none; align-items: center; justify-content: center;
+    z-index: 500; backdrop-filter: blur(6px);
 }
+#item-modal.active { display: flex; }
+
 .modal-content {
-    border-radius: 24px; padding: 22px;
-    width: 100%; max-width: 360px;
-    animation: sheetUp 0.3s cubic-bezier(0.2,0.8,0.2,1);
-    position: relative;
-}
-@keyframes sheetUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-.modal-drag { width: 36px; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.15); margin: 0 auto 18px; }
-
-.modal-top { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 14px; }
-.modal img { width: 72px; height: 72px; border-radius: 16px; object-fit: cover; flex-shrink: 0; }
-.modal-title-group { flex: 1; }
-.modal-name-text { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 800; margin-bottom: 4px; }
-.modal-info-text { font-size: 13px; line-height: 1.5; opacity: 0.7; }
-
-.modal-buttons { display: flex; gap: 10px; margin-top: 16px; }
-.fav-btn, .open-btn {
-    flex: 1; padding: 13px; border-radius: 13px;
-    border: none; font-weight: 700; cursor: pointer;
-    font-family: 'DM Sans', sans-serif; font-size: 14px;
-    transition: transform 0.15s, box-shadow 0.15s;
-}
-.fav-btn:active, .open-btn:active { transform: scale(0.95); }
-.open-btn {
-    background: linear-gradient(135deg, var(--em) 0%, var(--em-mid) 100%);
-    color: #000; box-shadow: 0 4px 18px var(--em-glow);
+    background: #1a1a1a; border-radius: 16px;
+    padding: 24px 20px; width: 90%; max-width: 450px;
+    display: flex; flex-direction: column; gap: 14px;
+    border: 1px solid rgba(16,185,129,0.1);
+    max-height: 85vh;
+    overflow-y: auto;
+    animation: modalSlideIn 0.3s ease-out;
 }
 
-#noinfo-modal .modal-content { max-width: 320px; margin: 0 auto; }
-#noinfo-modalp { font-size: 13px; opacity: 0.7; margin: 8px 0 0; }
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-imagevar(--em-dim) 0%, transparent 80%);
+    opacity: 0; transition: opacity 0.2s; pointer-events: none;
+}
+.top-row:active::before { opacity: 1; }
+
+.top-rank {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px; font-weight: 800;
+    color: var(--em); opacity: 0.35;
+    min-width: 28px; text-align: center; line-height: 1;
+}
+.top-rank.rank-1 { opacity: 1; font-size: 22px; }
+.top-rank.rank-2 { opacity: 0.75; }
+.top-rank.rank-3 { opacity: 0.55; }
+
+.top-img {
+    width: 44px; height: 44px; border-radius: 10px;
+    object-fit: cover; flex-shrink: 0;
+    border: 1.2px solid rgba(16,185,129,0.15);
+}
+
+.top-info {
+    flex: 1; min-width: 0;
+}
+.top-name {
+    font-size: 13px; font-weight: 600; margin-bottom: 2px;
+    color: #f5f5f5;
+}
+.top-desc {
+    font-size: 11px; opacity: 0.5; line-height: 1.3;
+    color: rgba(245,245,245,0.6);
+}
+
+.top-capsule {
+    padding: 2px 6px;
+    border-radius: 999px;
+    font-size: 7px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    border: 1px solid rgba(255,255,255,0.2);
+    margin-top: 4px;
+    display: inline-block;
+}
+
+.top-capsule:active {
+    transform: scale(0.9);
+}
+
+/* Top capsule colors by type */
+.top-capsule.capsule-cyan {
+    background: rgba(34,211,238,0.8);
+    color: #000;
+    box-shadow: 0 2px 8px rgba(34,211,238,0.3);
+}
+
+.top-capsule.capsule-blue {
+    background: rgba(59,130,246,0.8);
+    box-shadow: 0 2px 8px rgba(59,130,246,0.3);
+}
+
+.top-capsule.capsule-purple {
+    background: rgba(168,85,247,0.8);
+    box-shadow: 0 2px 8px rgba(168,85,247,0.3);
+}
+
+.top-capsule.capsule-green {
+    background: rgba(16,185,129,0.8);
+    box-shadow: 0 2px 8px rgba(16,185,129,0.3);
+}
+
+.top-capsule.capsule-pink {
+    background: rgba(236,72,153,0.8);
+    box-shadow: 0 2px 8px rgba(236,72,153,0.3);
+}
+
+.top-capsule.capsule-red {
+    background: rgba(239,68,68,0.8);
+    box-shadow: 0 2px 8px rgba(239,68,68,0.3);
+}
+
+.top-capsule.capsule-yellow {
+    background: rgba(234,179,8,0.8);
+    color: #000;
+    box-shadow: 0 2px 8px rgba(234,179,8,0.3);
+}
+
+.top-capsule.capsule-orange {
+    background: rgba(249,115,22,0.8);
+    box-shadow: 0 2px 8px rgba(249,115,22,0.3);
+}
+
+/* ── MODAL ── */
+#item-modal {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+    display: none; align-items: center; justify-content: center;
+    z-index: 500; backdrop-filter: blur(6px);
+}
+#item-modal.active { display: flex; }
+
+.modal-content {
+    background: #1a1a1a; border-radius: 16px;
+    padding: 24px 20px; width: 90%; max-width: 450px;
+    display: flex; flex-direction: column; gap: 14px;
+    border: 1px solid rgba(16,185,129,0.1);
+    max-height: 85vh;
+    overflow-y: auto;
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-image {
+    width: 100%; height: 180px; border-radius: 14px;
+    object-fit: cover; display: block;
+    border: 1px solid rgba(16,185,129,0.15);
+}
+
+.modal-header {
+    display: flex; flex-direction: column; gap: 6px;
+}
+.modal-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px; font-weight: 800;
+    color: #f5f5f5;
+}
+.modal-type {
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--em);
+}
+
+.modal-desc {
+    font-size: 12px; line-height: 1.5; opacity: 0.8;
+    color: rgba(245,245,245,0.7);
+}
+
+.modal-actions {
+    display: flex; gap: 8px;
+}
+.btn {
+    flex: 1; padding: 11px; border: none;
+    border-radius: 9px; cursor: pointer; font-weight: 600;
+    font-size: 12px; transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+}
+.btn-primary {
+    background: var(--em); color: #fff;
+}
+.btn-primary:active { transform: scale(0.95); }
+.btn-secondary {
+    background: rgba(255,255,255,0.1); color: #f5f5f5;
+}
+.btn-secondary:active { transform: scale(0.95); }
 
 /* ── TOAST ── */
 #toast {
-    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    padding: 10px 20px; border-radius: 999px;
-    font-size: 13px; font-weight: 600;
+    position: fixed; bottom: 20px; left: 50%;
+    transform: translateX(-50%);
+    background: rgba(16,185,129,0.95);
+    color: white; padding: 12px 18px;
+    border-radius: 8px; font-size: 12px;
     display: none; z-index: 2000;
+    box-shadow: 0 4px 12px rgba(16,185,129,0.3);
+    backdrop-filter: blur(12px);
+}
+
+/* ── MANAGER SECTION ── */
+#manager-container {
+    padding: 3px 9px 40px;
+    display: none;
+    position: relative;
+    z-index: 1;
+}
+#manager-container.active {
+    display: block;
+}
+
+.manager-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding: 0 3px;
+}
+
+.manager-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    color: #f5f5f5;
+}
+
+#refresh-apps {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid rgba(16,185,129,0.2);
+    background: rgba(16,185,129,0.1);
+    color: var(--em);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    font-size: 12px;
+}
+
+#refresh-apps:active {
+    transform: scale(0.9);
+}
+
+#refresh-apps.spinning {
+    animation: spin 0.8s linear infinite;
+}
+
+.installed-apps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px;
+}
+
+.app-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 8px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(16,185,129,0.15);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.app-card:active {
+    transform: scale(0.95);
+    background: rgba(16,185,129,0.15);
+}
+
+.app-card-icon {
+    font-size: 28px;
+}
+
+.app-card-name {
+    font-size: 10px;
+    font-weight: 600;
+    text-align: center;
+    color: #f5f5f5;
     white-space: nowrap;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-    animation: toastIn 0.3s ease;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
 }
-@keyframes toastIn { from { opacity: 0; transform: translate(-50%, -50%) scale(0.88); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
 
-/* ── FAVOURITES EMPTY ── */
-#fav-empty {
-    display: none; text-align: center;
-    padding: 60px 20px; opacity: 0.4;
+.app-card-timer {
+    font-size: 10px;
+    color: var(--em);
+    background: rgba(16,185,129,0.2);
+    padding: 2px 4px;
+    border-radius: 4px;
 }
-#fav-empty i { font-size: 40px; display: block; margin-bottom: 12px; }
 
-/* ── SCROLL HINT ── */
-.scroll-fade {
-    height: 3px; border-radius: 2px;
-    background: linear-gradient(90deg, var(--em) 0%, transparent 100%);
-    margin: 0 12px 4px;
-    opacity: 0.4;
+/* ── TIMER MODAL ── */
+#timer-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 600;
+    backdrop-filter: blur(6px);
 }
+#timer-modal.active {
+    display: flex;
+}
+
+.timer-content {
+    background: #1a1a1a;
+    border-radius: 18px 18px 0 0;
+    padding: 20px 16px 24px;
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid rgba(16,185,129,0.1);
+}
+
+.timer-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: #f5f5f5;
+}
+
+.timer-inputs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.timer-input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.timer-input-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--em);
+}
+
+.timer-input-group input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(16,185,129,0.2);
+    background: rgba(255,255,255,0.05);
+    color: #f5f5f5;
+    font-size: 12px;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.timer-input-group input:focus {
+    border-color: var(--em);
+    outline: none;
+}
+
+.timer-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* ── EMPTY STATE ── */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 60px 20px;
+    text-align: center;
+    color: rgba(245,245,245,0.4);
+}
+.empty-state i { font-size: 32px; opacity: 0.4; }
+.empty-state p { font-size: 12px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 480px) {
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+        padding: 3px 6px 40px;
+    }
+    .card-info strong { font-size: 8px; }
+}
+
 </style>
 </head>
 <body>
 
-<!-- Loader iframe -->
-<iframe src="loader.html" id="app-loader" style="
-    position:fixed;top:0;left:0;width:100vw;height:100vh;
-    border:none;z-index:999999;background:white;transition:opacity 0.8s ease;
-"></iframe>
-<script>
-window.addEventListener('load', function() {
-    const loader = document.getElementById('app-loader');
-    setTimeout(() => {
-        loader.style.opacity = "0";
-        setTimeout(() => loader.remove(), 800);
-    }, 3000);
-});
-</script>
+<!-- LOADING OVERLAY -->
+<div class="loading-overlay" id="loading-overlay">
+    <div class="loading-spinner">
+        <div class="spinner"></div>
+        <div class="loading-text">Loading data...</div>
+    </div>
+</div>
 
-<!-- ── HEADER ── -->
+<!-- HEADER -->
 <div id="app-header">
     <div class="brand-row">
         <div class="brand-left">
             <div class="brand-icon"><i class="fa fa-flask"></i></div>
-            <div class="brand-name"><span> Lab</span></div>
+            <div class="brand-name"><span>Lab</span></div>
         </div>
-        <button class="theme-btn" id="theme-toggle" title="Toggle theme">
-            <i class="fa fa-circle-half-stroke"></i>
-        </button>
+        <button class="theme-btn" id="theme-btn"><i class="fa fa-moon"></i></button>
     </div>
-
+    
     <div class="search-wrap">
-        <i class="fa fa-magnifying-glass"></i>
-        <input type="text" id="search-input" placeholder="Search resources…" autocomplete="off">
+        <i class="fa fa-search"></i>
+        <input type="text" id="search-input" placeholder="Search apps & websites...">
     </div>
-
-    <div class="tab-bar" id="tab-bar">
-        <button class="tab-btn" id="tab-top"><i class="fa fa-trophy"></i> Top</button>
-        <button class="tab-btn" id="tab-web"><i class="fa fa-globe"></i> Web</button>
-        <button class="tab-btn" id="tab-apps"><i class="fa fa-mobile-screen"></i> Apps</button>
-        <button class="tab-btn" id="tab-fav"><i class="fa fa-star"></i> Saved</button>
+    
+    <div class="tab-bar">
+        <button class="tab-btn active" id="tab-top"><i class="fa fa-trophy"></i> Top</button>
+        <buttonclass="tab-btn" id="tab-web"><i class="fa fa-globe"></i> Websites</button>
+        <button class="tab-btn" id="tab-apps"><i class="fa fa-mobile"></i> Apps</button>
+        <button class="tab-btn" id="tab-manager"><i class="fa fa-cog"></i> Manager</button>
     </div>
-    <div class="scroll-fade"></div>
 </div>
 
-<!-- ── SECTION LABEL ── -->
-<div class="section-label" id="section-label">ALL</div>
+<!-- CONTENT -->
+<div id="section-label" class="section-label">🏆 TOP WEB & APPS</div>
+<div id="content" class="grid"></div>
+<div id="top-list"></div>
 
-<!-- ── GRID (web / apps / fav) ── -->
-<div class="grid" id="content"></div>
-
-<!-- ── TOP LIST ── -->
-<div id="top-list" style="display:none;"></div>
-
-<!-- ── FAV EMPTY ── -->
-<div id="fav-empty">
-    <i class="fa fa-star"></i>
-    <p>Nothing saved yet.<br>Open any item and tap ♥ to save.</p>
+<!-- APP MANAGER SECTION -->
+<div id="manager-container">
+    <div class="manager-header">
+        <div class="manager-title">📱 Installed Apps</div>
+        <button id="refresh-apps" title="Refresh apps"><i class="fa fa-refresh"></i></button>
+    </div>
+    <div id="installed-apps" class="installed-apps-grid"></div>
 </div>
 
-<!-- ── MAIN MODAL ── -->
-<div class="modal" id="modal">
-    <div class="modal-content" id="modal-inner">
-        <div class="modal-drag"></div>
-        <div class="modal-top">
-            <img id="modal-img" src="" alt="">
-            <div class="modal-title-group">
-                <div class="modal-name-text" id="modal-name"></div>
-                <div class="modal-info-text" id="modal-info"></div>
+<!-- ITEM MODAL -->
+<div id="item-modal">
+    <div class="modal-content">
+        <img id="modal-img" class="modal-image" src="" alt="">
+        <div class="modal-header">
+            <div class="modal-type" id="modal-type">Unknown</div>
+            <div class="modal-title" id="modal-name">Title</div>
+        </div>
+        <div class="modal-desc" id="modal-info">Description</div>
+        <div class="modal-actions">
+            <button class="btn btn-primary" id="open-link">
+                <i class="fa fa-external-link"></i> Open
+            </button>
+            <button class="btn btn-secondary" id="close-modal">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- TIMER MODAL -->
+<div id="timer-modal">
+    <div class="timer-content">
+        <div class="timer-title" id="timer-app-name">Set Timer for App</div>
+        <div class="timer-inputs">
+            <div class="timer-input-group">
+                <label class="timer-input-label">Hours</label>
+                <input type="number" id="timer-hours" min="0" max="23" placeholder="0">
+            </div>
+            <div class="timer-input-group">
+                <label class="timer-input-label">Minutes</label>
+                <input type="number" id="timer-minutes" min="0" max="59" placeholder="0">
             </div>
         </div>
-        <div class="modal-buttons">
-            <button class="fav-btn" id="add-fav">♥ Save</button>
-            <button class="open-btn" id="open-link">Open →</button>
+        <div class="timer-actions">
+            <button class="btn btn-primary" id="timer-set-btn">Set Timer</button>
+            <button class="btn btn-secondary" id="timer-cancel-btn">Cancel</button>
         </div>
     </div>
 </div>
 
-<!-- ── NO-INFO MODAL ── -->
-<div class="modal" id="noinfo-modal" aria-hidden="true">
-    <div class="modal-content">
-        <div class="modal-drag"></div>
-        <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:800;">No info available</h3>
-        <p>This item has no description.</p>
-        <div class="modal-buttons">
-            <button id="noinfo-close" class="fav-btn">Close</button>
-            <button id="noinfo-open" class="open-btn">Open anyway →</button>
-        </div>
-    </div>
-</div>
+<!-- TOAST -->
+<div id="toast"></div>
 
-<div id="toast">Saved!</div>
-
-<!-- ── SCRIPTS ── -->
 <script>
-(function() {
-    /* ── THEME LOGIC (untouched) ── */
-    const savedTheme = localStorage.getItem('perfectTheme') || 'dark';
-    const applyForceTheme = (theme) => {
-        const isDark = theme === 'dark';
-        let style = document.getElementById("force-lab-emerald");
-        if (!style) {
-            style = document.createElement('style');
-            style.id = "force-lab-emerald";
-            document.head.appendChild(style);
-        }
-        if (isDark) {
-            style.innerHTML = `
-                body { background: #010d08 !important; color: #ecfdf5 !important; }
-                #app-header { background: rgba(1,13,8,0.92) !important; border-bottom: 1px solid rgba(16,185,129,0.12) !important; }
-                .search-wrap { background: #042f24 !important; }
-                #search-input { color: #ecfdf5 !important; }
-                #search-input::placeholder { color: rgba(236,253,245,0.35) !important; }
-                .tab-btn { background: rgba(6,78,59,0.45) !important; color: #a7f3d0 !important; border: 1px solid rgba(16,185,129,0.15) !important; }
-                .tab-btn.active { background: linear-gradient(135deg,#10b981,#059669) !important; color: #010d08 !important; border-color: transparent !important; }
-                .card { background: #062d1f !important; border: 1px solid rgba(16,185,129,0.1) !important; }
-                .card-info strong { color: #ecfdf5 !important; }
-                .top-row { background: #062d1f !important; border-color: rgba(16,185,129,0.1) !important; }
-                .top-name { color: #ecfdf5 !important; }
-                .modal-content { background: #063d2b !important; color: #ecfdf5 !important; border: 1px solid rgba(16,185,129,0.3) !important; }
-                .fav-btn { background: rgba(255,255,255,0.08) !important; color: #ecfdf5 !important; }
-                #toast { background: #10b981 !important; color: #000 !important; }
-                .section-label { color: #a7f3d0 !important; }
-                .brand-name { color: #ecfdf5 !important; }
-            `;
-        } else {
-            style.innerHTML = `
-                body { background: #f0fdf4 !important; color: #064e3b !important; }
-                #app-header { background: rgba(240,253,244,0.94) !important; border-bottom: 1px solid #d1fae5 !important; }
-                .search-wrap { background: white !important; }
-                #search-input { color: #064e3b !important; }
-                #search-input::placeholder { color: #93c4ab !important; }
-                .tab-btn { background: white !important; color: #059669 !important; border: 1px solid #d1fae5 !important; }
-                .tab-btn.active { background: linear-gradient(135deg,#10b981,#059669) !important; color: white !important; border-color: transparent !important; }
-                .card { background: white !important; border: 1px solid #d1fae5 !important; box-shadow: 0 2px 8px rgba(16,185,129,0.07) !important; }
-                .card-info strong { color: #064e3b !important; }
-                .top-row { background: white !important; border-color: #d1fae5 !important; box-shadow: 0 2px 8px rgba(16,185,129,0.07) !important; }
-                .top-name { color: #064e3b !important; }
-                .modal-content { background: white !important; color: #064e3b !important; border: 1px solid #d1fae5 !important; }
-                .fav-btn { background: #f0fdf4 !important; color: #064e3b !important; border: 1px solid #d1fae5 !important; }
-                #toast { background: #064e3b !important; color: #fff !important; }
-                .section-label { color: #059669 !important; }
-                .brand-name { color: #064e3b !important; }
-            `;
-        }
-    };
-    applyForceTheme(savedTheme);
+// ── DATA SOURCES ──
+let topData = [];
+let webData = [];
+let appData = [];
+let filteredData = [];
+let currentItem = null;
+let currentFilter = 'top';
+let currentIndex = 0;
+let categoryFilter = null;
+let typeFilter = null; // NEW: Track filtered type
+let appTimers = {};
+let currentAppName = '';
+const batchSize = 20;
 
-    // Theme toggle button
-    document.getElementById('theme-toggle').addEventListener('click', () => {
-        const cur = localStorage.getItem('perfectTheme') || 'dark';
-        const next = cur === 'dark' ? 'light' : 'dark';
-        localStorage.setItem('perfectTheme', next);
-        applyForceTheme(next);
-    });
-})();
-
-/* ── CORE APP LOGIC (untouched structure) ── */
-let data = [], filteredData = [], currentIndex = 0, batchSize = 21;
-let currentFilter = "website"; // default tab = Web (no APK)
-let currentItem = null, categoryFilter = null;
-let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-let topData = []; // from top.json
-
+// ── DOM REFS ──
 const content = document.getElementById('content');
 const topList = document.getElementById('top-list');
-const modal = document.getElementById('modal');
-const noinfoModal = document.getElementById('noinfo-modal');
 const searchInput = document.getElementById('search-input');
+const modal = document.getElementById('item-modal');
+const loadingOverlay = document.getElementById('loading-overlay');
+const installedAppsContainer = document.getElementById('installed-apps');
 
-/* Load apps.json (main data) */
-fetch('apps.json').then(res => {
-    if (!res.ok) return fetch('apps.json.txt');
-    return res;
-}).then(res => res.json()).then(json => {
-    data = json.items || [];
-    setActiveTab('tab-web', 'website');
-}).catch(() => {
-    data = [];
-    setActiveTab('tab-web', 'website');
+// Load timers from localStorage
+try {
+    appTimers = JSON.parse(localStorage.getItem('appTimers')) || {};
+} catch (e) {
+    appTimers = {};
+}
+
+// ── LOAD JSON DATA ──
+function loadJSONData() {
+    Promise.all([
+        fetch('top.json').then(r => r.json()).catch(e => {
+            console.warn('top.json failed, using fallback:', e);
+            return { items: [] };
+        }),
+        fetch('app.json').then(r => r.json()).catch(e => {
+            console.warn('app.json failed, using fallback:', e);
+            return { items: [] };
+        })
+    ]).then(([topJson, appJson]) => {
+        // Extract items array from both JSONs
+        const topItems = Array.isArray(topJson?.items) ? topJson.items : [];
+        const allAppItems = Array.isArray(appJson?.items) ? appJson.items : [];
+        
+        // Combine all items for filtering
+        const allItems = [...topItems, ...allAppItems];
+        
+        // Separate by type
+        topData = allItems.slice(0, 15); // First 15 as top
+        webData = allItems.filter(item => item.type === 'website');
+        appData = allItems.filter(item => item.type === 'app');
+        
+        console.log('✅ Loaded Data:', { 
+            topItems: topData.length, 
+            webItems: webData.length, 
+            appItems: appData.length,
+            totalItems: allItems.length
+        });
+        
+        // Hide loading and init after 600ms for smooth transition
+        setTimeout(() => {
+            loadingOverlay.style.display = 'none';
+            init();
+        }, 600);
+    }).catch(err => {
+        console.error('❌ JSON loading failed:', err);
+        setTimeout(() => {
+            loadingOverlay.style.display = 'none';
+            init();
+        }, 600);
+    });
+}
+
+// ── MODAL CLOSE ──
+document.getElementById('close-modal').addEventListener('click', () => {
+    modal.classList.remove('active');
 });
 
-/* Load top.json */
-fetch('top.json').then(res => res.json()).then(json => {
-    topData = json.items || json || [];
-}).catch(() => { topData = []; });
-
-/* ── CATEGORY DETECTION (untouched) ── */
-function getCategory(item) {
-    const text = ((item.name || "") + " " + (item.info || "")).toLowerCase();
-    const keywords = {
-        ai: ['ai','chatgpt','claude','gemini','assistant','copilot','ai assistant','palm','llm','large model','anthropic','hugging','poe','perplexity','pi.ai'],
-        editing: ['photo','image','edit','editor','photoshop','photopea','pixlr','remove.bg','remove','dall','midjourney','stable diffusion','craiyon','leonardo','iconmaker','tilemaker'],
-        earning: ['earn','earning','cash','pay','wallet','money','affiliate','monet','income','stripe','earnings'],
-        design: ['figma','miro','uizard','prototype','design','ui/ux','canva','brand kit','mockup'],
-        development: ['github','gitpod','replit','codesandbox','stackblitz','cursor','autocode','gitwit','dev','code','developer'],
-        education: ['khan','coursera','edx','mit','open course','quizlet','duolingo','wolfram','education','learn','ocw','arxiv','semantic scholar'],
-        productivity: ['notion','task','todo','trello','asana','airtable','calendar','calendly','otter.ai','fathom','notion ai','twos','reclaim'],
-        analytics: ['analytics','ahrefs','semrush','google analytics','fathom','insight','seo'],
-        finance: ['quickbooks','stripe','paypal','payments','payment','invoice','accounting','hubspot','financial','stripe dashboard','shopify'],
-        media: ['video','capcut','speechify','transcribe','audio','media','unsplash','pexels'],
-        utility: ['pdf','convert','smallpdf','cloudconvert','dns','speedtest','worldtime','caniuse','browserstack','photopea','cloudways','vercel','heroku','supabase']};
-    for (const cat of Object.keys(keywords)) {
-        for (const kw of keywords[cat]) {
-            if (text.indexOf(kw) !== -1) {
-                switch(cat) {
-                    case 'ai': return 'AI';
-                    case 'editing': return 'Editing';
-                    case 'earning': return 'Earning';
-                    case 'design': return 'Design';
-                    case 'development': return 'Development';
-                    case 'education': return 'Education';
-                    case 'productivity': return 'Productivity';
-                    case 'analytics': return 'Analytics';
-                    case 'finance': return 'Finance';
-                    case 'media': return 'Media';
-                    case 'utility': return 'Utility';
-                }
-            }
-        }
+window.addEventListener('click', (e) => {
+    if (e.target === modal) modal.classList.remove('active');
+    if (e.target === document.getElementById('timer-modal')) {
+        document.getElementById('timer-modal').classList.remove('active');
     }
-    return 'Other';
+});
+
+// ── RENDER INSTALLED APPS ──
+function renderManager() {
+    installedAppsContainer.innerHTML = '';
+    
+    // Simulated installed apps - will be replaced with Android detection
+    const installedApps = [
+        { id: 'whatsapp', name: 'WhatsApp', icon: '💬' },
+        { id: 'instagram', name: 'Instagram', icon: '📸' },
+        { id: 'chrome', name: 'Chrome', icon: '🌐' },
+        { id: 'youtube', name: 'YouTube', icon: '▶️' },
+        { id: 'gmail', name: 'Gmail', icon: '📧' },
+        { id: 'maps', name: 'Maps', icon: '🗺️' },
+        { id: 'gallery', name: 'Gallery', icon: '🖼️' },
+        { id: 'files', name: 'Files', icon: '📁' }
+    ];
+
+    installedApps.forEach(app => {
+        const appCard = document.createElement('div');
+        appCard.className = 'app-card';
+        const timerSet = appTimers[app.id];
+        
+        appCard.innerHTML = `
+            <div class="app-card-icon">${app.icon || '📱'}</div>
+            <div class="app-card-name">${app.name}</div>
+            ${timerSet ? `<div class="app-card-timer"><i class="fa fa-clock"></i></div>` : ''}
+        `;
+
+        appCard.addEventListener('click', () => {
+            currentAppName = app.name;
+            showTimerModal(app.name, app.id);
+        });
+
+        installedAppsContainer.appendChild(appCard);
+    });
 }
 
-function slugifyCategory(cat) {
-    return 'cat-' + (cat || 'unknown').toString().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+// ── TIMER MODAL ──
+function showTimerModal(appName, appId) {
+    const timerModal = document.getElementById('timer-modal');
+    document.getElementById('timer-app-name').textContent = `Set Timer for ${appName}`;
+
+    document.getElementById('timer-hours').value = '';
+    document.getElementById('timer-minutes').value = '';
+
+    document.getElementById('timer-set-btn').onclick = () => {
+        const hours = parseInt(document.getElementById('timer-hours').value) || 0;
+        const minutes = parseInt(document.getElementById('timer-minutes').value) || 0;
+
+        if (hours === 0 && minutes === 0) {
+            showToast('Please set a time');
+            return;
+        }
+
+        appTimers[appId] = { hours, minutes, setAt: Date.now() };
+        localStorage.setItem('appTimers', JSON.stringify(appTimers));
+
+        showToast(`⏱️ Timer: ${hours}h ${minutes}m for ${appName}`);
+        timerModal.classList.remove('active');
+        renderManager();
+    };
+
+    document.getElementById('timer-cancel-btn').onclick = () => {
+        timerModal.classList.remove('active');
+    };
+
+    timerModal.classList.add('active');
 }
 
-/* ── RESET / FILTER / RENDER (untouched logic) ── */
+// ── REFRESH APPS ──
+document.getElementById('refresh-apps').addEventListener('click', function() {
+    this.classList.add('spinning');
+    setTimeout(() => {
+        renderManager();
+        this.classList.remove('spinning');
+        showToast('Apps refreshed');
+    }, 800);
+});
+
+// ── FILTER & SEARCH ──
+function applyFilters() {
+    const search = (searchInput.value || '').toLowerCase();
+    let source = [];
+
+    if (currentFilter === 'top') {
+        source = topData;
+    } else if (currentFilter === 'website') {
+        source = webData;
+    } else if (currentFilter === 'app') {
+        source = appData;
+    }
+
+    filteredData = source.filter(item => {
+        const matchSearch = (item.name || '').toLowerCase().includes(search) ||
+                          (item.info || '').toLowerCase().includes(search);
+        const matchCategory = !categoryFilter || item.category === categoryFilter;
+        const matchCapsule = !typeFilter || (item.capsule || '') === typeFilter;
+        return matchSearch && matchCategory && matchCapsule;
+    });
+}
+
 function resetRender(filter) {
     currentFilter = filter;
-    content.innerHTML = "";
     currentIndex = 0;
-    filterData();
+    content.innerHTML = '';
+    applyFilters();
     renderBatch();
 }
 
-function filterData() {
-    const search = (searchInput.value || '').toLowerCase();
-    filteredData = data.filter(item => {
-        const itemType = item.type || '';
-        const matchType = currentFilter === "all"
-            || (currentFilter === "favourite" ? favorites.some(f => f.name === item.name) : itemType === currentFilter);
-        const matchSearch = (item.name || '').toLowerCase().includes(search) || (item.info || '').toLowerCase().includes(search);
-        const itemCategory = item.category ? item.category : getCategory(item);
-        const matchCategory = !categoryFilter || (itemCategory === categoryFilter);
-        return matchType && matchSearch && matchCategory;
-    });
-}
-
 function renderBatch() {
-    const slice = filteredData.slice(currentIndex, currentIndex + batchSize);
+    const slice = filteredData.slice(currentIndex,currentIndex + batchSize);
     slice.forEach(item => {
         const div = document.createElement('div');
         div.className = 'card';
-        const typeClass = 'type-' + (item.type || 'unknown').toString().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
-        const label = item.type ? item.type : 'Unknown';
-        const categoryLabel = item.category ? item.category : getCategory(item);
-        const catClass = slugifyCategory(categoryLabel);
+        const typeClass = 'type-' + (item.type || 'unknown').toLowerCase().replace(/\s+/g,'-');
+        const capsuleColor = getCapsuleColorByType(item.capsule);
+        const capsuleText = item.capsule || item.type || 'Unknown';
 
         div.innerHTML = `
-            <div class="card-badge ${typeClass}">${label}</div>
-            <img src="${item.image}" loading="lazy" alt="${item.name}">
+            <div class="card-badge ${typeClass}">${item.type || 'Unknown'}</div>
+            <img src="${item.image}" loading="lazy" alt="${item.name}" onerror="this.src='https://via.placeholder.com/100?text=${item.type}'">
             <div class="card-info">
                 <strong>${item.name}</strong>
-                <small>${item.info || ''}</small>
-                <button class="card-category ${catClass}" aria-label="Filter by ${categoryLabel}">${item.capsule || categoryLabel}</button>
+                <div class="card-capsule ${capsuleColor}" data-capsule="${item.capsule}">${capsuleText}</div>
             </div>
         `;
 
-        div.addEventListener('click', () => {
-            currentItem = item;
-            const infoText = (item.info || '').toString().trim();
-            if (!infoText) {
-                noinfoModal.style.display = 'flex';
-                noinfoModal.setAttribute('aria-hidden', 'false');
-            } else {
-                document.getElementById('modal-img').src = item.image;
-                document.getElementById('modal-name').textContent = item.name;
-                document.getElementById('modal-info').textContent = item.info;
-                modal.style.display = "flex";
+        // Main card click - open modal
+        div.addEventListener('click', (e) => {
+            // Don't open modal if capsule is clicked
+            if (e.target.classList.contains('card-capsule')) {
+                return;
             }
+            currentItem = item;
+            document.getElementById('modal-img').src = item.image;
+            document.getElementById('modal-name').textContent = item.name;
+            document.getElementById('modal-type').textContent = item.type || 'Unknown';
+            document.getElementById('modal-info').textContent = item.info || 'No additional info.';
+            modal.classList.add('active');
         });
 
-        const catBtn = div.querySelector('.card-category');
-        catBtn.addEventListener('click', (ev) => {
-            ev.stopPropagation();
-            if (categoryFilter === categoryLabel) {
-                categoryFilter = null;
-                showToast('Category cleared');
-            } else {
-                categoryFilter = categoryLabel;
-                showToast('Filtered: ' + categoryLabel);
-            }
-            resetRender(currentFilter);
-        });
+        // Capsule click - toggle capsule filter
+        const capsule = div.querySelector('.card-capsule');
+        if (capsule && item.capsule) {
+            capsule.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const itemCapsule = item.capsule;
+                
+                // Toggle filter: if same capsule is clicked, clear filter
+                if (typeFilter === itemCapsule) {
+                    typeFilter = null;
+                    showToast(`Showing all items`);
+                } else {
+                    typeFilter = itemCapsule;
+                    showToast(`Filtering ${itemCapsule}`);
+                }
+                
+                // Re-render with new filter
+                resetRender(currentFilter);
+            });
+        }
 
         content.appendChild(div);
     });
 
-    // empty state
     if (filteredData.length === 0 && currentIndex === 0) {
         const empty = document.createElement('div');
         empty.className = 'empty-state';
@@ -662,146 +1205,154 @@ function renderBatch() {
     currentIndex += batchSize;
 }
 
-/* ── TOP SECTION RENDER ── */
+// ── GET CAPSULE COLOR BY CAPSULE VALUE ──
+function getCapsuleColorByType(capsule) {
+    const colorMap = {
+        'website': 'capsule-cyan',
+        'web': 'capsule-cyan',
+        'app': 'capsule-blue',
+        'ai': 'capsule-purple',
+        'tool': 'capsule-green',
+        'game': 'capsule-pink',
+        'social': 'capsule-red',
+        'education': 'capsule-yellow'
+    };
+    return colorMap[(capsule || '').toLowerCase()] || 'capsule-green';
+}
+
+// ── TOP RENDER ──
 function renderTop() {
     topList.innerHTML = '';
     const search = (searchInput.value || '').toLowerCase();
-    const items = topData.filter(item =>
+    let items = topData.filter(item =>
         (item.name || '').toLowerCase().includes(search) ||
         (item.info || '').toLowerCase().includes(search)
     );
+    
+    // Apply capsule filter if set
+    if (typeFilter) {
+        items = items.filter(item => (item.capsule || '') === typeFilter);
+    }
 
     if (items.length === 0) {
-        topList.innerHTML = `<div style="text-align:center;padding:60px 20px;opacity:0.4;">
-            <i class="fa fa-trophy" style="font-size:36px;display:block;margin-bottom:12px;"></i>
-            <p style="font-size:14px;">No top items yet — add them in top.json</p></div>`;
+        topList.innerHTML = `<div class="empty-state"><i class="fa fa-trophy"></i><p>No items found</p></div>`;
         return;
     }
 
     items.forEach((item, i) => {
         const rank = i + 1;
-        const typeClass = 'type-' + (item.type || 'unknown').toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
-        const categoryLabel = item.category ? item.category : getCategory(item);
-        const catClass = slugifyCategory(categoryLabel);
+        const typeClass = 'type-' + (item.type || 'unknown').toLowerCase();
         const rankClass = rank === 1 ? 'rank-1' : rank === 2 ? 'rank-2' : rank === 3 ? 'rank-3' : '';
+        const capsuleColor = getCapsuleColorByType(item.capsule);
+        const capsuleText = item.capsule || item.type || 'Unknown';
 
         const row = document.createElement('div');
         row.className = 'top-row';
         row.innerHTML = `
-            ${rank === 1 ? '<div class="crown-wrap">👑</div>' : ''}
+            ${rank === 1 ? '<div style="font-size:20px;margin-right:4px;">👑</div>' : ''}
             <div class="top-rank ${rankClass}">${rank}</div>
-            <img class="top-img" src="${item.image}" loading="lazy" alt="${item.name}">
+            <img class="top-img" src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/50?text=${item.type}'">
             <div class="top-info">
                 <div class="top-name">${item.name}</div>
                 <div class="top-desc">${item.info || ''}</div>
-                <div class="top-badge-row">
-                    <span class="top-type-badge ${typeClass}">${item.type || 'Unknown'}</span>
-                    <span class="top-cat-badge ${catClass}">${categoryLabel}</span>
-                </div>
+                ${item.capsule ? `<div class="top-capsule ${capsuleColor}" data-capsule="${item.capsule}">${capsuleText}</div>` : ''}
             </div>
-            <i class="fa fa-arrow-up-right-from-square top-arrow"></i>
         `;
 
-        row.addEventListener('click', () => {
-            currentItem = item;
-            const infoText = (item.info || '').toString().trim();
-            if (!infoText) {
-                noinfoModal.style.display = 'flex';
-            } else {
-                document.getElementById('modal-img').src = item.image;
-                document.getElementById('modal-name').textContent = item.name;
-                document.getElementById('modal-info').textContent = item.info;
-                modal.style.display = "flex";
+        // Main row click - open modal
+        row.addEventListener('click', (e) => {
+            // Don't open modal if capsule is clicked
+            if (e.target.classList.contains('top-capsule')) {
+                return;
             }
+            currentItem = item;
+            document.getElementById('modal-img').src = item.image;
+            document.getElementById('modal-name').textContent = item.name;
+            document.getElementById('modal-type').textContent = item.type || 'Unknown';
+            document.getElementById('modal-info').textContent = item.info;
+            modal.classList.add('active');
         });
+
+        // Capsule click - toggle capsule filter
+        const capsule = row.querySelector('.top-capsule');
+        if (capsule && item.capsule) {
+            capsule.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const itemCapsule = item.capsule;
+                
+                // Toggle filter: if same capsule is clicked, clear filter
+                if (typeFilter === itemCapsule) {
+                    typeFilter = null;
+                    showToast(`Showing all items`);
+                } else {
+                    typeFilter = itemCapsule;
+                    showToast(`Filtering ${itemCapsule}`);
+                }
+                
+                // Re-render top with new filter
+                renderTop();
+            });
+        }
 
         topList.appendChild(row);
     });
 }
 
-/* ── TAB SWITCHING ── */
+// ── TAB SWITCHING ──
 function setActiveTab(tabId, filter) {
-    // Update tab button styles
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.getElementById(tabId).classList.add('active');
 
     const isTop = tabId === 'tab-top';
-    const isFav = tabId === 'tab-fav';
+    const isManager = tabId === 'tab-manager';
 
-    // Show/hide grid vs top list vs fav-empty
     content.style.display = isTop ? 'none' : 'grid';
     topList.style.display = isTop ? 'flex' : 'none';
-    document.getElementById('fav-empty').style.display = 'none';
+    document.getElementById('manager-container').classList.toggle('active', isManager);
 
-    // Section label
+    // Reset filters when switching tabs
+    typeFilter = null;
+    searchInput.value = '';
+    
     const labels = {
-        'tab-top': '🏆 Top Web & Apps',
-        'tab-web': '🌐 Websites',
-        'tab-apps': '📱 Apps',
-        'tab-fav': '⭐ Saved'
+        'tab-top': '🏆 TOP WEB & APPS',
+        'tab-web': '🌐 WEBSITES',
+        'tab-apps': '📱 APPS',
+        'tab-manager': '🔧 APP MANAGER'
     };
     document.getElementById('section-label').textContent = labels[tabId] || '';
 
     if (isTop) {
         renderTop();
+    } else if (isManager) {
+        renderManager();
     } else {
         categoryFilter = null;
         resetRender(filter);
-        // show fav-empty when no favourites
-        if (isFav && favorites.length === 0) {
-            document.getElementById('fav-empty').style.display = 'block';
-        }
     }
 }
 
-/* ── TAB BUTTON LISTENERS ── */
-document.getElementById('tab-top').onclick   = () => setActiveTab('tab-top', 'top');
-document.getElementById('tab-web').onclick   = () => setActiveTab('tab-web', 'website');
-document.getElementById('tab-apps').onclick  = () => setActiveTab('tab-apps', 'app');
-document.getElementById('tab-fav').onclick   = () => setActiveTab('tab-fav', 'favourite');
+// ── TAB LISTENERS ──
+document.getElementById('tab-top').onclick = () => setActiveTab('tab-top', 'top');
+document.getElementById('tab-web').onclick = () => setActiveTab('tab-web', 'website');
+document.getElementById('tab-apps').onclick = () => setActiveTab('tab-apps', 'app');
+document.getElementById('tab-manager').onclick = () => setActiveTab('tab-manager', 'manager');
 
-/* ── SEARCH ── */
+// ── MODAL ACTIONS ──
+document.getElementById('open-link').onclick = () => {
+    if (currentItem && currentItem.link) window.open(currentItem.link, '_blank');
+    modal.classList.remove('active');
+};
+
+// ── SEARCH ──
 searchInput.oninput = () => {
     categoryFilter = null;
     const activeTab = document.querySelector('.tab-btn.active')?.id;
     if (activeTab === 'tab-top') renderTop();
-    else resetRender(currentFilter);
+    else if (activeTab !== 'tab-manager') resetRender(currentFilter);
 };
 
-/* ── MODAL BUTTONS (untouched logic) ── */
-document.getElementById('add-fav').onclick = () => {
-    if (!currentItem) { modal.style.display = "none"; return; }
-    if (!favorites.some(f => f.name === currentItem.name)) {
-        favorites.push(currentItem);
-        localStorage.setItem("favorites", JSON.stringify(favorites));
-        showToast("Saved to Lab!");
-    }
-    modal.style.display = "none";
-};
-document.getElementById('open-link').onclick = () => {
-    if (currentItem && currentItem.link) window.open(currentItem.link, '_blank');
-    modal.style.display = "none";
-};
-document.getElementById('noinfo-close').addEventListener('click', () => {
-    noinfoModal.style.display = 'none';
-    noinfoModal.setAttribute('aria-hidden', 'true');
-});
-document.getElementById('noinfo-open').addEventListener('click', () => {
-    noinfoModal.style.display = 'none';
-    noinfoModal.setAttribute('aria-hidden', 'true');
-    if (currentItem) {
-        if (currentItem.link) {
-            window.open(currentItem.link, '_blank');
-        } else {
-            document.getElementById('modal-img').src = currentItem.image || '';
-            document.getElementById('modal-name').textContent = currentItem.name || '';
-            document.getElementById('modal-info').textContent = currentItem.info || 'No additional info.';
-            modal.style.display = 'flex';
-        }
-    }
-});
-
-/* ── TOAST ── */
+// ── TOAST ──
 function showToast(msg) {
     const t = document.getElementById('toast');
     t.style.display = "none";
@@ -809,22 +1360,25 @@ function showToast(msg) {
     t.textContent = msg;
     t.style.display = "block";
     clearTimeout(t._hide);
-    t._hide = setTimeout(() => t.style.display = "none", 2200);
+    t._hide = setTimeout(() => t.style.display = "none", 2000);
 }
 
-/* ── CLOSE MODALS ON OUTSIDE CLICK ── */
-window.onclick = (e) => {
-    if (e.target == modal) modal.style.display = "none";
-    if (e.target == noinfoModal) { noinfoModal.style.display = "none"; noinfoModal.setAttribute('aria-hidden','true'); }
-};
-
-/* ── INFINITE SCROLL (untouched) ── */
+// ── INFINITE SCROLL ──
 window.onscroll = () => {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
         const activeTab = document.querySelector('.tab-btn.active')?.id;
-        if (activeTab !== 'tab-top') renderBatch();
+        if (activeTab !== 'tab-top' && activeTab !== 'tab-manager') renderBatch();
     }
 };
+
+// ── INIT ──
+function init() {
+    renderTop();
+    setActiveTab('tab-top', 'top');
+}
+
+// ── START ──
+loadJSONData();
 </script>
 </body>
 </html>
