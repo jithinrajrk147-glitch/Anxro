@@ -281,8 +281,7 @@ body::before {
 }
 
 /* Capsule colors based on type */
-.capsule-cyan {
-    background: rgba(34,211,238,0.8);
+.capsule-cyan {background: rgba(34,211,238,0.8);
     color: #000;
     box-shadow: 0 2px 8px rgba(34,211,238,0.3);
 }
@@ -355,131 +354,6 @@ body::before {
     content: '';
     position: absolute; inset: 0;
     background: linear-gradient(135deg, var(--em-dim) 0%, transparent 80%);
-    opacity: 0; transition: opacity 0.2s; pointer-events: none;
-}
-.top-row:active::before { opacity: 1; }
-
-.top-rank {
-    font-family: 'Syne', sans-serif;
-    font-size: 18px; font-weight: 800;
-    color: var(--em); opacity: 0.35;
-    min-width: 28px; text-align: center; line-height: 1;
-}
-.top-rank.rank-1 { opacity: 1; font-size: 22px; }
-.top-rank.rank-2 { opacity: 0.75; }
-.top-rank.rank-3 { opacity: 0.55; }
-
-.top-img {
-    width: 44px; height: 44px; border-radius: 10px;
-    object-fit: cover; flex-shrink: 0;
-    border: 1.2px solid rgba(16,185,129,0.15);
-}
-
-.top-info {
-    flex: 1; min-width: 0;
-}
-.top-name {
-    font-size: 13px; font-weight: 600; margin-bottom: 2px;
-    color: #f5f5f5;
-}
-.top-desc {
-    font-size: 11px; opacity: 0.5; line-height: 1.3;
-    color: rgba(245,245,245,0.6);
-}
-
-.top-capsule {
-    padding: 2px 6px;
-    border-radius: 999px;
-    font-size: 7px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-    color: #fff;
-    cursor: pointer;
-    transition: all 0.2s;
-    white-space: nowrap;
-    border: 1px solid rgba(255,255,255,0.2);
-    margin-top: 4px;
-    display: inline-block;
-}
-
-.top-capsule:active {
-    transform: scale(0.9);
-}
-
-/* Top capsule colors by type */
-.top-capsule.capsule-cyan {
-    background: rgba(34,211,238,0.8);
-    color: #000;
-    box-shadow: 0 2px 8px rgba(34,211,238,0.3);
-}
-
-.top-capsule.capsule-blue {
-    background: rgba(59,130,246,0.8);
-    box-shadow: 0 2px 8px rgba(59,130,246,0.3);
-}
-
-.top-capsule.capsule-purple {
-    background: rgba(168,85,247,0.8);
-    box-shadow: 0 2px 8px rgba(168,85,247,0.3);
-}
-
-.top-capsule.capsule-green {
-    background: rgba(16,185,129,0.8);
-    box-shadow: 0 2px 8px rgba(16,185,129,0.3);
-}
-
-.top-capsule.capsule-pink {
-    background: rgba(236,72,153,0.8);
-    box-shadow: 0 2px 8px rgba(236,72,153,0.3);
-}
-
-.top-capsule.capsule-red {
-    background: rgba(239,68,68,0.8);
-    box-shadow: 0 2px 8px rgba(239,68,68,0.3);
-}
-
-.top-capsule.capsule-yellow {
-    background: rgba(234,179,8,0.8);
-    color: #000;
-    box-shadow: 0 2px 8px rgba(234,179,8,0.3);
-}
-
-.top-capsule.capsule-orange {
-    background: rgba(249,115,22,0.8);
-    box-shadow: 0 2px 8px rgba(249,115,22,0.3);
-}
-
-/* ── MODAL ── */
-#item-modal {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.6);
-    display: none; align-items: center; justify-content: center;
-    z-index: 500; backdrop-filter: blur(6px);
-}
-#item-modal.active { display: flex; }
-
-.modal-content {
-    background: #1a1a1a; border-radius: 16px;
-    padding: 24px 20px; width: 90%; max-width: 450px;
-    display: flex; flex-direction: column; gap: 14px;
-    border: 1px solid rgba(16,185,129,0.1);
-    max-height: 85vh;
-    overflow-y: auto;
-    animation: modalSlideIn 0.3s ease-out;
-}
-
-@keyframes modalSlideIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.modal-imagevar(--em-dim) 0%, transparent 80%);
     opacity: 0; transition: opacity 0.2s; pointer-events: none;
 }
 .top-row:active::before { opacity: 1; }
@@ -710,7 +584,7 @@ body::before {
 
 .installed-apps-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(80px,1fr));
     gap: 10px;
 }
 
@@ -882,7 +756,7 @@ body::before {
     
     <div class="tab-bar">
         <button class="tab-btn active" id="tab-top"><i class="fa fa-trophy"></i> Top</button>
-        <buttonclass="tab-btn" id="tab-web"><i class="fa fa-globe"></i> Websites</button>
+        <button class="tab-btn" id="tab-web"><i class="fa fa-globe"></i> Websites</button>
         <button class="tab-btn" id="tab-apps"><i class="fa fa-mobile"></i> Apps</button>
         <button class="tab-btn" id="tab-manager"><i class="fa fa-cog"></i> Manager</button>
     </div>
@@ -983,7 +857,7 @@ function loadJSONData() {
         }),
         fetch('app.json').then(r => r.json()).catch(e => {
             console.warn('app.json failed, using fallback:', e);
-            return { items: [] };
+            return{ items: [] };
         })
     ]).then(([topJson, appJson]) => {
         // Extract items array from both JSONs
@@ -1140,7 +1014,7 @@ function resetRender(filter) {
 }
 
 function renderBatch() {
-    const slice = filteredData.slice(currentIndex,currentIndex + batchSize);
+    const slice = filteredData.slice(currentIndex, currentIndex + batchSize);
     slice.forEach(item => {
         const div = document.createElement('div');
         div.className = 'card';
@@ -1176,9 +1050,7 @@ function renderBatch() {
         if (capsule && item.capsule) {
             capsule.addEventListener('click', (e) => {
                 e.stopPropagation();
-                const itemCapsule = item.capsule;
-                
-                // Toggle filter: if same capsule is clicked, clear filter
+                const itemCapsule = item.capsule;// Toggle filter: if same capsule is clicked, clear filter
                 if (typeFilter === itemCapsule) {
                     typeFilter = null;
                     showToast(`Showing all items`);
