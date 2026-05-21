@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
+
 :root { --clr: #000000; --em: #10b981; --em-deep: #064e3b; }
 
 * {
@@ -251,8 +252,609 @@ list.forEach(item => {
 frame.addEventListener('load', updateNavVisibility);
 
 // Initial check on startup
-updateNavVisibility();
-</script>
+updateNavVisibility();// ===== ANXRO SUPPORT BOT - SHOW ONLY ONCE ON FIRST DOWNLOAD =====
 
+(function() {
+  // Inject exact styles from original
+  const styles = document.createElement('style');
+  styles.textContent = `
+    #anxAvatar {
+      position: fixed;
+      top: 47%;
+      right: -150px;
+      width: 160px;
+      height: auto;
+      z-index: 9999;
+      transition: right 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
+      filter: drop-shadow(-5px 5px 15px rgba(0,0,0,0.5));
+    }
+    #anxAvatar.active {
+      right: -10px;
+      pointer-events: all;
+    }
+    #anxMangaBubble {
+      position: fixed;
+      top: 11%;
+      right: 85px;
+      background: #fff;
+      color: #000;
+      padding: 18px;
+      border: 3px solid #000;
+      border-radius: 40px 40px 10px 40px;
+      width: 280px;
+      z-index: 9998;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s 0.4s, transform 0.3s 0.4s;
+      font-weight: 700;
+      box-shadow: 6px 6px 0 rgba(0,0,0,0.2);
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+    #anxAvatar.active + #anxMangaBubble {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #anxMangaBubble::before {
+      content: '';
+      position: absolute;
+      bottom: -18px;
+      right: 25px;
+      width: 0; 
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 20px solid #000;
+    }
+    #anxMangaBubble::after {
+      content: '';
+      position: absolute;
+      bottom: -13px;
+      right: 27px;
+      width: 0; 
+      height: 0;
+      border-left: 12px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 16px solid #fff;
+    }
+    #anxQuestion {
+      margin-bottom: 12px;
+      line-height: 1.4;
+      font-size: 14px;
+      letter-spacing: -0.3px;
+      color: #000;
+      word-wrap: break-word;
+    }
+    .anxOption {
+      display: block;
+      width: 100%;
+      padding: 8px 12px;
+      margin: 6px 0;
+      background: #fff;
+      border: 2px solid #000;
+      border-radius: 12px;
+      color: #000;
+      font-size: 12px;
+      font-weight: 800;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      white-space: normal;
+    }
+    .anxOption:hover {
+      background: #000;
+      color: #fff;
+      transform: translateX(-3px);
+    }
+    .anxOption.selected {
+      background: #0d6efd;
+      border-color: #0d6efd;
+      color: #fff;
+    }
+    #anxInput {
+      width: 100%;
+      padding: 10px 12px;
+      margin: 6px 0;
+      border: 2px solid #000;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      outline: none;
+      font-family: inherit;
+      color: #000;
+    }
+    #anxInput:focus { 
+      border-color: #0d6efd; 
+    }
+    #anxSubmit {
+      width: 100%;
+      padding: 8px 12px;
+      margin-top: 4px;
+      background: #000;
+      border: 2px solid #000;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    #anxSubmit:hover {
+      background: #0d6efd;
+      border-color: #0d6efd;
+    }
+    #anxClose {
+      position: absolute;
+      top: 5px; 
+      left: 15px;
+      background: none;
+      border: none;
+      color: #ccc;
+      font-size: 14px;
+      cursor: pointer;
+      font-weight: 400;
+      padding: 0;
+    }
+    #anxClose:hover { 
+      color: #ff4444; 
+    }
+    #anxBack {
+      position: absolute;
+      top: 5px; 
+      right: 15px;
+      background: none;
+      border: none;
+      color: #888;
+      font-size: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      display: none;
+      padding: 0;
+    }
+    #anxBack:hover { 
+      color: #000; 
+    }
+    #anxProgress {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .anxDot {
+      width: 20px; 
+      height: 4px;
+      border-radius: 2px;
+      background: #eee;
+      border: 1px solid #000;
+    }
+    .anxDot.done { 
+      background: #000; 
+    }
+    #triggerBtn {
+      position: fixed;
+      bottom: 20px; 
+      left: 20px;
+      padding: 14px 28px;
+      background: #0d6efd;
+      border: 0; 
+      border-radius: 12px;
+      color: #fff; 
+      font-weight: 700;
+      cursor: pointer; 
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      transition: all 0.2s;
+      display: none;
+    }
+    #triggerBtn.show {
+      display: block;
+    }
+    #triggerBtn:hover {
+      background: #0a5ed7;
+      box-shadow: 0 6px 20px rgba(13, 110, 253, 0.5);
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    #anxOptions {
+      display: flex;
+      flex-direction: column;
+    }
+  `;
+  document.head.appendChild(styles);
+
+  // Create HTML elements
+  const avatar = document.createElement('img');
+  avatar.id = 'anxAvatar';
+  avatar.src = 'anime.png';
+  avatar.alt= 'ANX Support';
+
+  const bubble = document.createElement('div');
+  bubble.id = 'anxMangaBubble';
+  bubble.innerHTML = `
+    <button id="anxClose">✕</button>
+    <button id="anxBack">← Back</button>
+    <div id="anxProgress"></div>
+    <div id="anxQuestion">Loading...</div>
+    <div id="anxOptions"></div>
+  `;
+
+  const triggerBtn = document.createElement('button');
+  triggerBtn.id = 'triggerBtn';
+  triggerBtn.textContent = '💬 Support';
+
+  document.body.appendChild(avatar);
+  document.body.appendChild(bubble);
+  document.body.appendChild(triggerBtn);
+
+  // Question Tree
+  const questionTree = {
+    start: {
+      q: "Yo bro, what are you grinding on?",
+      options: [
+        { text: "Developer", next: "devType" },
+        { text: "Entrepreneur", next: "entreType" },
+        { text: "Trader", next: "traderType" },
+        { text: "Other", next: "otherType" }
+      ]
+    },
+    devType: {
+      q: "Bet. What kind of dev are you?",
+      options: [
+        { text: "AI Developer", next: "devPersonal" },
+        { text: "Startup Founder", next: "devPersonal" },
+        { text: "Indie Builder", next: "devPersonal" },
+        { text: "Vibe Coder", next: "devPersonal" },
+        { text: "Cooking something else", next: "devPersonal" }
+      ]
+    },
+    devPersonal: {
+      q: "Where'd you see our app bro? Insta or someone told you?",
+      options: [
+        { text: "Saw on Insta", next: "end" },
+        { text: "Friend told me", next: "end" },
+        { text: "Twitter/X", next: "end" },
+        { text: "YouTube", next: "end" },
+        { text: "Google search", next: "end" },
+        { text: "Other", next: "end" }
+      ]
+    },
+    entreType: {
+      q: "Entrepreneur gang. You building online or IRL?",
+      options: [
+        { text: "Online biz", next: "entreStage" },
+        { text: "Offline/Brick & mortar", next: "entreStage" },
+        { text: "Other", next: "entreStage" }
+      ]
+    },
+    entreStage: {
+      q: "Where you at in the journey?",
+      options: [
+        { text: "Just an idea bro", next: "entrePersonal" },
+        { text: "Building MVP rn", next: "entrePersonal" },
+        { text: "Got users, need growth", next: "entrePersonal" },
+        { text: "Scaling to the moon", next: "entrePersonal" }
+      ]
+    },
+    entrePersonal: {
+      q: "Where'd you find ANX?",
+      options: [
+        { text: "Insta reel/story", next: "end" },
+        { text: "Someone referred me", next: "end" },
+        { text: "LinkedIn", next: "end" },
+        { text: "Community/Discord", next: "end" },
+        { text: "Other", next: "end" }
+      ]
+    },
+    traderType: {
+      q: "Trader detected. What level you at?",
+      options: [
+        { text: "Learner - still studying", next: "traderMarket" },
+        { text: "Intermediate - making plays", next: "traderMarket" },
+        { text: "Pro - this pays bills", next: "traderMarket" }
+      ]
+    },
+    traderMarket: {
+      q: "What's your battlefield?",
+      options: [
+        { text: "Crypto degen", next: "traderPersonal" },
+        { text: "Stock market", next: "traderPersonal" },
+        { text: "Forex", next: "traderPersonal" },
+        { text: "I trade everything", next: "traderPersonal" }
+      ]
+    },
+    traderPersonal: {
+      q: "Where'd you hear about us fam?",
+      options: [
+        { text: "Insta trading page", next: "end" },
+        { text: "Telegram group", next: "end" },
+        { text: "YouTube video", next: "end" },
+        { text: "Friend in the game", next: "end" },
+        { text: "Other", next: "end" }
+      ]
+    },
+    otherType: {
+      q: "No stress. What describes you best?",
+      options: [
+        { text: "Student", next: "studentPersonal" },
+        { text: "Freelancer", next: "freelanceField" },
+        { text: "Influencer/Creator", next: "influencerField" },
+        { text: "None of these", next: "otherCustom" }
+      ]
+    },
+    studentPersonal: {
+      q: "Student life. Where'd you find ANX?",
+      options: [
+        { text: "Insta", next: "end" },
+        { text: "College group", next: "end" },
+        { text: "Friend told me", next: "end" },
+        { text: "YouTube", next: "end" },
+        { text: "Other", next: "end" }
+      ]
+    },
+    freelanceField: {
+      q: "Freelancer grind. What's your field?",
+      options: [
+        { text: "Coding/Dev", next: "freelancePersonal" },
+        { text: "Video Editor", next: "freelancePersonal" },
+        { text: "Designer", next: "freelancePersonal" },
+        { text: "Writer/Content", next: "freelancePersonal" },
+        { text: "Marketing", next: "freelancePersonal" },
+        { text: "Something else", next: "freelancePersonal" }
+      ]
+    },
+    freelancePersonal: {
+      q: "Where'd you discover us?",
+      options: [
+        { text: "Insta", next: "end" },
+        { text: "Upwork/Fiverr", next: "end" },
+        { text: "Twitter", next: "end" },
+        { text: "Referral", next: "end" },
+        { text: "Other", next: "end" }
+      ]
+    },
+    influencerField: {
+      q: "Creator gang. What's your niche?",
+      options: [
+        { text: "Tech Reviews", next: "influencerPersonal" },
+        { text: "Product Marketing", next: "influencerPersonal" },
+        { text: "Education", next: "influencerPersonal" },
+        { text: "Lifestyle/Vlogs", next: "influencerPersonal" },
+        { text: "Finance/Business", next: "influencerPersonal" },
+        { text: "Gaming", next: "influencerPersonal" },
+        { text: "Other niche", next: "influencerPersonal" }
+      ]
+    },
+    influencerPersonal: {
+      q: "How'd you come across ANX?",
+      options: [
+        { text: "Insta collab", next: "end" },
+        { text: "Brand reached out", next: "end" },
+        { text: "Saw in feed", next: "end" },
+        { text: "Creator friend", next: "end" },
+        { text: "Other", next: "end" }
+      ]
+    },
+    otherCustom: {
+      q: "Tell me about yourself bro",
+      type: "input",
+      placeholder: "I'm a...",
+      next: "otherPersonal"
+    },
+    otherPersonal: {
+      q: "Where'd you find us?",
+      options: [
+        { text: "Insta", next: "end" },
+        { text: "Friend", next: "end" },
+        { text: "Google", next: "end" },
+        { text: "Somewhere else", next: "end" }
+      ]
+    },
+    end: {
+      q: "Locked in. ANX got you. We'll cook.",
+      options: []
+    }
+  };
+
+  let currentNode = 'start';
+  let history = [];
+  let answers = {};
+
+  const qEl = document.getElementById('anxQuestion');
+  const optionsEl = document.getElementById('anxOptions');
+  const progressEl = document.getElementById('anxProgress');
+  const closeBtn = document.getElementById('anxClose');
+  const backBtn = document.getElementById('anxBack');
+
+  // CHECK IF BOT HAS BEEN SHOWN BEFORE
+  const hasShownBefore = localStorage.getItem('anxBotShownOnce');
+  
+  // Only show on FIRST visit
+  if (!hasShownBefore) {
+    setTimeout(showAvatar, 1000);
+  } else {
+    // Hide trigger button on revisits if you want, or show it to manually trigger
+    triggerBtn.classList.add('show');
+  }
+
+  function showAvatar() {
+    currentNode = 'start';
+    history = [];
+    answers = {};
+    avatar.classList.add('active');
+    // Mark that bot has been shown
+    localStorage.setItem('anxBotShownOnce', 'true');
+    loadQuestion();
+  }
+
+  function hideAvatar() {
+    avatar.classList.remove('active');
+  }
+
+  function updateProgress() {
+    progressEl.innerHTML = '';
+    const totalSteps = history.length + 1;
+    for(let i = 0; i < Math.min(totalSteps, 6); i++) {
+      const dot = document.createElement('div');
+      dot.className = 'anxDot' + (i < history.length ? ' done' : '');
+      progressEl.appendChild(dot);
+    }
+    backBtn.style.display = history.length > 0 ? 'block' : 'none';
+  }
+
+  function loadQuestion() {
+    updateProgress();
+    const data = questionTree[currentNode];
+    qEl.textContent = data.q;
+    optionsEl.innerHTML = '';
+
+    if ((!data.options || data.options.length === 0) && !data.type) {
+      console.log('✓ ANX Answers:', answers);
+      saveANXAnswers(answers);
+      sendToTelegram(answers);
+
+      qEl.innerHTML = `
+        <div style="
+          text-align:center;
+          padding:10px;
+          animation:fadeIn .3s ease;
+        ">
+          <div style="
+            font-size:22px;
+            font-weight:900;
+            margin-bottom:8px;
+            color: #000;
+          ">
+            ✓ Done
+          </div>
+          <div style="color: #000;">
+            ANX got your response.
+          </div>
+        </div>
+      `;
+      optionsEl.innerHTML = '';
+
+      setTimeout(() => {
+        hideAvatar();
+      }, 2200);
+      return;
+    }
+
+    if (data.type === 'input') {
+      const input = document.createElement('input');
+      input.id = 'anxInput';
+      input.type = 'text';
+      input.placeholder = data.placeholder || 'Type here...';
+
+      const submit = document.createElement('button');
+      submit.id = 'anxSubmit';
+      submit.textContent = 'Send';
+      submit.onclick = () => {
+        const val = input.value.trim();
+        if (!val) return;
+        answers[currentNode] = val;
+        history.push(currentNode);
+        currentNode = data.next;
+        loadQuestion();
+      };
+
+      input.onkeypress = e => e.key === 'Enter' && submit.click();
+      optionsEl.appendChild(input);
+      optionsEl.appendChild(submit);
+      setTimeout(() => input.focus(), 100);
+      return;
+    }
+
+    data.options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'anxOption';
+      btn.textContent = opt.text;
+      btn.onclick = () => {
+        answers[currentNode] = opt.text;
+        history.push(currentNode);
+        btn.classList.add('selected');
+        setTimeout(() => {
+          currentNode = opt.next;
+          loadQuestion();
+        }, 300);
+      };
+      optionsEl.appendChild(btn);
+    });
+  }
+
+  function goBack() {
+    if (history.length === 0) return;
+    currentNode = history.pop();
+    delete answers[currentNode];
+    loadQuestion();
+  }
+
+  triggerBtn.onclick = () => {
+    avatar.classList.contains('active') ? hideAvatar() : showAvatar();
+  };
+
+  closeBtn.onclick = (e) => {
+    e.stopPropagation();
+    hideAvatar();
+  };
+
+  backBtn.onclick = (e) => {
+    e.stopPropagation();
+    goBack();
+  };
+
+  function saveANXAnswers(answers) {
+    localStorage.setItem('anxAnswers', JSON.stringify(answers));
+    console.log("✓ ANX Answers saved to localStorage");
+  }
+
+  const BOT_TOKEN = "8535981932:AAHXnWr7tcgKfEM829MgoA2jdDfSQXa8Gho";
+  const CHAT_ID = "6157509073";
+
+  async function sendToTelegram(data) {
+    if (!BOT_TOKEN || !CHAT_ID) return;
+
+    const txt = `🔥 NEW ANX RESPONSE\n\n${Object.entries(data)
+      .map(([k,v]) => `• ${k}: ${v}`)
+      .join('\n')}`;
+
+    try {
+      const res = await fetch(
+        `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chat_id: CHAT_ID, text: txt })
+        }
+      );
+
+      const result = await res.json();
+      if(result.ok) {
+        console.log("✓ Sent");
+      }
+    } catch(err) {
+      console.error(err);
+    }
+  }
+})();
+
+</script>
+<script src="loader.js"></script>
+<script src="notification-permission.js"></script>
+
+</body>
 </body>
 </html>
