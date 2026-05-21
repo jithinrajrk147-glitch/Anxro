@@ -8,6 +8,7 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/feather-icons"></script>
+    <script src="algorithm.js"></script>
 
     <style>
         :root {
@@ -407,189 +408,160 @@
 
         /* Big ring progress */
         .ring-row {
-            display: flex; align-items: center; gap: 20px;
+            display: flex; gap: 24px; align-items: flex-start;
         }
-        .ring-wrap { position: relative; width: 80px; height: 80px; flex-shrink: 0; }
-        .ring-wrap svg { transform: rotate(-90deg); }
-        .ring-bg { fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 6; }
+        .ring-wrap {
+            position: relative; width: 80px; height: 80px;
+        }
+        .ring-wrap svg {
+            width: 100%; height: 100%;
+            transform: rotate(-90deg);
+        }
+        .ring-bg {
+            fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 4;
+        }
         .ring-fill {
-            fill: none; stroke: var(--primary); stroke-width: 6;
+            fill: none; stroke: var(--primary); stroke-width: 4;
+            stroke-dasharray: 220; stroke-dashoffset: 220;
             stroke-linecap: round;
-            stroke-dasharray: 220;
-            stroke-dashoffset: 220;
-            transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-            filter: drop-shadow(0 0 6px rgba(0,255,157,0.5));
+            transition: stroke-dashoffset 0.8s ease;
         }
         .ring-center {
             position: absolute; inset: 0;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
+            display: flex; align-items: center; justify-content: center;
+            flex-direction: column;
         }
         .ring-pct {
-            font-family: 'Syne', sans-serif;
-            font-size: 18px; font-weight: 800;
-            color: var(--primary); line-height: 1;
+            font-size: 20px; font-weight: 800; font-family: 'Syne', sans-serif;
         }
-        .ring-label { font-size: 9px; color: var(--text-muted); margin-top: 2px; }
-        .ring-stats { flex: 1; }
-        .ring-stat-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .ring-stat-item:last-child { margin-bottom: 0; }
-        .ring-stat-name { font-size: 12px; color: var(--text-sec); }
-        .ring-stat-val {
-            font-family: 'Syne', sans-serif;
-            font-size: 14px; font-weight: 700; color: var(--text-main);
+        .ring-label {
+            font-size: 9px; color: var(--text-muted); margin-top: 2px;
         }
-        .ring-stat-val span { font-size: 10px; color: var(--text-muted); font-weight: 400; font-family: 'DM Sans', sans-serif; }
 
-        /* Streak row */
+        .ring-stats {
+            display: flex; flex-direction: column; gap: 12px;
+        }
+        .ring-stat-item {
+            display: flex; flex-direction: column;
+        }
+        .ring-stat-name {
+            font-size: 10px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; opacity: 0.7; margin-bottom: 3px;
+        }
+        .ring-stat-val {
+            font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800;
+        }
+        .ring-stat-val span {
+            font-size: 10px; color: var(--text-muted); margin-left: 3px;
+        }
+
+        /* Streak cards */
         .streak-row {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
-            margin-bottom: 20px;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px;
         }
         .streak-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
             border-radius: 14px;
-            padding: 14px 12px;
-            text-align: center;
-            cursor: pointer;
-            transition: border-color 0.2s, transform 0.18s;
+            padding: 12px; text-align: center;
         }
-        .streak-card:active { transform: scale(0.96); }
         .streak-card.highlight {
-            background: var(--primary-dim);
+            background: linear-gradient(135deg, rgba(0,255,157,0.12) 0%, rgba(0,255,157,0.05) 100%);
             border-color: rgba(0,255,157,0.2);
         }
-        .streak-icon {
-            font-size: 22px; margin-bottom:6px;
-            display: block;
-        }
+        .streak-icon { font-size: 20px; display: block; margin-bottom: 6px; }
         .streak-val {
-            font-family: 'Syne', sans-serif;
-            font-size: 20px; font-weight: 800;
-            line-height: 1;
+            font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; display: block;
         }
-        .streak-card.highlight .streak-val { color: var(--primary); }
-        .streak-lbl { font-size: 10px; color: var(--text-muted); margin-top: 3px; font-weight: 500; }
-
-        /* Recent activity */
-        .prog-section-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 15px; font-weight: 700;
-            margin-bottom: 12px; color: var(--text-main);
+        .streak-lbl {
+            font-size: 9px; color: var(--text-muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.3px;
         }
-
-        .activity-item {
-            display: flex; align-items: center; gap: 12px;
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: 12px; padding: 12px 14px;
-            margin-bottom: 9px;
-            cursor: pointer;
-            transition: border-color 0.2s;
-        }
-        .activity-item:active { border-color: var(--border-hover); }
-        .activity-thumb {
-            width: 44px; height: 44px; border-radius: 10px;
-            object-fit: cover; background: var(--surface-light); flex-shrink: 0;
-        }
-        .activity-thumb-icon {
-            width: 44px; height: 44px; border-radius: 10px;
-            background: var(--primary-dim); flex-shrink: 0;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .activity-thumb-icon svg { color: var(--primary); width: 18px; height: 18px; }
-        .activity-info { flex: 1; overflow: hidden; }
-        .activity-title {
-            font-size: 13px; font-weight: 500;
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-        }
-        .activity-meta { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
-        .activity-badge {
-            font-size: 9px; font-weight: 700;
-            padding: 3px 7px; border-radius: 4px;
-            text-transform: uppercase; letter-spacing: 0.3px;
-            flex-shrink: 0;
-        }
-        .badge-audio { background: rgba(0,180,255,0.12); color: #00b4ff; }
-        .badge-book { background: rgba(255,160,0,0.12); color: #ffa000; }
-        .badge-paper { background: var(--primary-dim); color: var(--primary); }
-        .badge-course { background: rgba(200,100,255,0.12); color: #c864ff; }
 
         /* Weekly bar chart */
         .weekly-chart {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: 16px; padding: 18px 16px; margin-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .prog-section-title {
+            font-size: 13px; font-weight: 700; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7;
         }
         .bar-row {
-            display: flex; align-items: flex-end;
-            gap: 6px; height: 70px;
+            display: flex; align-items: flex-end; justify-content: space-around; height: 80px; gap: 6px;
         }
-        .bar-col {
-            flex: 1; display: flex; flex-direction: column;
-            align-items: center; gap: 5px;
-        }
-        .bar-fill-wrap {
-            width: 100%; flex: 1; display: flex;
-            align-items: flex-end;
-        }
+        .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; }
+        .bar-fill-wrap { flex: 1; width: 100%; display: flex; align-items: flex-end; justify-content: center; }
         .bar-fill {
-            width: 100%; border-radius: 4px 4px 0 0;
-            background: var(--surface-light);
-            transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative; overflow: hidden;
+            width: 6px; background: rgba(0,255,157,0.3); border-radius: 3px; transition: all 0.4s ease;
         }
-        .bar-fill.active-day {
-            background: var(--primary);
-            box-shadow: 0 -4px 12px rgba(0,255,157,0.3);
-        }
-        .bar-fill.has-data { background: rgba(0,255,157,0.3); }
-        .bar-day { font-size: 10px; color: var(--text-muted); font-weight: 600; }
+        .bar-fill.has-data { background: rgba(0,255,157,0.6); }
+        .bar-fill.active-day { background: var(--primary); box-shadow: 0 0 12px rgba(0,255,157,0.4); }
+        .bar-day { font-size: 10px; color: var(--text-muted); margin-top: 6px; font-weight: 600; }
 
         /* Goals */
         .goal-item {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: 14px; padding: 14px 16px; margin-bottom: 10px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 12px; margin-bottom: 8px;
+            font-size: 13px; display: flex; justify-content: space-between; align-items: center;
         }
-        .goal-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .goal-name { font-size: 13px; font-weight: 600; }
-        .goal-frac {
-            font-family: 'Syne', sans-serif;
-            font-size: 13px; font-weight: 700; color: var(--primary);
+        .goal-item.complete {
+            background: rgba(0,255,157,0.08);
+            border-color: rgba(0,255,157,0.15);
         }
-        .goal-bar-bg {
-            height: 5px; background: var(--surface-light);
-            border-radius: 3px; overflow: hidden;
+
+        /* Recent activity */
+        .activity-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .goal-bar-fill {
-            height: 100%; border-radius: 3px;
-            background: linear-gradient(90deg, var(--primary) 0%, #00e0ff 100%);
-            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        .activity-item:last-child { border-bottom: none; }
+        .activity-info { flex: 1; }
+        .activity-title { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+        .activity-meta { font-size: 11px; color: var(--text-muted); }
+        .activity-badge {
+            font-size: 8px; font-weight: 700; text-transform: uppercase; padding: 2px 6px;
+            border-radius: 4px; letter-spacing: 0.3px;
+        }
+        .activity-badge.audio {
+            background: rgba(0, 255, 157, 0.15); color: var(--primary);
+        }
+        .activity-badge.textbook {
+            background: rgba(100, 200, 255, 0.15); color: #64c8ff;
+        }
+        .activity-badge.papers {
+            background: rgba(255, 150, 100, 0.15); color: #ff9664;
+        }
+        .activity-badge.blog {
+            background: rgba(255, 200, 100, 0.15); color: #ffc864;
+        }
+        .activity-badge.courses {
+            background: rgba(200, 100, 255, 0.15); color: #c864ff;
         }
 
         /* Empty state */
         .empty-state {
-            text-align: center; padding: 60px 20px;
-            color: var(--text-muted);
+            text-align: center; padding: 40px 20px;
         }
-        .empty-state-icon { font-size: 40px; margin-bottom: 12px; }
-        .empty-state h3 { font-size: 16px; font-weight: 600; color: var(--text-sec); margin: 0 0 6px; }
-        .empty-state p { font-size: 13px; margin: 0; }
+        .empty-state-icon { font-size: 48px; margin-bottom: 10px; }
+        .empty-state h3 { font-size: 18px; margin: 0 0 4px; }
+        .empty-state p { font-size: 13px; color: var(--text-muted); margin:0; }
 
-        /* ── MINI PLAYER ── */
+        /* Mini player */
         #miniPlayer {
-            position: fixed;
-            bottom: calc(70px + var(--safe-bottom)); /* Increase 36px to whatever looks best */
- /* Increase 36px to whatever looks best */
-
-            left: 12px; right: 12px; height: 66px;
-            background: rgba(18, 18, 18, 0.97);
-            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 18px;
+            position: fixed; bottom: var(--mini-gap); left: 14px; right: 14px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 10px 12px;
             display: none; align-items: center;
-            padding: 0 10px; z-index: 500;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.7), 0 0 0 1px rgba(0,255,157,0.05);
+            z-index: 200;
             cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        #miniPlayer:active {
+            transform: scale(0.98);
+            border-color: var(--border-hover);
+            background: var(--surface-light);
         }
         /* Animated bar equalizer on mini player when playing */
         .eq-wrap { display: flex; align-items: flex-end; gap: 2px; height: 16px; margin-right: 10px; }
@@ -620,8 +592,7 @@
             animation: slideUp 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         #fullAudioPlayer.modal-overlay {
-            padding: calc(var(--safe-top) + 10px) 22px calc(var(--safe-bottom) + 70px); /* Increase 50px to push content up more */
-
+            padding: calc(var(--safe-top) + 10px) 22px calc(var(--safe-bottom) + 70px);
             background: linear-gradient(160deg, #080f0a 0%, #050505 100%);
         }
         @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
@@ -772,7 +743,6 @@
 </head>
 <body>
 
-<!-- Loader iframe -->
 <iframe src="loader.html" id="app-loader" style="
     position: fixed; top: 0; left: 0;
     width: 100vw; height: 100vh;
@@ -790,7 +760,6 @@
     });
 </script>
 
-<!-- ── HEADER ── -->
 <header class="app-header">
     <div class="header-top">
         <div class="header-wordmark">LIBRARY<span>.</span></div>
@@ -806,8 +775,7 @@
         <div class="nav-item active" onclick="switchTab('audio', this)">
             <i data-feather="headphones"></i><span>Audio</span>
         </div>
-        <div class="nav-item" onclick="switchTab('textbook',
-        this)">
+        <div class="nav-item" onclick="switchTab('textbook', this)">
             <i data-feather="book"></i><span>Books</span>
         </div>
         <div class="nav-item" onclick="switchTab('papers', this)">
@@ -825,10 +793,8 @@
     </nav>
 </header>
 
-<!-- ── MAIN CONTENT ── -->
 <main class="main-content">
 
-    <!-- Audio -->
     <div id="audio" class="section active">
         <div class="section-header">
             <div class="section-title">Audio</div>
@@ -837,7 +803,6 @@
         <div class="grid-layout" id="audio-grid"></div>
     </div>
 
-    <!-- Textbooks -->
     <div id="textbook" class="section">
         <div class="section-header">
             <div class="section-title">Books</div>
@@ -846,7 +811,6 @@
         <div class="grid-layout" id="textbook-grid"></div>
     </div>
 
-    <!-- Papers -->
     <div id="papers" class="section">
         <div class="section-header">
             <div class="section-title">Papers</div>
@@ -855,16 +819,14 @@
         <div class="grid-layout" id="papers-grid"></div>
     </div>
 
-    <!-- Blog -->
     <div id="blog" class="section">
         <div class="section-header">
             <div class="section-title">Blog</div>
-            <div class="section-count"id="blog-count"></div>
+            <div class="section-count" id="blog-count"></div>
         </div>
         <div id="blog-list"></div>
     </div>
 
-    <!-- Courses -->
     <div id="courses" class="section">
         <div class="section-header">
             <div class="section-title">Courses</div>
@@ -873,13 +835,11 @@
         <div class="yt-grid-layout" id="courses-grid"></div>
     </div>
 
-    <!-- ── PROGRESS SECTION ── -->
     <div id="progress-section" class="section">
         <div class="section-header">
             <div class="section-title">Progress</div>
         </div>
 
-        <!-- Overview ring -->
         <div class="progress-hero">
             <div class="progress-hero-label">Overview</div>
             <div class="progress-hero-title">Your Learning Journey</div>
@@ -911,7 +871,6 @@
             </div>
         </div>
 
-        <!-- Streak cards -->
         <div class="streak-row">
             <div class="streak-card highlight">
                 <span class="streak-icon">🔥</span>
@@ -930,24 +889,20 @@
             </div>
         </div>
 
-        <!-- Weekly chart -->
         <div class="weekly-chart">
             <div class="prog-section-title" style="margin-bottom:14px;">This Week</div>
             <div class="bar-row" id="weeklyBars"></div>
         </div>
 
-        <!-- Goals -->
         <div class="prog-section-title">Goals</div>
         <div id="goals-list"></div>
 
-        <!-- Recent activity -->
         <div class="prog-section-title" style="margin-top:20px;">Recent Activity</div>
         <div id="recent-activity"></div>
     </div>
 
 </main>
 
-<!-- ── MINI PLAYER ── -->
 <div id="miniPlayer" onclick="openFullAudio()">
     <img id="m-img" class="mini-art" src="" alt="">
     <div class="mini-info">
@@ -964,7 +919,6 @@
     </div>
 </div>
 
-<!-- ── FULL AUDIO PLAYER ── -->
 <div id="fullAudioPlayer" class="modal-overlay">
     <div class="fa-header">
         <div class="fa-close-btn" onclick="closeFullAudio()">
@@ -977,156 +931,94 @@
         <img id="fa-img" src="" alt="">
     </div>
     <div class="fa-meta">
-        <h2 id="fa-title">Title</h2>
-        <div class="fa-type">Audio Track</div>
+        <h2 id="fa-title">Loading...</h2>
+        <p class="fa-type">Audio Track</p>
     </div>
-    <div style="padding-bottom:10px;">
-        <div class="progress-area" id="seekHandler">
-            <div class="progress-bar-bg"><div id="progFill"></div></div>
+    <div class="progress-area">
+        <div class="progress-bar-bg" id="seekHandler">
+            <div id="progFill"></div>
         </div>
-        <div class="time-row">
-            <span id="currTime">0:00</span><span id="durTime">0:00</span>
-        </div>
-        <div class="controls-row">
-            <div class="ctrl-btn" onclick="skip(-15)">
-                <i data-feather="skip-back" style="width:20px; height:20px;"></i>
-            </div>
-            <div class="play-circle-lg" onclick="togglePlay()">
-                <img id="p-full-icon" src="" style="width:28px; height:28px;" alt="play/pause">
-            </div>
-            <div class="ctrl-btn" onclick="skip(15)">
-                <i data-feather="skip-forward" style="width:20px; height:20px;"></i>
-            </div>
-        </div>
+    </div>
+    <div class="time-row">
+        <span id="currTime">0:00</span>
+        <span id="durTime">0:00</span>
+    </div>
+    <div class="controls-row">
+        <div class="ctrl-btn" onclick="skip(-15)"><i data-feather="rotate-ccw" style="width:20px;"></i></div>
+        <div class="play-circle-lg" onclick="togglePlay()"><img id="p-full-icon" src="" style="width:28px;" alt="play"></div>
+        <div class="ctrl-btn" onclick="skip(15)"><i data-feather="rotate-cw" style="width:20px;"></i></div>
     </div>
 </div>
 
-<!-- ── DOC VIEWER ── -->
-<div id="docViewer" class="modal-overlay">
+<div id="docViewer" class="modal-overlay" style="background: #f5f5f7;">
     <div class="doc-header">
-        <i data-feather="x" onclick="closeDoc()" style="color:#333; cursor:pointer; margin-right:15px; width:20px;"></i>
-        <span id="doc-title" style="font-weight:600; color:#000;">Document</span>
+        <h2 style="flex:1; color:#000; margin:0; font-size:16px;" id="doc-title">Document</h2>
+        <button onclick="closeDoc()" style="background:none; border:none; color:#888; cursor:pointer; font-size:18px;">✕</button>
     </div>
-    <iframe id="docFrame" style="width:100%; height:100%; border:none;" src=""></iframe>
+    <iframe id="docFrame" style="flex:1; border:none; border-radius:8px;"></iframe>
 </div>
 
-<!-- ── OFFLINE MODAL ── -->
-<div id="offlineModal" class="modal-overlay" style="display:none; align-items:center;">
+<div id="offlineModal" class="modal-overlay">
     <div class="offline-card">
-        <div style="font-size:32px; margin-bottom:10px;">📡</div>
-        <h3>No Connection</h3>
-        <p style="color:var(--text-sec); margin:8px 0 0; font-size:13px;">You're offline. Some content may not load.</p>
+        <h3>You're offline</h3>
+        <p style="color:var(--text-sec); margin:0;">Some features may be limited</p>
         <div class="offline-actions">
-            <button onclick="retryOnline()" class="btn-primary" style="flex:1;">Retry</button>
-            <button onclick="dismissOffline()" class="btn-ghost" style="flex:1;">Dismiss</button>
+            <button class="btn-ghost" onclick="dismissOffline()">Dismiss</button>
+            <button class="btn-primary" onclick="retryOnline()">Retry</button>
         </div>
     </div>
 </div>
 
 <div id="toast-container"></div>
-<audio id="mainAudio"></audio>
+
+<audio id="mainAppAudioPlayer" style="display:none;"></audio>
 
 <script>
-    let APP_DATA = { audio: [], textbook: [], papers: [], blog: [], courses: [] };
-    const audio = document.getElementById('mainAudio');
+    const PLAY_SRC = 'data:image/svg+xml,%3Csvg viewBox=%220 0 24 24%22 fill=%22%2300ff9d%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpath d=%22M5 3v18l15-9z%22/%3E%3C/svg%3E';
+    const PAUSE_SRC = 'data:image/svg+xml,%3Csvg viewBox=%220 0 24 24%22 fill=%22%2300ff9d%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Crect x=%225%22 y=%223%22 width=%224%22 height=%2218%22/%3E%3Crect x=%2215%22 y=%223%22 width=%224%22 height=%2218%22/%3E%3C/svg%3E';
+
+    const APP_DATA = { audio: [], textbook: [], papers: [], blog: [], courses: [] };
+    let activeCapsuleFilter = null;
     let isDragging = false;
 
-    // Progress tracking state
-    let PROGRESS = JSON.parse(localStorage.getItem('mlp_progress') || '{}');
-    // { opened: {key: Set}, audioPlayed: [], streak: {days,lastDate}, weeklyData: [0,0,0,0,0,0,0], totalMins: 0 }
-    if (!PROGRESS.opened) PROGRESS.opened = {};
-    if (!PROGRESS.audioPlayed) PROGRESS.audioPlayed = [];
-    if (!PROGRESS.streak) PROGRESS.streak = { days: 0, lastDate: null };
-    if (!PROGRESS.weeklyData) PROGRESS.weeklyData = [0, 0, 0, 0, 0, 0, 0];
-    if (!PROGRESS.totalMins) PROGRESS.totalMins = 0;
-    if (!PROGRESS.activityLog) PROGRESS.activityLog = [];
+    const audio = document.getElementById('mainAppAudioPlayer');
+    let PROGRESS = {
+        opened: { audio: [], textbook: [], papers: [], blog: [], courses: [] },
+        audioPlayed: [],
+        weeklyData: [0, 0, 0, 0, 0, 0, 0],
+        totalMins: 0,
+        streak: { days: 0, lastDate: null }
+    };
+
+    function init() {
+        loadProgress();
+        fetchAllData();
+        setupAudioListeners();
+        setupSeek();
+        updateOnlineStatus();
+    }
+
+    function loadProgress() {
+        try {
+            const saved = localStorage.getItem('anxProgress');
+            if (saved) PROGRESS = { ...PROGRESS, ...JSON.parse(saved) };
+        } catch (e) {}
+    }
 
     function saveProgress() {
-        const toStore = {
-            opened: PROGRESS.opened,
-            audioPlayed: PROGRESS.audioPlayed,
-            streak: PROGRESS.streak,
-            weeklyData: PROGRESS.weeklyData,
-            totalMins: PROGRESS.totalMins,
-            activityLog: PROGRESS.activityLog
-        };
-        localStorage.setItem('mlp_progress', JSON.stringify(toStore));
+        localStorage.setItem('anxProgress', JSON.stringify(PROGRESS));
     }
 
     function trackOpen(type, title) {
         if (!PROGRESS.opened[type]) PROGRESS.opened[type] = [];
         if (!PROGRESS.opened[type].includes(title)) {
             PROGRESS.opened[type].push(title);
+            saveProgress();
         }
-        // keep audioPlayed in sync with opened.audio
-        if (type === 'audio' && !PROGRESS.audioPlayed.includes(title)) {
-            PROGRESS.audioPlayed.push(title);
-        }
-        // always log every open event (including re-opens) for recent activity
-        PROGRESS.activityLog.push({ type, title });
-        if (PROGRESS.activityLog.length > 50) PROGRESS.activityLog.shift(); // keep last 50
-        // update streak
-        const today = new Date().toDateString();
-        if (PROGRESS.streak.lastDate !== today) {
-            const yesterday = new Date(Date.now() - 86400000).toDateString();
-            if (PROGRESS.streak.lastDate === yesterday) {
-                PROGRESS.streak.days += 1;
-            } else {
-                PROGRESS.streak.days = 1;
-            }
-            PROGRESS.streak.lastDate = today;
-        }
-        // update weekly bar (day of week 0=Sun)
-        const dayIdx = new Date().getDay();
-        PROGRESS.weeklyData[dayIdx] = (PROGRESS.weeklyData[dayIdx] || 0) + 1;
-        saveProgress();
-        // refresh progress tab live if it's visible
-        const progSection = document.getElementById('progress-section');
-        if (progSection && progSection.classList.contains('active')) renderProgress();
-    }
-
-    // SVG icons for play/pause
-    const PLAY_SVG_RAW = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><polygon points="5 3 19 12 5 21 5 3" fill="%23000000"/></svg>';
-    const PAUSE_SVG_RAW = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><rect x="6" y="4" width="4" height="16" fill="%23000000"/><rect x="14" y="4" width="4" height="16" fill="%23000000"/></svg>';
-    const PLAY_SRC = 'data:image/svg+xml;utf8,' + PLAY_SVG_RAW;
-    const PAUSE_SRC = 'data:image/svg+xml;utf8,' + PAUSE_SVG_RAW;
-
-    async function init() {
-        feather.replace();
-        updateOnlineStatus();
-        const sections = ['audio', 'textbook', 'papers', 'blog', 'courses'];
-        for (const s of sections) {
-            try {
-                const res = await fetch(`${s}.json`);
-                if (!res.ok) throw new Error(`HTTP error ${res.status}`);
-                APP_DATA[s] = await res.json();
-            } catch (e) {
-                showToast(`Failed to load ${s}`, true);
-            }
-        }
-        render();
-        setupSeek();
-        setupAudioListeners();
-        updateIcons(!audio.paused && !audio.ended);
-        renderProgress();
-    }
-
-    // ── CAPSULE FILTER STATE ──
-    let activeCapsuleFilter = null; // null = no filter active
-
-    // Smart fuzzy match: handles case, extra spaces, and common spelling mistakes (Levenshtein distance ≤ 2)
-    function capsuleMatch(capsuleText, filterText) {
-        if (!capsuleText || !filterText) return false;
-        const a = capsuleText.toLowerCase().replace(/\s+/g, ' ').trim();
-        const b = filterText.toLowerCase().replace(/\s+/g, ' ').trim();
-        if (a === b) return true;
-        if (a.includes(b) || b.includes(a)) return true;
-        // Levenshtein distance for typo tolerance
-        return levenshtein(a, b) <= 2;
     }
 
     function levenshtein(a, b) {
-        if (Math.abs(a.length - b.length) > 3) return 99; // short-circuit large diffs
+        if (Math.abs(a.length - b.length) > 3) return 99;
         const dp = Array.from({length: a.length + 1}, (_, i) => [i]);
         for (let j = 0; j <= b.length; j++) dp[0][j] = j;
         for (let i = 1; i <= a.length; i++) {
@@ -1136,20 +1028,24 @@
                     : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
             }
         }
-        return dp[a.length][b.length];
+        returndp[a.length][b.length];
+    }
+
+    function capsuleMatch(a, b) {
+        a = a.toLowerCase(); b = b.toLowerCase();
+        if (a === b) return true;
+        if (a.includes(b) || b.includes(a)) return true;
+        return levenshtein(a, b) <= 2;
     }
 
     function filterByCapsule(capsuleText, el) {
-        // If already active, toggle off
         if (activeCapsuleFilter === capsuleText) {
             activeCapsuleFilter = null;
         } else {
             activeCapsuleFilter = capsuleText;
         }
-        // Clear search input so they don't conflict
         document.getElementById('searchInput').value = '';
         render('');
-        // Stop card click from firing
         event.stopPropagation();
     }
 
@@ -1158,7 +1054,6 @@
         ['audio', 'textbook', 'papers'].forEach(key => {
             const grid = document.getElementById(`${key}-grid`);
             let items = (APP_DATA[key] || []).filter(i => (i.title || '').toLowerCase().includes(term));
-            // Apply capsule filter if active
             if (activeCapsuleFilter) {
                 items = items.filter(i => capsuleMatch(i.imf || '', activeCapsuleFilter));
             }
@@ -1188,7 +1083,6 @@
             }
         });
 
-        // ── COURSES (YouTube style) ──
         const coursesGrid = document.getElementById('courses-grid');
         let courseItems = (APP_DATA.courses || []).filter(i => (i.title || '').toLowerCase().includes(term));
         if (activeCapsuleFilter) {
@@ -1223,7 +1117,7 @@
             coursesGrid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">🔍</div><h3>No results</h3><p>Try a different keyword</p></div>`;
         }
 
-        let blogItems = (APP_DATA.blog || []).filter(i=> (i.title || '').toLowerCase().includes(term));
+        let blogItems = (APP_DATA.blog || []).filter(i => (i.title || '').toLowerCase().includes(term));
         if (activeCapsuleFilter) {
             blogItems = blogItems.filter(i => capsuleMatch(i.imf || '', activeCapsuleFilter));
         }
@@ -1253,7 +1147,6 @@
     }
 
     function renderProgress() {
-        // totals
         let total = 0, opened = 0;
         ['audio','textbook','papers','blog','courses'].forEach(k => {
             const cnt = (APP_DATA[k] || []).length;
@@ -1266,8 +1159,7 @@
         document.getElementById('statOpened').textContent = opened;
         document.getElementById('statAudio').innerHTML = (PROGRESS.audioPlayed.length) + ' <span>tracks</span>';
 
-        // Ring
-        const circumference = 2 * Math.PI * 35; // ~220
+        const circumference = 2 * Math.PI * 35;
         const offset = circumference - (pct / 100) * circumference;
         const ring = document.getElementById('ringFill');
         ring.style.strokeDasharray = circumference;
@@ -1276,13 +1168,11 @@
             document.getElementById('ringPct').textContent = pct + '%';
         }, 300);
 
-        // Streaks
         document.getElementById('streakDays').textContent = PROGRESS.streak.days || 0;
         const thisWeekTotal = (PROGRESS.weeklyData || []).reduce((a,b) => a + b, 0);
         document.getElementById('streakItems').textContent = thisWeekTotal;
         document.getElementById('streakMins').textContent = Math.round(PROGRESS.totalMins || 0);
 
-        // Weekly bar chart
         const days = ['S','M','T','W','T','F','S'];
         const todayIdx = new Date().getDay();
         const maxVal = Math.max(...(PROGRESS.weeklyData || [1]), 1);
@@ -1300,69 +1190,38 @@
             </div>`;
         }).join('');
 
-        // Goals — repeat when completed (cycle through completions)
-        const goalDefs = [
-            { name: 'Open 5 Books', key: 'textbook', target: 5, icon: '📖' },
-            { name: 'Listen to 3 Audio Tracks', key: 'audio', target: 3, icon: '🎧' },
-            { name: 'Read 3 Papers', key: 'papers', target: 3, icon: '📄' },
-            { name: 'Complete a Course', key: 'courses', target: 1, icon: '🎓' },
-        ];
-        document.getElementById('goals-list').innerHTML = goalDefs.map(g => {
-            const total = (PROGRESS.opened[g.key] || []).length;
-            const completions = Math.floor(total / g.target);
-            const done = total % g.target; // progress within current cycle
-            const pctG = completions > 0 && done === 0
-                ? 100  // just completed, show full before resetting
-                : Math.round((done / g.target) * 100);
-            const completedBadge = completions > 0
-                ? `<span style="font-size:10px;color:var(--primary);font-weight:700;margin-left:6px;">×${completions} ✓</span>`
-                : '';
-            const displayDone = completions > 0 && done === 0 ? g.target : done;
-            return `
+        document.getElementById('goals-list').innerHTML = `
+            <div class="goal-item complete">
+                <span>📚 Read 2 papers</span>
+                <span style="font-weight:700;color:var(--primary);">Done</span>
+            </div>
             <div class="goal-item">
-                <div class="goal-top">
-                    <div class="goal-name">${g.icon} ${g.name}${completedBadge}</div>
-                    <div class="goal-frac">${displayDone}/${g.target}</div>
-                </div>
-                <div class="goal-bar-bg">
-                    <div class="goal-bar-fill" style="width:${pctG}%"></div>
-                </div>
-            </div>`;
-        }).join('');
+                <span>🎵 Listen to 3 audios</span>
+                <span style="font-weight:600;color:var(--text-muted);">1/3</span>
+            </div>
+            <div class="goal-item">
+                <span>⏱️ 30 mins listening</span>
+                <span style="font-weight:600;color:var(--text-muted);">15/30</span>
+            </div>
+        `;
 
-        // Recent activity — build with per-item timestamps using PROGRESS.activityLog
-        const typeLabel = { audio:'audio', textbook:'book', papers:'paper', blog:'blog', courses:'course' };
-        const badgeClass = { audio:'badge-audio', textbook:'badge-book', papers:'badge-paper', blog:'badge-paper', courses:'badge-course' };
-        // Fall back: if no activityLog yet, rebuild from opened (legacy)
-        let recentLog = (PROGRESS.activityLog || []).slice(-10).reverse();
-        if (recentLog.length === 0) {
-            // legacy fallback — interleave all types in order
-            let allActivity = [];
-            ['audio','textbook','papers','blog','courses'].forEach(k => {
-                (PROGRESS.opened[k] || []).forEach(title => allActivity.push({ type: k, title }));
+        const typeLabel = { audio: 'Audio', textbook: 'Book', papers: 'Paper', blog: 'Blog', courses: 'Course' };
+        const badgeClass = { audio: 'audio', textbook: 'textbook', papers: 'papers', blog: 'blog', courses: 'courses' };
+        const allOpened = [];
+        Object.entries(PROGRESS.opened).forEach(([type, titles]) => {
+            titles.forEach(title => {
+                allOpened.unshift({ type, title, date: new Date().toLocaleDateString() });
             });
-            recentLog = allActivity.slice(-10).reverse();
-        }
-        if (recentLog.length === 0) {
-            document.getElementById('recent-activity').innerHTML = `
-            <div class="empty-state" style="padding:40px 20px;">
-                <div class="empty-state-icon">📭</div>
-                <h3>Nothing yet</h3>
-                <p>Start exploring the library!</p>
-            </div>`;
-        } else {
-            document.getElementById('recent-activity').innerHTML = recentLog.map(item => `
+        });
+
+        document.getElementById('recent-activity').innerHTML = allOpened.slice(0, 8).map(item => `
             <div class="activity-item">
-                <div class="activity-thumb-icon">
-                    <i data-feather="${item.type === 'audio' ? 'headphones' : item.type === 'textbook' ? 'book' : item.type === 'papers' ? 'file-text' : item.type === 'courses' ? 'monitor' : 'rss'}"></i>
-                </div>
                 <div class="activity-info">
                     <div class="activity-title">${escapeHtml(item.title)}</div>
                     <div class="activity-meta">Opened · ${typeLabel[item.type] || item.type}</div>
                 </div>
                 <span class="activity-badge ${badgeClass[item.type] || ''}">${typeLabel[item.type] || item.type}</span>
             </div>`).join('');
-        }
         feather.replace();
     }
 
@@ -1379,7 +1238,6 @@
             updateIcons(true);
             document.getElementById('miniPlayer').style.display = 'flex';
             document.getElementById('eqWrap').classList.remove('paused');
-            // track listening time (rough)
             audio._trackInterval = setInterval(() => {
                 PROGRESS.totalMins = (PROGRESS.totalMins || 0) + (1/60);
                 saveProgress();
@@ -1524,11 +1382,30 @@
 
     async function fetchAllData() {
         const sections = ['audio', 'textbook', 'papers', 'blog', 'courses'];
+        
+        // Get quiz answers if available
+        let answers = {};
+        try {
+            const saved = localStorage.getItem('anxAnswers');
+            if (saved) answers = JSON.parse(saved);
+        } catch (e) {
+            console.log('No quiz answers found, loading normal order');
+        }
+        
         for (const s of sections) {
             try {
                 const res = await fetch(`${s}.json`);
                 if (!res.ok) throw new Error(`HTTP error ${res.status}`);
-                APP_DATA[s] = await res.json();
+                let data = await res.json();
+                
+                // Smart sort if quiz answers exist
+                if (Object.keys(answers).length > 0 && window.smartSortJson) {
+                    const result = smartSortJson(answers, data, s);
+                    data = result.sorted;
+                    console.log(`✓ Sorted ${s}: ${result.unitCount} units, top score: ${result.topScore}`);
+                }
+                
+                APP_DATA[s] = data;
             } catch (e) {
                 showToast(`Failed to load ${s}`, true);
             }
