@@ -7,490 +7,310 @@
 
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <script>if(localStorage.getItem('userProfile'))window.location.replace('third.html');</script>
 
     <style>
-        :root {
-            --bg: #010d08;
-            --card: #062d1f;
-            --accent: #10b981;
-            --input-bg: #041a12;
-            --text: #fff;
-            --text-muted: #a7f3d0;
-            --border: rgba(16,185,129,.15);
-            --glow: rgba(16,185,129,.25);
+        :root{
+          --bg: #020a07;
+          --bg2: #051410;
+          --surface: #0a1f17;
+          --surface2: #0f2a1f;
+          --emerald: #10b981;
+          --emerald-light: #34d399;
+          --emerald-dim: rgba(16,185,129,0.12);
+          --emerald-glow: rgba(16,185,129,0.3);
+          --white: #f8fafc;
+          --white-dim: #cbd5e1;
+          --white-muted: #94a3b8;
+          --border: rgba(255,255,255,0.06);
+          --border-emerald: rgba(16,185,129,0.25);
+          --glass: rgba(10,31,23,0.7);
+          --input-bg: #041a12;
+          --ff-display: 'Sora', sans-serif;
+          --ff-body: 'Outfit', sans-serif;
+          --ff-mono: 'JetBrains Mono', monospace;
+        }
+        *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+        html{scroll-behavior:smooth;}
+        body{
+          font-family:var(--ff-body);
+          background:var(--bg);
+          color:var(--white);
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          min-height:100vh;
+          padding:20px 0;
+          background-image:
+            radial-gradient(ellipse 80% 50% at 10% -10%,rgba(16,185,129,0.08) 0%,transparent 60%),
+            radial-gradient(ellipse 60% 40% at 90% 110%,rgba(5,150,105,0.06) 0%,transparent 60%),
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M0 40h80M40 0v80' stroke='rgba(255,255,255,0.015)' stroke-width='1'/%3E%3C/svg%3E");
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
-
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
+        /* AUTH CONTAINER */
+       .auth-container{
+          width:90%;
+          max-width:400px;
+          background:var(--glass);
+          backdrop-filter:blur(20px) saturate(180%);
+          border-radius:28px;
+          padding:38px 28px;
+          border:1px solid var(--border-emerald);
+          box-shadow:0 8px 32px rgba(0,0,0,0.5), 0 0 40px var(--emerald-glow);
+          position:relative;
+          animation:fadeUp 0.6s ease both;
+        }
+       .auth-container::before{
+          content:'';
+          position:absolute;
+          top:0;left:0;right:0;
+          height:2px;
+          background:linear-gradient(90deg,var(--emerald),var(--emerald-light) 50%,transparent);
+          border-radius:28px 28px 0 0;
         }
 
-        /* Ambient background effects */
-        body::before {
-            content: '';
-            position: fixed;
-            top: -30%;
-            left: -20%;
-            width: 70vw;
-            height: 70vw;
-            background: radial-gradient(circle, rgba(16,185,129,.07) 0%, transparent 65%);
-            pointer-events: none;
-            animation: drift 8s ease-in-out infinite alternate;
+        /* TABS */
+       .tabs{
+          display:flex;
+          background:var(--input-bg);
+          padding:6px;
+          border-radius:16px;
+          margin-bottom:32px;
+          border:1px solid var(--border);
         }
-        body::after {
-            content: '';
-            position: fixed;
-            bottom: -20%;
-            right: -20%;
-            width: 60vw;
-            height: 60vw;
-            background: radial-gradient(circle, rgba(6,45,31,.6) 0%, transparent 70%);
-            pointer-events: none;
-            animation: drift 10s ease-in-out infinite alternate-reverse;
+       .tabs button{
+          flex:1;
+          padding:13px;
+          border:none;
+          border-radius:12px;
+          background:none;
+          color:var(--white-muted);
+          font-weight:600;
+          font-size:0.9rem;
+          font-family:var(--ff-body);
+          cursor:pointer;
+          transition:all 0.25s;
         }
-
-        @keyframes drift {
-            from { transform: translate(0,0) scale(1); }
-            to   { transform: translate(4%,3%) scale(1.05); }
-        }
-
-        /* Grid texture */
-        .grid-bg {
-            position: fixed;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(16,185,129,.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(16,185,129,.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
+       .tabs button.active{
+          background:var(--emerald);
+          color:var(--bg);
+          box-shadow:0 4px 16px var(--emerald-glow);
         }
 
-        /* Card */
-        .auth-container {
-            position: relative;
-            z-index: 10;
-            width: 92%;
-            max-width: 400px;
-            background: linear-gradient(145deg, rgba(6,45,31,.95), rgba(4,26,18,.98));
-            border-radius: 32px;
-            padding: 0;
-            border: 1px solid var(--border);
-            box-shadow:
-                0 0 0 1px rgba(16,185,129,.05),
-                0 30px 80px rgba(0,0,0,.6),
-                0 0 60px rgba(16,185,129,.04);
-            overflow: hidden;
-            animation: slideUp .5s cubic-bezier(.22,1,.36,1);
+        /* AVATAR */
+       .avatar-section{
+          position:relative;
+          width:110px;
+          height:110px;
+          margin:0 auto 28px;
+          cursor:pointer;
+          transition:transform 0.3s;
+        }
+       .avatar-section:active{transform:scale(0.95);}
+       .avatar-section img{
+          width:100%;
+          height:100%;
+          border-radius:50%;
+          object-fit:cover;
+          border:2px solid var(--border-emerald);
+          box-shadow:0 0 30px var(--emerald-glow);
+        }
+       .edit-icon{
+          position:absolute;
+          bottom:4px;
+          right:4px;
+          background:var(--emerald);
+          color:var(--bg);
+          width:32px;
+          height:32px;
+          border-radius:50%;
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          border:3px solid var(--surface);
+          box-shadow:0 4px 12px rgba(0,0,0,0.4);
         }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(28px) scale(.97); }
-            to   { opacity: 1; transform: translateY(0) scale(1); }
+        /* INPUTS */
+        input{
+          width:100%;
+          padding:16px 18px;
+          margin-bottom:14px;
+          border-radius:14px;
+          border:1px solid var(--border);
+          background:var(--input-bg);
+          color:var(--white);
+          outline:none;
+          font-size:16px;
+          font-family:var(--ff-body);
+          transition:all 0.25s;
+        }
+        input:focus{
+          border-color:var(--border-emerald);
+          box-shadow:0 0 0 3px var(--emerald-dim);
+        }
+        input::placeholder{color:var(--white-muted);}
+
+        /* TERMS */
+       .terms-wrapper{
+          display:flex;
+          align-items:flex-start;
+          gap:12px;
+          margin:12px 0 28px;
+        }
+       .terms-wrapper input{
+          width:22px;
+          height:22px;
+          margin:0;
+          accent-color:var(--emerald);
+          cursor:pointer;
+          flex-shrink:0;
+        }
+       .terms-text{
+          font-size:0.78rem;
+          color:var(--white-muted);
+          line-height:1.5;
+        }
+       .terms-text a{
+          color:var(--emerald-light);
+          text-decoration:none;
+          font-weight:600;
         }
 
-        /* Header strip */
-        .card-header {
-            padding: 28px 28px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        /* BUTTON */
+       .submit-btn{
+          width:100%;
+          padding:17px;
+          border-radius:14px;
+          border:none;
+          background:var(--emerald);
+          color:var(--bg);
+          font-weight:700;
+          font-size:0.95rem;
+          font-family:var(--ff-display);
+          cursor:pointer;
+          transition:all 0.25s;
+          box-shadow:0 6px 20px var(--emerald-glow);
         }
-        .logo-mark {
-            width: 34px;
-            height: 34px;
-            background: var(--accent);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: 16px;
-            color: var(--bg);
-            letter-spacing: -1px;
-            flex-shrink: 0;
-        }
-        .app-name {
-            font-family: 'Syne', sans-serif;
-            font-weight: 700;
-            font-size: 20px;
-            letter-spacing: .5px;
-            color: #fff;
-        }
-        .app-name span { color: var(--accent); }
-
-        /* Tabs */
-        .tabs-wrap {
-            padding: 20px 28px 0;
-        }
-        .tabs {
-            display: flex;
-            background: var(--input-bg);
-            padding: 5px;
-            border-radius: 16px;
-            border: 1px solid var(--border);
-            gap: 4px;
-        }
-        .tabs button {
-            flex: 1;
-            padding: 11px;
-            border: none;
-            border-radius: 12px;
-            background: none;
-            color: rgba(167,243,208,.5);
-            font-family: 'Syne', sans-serif;
-            font-weight: 600;
-            font-size: 13px;
-            letter-spacing: .4px;
-            cursor: pointer;
-            transition: all .25s ease;
-        }
-        .tabs button.active {
-            background: var(--accent);
-            color: var(--bg);
-            box-shadow: 0 4px 16px rgba(16,185,129,.35);
+       .submit-btn:active{
+          transform:scale(0.97);
+          box-shadow:0 3px 12px var(--emerald-glow);
         }
 
-        /* Form body */
-        .form-body {
-            padding: 24px 28px 28px;
+        /* LOGIN FORM */
+       .login-header{
+          text-align:center;
+          padding-bottom:24px;
+        }
+       .login-header i{
+          font-size:56px;
+          color:var(--emerald);
+          margin-bottom:12px;
+          filter:drop-shadow(0 0 20px var(--emerald-glow));
+        }
+       .login-header h3{
+          font-family:var(--ff-display);
+          font-size:1.2rem;
+          color:var(--white);
         }
 
-        /* Avatar */
-        .avatar-section {
-            position: relative;
-            width: 88px;
-            height: 88px;
-            margin: 0 auto 26px;
-            cursor: pointer;
+        /* MODAL */
+       .custom-modal{
+          display:none;
+          position:fixed;
+          top:0;left:0;
+          width:100%;height:100%;
+          background:rgba(0,0,0,0.88);
+          backdrop-filter:blur(8px);
+          z-index:1000;
+          justify-content:center;
+          align-items:center;
         }
-        .avatar-ring {
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            border: 2px solid transparent;
-            background: linear-gradient(135deg, var(--accent), transparent) border-box;
-            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: destination-out;
-            mask-composite: exclude;
-            animation: spin 4s linear infinite;
+       .modal-box{
+          background:var(--glass);
+          backdrop-filter:blur(20px);
+          width:85%;
+          max-width:340px;
+          padding:34px 28px;
+          border-radius:24px;
+          border:1px solid var(--border-emerald);
+          text-align:center;
+          animation:popIn 0.4s cubic-bezier(.175,.885,.32,1.275);
+          box-shadow:0 12px 40px rgba(0,0,0,0.6), 0 0 40px var(--emerald-glow);
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        .avatar-section img {
-            width: 88px;
-            height: 88px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid rgba(16,185,129,.3);
-            display: block;
+        @keyframes popIn{from{transform:scale(0.8);opacity:0}to{transform:scale(1);opacity:1}}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+       .modal-box i{
+          font-size:50px;
+          color:var(--emerald);
+          margin-bottom:16px;
+          filter:drop-shadow(0 0 20px var(--emerald-glow));
         }
-        .edit-icon {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            background: var(--accent);
-            color: var(--bg);
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 11px;
-            border: 2px solid #010d08;
-            transition: transform .2s;
+       .modal-box h3{
+          margin:12px 0;
+          font-size:1.15rem;
+          font-family:var(--ff-display);
+          color:var(--white);
         }
-        .avatar-section:hover .edit-icon { transform: scale(1.15); }
-
-        /* Input fields */
-        .input-group {
-            position: relative;
-            margin-bottom: 12px;
+       .modal-box p{
+          color:var(--white-dim);
+          font-size:0.9rem;
+          margin-bottom:24px;
+          line-height:1.6;
         }
-        .input-group i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: rgba(167,243,208,.4);
-            font-size: 14px;
-            pointer-events: none;
+       .modal-close{
+          background:var(--emerald);
+          color:var(--bg);
+          border:none;
+          padding:14px 28px;
+          border-radius:12px;
+          font-weight:700;
+          font-family:var(--ff-display);
+          cursor:pointer;
+          transition:all 0.2s;
         }
-        .input-group input {
-            width: 100%;
-            padding: 14px 15px 14px 40px;
-            border-radius: 14px;
-            border: 1px solid var(--border);
-            background: var(--input-bg);
-            color: #fff;
-            outline: none;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 15px;
-            transition: border-color .2s, box-shadow .2s;
-        }
-        .input-group input::placeholder { color: rgba(167,243,208,.35); }
-        .input-group input:focus {
-            border-color: rgba(16,185,129,.45);
-            box-shadow: 0 0 0 3px rgba(16,185,129,.08);
-        }
-        /* Date input fix */
-        input[type="date"]::-webkit-calendar-picker-indicator {
-            filter: invert(1) opacity(.3);
-            cursor: pointer;
-        }
-
-        /* Terms */
-        .terms-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 6px 0 20px;
-            padding: 12px 14px;
-            background: rgba(16,185,129,.04);
-            border-radius: 12px;
-            border: 1px solid rgba(16,185,129,.08);
-        }
-        .terms-wrapper input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            margin: 0;
-            accent-color: var(--accent);
-            cursor: pointer;
-            flex-shrink: 0;
-        }
-        .terms-text {
-            font-size: 12.5px;
-            color: rgba(167,243,208,.6);
-            line-height: 1.4;
-        }
-        .terms-text a { color: var(--accent); text-decoration: none; }
-
-        /* Submit button */
-        .submit-btn {
-            width: 100%;
-            padding: 16px;
-            border-radius: 16px;
-            border: none;
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: var(--bg);
-            font-family: 'Syne', sans-serif;
-            font-weight: 700;
-            font-size: 15px;
-            letter-spacing: .4px;
-            cursor: pointer;
-            transition: transform .18s, box-shadow .18s;
-            box-shadow: 0 8px 28px rgba(16,185,129,.3);
-            position: relative;
-            overflow: hidden;
-        }
-        .submit-btn::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,.12), transparent);
-            border-radius: inherit;
-        }
-        .submit-btn:hover {
-            box-shadow: 0 12px 36px rgba(16,185,129,.45);
-            transform: translateY(-1px);
-        }
-        .submit-btn:active { transform: scale(.97); }
-
-        /* Login panel */
-        .login-icon-wrap {
-            text-align: center;
-            padding: 6px 0 22px;
-        }
-        .fp-circle {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 14px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 40% 40%, rgba(16,185,129,.2), rgba(4,26,18,.8));
-            border: 1px solid rgba(16,185,129,.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            color: var(--accent);
-            box-shadow: 0 0 30px rgba(16,185,129,.15);
-            animation: pulse 2.5s ease-in-out infinite;
-        }
-        @keyframes pulse {
-            0%,100% { box-shadow: 0 0 20px rgba(16,185,129,.12); }
-            50%      { box-shadow: 0 0 40px rgba(16,185,129,.28); }
-        }
-        .login-icon-wrap h3 {
-            font-family: 'Syne', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 4px;
-        }
-        .login-icon-wrap p {
-            font-size: 12.5px;
-            color: rgba(167,243,208,.5);
-        }
-
-        /* Modal */
-        .custom-modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,.8);
-            backdrop-filter: blur(8px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-box {
-            background: linear-gradient(145deg, #062d1f, #041a12);
-            width: 88%;
-            max-width: 310px;
-            padding: 32px 24px 24px;
-            border-radius: 28px;
-            border: 1px solid rgba(16,185,129,.25);
-            text-align: center;
-            box-shadow: 0 30px 80px rgba(0,0,0,.6), 0 0 40px rgba(16,185,129,.08);
-            animation: popIn .35s cubic-bezier(.175,.885,.32,1.275);
-        }
-        @keyframes popIn {
-            from { transform: scale(.8) translateY(10px); opacity: 0; }
-            to   { transform: scale(1) translateY(0); opacity: 1; }
-        }
-        .modal-icon-wrap {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 16px;
-            border-radius: 50%;
-            background: rgba(16,185,129,.1);
-            border: 1px solid rgba(16,185,129,.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .modal-box i { font-size: 26px; color: var(--accent); }
-        .modal-box h3 {
-            font-family: 'Syne', sans-serif;
-            font-size: 17px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        .modal-box p {
-            color: rgba(167,243,208,.6);
-            font-size: 13px;
-            line-height: 1.5;
-            margin-bottom: 22px;
-        }
-        .modal-close {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: var(--bg);
-            border: none;
-            padding: 13px 32px;
-            border-radius: 12px;
-            font-family: 'Syne', sans-serif;
-            font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
-            box-shadow: 0 6px 20px rgba(16,185,129,.3);
-            transition: transform .15s;
-        }
-        .modal-close:active { transform: scale(.96); }
-
-        .hidden { display: none !important; }
+       .modal-close:active{transform:scale(0.96);}
+       .hidden{display:none}
     </style>
 </head>
 <body>
-    <div class="grid-bg"></div>
-
     <div class="auth-container">
-        <!-- Header -->
-        <div class="card-header">
-            <div class="logo-mark">Ax</div>
-            <div class="app-name">Anx<span>ro</span></div>
+        <div class="tabs">
+            <button id="tabNew" class="active" onclick="switchMode('new')">Register</button>
+            <button id="tabLogin" onclick="switchMode('login')">Sync</button>
         </div>
 
-        <!-- Tabs -->
-        <div class="tabs-wrap">
-            <div class="tabs">
-                <button id="tabNew" class="active" onclick="switchMode('new')">Register</button>
-                <button id="tabLogin" onclick="switchMode('login')">Sync</button>
-            </div>
-        </div>
-
-        <!-- Register Form -->
-        <div class="form-body" id="formNew">
+        <div id="formNew">
             <div class="avatar-section" onclick="document.getElementById('fileIn').click()">
-                <div class="avatar-ring"></div>
-                <img src="https://via.placeholder.com/100?text=+" id="avatarImg" alt="Avatar" width="88" height="88">
+                <img src="https://via.placeholder.com/110?text=Logo" id="avatarImg" alt="Avatar" width="110" height="110">
                 <div class="edit-icon"><i class="fa fa-camera"></i></div>
                 <input type="file" id="fileIn" class="hidden" accept="image/*" onchange="preview(event)">
             </div>
-
-            <div class="input-group">
-                <i class="fa fa-user"></i>
-                <input type="text" id="name" placeholder="Full Name" autocomplete="name">
-            </div>
-            <div class="input-group">
-                <i class="fa fa-calendar"></i>
-                <input type="date" id="dob" autocomplete="bday">
-            </div>
-            <div class="input-group">
-                <i class="fa fa-lock"></i>
-                <input type="number" id="code" placeholder="Create 5-Digit Code" oninput="limit(this)" inputmode="numeric">
-            </div>
-
+            <input type="text" id="name" placeholder="Full Name" autocomplete="name">
+            <input type="date" id="dob" autocomplete="bday">
+            <input type="number" id="code" placeholder="Create 5-Digit Code" oninput="limit(this)" inputmode="numeric">
             <div class="terms-wrapper">
                 <input type="checkbox" id="agreeCheck">
-                <div class="terms-text">I agree to the <a href="#">Terms &amp; Privacy Policy</a></div>
+                <div class="terms-text">Agree to <a href="terms-2.html">Terms & Policy</a></div>
             </div>
-
-            <button class="submit-btn" onclick="onRegister()">
-                <i class="fa fa-arrow-right" style="margin-right:8px"></i>Create Profile
-            </button>
+            <button class="submit-btn" onclick="onRegister()">Create Profile</button>
         </div>
 
-        <!-- Login Form -->
-        <div class="form-body hidden" id="formLogin">
-            <div class="login-icon-wrap">
-                <div class="fp-circle">
-                    <i class="fa fa-fingerprint"></i>
-                </div>
+        <div id="formLogin" class="hidden">
+            <div class="login-header">
+                <i class="fa fa-fingerprint"></i>
                 <h3>Security Sync</h3>
-                <p>Enter your code to access your profile</p>
             </div>
-
-            <div class="input-group">
-                <i class="fa fa-key"></i>
-                <input type="number" id="loginCode" placeholder="Enter 5-Digit Code" oninput="limit(this)" inputmode="numeric">
-            </div>
-
-            <button class="submit-btn" onclick="onLogin()" style="margin-top:8px">
-                <i class="fa fa-shield-halved" style="margin-right:8px"></i>Verify &amp; Open
-            </button>
+            <input type="number" id="loginCode" placeholder="Enter 5-Digit Code" oninput="limit(this)" inputmode="numeric">
+            <button class="submit-btn" onclick="onLogin()">Verify & Open</button>
         </div>
     </div>
 
-    <!-- Modal -->
     <div class="custom-modal" id="alertModal">
         <div class="modal-box">
-            <div class="modal-icon-wrap">
-                <i id="modalIcon" class="fa fa-circle-exclamation"></i>
-            </div>
+            <i id="modalIcon" class="fa fa-circle-exclamation"></i>
             <h3 id="modalTitle">Notice</h3>
             <p id="modalMsg">Please fill in all details.</p>
             <button class="modal-close" onclick="closeModal()">Got it</button>
@@ -530,7 +350,7 @@
                 showAlert("Terms Required","You must agree to the terms to continue.");return;
             }
             localStorage.setItem('userProfile',JSON.stringify({name:n,dob:d,userId:c,avatar:img}));
-            showAlert("Success 🎉","Profile Created! Redirecting...","fa-circle-check");
+            showAlert("Success","Profile Created! Redirecting...","fa-circle-check");
             setTimeout(()=>window.location.href="third.html",1500);
         };
         const onLogin=()=>{
