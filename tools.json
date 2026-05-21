@@ -73,5 +73,10 @@
     "name": "Calculator",
     "link": "calculator.html",
     "image": "calculator.png"
+  },
+{
+    "name": "Paper trading",
+    "link": "paper trading.html",
+    "image": "calculator.png"
   }
 ]
