@@ -7,11 +7,14 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - run: |
-          zip -r app-v${{ github.run_number }}.zip. -x "*.git*" "*.github*" "*.zip"
+      - name: Create zip and version file
+        run: |
+          zip -r app-v${{ github.run_number }}.zip. -x "*.git*" -x "*.github*" -x "*.zip"
           echo '{"version": ${{ github.run_number }}, "zip_url": "https://jithinrajrk147-glitch.github.io/Anxro/app-v${{ github.run_number }}.zip"}' > app-version.json
+      - name: Commit files
+        run: |
           git config user.name github-actions
           git config user.email actions@github.com
-          git add.
-          git commit -m "auto release v${{ github.run_number }}" || true
+          git add app-version.json app-v${{ github.run_number }}.zip
+          git commit -m "auto release v${{ github.run_number }}" || echo "No changes"
           git push
