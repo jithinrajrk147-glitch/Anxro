@@ -406,20 +406,17 @@ async function init() {
   try {
     allTools = await fetch('tools.json').then(r => r.json());
   } catch(e) {
-    // Demo fallback
-    allTools = [
-      {name: "Calendar", image: "https://img.icons8.com/fluency/96/calendar.png", category: "Productivity"},
-      {name: "Calculator", image: "https://img.icons8.com/fluency/96/calculator.png", category: "Utility"},
-      {name: "Notes", image: "https://img.icons8.com/fluency/96/note.png", category: "Productivity"},
-      {name: "QR Generator", image: "https://img.icons8.com/fluency/96/qr-code.png", category: "Utility"}
-    ];
-    console.warn('tools.json not found, using demo tools.');
+    allTools = [];
   }
+
+  // LOAD SITES ADDED FROM BROWSER
+  const anxTools = JSON.parse(localStorage.getItem('anxTools') || '[]');
+  allTools = [...anxTools,...allTools];
+
   buildCategoryTabs();
   renderPinnedBar();
   renderAllTools();
 }
-
 // ── CATEGORY TABS ──
 function buildCategoryTabs() {
   const cats = ['All',...new Set(allTools.map(t => t.category || 'General').filter(Boolean))];
