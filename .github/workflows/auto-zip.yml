@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          zip -r app-v${{ github.run_number }}.zip. -x "*.git*" "*.github*"
+          zip -r app-v${{ github.run_number }}.zip. -x "*.git*" "*.github*" "*.zip"
           echo '{"version": ${{ github.run_number }}, "zip_url": "https://jithinrajrk147-glitch.github.io/Anxro/app-v${{ github.run_number }}.zip"}' > app-version.json
           git config user.name github-actions
           git config user.email actions@github.com
