@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nexus Home</title>
+    <style>
+    #search-results { display: none !important; }
+
+        :root {
+            --bg: #0b0b0b;
+            --surface: #1a1a1a;
+            --accent: #00ff88;
+            --accent-light: rgba(0, 255, 136, 0.1);
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-dim: #999;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+        body {
+            background-color: var(--bg);
+            background-image: radial-gradient(circle at 50% 20%, #1a2c26 0%, #0b0b0b 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* 1. TOP NAV BAR */
+        .top-nav {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+
+        /* 2. CENTER LOGO */
+        .logo-area {
+            margin-top: 50px;
+            font-size: 52px;
+            font-weight: 800;
+            letter-spacing: -2px;
+            background: linear-gradient(to bottom, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            z-index: 5;
+        }/* NEWS FEED */
+.news-container {
+    margin-top: 25px;
+    margin-bottom: 30px;
+    width: 92%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.news-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(.175,.885,.32,1.275);
+    text-decoration: none;
+    color: #202124;
+    display: block;
+}
+
+.news-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 255, 136, 0.15);
+}
+
+.news-thumb {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    background: #f0f0f0;
+}
+
+.news-content {
+    padding: 16px 18px 18px 18px;
+}
+
+.news-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+.news-desc {
+    font-size: 13px;
+    color: #5f6368;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+        /* 3. SEARCH BAR */
+        .search-wrapper {
+            width: 90%;
+            max-width: 500px;
+            margin-top: 35px;
+            position: relative;
+            z-index: 20;
+        }
+
+        .search-bar {
+            width: 100%;
+            background: #dce5dd;
+            border: none;
+            border-radius: 40px;
+            padding: 18px 60px;
+            color: #1a1a1a;
+            font-size: 16px;
+            outline: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .search-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            z-index: 21;
+            cursor: pointer;
+        }
+
+        .icon-left { left: 15px; }
+        .icon-right { right: 20px; } 
+
+        /* DROPDOWN SUGGESTIONS */
+        #search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border-radius: 20px;
+            margin-top: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: none;
+            z-index: 1000;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        #search-suggestions.visible {
+            display: block;
+        }
+
+        .suggestion-item {
+            padding: 14px 25px;
+            color: #1a1a1a;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+            font-weight: 500;
+        }
+
+        .suggestion-item:hover, .suggestion-item.selected {
+            background: #f0f0f0;
+        }
+
+        /* 4. ACTION ROW */
+        .action-row {
+            margin-top: 15px;
+            width: 90%;
+            max-width: 500px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .ai-btn-small {
+            background: #dce5dd;
+            padding: 12px 25px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            color: #1a1a1a;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .ai-btn-small:hover {
+            background: #d0dace;
+        }
+
+        /* 
+
+        /* 6. TOOLS SECTION */
+        .tools-container {
+            margin-top: 15px;
+            margin-bottom: 30px;
+            width: 92%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 28px;
+            padding: 25px;
+            color: #202124;
+        }
+
+        .tools-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .tool-card {
+            background: #f5f5f5;
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: #202124;
+        }
+
+        .tool-card:hover {
+            background: #efefef;
+            transform: translateY(-3px);
+        }
+
+        .tool-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .tool-name {
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .loading {
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="tab-count-box" id="tab-count-box" title=></div>
+    </div>
+
+    <div class="logo-area">ANXRO</div>
+
+    <div class="search-wrapper">
+        <img src="m.png" class="search-icon icon-left" alt="Earth" onclick="location.href='earth.html'">
+        
+        <input type="text" class="search-bar" id="search-input" placeholder="Search with Anxro..." autocomplete="off">
+        
+        <img src="n.png" class="search-icon icon-right" alt="Voice" onclick="startVoice()">
+        
+        <div id="search-suggestions"></div>
+    </div>
+
+    <div id="search-results"></div>
+
+    <div class="action-row">
+        <button class="ai-btn-small" onclick="location.href='ai.html'">
+            <span style="font-size: 18px;">✨</span> AI Mode
+        </button>
+    </div>
+
+    <div class="news-container" id="news-container">
+    <div class="loading">Loading news...</div>
+</div>
+    </divloadMainJSON
+    
+<script src="search.js"></script>
+
+    <script>
+        // Load data from main.json
+       async function loadMainJSON() {
+    try {
+        const response = await fetch('main.json');
+        const data = await response.json();
+        
+        // Load news instead of tools/shortcuts
+        loadNews(data.news || []);
+        
+        updateTabCount();
+    } catch (error) {
+        console.error('Error loading main.json:', error);
+        document.getElementById('news-container').innerHTML = '<div class="loading">Failed to load news</div>';
+    }
+}
+
+        function loadShortcuts(shortcuts) {
+            const container = document.getElementById('shortcuts-container');
+            container.innerHTML = '';
+
+            shortcuts.forEach(shortcut => {
+                const link = document.createElement('a');
+                link.href = shortcut.link;
+                link.target = '_blank';
+                link.className = 'shortcut-item';
+                link.onclick = () => addTab(shortcut.title, shortcut.link);
+                
+                link.innerHTML = `
+                    <div class="shortcut-icon">${shortcut.icon || '📌'}</div>
+                    <span class="shortcut-label">${shortcut.title}</span>
+                `;
+                
+                container.appendChild(link);
+            });
+        }
+
+       function loadNews(news) {
+    const container = document.getElementById('news-container');
+    container.innerHTML = '';
+
+    news.forEach(item => {
+        const card = document.createElement('a');
+        card.href = item.link;
+        card.target = '_blank';
+        card.className = 'news-card';
+        card.onclick = () => addTab(item.title, item.link);
+        
+        card.innerHTML = `
+            <img src="${item.image}" class="news-thumb" alt="${item.title}" loading="lazy">
+            <div class="news-content">
+                <div class="news-title">${item.title}</div>
+                <div class="news-desc">${item.description}</div>
+            </div>
+        `;
+        
+        container.appendChild(card);
+    });
+}
+
+        function addTab(title, url) {
+            let tabs = JSON.parse(localStorage.getItem('nexusTabs')) || [];
+            
+            // Check if tab already exists
+            if (!tabs.find(t => t.url === url)) {
+                tabs.push({
+                    id: Date.now(),
+                    title: title,
+                    url: url,
+                    timestamp: new Date().toISOString()
+                });
+                localStorage.setItem('nexusTabs', JSON.stringify(tabs));
+            }
+            
+            updateTabCount();
+        }
+
+        function updateTabCount() {
+            const tabs = JSON.parse(localStorage.getItem('nexusTabs')) || [];
+            document.getElementById('tab-count-box').textContent = tabs.length;
+        }
+
+        // Tab count box click - navigate to tabs.html
+        document.getElementById('tab-count-box').addEventListener('click', () => {
+            window.location.href = 'tabs.html';
+        });
+
+        // Load search engine
+        document.addEventListener('DOMContentLoaded', () => {
+            loadMainJSON();
+
+            window.searchEngine = new SearchEngine({
+                inputSelector: '#search-input',
+                suggestionsSelector: '#search-suggestions',
+                resultsSelector: '#search-results'
+            });
+
+            const originalSelect = window.searchEngine.selectSuggestion.bind(window.searchEngine);
+            window.searchEngine.selectSuggestion = function(text) {
+                sessionStorage.setItem('searchQuery', text);
+                window.location.href = 'load.html';
+            };
+
+            const input = document.getElementById('search-input');
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && window.searchEngine.currentSuggestionIndex === -1) {
+                    const query = input.value.trim();
+                    if (query) {
+                        sessionStorage.setItem('searchQuery', query);
+                        window.location.href = 'load.html';
+                    }
+                }
+            });
+        });
+
+        function startVoice() {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                document.getElementById('search-input').value = transcript;
+                window.searchEngine.selectSuggestion(transcript);
+            };
+            recognition.start();
+        }
+    </script><style>
+/* ANXRO VOICE V2 - PIXEL STYLE */
+.anxro-v-overlay {
+    position: fixed; inset: 0;
+    width: 100%; height: 100%;
+    background: #0b0b0b;
+    z-index: 99999;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 20px 60px 20px;
+}
+
+.anxro-v-overlay.active {
+    display: flex;
+    animation: anxroFade 0.25s ease;
+}
+
+.anxro-v-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.anxro-v-title {
+    color: #8ab4f8;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.anxro-v-close {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: #1f1f1f;
+    border: none;
+    color: #e8eaed;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center; justify-content: center;
+}
+
+.anxro-v-transcript {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 700px;
+    padding: 20px;
+}
+
+.anxro-v-text {
+    color: #e8eaed;
+    font-size: 32px;
+    font-weight: 400;
+    text-align: center;
+    line-height: 1.3;
+    min-height: 40px;
+    word-wrap: break-word;
+}
+
+.anxro-v-text.interim { color: #9aa0a6; }
+
+.anxro-v-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.anxro-v-status {
+    color: #9aa0a6;
+    font-size: 16px;
+    height: 20px;
+}
+
+.anxro-v-mic-wrap {
+    position: relative;
+    width: 80px; height: 80px;
+    display: flex; align-items: center; justify-content: center;
+}
+
+.anxro-v-mic {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: #8ab4f8;
+    border: none;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 3;
+    transition: transform 0.2s;
+}
+
+.anxro-v-mic:active { transform: scale(0.92); }
+
+.anxro-v-mic svg {
+    width: 32px; height: 32px;
+    fill: #202124;
+}
+
+.anxro-v-waves {
+    position: absolute;
+    width: 100%; height: 100%;
+    display: none;
+}
+
+.anxro-v-waves.active { display: block; }
+
+.anxro-v-wave {
+    position: absolute;
+    inset: 0;
+    border: 3px solid #8ab4f8;
+    border-radius: 50%;
+    opacity: 0;
+    animation: anxroWave 2s infinite;
+}
+
+.anxro-v-wave:nth-child(2) { animation-delay: 0.5s; }
+.anxro-v-wave:nth-child(3) { animation-delay: 1s; }
+
+@keyframes anxroFade { from{opacity:0} to{opacity:1} }
+@keyframes anxroWave {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(2.2); opacity: 0; }
+}
+</style>
+
+<!-- POPUP HTML -->
+<div class="anxro-v-overlay" id="anxroVPopup">
+    <div class="anxro-v-header">
+        <div class="anxro-v-title">Anxro Voice</div>
+        <button class="anxro-v-close" onclick="anxroCloseVoice()">✕</button>
+    </div>
+
+    <div class="anxro-v-transcript">
+        <div class="anxro-v-text" id="anxroVText"></div>
+    </div>
+
+    <div class="anxro-v-footer">
+        <div class="anxro-v-status" id="anxroVStatus">Tap mic to start</div>
+        <div class="anxro-v-mic-wrap">
+            <div class="anxro-v-waves" id="anxroVWaves">
+                <div class="anxro-v-wave"></div>
+                <div class="anxro-v-wave"></div>
+                <div class="anxro-v-wave"></div>
+            </div>
+            <button class="anxro-v-mic" id="anxroVMicBtn">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0.55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ANXRO VOICE V2 - FIXED STT
+let anxroRec = null;
+let anxroFinalText = '';
+let anxroIsListening = false;
+
+function anxroGetRecognition() {
+    // Better compatibility check for APK WebView
+    return window.SpeechRecognition ||
+           window.webkitSpeechRecognition ||
+           window.mozSpeechRecognition ||
+           window.msSpeechRecognition;
+}
+
+async function startVoice() {
+    const popup = document.getElementById('anxroVPopup');
+    const textEl = document.getElementById('anxroVText');
+    const statusEl = document.getElementById('anxroVStatus');
+    const waves = document.getElementById('anxroVWaves');
+
+    // 1. Open UI first
+    popup.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    textEl.innerHTML = '';
+    statusEl.textContent = 'Initializing...';
+    anxroFinalText = '';
+
+    // 2. Check STT support
+    const SR = anxroGetRecognition();
+    if (!SR) {
+        statusEl.textContent = 'Voice not supported on this device';
+        textEl.innerHTML = 'Update Android System WebView or use Chrome';
+        return;
+    }
+
+    try {
+        // 3. Get mic - this triggers Android permission popup in APK
+        statusEl.textContent = 'Waiting for microphone...';
+        await navigator.mediaDevices.getUserMedia({ audio: true });
+
+        // 4. Setup recognition
+        anxroRec = new SR();
+        anxroRec.continuous = true; // Keep listening until pause
+        anxroRec.interimResults = true;
+        anxroRec.lang = 'en-US';
+        anxroRec.maxAlternatives = 1;
+
+        anxroRec.onstart = () => {
+            anxroIsListening = true;
+            waves.classList.add('active');
+            statusEl.textContent = 'Listening...';
+            textEl.innerHTML = '';
+        };
+
+        anxroRec.onresult = (event) => {
+            let interim = '';
+
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+                const transcript = event.results[i][0].transcript;
+                if (event.results[i].isFinal) {
+                    anxroFinalText += transcript + ' ';
+                } else {
+                    interim += transcript;
+                }
+            }
+
+            // Update UI with live text
+            textEl.innerHTML = anxroFinalText + '<span class="interim">' + interim + '</span>';
+
+            // Auto-submit after 1.2s of silence
+            if (anxroFinalText.trim()) {
+                clearTimeout(window.anxroSubmitTimer);
+                window.anxroSubmitTimer = setTimeout(() => {
+                    anxroSubmitVoice();
+                }, 1200);
+            }
+        };
+
+        anxroRec.onerror = (event) => {
+            waves.classList.remove('active');
+            anxroIsListening = false;
+
+            if (event.error === 'not-allowed' || event.error === 'permission-denied') {
+                statusEl.textContent = 'Microphone blocked';
+                textEl.innerHTML = 'Enable in Settings > Apps > Anxro > Permissions > Microphone';
+            } else if (event.error === 'no-speech') {
+                statusEl.textContent = 'Didn\'t hear anything';
+                textEl.innerHTML = 'Tap mic to try again';
+            } else if (event.error === 'network') {
+                statusEl.textContent = 'Network error';
+                textEl.innerHTML = 'Check internet connection';
+            } else {
+                statusEl.textContent = 'Error occurred';
+                textEl.innerHTML = 'Tap mic to retry';
+            }
+        };
+
+        anxroRec.onend = () => {
+            waves.classList.remove('active');
+            anxroIsListening = false;
+            if (!anxroFinalText.trim()) {
+                statusEl.textContent = 'Tap mic to start';
+            }
+        };
+
+        // 5. Start
+        anxroRec.start();
+
+    } catch (err) {
+        waves.classList.remove('active');
+        if (err.name === 'NotAllowedError') {
+            statusEl.textContent = 'Permission denied';
+            textEl.innerHTML = 'Enable microphone in Settings > Apps > Anxro > Permissions';
+        } else if (err.name === 'NotFoundError') {
+            statusEl.textContent = 'No microphone';
+            textEl.innerHTML = 'No microphone detected on device';
+        } else {
+            statusEl.textContent = 'Cannot access microphone';
+            textEl.innerHTML = err.message;
+        }
+    }
+}
+
+function anxroSubmitVoice() {
+    if (anxroFinalText.trim()) {
+        sessionStorage.setItem('searchQuery', anxroFinalText.trim());
+        anxroCloseVoice();
+        window.location.href = 'load.html';
+    }
+}
+
+function anxroCloseVoice() {
+    const popup = document.getElementById('anxroVPopup');
+    const waves = document.getElementById('anxroVWaves');
+
+    if (anxroRec) {
+        anxroRec.stop();
+        anxroRec = null;
+    }
+
+    clearTimeout(window.anxroSubmitTimer);
+    popup.classList.remove('active');
+    document.body.style.overflow = '';
+    waves.classList.remove('active');
+    anxroIsListening = false;
+    anxroFinalText = '';
+}
+
+// Mic button tap to restart
+document.getElementById('anxroVMicBtn').onclick = () => {
+    if (anxroIsListening && anxroRec) {
+        anxroRec.stop();
+    } else if (anxroRec) {
+        anxroFinalText = '';
+        document.getElementById('anxroVText').innerHTML = '';
+        anxroRec.start();
+    } else {
+        startVoice();
+    }
+};
+
+// ESC or back button to close
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') anxroCloseVoice();
+});
+</script><style>
+/* SIMPLE VOICE POPUP */
+.anxro-simple-voice {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.9);
+    z-index: 99999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+}
+
+.anxro-simple-voice.active { display: flex; }
+
+.anxro-simple-box {
+    background: #1a1a1a;
+    border: 1px solid rgba(0,255,136,0.2);
+    border-radius: 28px;
+    padding: 40px 30px;
+    width: 90%;
+    max-width: 320px;
+    text-align: center;
+    position: relative;
+}
+
+.anxro-simple-close {
+    position: absolute; top: 12px; right: 12px;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: #fff; font-size: 18px;
+    cursor: pointer;
+}
+
+.anxro-simple-title {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.anxro-simple-status {
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 30px;
+    min-height: 20px;
+}
+
+.anxro-simple-mic {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: none;
+    margin: 0 auto;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.anxro-simple-mic.listening {
+    animation: anxroPulseMic 1.2s infinite;
+}
+
+.anxro-simple-mic svg {
+    width: 36px; height: 36px;
+    fill: #0b0b0b;
+}
+
+@keyframes anxroPulseMic {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0,255,136,0.7); }
+    50% { box-shadow: 0 0 0 20px rgba(0,255,136,0); }
+}
+</style>
+
+<!-- POPUP HTML - Add before </body> -->
+<div class="anxro-simple-voice" id="simpleVoicePopup">
+    <div class="anxro-simple-box">
+        <button class="anxro-simple-close" onclick="closeSimpleVoice()">✕</button>
+        <div class="anxro-simple-title">Voice Search</div>
+        <div class="anxro-simple-status" id="simpleVoiceStatus">Tap mic to speak</div>
+        <button class="anxro-simple-mic" id="simpleMicBtn">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0.55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z"/>
+            </svg>
+        </button>
+    </div>
+</div>
+
+<script>
+// SIMPLE VOICE - YOUR WORKING CODE IN POPUP
+let simpleVoiceActive = false;
+let simpleRecognition = null;
+
+async function startVoice() {
+    const popup = document.getElementById('simpleVoicePopup');
+    const micBtn = document.getElementById('simpleMicBtn');
+    const statusEl = document.getElementById('simpleVoiceStatus');
+    const searchInput = document.getElementById('search-input');
+
+    // Open popup
+    popup.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    statusEl.textContent = 'Starting...';
+
+    try {
+        // 1. Ask for mic permission - works in web + APK if RECORD_AUDIO is in manifest
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        stream.getTracks().forEach(track => track.stop());
+
+        // 2. Start voice recognition - YOUR WORKING CODE
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            statusEl.textContent = 'Voice not supported. Update WebView';
+            return;
+        }
+
+        simpleRecognition = new SpeechRecognition();
+        simpleRecognition.lang = 'en-US';
+        simpleRecognition.continuous = false;
+
+        simpleRecognition.onstart = () => {
+            simpleVoiceActive = true;
+            micBtn.classList.add('listening');
+            statusEl.textContent = 'Listening...';
+        };
+
+        simpleRecognition.onresult = (e) => {
+            const text = e.results[0][0].transcript;
+            searchInput.value = text;
+            statusEl.textContent = 'Got it!';
+            setTimeout(() => {
+                sessionStorage.setItem('searchQuery', text);
+                closeSimpleVoice();
+                window.location.href = 'load.html';
+            }, 600);
+        };
+
+        simpleRecognition.onerror = (e) => {
+            micBtn.classList.remove('listening');
+            simpleVoiceActive = false;
+            if (e.error === 'not-allowed') {
+                statusEl.textContent = 'Mic blocked';
+            } else if (e.error === 'no-speech') {
+                statusEl.textContent = 'Did not hear anything';
+            } else {
+                statusEl.textContent = 'Error. Tap mic to retry';
+            }
+        };
+
+        simpleRecognition.onend = () => {
+            simpleVoiceActive = false;
+            micBtn.classList.remove('listening');
+            if (statusEl.textContent === 'Listening...') {
+                statusEl.textContent = 'Tap mic to speak';
+            }
+        };
+
+        simpleRecognition.start();
+
+    } catch (err) {
+        micBtn.classList.remove('listening');
+        if (err.name === 'NotAllowedError') {
+            statusEl.textContent = 'Mic permission denied';
+        } else {
+            statusEl.textContent = 'No microphone found';
+        }
+    }
+}
+
+function closeSimpleVoice() {
+    const popup = document.getElementById('simpleVoicePopup');
+    const micBtn = document.getElementById('simpleMicBtn');
+    const statusEl = document.getElementById('simpleVoiceStatus');
+
+    if (simpleRecognition) {
+        simpleRecognition.stop();
+        simpleRecognition = null;
+    }
+
+    popup.classList.remove('active');
+    document.body.style.overflow = '';
+    micBtn.classList.remove('listening');
+    simpleVoiceActive = false;
+    statusEl.textContent = 'Tap mic to speak';
+}
+
+// Mic button in popup to restart
+document.getElementById('simpleMicBtn').onclick = () => {
+    if (simpleVoiceActive && simpleRecognition) {
+        simpleRecognition.stop();
+    } else {
+        if (simpleRecognition) simpleRecognition = null;
+        startVoice();
+    }
+};
+
+// Auto-ask permission on APK first launch - YOUR CODE
+document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('anxro_mic_asked') === 'true') return;
+    navigator.mediaDevices.getUserMedia({ audio: true })
+      .then(stream => {
+            stream.getTracks().forEach(track => track.stop());
+            localStorage.setItem('anxro_mic_asked', 'true');
+        })
+      .catch(() => {
+            localStorage.setItem('anxro_mic_asked', 'true');
+        });
+});
+</script>
+</body>
+</html> 
