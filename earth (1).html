@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>3D Earth - Multi JSON + 60FPS</title>
+  <script src="https://cdn.jsdelivr.net/npm/cesium@1.117.0/Build/Cesium/Cesium.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/cesium@1.117.0/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+  <style>
+    html, body, #cesiumContainer { 
+      width: 100%; height: 100%; margin: 0; overflow: hidden; background: #000; font-family: 'DM Sans', -apple-system, sans-serif;
+    }
+    
+    /* PREMIUM LOADING */
+    #loading {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      color: #ecfdf5; z-index: 10;
+      background: rgba(1,13,8,0.92); 
+      padding: 24px 32px; 
+      border-radius: 16px;
+      border: 1px solid rgba(16,185,129,0.2);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+      text-align: center;
+      backdrop-filter: blur(12px);
+    }
+    .loader-ring {
+      width: 48px; height: 48px;
+      margin: 0 auto 16px;
+      border: 3px solid rgba(16,185,129,0.15);
+      border-top-color: #10b981;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #loadingText {
+      font-size: 14px; 
+      font-weight: 600; 
+      letter-spacing: 0.3px;
+      color: #6ee7b7;
+    }
+    #loadingSub {
+      font-size: 11px; 
+      color: #34795a; 
+      margin-top: 6px;
+    }
+
+    #info {
+      position: absolute; top: 10px; left: 10px; z-index: 1; color: #fff;
+      background: rgba(0,0,0,0.6); padding: 6px 10px; border-radius: 4px; font-size: 14px;
+    }
+
+    /* PREMIUM CENTERED POPUP */
+    #slidePanel {
+      position: fixed; 
+      top: 50%; left: 50%; 
+      transform: translate(-50%, -50%) scale(0.9);
+      width: 92%; max-width: 400px; 
+      background: #010d08; 
+      color: #ecfdf5; 
+      z-index: 100; 
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.35s cubic-bezier(0.2,0.8,0.2,1);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.9), 0 0 0 1px rgba(16,185,129,0.2);
+      overflow: hidden;
+      border-radius: 20px;
+      backdrop-filter: blur(24px);
+    }
+    #slidePanel.open { 
+      opacity: 1;
+      pointer-events: all;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    
+    #slidePanel .closeBtn {
+      position: absolute;
+      top: 14px; right: 14px;
+      width: 32px; height: 32px;
+      background: rgba(16,185,129,0.1); 
+      border: 1px solid rgba(16,185,129,0.2); 
+      color: #10b981; 
+      border-radius: 10px; 
+      cursor: pointer; 
+      font-size: 18px;
+      font-weight: 600;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+    #slidePanel .closeBtn:hover { 
+      background: rgba(16,185,129,0.2);
+      transform: scale(0.94);
+    }
+    
+    #slidePanel .content { 
+      padding: 0; 
+    }
+    
+    /* WEBSITE PREVIEW - HERO IMAGE */
+    .site-hero {
+      width: 100%;
+      position: relative;
+      background: linear-gradient(135deg, #064e3b 0%, #059669 100%);
+    }
+    .site-hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+    }
+    .site-hero-fallback {
+      width: 100%;
+      aspect-ratio: 16/10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 64px;
+      background: linear-gradient(135deg, #064e3b 0%, #059669 100%);
+    }
+    .site-hero-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 24px 20px 16px;
+      background: linear-gradient(to top, rgba(1,13,8,0.95) 0%, transparent 100%);
+    }
+    .site-hero-overlay h2 {
+      margin: 0;
+      font-size: 20px; 
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #ecfdf5;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+    
+    .site-body {
+      padding: 20px;
+    }
+    
+    .site-description {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #6ee7b7;
+      margin-bottom: 20px;
+      padding: 16px;
+      background: rgba(16,185,129,0.06);
+      border-radius: 12px;
+      border: 1px solid rgba(16,185,129,0.12);
+    }
+    
+    .site-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .meta-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 6px 12px;
+      background: rgba(16,185,129,0.08);
+      border: 1px solid rgba(16,185,129,0.2);
+      border-radius: 8px;
+      color: #10b981;
+    }
+    
+    #slidePanel a.visit {
+      display: block; 
+      padding: 14px 16px; 
+      background: #10b981;
+      color: #010d08; 
+      text-decoration: none; 
+      border-radius: 14px; 
+      font-size: 15px;
+      font-weight: 700;
+      text-align: center;
+      transition: all 0.15s;
+      box-shadow: 0 4px 16px rgba(16,185,129,0.3);
+    }
+    #slidePanel a.visit:active { 
+      background: #059669;
+      transform: scale(0.97);
+    }
+  </style>
+</head>
+<body>
+  <div id="loading">
+    <div class="loader-ring"></div>
+    <div id="loadingText">Loading Earth</div>
+    <div id="loadingSub">Initializing...</div>
+  </div>
+  <div id="info">Scroll = zoom | Click dot for details</div>
+  <div id="cesiumContainer"></div>
+
+  <div id="slidePanel">
+    <button class="closeBtn" onclick="closePanel()">×</button>
+    <div class="content" id="panelContent"></div>
+  </div>
+
+  <script type="module">
+    window.CESIUM_BASE_URL = 'https://cdn.jsdelivr.net/npm/cesium@1.117.0/Build/Cesium/';
+
+    const viewer = new Cesium.Viewer('cesiumContainer', {
+      imageryProvider: false,
+      terrainProvider: new Cesium.EllipsoidTerrainProvider(),
+      baseLayerPicker: false, geocoder: false, homeButton: false,
+      sceneModePicker: false, navigationHelpButton: false, animation: false,
+      timeline: false, fullscreenButton: false, creditContainer: document.createElement('div'),
+      requestRenderMode: false,
+      maximumRenderTimeChange: 16,
+      targetFrameRate: 60
+    });
+
+    const satellite = new Cesium.UrlTemplateImageryProvider({
+      url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      credit: 'Esri, Maxar, Earthstar Geographics',
+      maximumLevel: 20
+    });
+    viewer.imageryLayers.addImageryProvider(satellite);
+
+    const labels = new Cesium.UrlTemplateImageryProvider({
+      url: 'https://a.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}.png',
+      credit: 'CARTO',
+      maximumLevel: 20
+    });
+    viewer.imageryLayers.addImageryProvider(labels);
+
+    const loadingEl = document.getElementById('loading');
+    const loadingText = document.getElementById('loadingText');
+    const loadingSub = document.getElementById('loadingSub');
+
+    const billboardCollection = viewer.scene.primitives.add(new Cesium.BillboardCollection());
+    const labelCollection = viewer.scene.primitives.add(new Cesium.LabelCollection());
+
+    const dotCanvas = document.createElement('canvas');
+    dotCanvas.width = 32; dotCanvas.height = 32;
+    const ctx = dotCanvas.getContext('2d');
+    ctx.beginPath(); ctx.arc(16, 16, 12, 0, 2 * Math.PI); ctx.fillStyle = 'white'; ctx.fill();
+    ctx.strokeStyle = 'white'; ctx.lineWidth = 4; ctx.stroke();
+    const dotImage = dotCanvas.toDataURL();
+
+    async function loadAllDots() {
+  let index = 1;
+  let allMarkers = [];
+  loadingText.textContent = 'Loading markers...';
+
+  // Clear old billboards if reloading
+  billboardCollection.removeAll();
+  labelCollection.removeAll();
+
+  while (true) {
+    try {
+      const fileName = `search${index}.json`;
+      // Add timestamp to bust cache
+      const res = await fetch(fileName + '?t=' + Date.now(), {
+        cache: 'no-cache'
+      });
+      if (!res.ok) break;
+      const data = await res.json();
+      allMarkers = allMarkers.concat(data);
+      loadingSub.textContent = `${allMarkers.length} locations found`;
+      index++;
+    } catch (e) {
+      break;
+    }
+  }
+
+  if (allMarkers.length === 0) {
+    loadingText.textContent = 'No dots.json found';
+    loadingSub.textContent = 'Check your files';
+    setTimeout(() => loadingEl.remove(), 2000);
+    return;
+  }
+
+  allMarkers.forEach(m => {
+    const lat = m.location?.lat || m.lat;
+    const lng = m.location?.lng || m.lng;
+    const title = m.title || m.name;
+    
+    if (lat === undefined || lng === undefined) return;
+    
+    const position = Cesium.Cartesian3.fromDegrees(lng, lat);
+    
+    billboardCollection.add({
+      position: Cesium.Cartesian3.fromDegrees(lng, lat, 0),
+      image: dotImage,
+      color: Cesium.Color.fromCssColorString(m.color || "#FF3333"),
+      scale: 0.5,
+      verticalOrigin: Cesium.VerticalOrigin.CENTER,
+      id: m
+    });
+
+    labelCollection.add({
+      position: position,
+      text: title,
+      font: '11px sans-serif',
+      fillColor: Cesium.Color.WHITE,
+      outlineColor: Cesium.Color.BLACK,
+      outlineWidth: 3,
+      style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+      pixelOffset: new Cesium.Cartesian2(0, -18),
+      scaleByDistance: new Cesium.NearFarScalar(1.0e5, 1.0, 1.0e7, 0.0),
+      translucencyByDistance: new Cesium.NearFarScalar(1.0e5, 1.0, 1.0e7, 0.0)
+    });
+  });
+
+  loadingText.textContent = 'Ready';
+  loadingSub.textContent = `${allMarkers.length} dots loaded`;
+  setTimeout(() => loadingEl.style.opacity = '0', 800);
+  setTimeout(() => loadingEl.remove(), 1200);
+}
+
+    loadAllDots();
+
+    viewer.scene.preRender.addEventListener(() => {
+      const cameraHeight = viewer.camera.positionCartographic.height;
+      let scale;
+      
+      if (cameraHeight < 500000) {
+        scale = 0.5;
+      } else if (cameraHeight < 3000000) {
+        const t = (cameraHeight - 500000) / 2500000;
+        scale = 0.5 - t * 0.3;
+      } else {
+        const t = Math.min((cameraHeight - 3000000) / 15000000, 1.0);
+        scale = 0.2 * (1.0 - t);
+      }
+
+      const len = billboardCollection.length;
+      for (let i = 0; i < len; i++) {
+        billboardCollection.get(i).scale = scale;
+      }
+    });
+
+    window.closePanel = () => {
+      document.getElementById('slidePanel').classList.remove('open');
+    };
+
+    // FIXED: USE SESSIONSTORAGE FOR RESULT.HTML
+    window.loadWebsiteInFrame = (url) => {
+      sessionStorage.setItem('searchQuery', url);
+      window.location.href = 'result.html';
+    };
+
+    function openPanel(data) {
+      const title = data.title || data.name;
+      let html = '';
+      
+      if (data.image || data.thumbnail) {
+        html += `<div class="site-hero"><img src="${data.image || data.thumbnail}" alt="${title}" onerror="this.parentElement.innerHTML='<div class=site-hero-fallback>🌐</div>'"><div class="site-hero-overlay"><h2>${title}</h2></div></div>`;
+      } else {
+        html += `<div class="site-hero"><div class="site-hero-fallback">🌐</div><div class="site-hero-overlay"><h2>${title}</h2></div></div>`;
+      }
+      
+      html += '<div class="site-body">';
+      
+      if (data.description) {
+        html += `<div class="site-description">${data.description}</div>`;
+      }
+      
+      const badges = [];
+      if (data.category) badges.push(data.category);
+      if (data.popularity) badges.push(`🔥 ${data.popularity}%`);
+      if (badges.length > 0) {
+        html += `<div class="site-meta">${badges.map(b => `<span class="meta-badge">${b}</span>`).join('')}</div>`;
+      }
+      
+      if (data.url) {
+        html += `<a href="#" onclick="loadWebsiteInFrame('${data.url}'); return false;" class="visit">Open in Browser →</a>`;
+      }
+      
+      html += '</div>';
+      document.getElementById('panelContent').innerHTML = html;
+      document.getElementById('slidePanel').classList.add('open');
+    }
+
+    viewer.screenSpaceEventHandler.setInputAction((click) => {
+      const picked = viewer.scene.pick(click.position);
+      if (Cesium.defined(picked) && picked.id) {
+        openPanel(picked.id);
+      } else {
+        closePanel();
+      }
+    }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+
+    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 100;
+    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 20000000;
+    viewer.scene.screenSpaceCameraController.inertiaSpin = 0.95;
+    viewer.scene.screenSpaceCameraController.inertiaZoom = 0.85;
+    viewer.scene.screenSpaceCameraController.inertiaTranslate = 0.92;
+    
+    viewer.scene.globe.maximumScreenSpaceError = 4;
+    viewer.scene.globe.tileCacheSize = 2000;
+    viewer.scene.globe.enableLighting = true;
+    viewer.scene.skyAtmosphere.show = true;
+
+    viewer.camera.setView({
+      destination: Cesium.Cartesian3.fromDegrees(-98.5795, 39.8283, 15000000)
+    });
+  </script>
+</body>
+</html>
