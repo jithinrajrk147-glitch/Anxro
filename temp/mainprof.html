@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Anxro | Authentication</title>
+
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <script>if(localStorage.getItem('userProfile'))window.location.replace('third.html');</script>
+
+    <style>
+        :root{
+          --bg: #020a07;
+          --bg2: #051410;
+          --surface: #0a1f17;
+          --surface2: #0f2a1f;
+          --emerald: #10b981;
+          --emerald-light: #34d399;
+          --emerald-dim: rgba(16,185,129,0.12);
+          --emerald-glow: rgba(16,185,129,0.3);
+          --white: #f8fafc;
+          --white-dim: #cbd5e1;
+          --white-muted: #94a3b8;
+          --border: rgba(255,255,255,0.06);
+          --border-emerald: rgba(16,185,129,0.25);
+          --glass: rgba(10,31,23,0.7);
+          --input-bg: #041a12;
+          --ff-display: 'Sora', sans-serif;
+          --ff-body: 'Outfit', sans-serif;
+          --ff-mono: 'JetBrains Mono', monospace;
+        }
+        *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+        html{scroll-behavior:smooth;}
+        body{
+          font-family:var(--ff-body);
+          background:var(--bg);
+          color:var(--white);
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          min-height:100vh;
+          padding:20px 0;
+          background-image:
+            radial-gradient(ellipse 80% 50% at 10% -10%,rgba(16,185,129,0.08) 0%,transparent 60%),
+            radial-gradient(ellipse 60% 40% at 90% 110%,rgba(5,150,105,0.06) 0%,transparent 60%),
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M0 40h80M40 0v80' stroke='rgba(255,255,255,0.015)' stroke-width='1'/%3E%3C/svg%3E");
+        }
+
+        /* AUTH CONTAINER */
+       .auth-container{
+          width:90%;
+          max-width:400px;
+          background:var(--glass);
+          backdrop-filter:blur(20px) saturate(180%);
+          border-radius:28px;
+          padding:38px 28px;
+          border:1px solid var(--border-emerald);
+          box-shadow:0 8px 32px rgba(0,0,0,0.5), 0 0 40px var(--emerald-glow);
+          position:relative;
+          animation:fadeUp 0.6s ease both;
+        }
+       .auth-container::before{
+          content:'';
+          position:absolute;
+          top:0;left:0;right:0;
+          height:2px;
+          background:linear-gradient(90deg,var(--emerald),var(--emerald-light) 50%,transparent);
+          border-radius:28px 28px 0 0;
+        }
+
+        /* TABS */
+       .tabs{
+          display:flex;
+          background:var(--input-bg);
+          padding:6px;
+          border-radius:16px;
+          margin-bottom:32px;
+          border:1px solid var(--border);
+        }
+       .tabs button{
+          flex:1;
+          padding:13px;
+          border:none;
+          border-radius:12px;
+          background:none;
+          color:var(--white-muted);
+          font-weight:600;
+          font-size:0.9rem;
+          font-family:var(--ff-body);
+          cursor:pointer;
+          transition:all 0.25s;
+        }
+       .tabs button.active{
+          background:var(--emerald);
+          color:var(--bg);
+          box-shadow:0 4px 16px var(--emerald-glow);
+        }
+
+        /* AVATAR */
+       .avatar-section{
+          position:relative;
+          width:110px;
+          height:110px;
+          margin:0 auto 28px;
+          cursor:pointer;
+          transition:transform 0.3s;
+        }
+       .avatar-section:active{transform:scale(0.95);}
+       .avatar-section img{
+          width:100%;
+          height:100%;
+          border-radius:50%;
+          object-fit:cover;
+          border:2px solid var(--border-emerald);
+          box-shadow:0 0 30px var(--emerald-glow);
+        }
+       .edit-icon{
+          position:absolute;
+          bottom:4px;
+          right:4px;
+          background:var(--emerald);
+          color:var(--bg);
+          width:32px;
+          height:32px;
+          border-radius:50%;
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          border:3px solid var(--surface);
+          box-shadow:0 4px 12px rgba(0,0,0,0.4);
+        }
+
+        /* INPUTS */
+        input{
+          width:100%;
+          padding:16px 18px;
+          margin-bottom:14px;
+          border-radius:14px;
+          border:1px solid var(--border);
+          background:var(--input-bg);
+          color:var(--white);
+          outline:none;
+          font-size:16px;
+          font-family:var(--ff-body);
+          transition:all 0.25s;
+        }
+        input:focus{
+          border-color:var(--border-emerald);
+          box-shadow:0 0 0 3px var(--emerald-dim);
+        }
+        input::placeholder{color:var(--white-muted);}
+
+        /* TERMS */
+       .terms-wrapper{
+          display:flex;
+          align-items:flex-start;
+          gap:12px;
+          margin:12px 0 28px;
+        }
+       .terms-wrapper input{
+          width:22px;
+          height:22px;
+          margin:0;
+          accent-color:var(--emerald);
+          cursor:pointer;
+          flex-shrink:0;
+        }
+       .terms-text{
+          font-size:0.78rem;
+          color:var(--white-muted);
+          line-height:1.5;
+        }
+       .terms-text a{
+          color:var(--emerald-light);
+          text-decoration:none;
+          font-weight:600;
+        }
+
+        /* BUTTON */
+       .submit-btn{
+          width:100%;
+          padding:17px;
+          border-radius:14px;
+          border:none;
+          background:var(--emerald);
+          color:var(--bg);
+          font-weight:700;
+          font-size:0.95rem;
+          font-family:var(--ff-display);
+          cursor:pointer;
+          transition:all 0.25s;
+          box-shadow:0 6px 20px var(--emerald-glow);
+        }
+       .submit-btn:active{
+          transform:scale(0.97);
+          box-shadow:0 3px 12px var(--emerald-glow);
+        }
+
+        /* LOGIN FORM */
+       .login-header{
+          text-align:center;
+          padding-bottom:24px;
+        }
+       .login-header i{
+          font-size:56px;
+          color:var(--emerald);
+          margin-bottom:12px;
+          filter:drop-shadow(0 0 20px var(--emerald-glow));
+        }
+       .login-header h3{
+          font-family:var(--ff-display);
+          font-size:1.2rem;
+          color:var(--white);
+        }
+
+        /* MODAL */
+       .custom-modal{
+          display:none;
+          position:fixed;
+          top:0;left:0;
+          width:100%;height:100%;
+          background:rgba(0,0,0,0.88);
+          backdrop-filter:blur(8px);
+          z-index:1000;
+          justify-content:center;
+          align-items:center;
+        }
+       .modal-box{
+          background:var(--glass);
+          backdrop-filter:blur(20px);
+          width:85%;
+          max-width:340px;
+          padding:34px 28px;
+          border-radius:24px;
+          border:1px solid var(--border-emerald);
+          text-align:center;
+          animation:popIn 0.4s cubic-bezier(.175,.885,.32,1.275);
+          box-shadow:0 12px 40px rgba(0,0,0,0.6), 0 0 40px var(--emerald-glow);
+        }
+        @keyframes popIn{from{transform:scale(0.8);opacity:0}to{transform:scale(1);opacity:1}}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+       .modal-box i{
+          font-size:50px;
+          color:var(--emerald);
+          margin-bottom:16px;
+          filter:drop-shadow(0 0 20px var(--emerald-glow));
+        }
+       .modal-box h3{
+          margin:12px 0;
+          font-size:1.15rem;
+          font-family:var(--ff-display);
+          color:var(--white);
+        }
+       .modal-box p{
+          color:var(--white-dim);
+          font-size:0.9rem;
+          margin-bottom:24px;
+          line-height:1.6;
+        }
+       .modal-close{
+          background:var(--emerald);
+          color:var(--bg);
+          border:none;
+          padding:14px 28px;
+          border-radius:12px;
+          font-weight:700;
+          font-family:var(--ff-display);
+          cursor:pointer;
+          transition:all 0.2s;
+        }
+       .modal-close:active{transform:scale(0.96);}
+       .hidden{display:none}
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="tabs">
+            <button id="tabNew" class="active" onclick="switchMode('new')">Register</button>
+            <button id="tabLogin" onclick="switchMode('login')">Sync</button>
+        </div>
+
+        <div id="formNew">
+            <div class="avatar-section" onclick="document.getElementById('fileIn').click()">
+                <img src="https://via.placeholder.com/110?text=Logo" id="avatarImg" alt="Avatar" width="110" height="110">
+                <div class="edit-icon"><i class="fa fa-camera"></i></div>
+                <input type="file" id="fileIn" class="hidden" accept="image/*" onchange="preview(event)">
+            </div>
+            <input type="text" id="name" placeholder="Full Name" autocomplete="name">
+            <input type="date" id="dob" autocomplete="bday">
+            <input type="number" id="code" placeholder="Create 5-Digit Code" oninput="limit(this)" inputmode="numeric">
+            <div class="terms-wrapper">
+                <input type="checkbox" id="agreeCheck">
+                <div class="terms-text">Agree to <a href="terms-2.html">Terms & Policy</a></div>
+            </div>
+            <button class="submit-btn" onclick="onRegister()">Create Profile</button>
+        </div>
+
+        <div id="formLogin" class="hidden">
+            <div class="login-header">
+                <i class="fa fa-fingerprint"></i>
+                <h3>Security Sync</h3>
+            </div>
+            <input type="number" id="loginCode" placeholder="Enter 5-Digit Code" oninput="limit(this)" inputmode="numeric">
+            <button class="submit-btn" onclick="onLogin()">Verify & Open</button>
+        </div>
+    </div>
+
+    <div class="custom-modal" id="alertModal">
+        <div class="modal-box">
+            <i id="modalIcon" class="fa fa-circle-exclamation"></i>
+            <h3 id="modalTitle">Notice</h3>
+            <p id="modalMsg">Please fill in all details.</p>
+            <button class="modal-close" onclick="closeModal()">Got it</button>
+        </div>
+    </div>
+
+    <script>
+        const showAlert=(t,m,i="fa-circle-exclamation")=>{
+            document.getElementById('modalTitle').innerText=t;
+            document.getElementById('modalMsg').innerText=m;
+            document.getElementById('modalIcon').className="fa "+i;
+            document.getElementById('alertModal').style.display="flex";
+        };
+        const closeModal=()=>document.getElementById('alertModal').style.display="none";
+        const switchMode=m=>{
+            document.getElementById('formNew').classList.toggle('hidden',m!=='new');
+            document.getElementById('formLogin').classList.toggle('hidden',m!=='login');
+            document.getElementById('tabNew').classList.toggle('active',m==='new');
+            document.getElementById('tabLogin').classList.toggle('active',m==='login');
+        };
+        const limit=e=>{if(e.value.length>5)e.value=e.value.slice(0,5)};
+        const preview=e=>{
+            const reader=new FileReader();
+            reader.onload=()=>document.getElementById('avatarImg').src=reader.result;
+            reader.readAsDataURL(e.target.files[0]);
+        };
+        const onRegister=()=>{
+            const n=document.getElementById('name').value;
+            const d=document.getElementById('dob').value;
+            const c=document.getElementById('code').value;
+            const img=document.getElementById('avatarImg').src;
+            const agree=document.getElementById('agreeCheck').checked;
+            if(!n||!d||c.length!==5||img.includes('placeholder')){
+                showAlert("Missing Info","Please complete all fields and upload a photo.");return;
+            }
+            if(!agree){
+                showAlert("Terms Required","You must agree to the terms to continue.");return;
+            }
+            localStorage.setItem('userProfile',JSON.stringify({name:n,dob:d,userId:c,avatar:img}));
+            showAlert("Success","Profile Created! Redirecting...","fa-circle-check");
+            setTimeout(()=>window.location.href="third.html",1500);
+        };
+        const onLogin=()=>{
+            const c=document.getElementById('loginCode').value;
+            const saved=JSON.parse(localStorage.getItem('userProfile'));
+            if(saved&&c===saved.userId){
+                showAlert("Verified","Welcome back!","fa-circle-check");
+                setTimeout(()=>window.location.href="third.html",1000);
+            }else{
+                showAlert("Sync Failed","Incorrect code or no local profile found.");
+            }
+        };
+    </script>
+</body>
+</html>

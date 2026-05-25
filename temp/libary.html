@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#050505">
+    <title>Master Mobile Library</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="algorithm.js"></script>
+
+    <style>
+        :root {
+            --bg: #050505;
+            --surface: #0f0f0f;
+            --surface-light: #1a1a1a;
+            --surface-elevated: #222222;
+            --primary: #00ff9d;
+            --primary-dim: rgba(0, 255, 157, 0.08);
+            --primary-glow: rgba(0, 255, 157, 0.25);
+            --text-main: #f0f0f0;
+            --text-sec: #888;
+            --text-muted: #555;
+            --border: rgba(255, 255, 255, 0.07);
+            --border-hover: rgba(0, 255, 157, 0.2);
+            --glass: rgba(8, 8, 8, 0.9);
+            --blur: 24px;
+            --radius: 18px;
+            --radius-sm: 10px;
+            --safe-top: env(safe-area-inset-top);
+            --safe-bottom: env(safe-area-inset-bottom);
+            --mini-gap: 80px;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* Grain overlay for texture */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.4;
+        }
+
+        /* ── HEADER ── */
+        .app-header {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: var(--glass);
+            backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+            padding-top: var(--safe-top);
+        }
+
+        .header-top {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 16px 6px;
+        }
+        .header-wordmark {
+            font-family: 'Syne', sans-serif;
+            font-size: 18px; font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+        }
+        .header-wordmark span { color: var(--primary); }
+
+        .header-badge {
+            font-size: 10px; font-weight: 600; letter-spacing: 0.5px;
+            background: var(--primary-dim); color: var(--primary);
+            border: 1px solid rgba(0,255,157,0.15);
+            padding: 4px 10px; border-radius: 999px;
+        }
+
+        .search-container { padding: 4px 16px 8px; }
+        .search-input-wrapper { position: relative; width: 100%; }
+        .search-icon {
+            position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+            color: var(--text-muted); width: 15px; pointer-events: none;
+        }
+        #searchInput {
+            width: 100%;
+            background: var(--surface-light);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 11px 14px 11px 38px;
+            color: var(--text-main);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px; outline: none; transition: all 0.2s;
+        }
+        #searchInput::placeholder { color: var(--text-muted); }
+        #searchInput:focus {
+            background: var(--surface-elevated);
+            border-color: rgba(0,255,157,0.3);
+            box-shadow: 0 0 0 3px rgba(0,255,157,0.06);
+        }
+
+        /* ── NAV BAR ── */
+        .nav-bar {
+            display: flex; align-items: center;
+            padding: 2px 12px 10px; gap: 2px;
+            overflow-x: auto; -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .nav-bar::-webkit-scrollbar { display: none; }
+
+        .nav-item {
+            display: flex; flex-direction: column; align-items: center;
+            flex: 1; min-width: 52px;
+            cursor: pointer;
+            padding: 7px 4px;
+            border-radius: 12px;
+            opacity: 0.45;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .nav-item.active {
+            opacity: 1;
+            background: var(--primary-dim);
+        }
+        .nav-item.active svg { color: var(--primary) !important; }
+        .nav-item span {
+            font-size: 9px; font-weight: 600;
+            margin-top: 4px;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+        .nav-item.active span { color: var(--primary); }
+
+        /* ── MAIN CONTENT ── */
+        .main-content {
+            height: 100vh;
+            overflow-y: auto;
+            padding: 168px 14px 100px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .section { display: none; animation: sectionIn 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .section.active { display: block; }
+        @keyframes sectionIn {
+            from { opacity: 0; transform: translateY(14px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Section title */
+        .section-header {
+            display: flex; align-items: baseline; gap: 10px;
+            margin-bottom: 16px;
+        }
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 22px; font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .section-count {
+            font-size: 12px; color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ── GRID ── */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        /* ── YOUTUBE STYLE VERTICAL CARDS ── */
+        .yt-grid-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .yt-media-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .yt-media-card:active {
+            transform: scale(0.98);
+            border-color: var(--border-hover);
+            background: var(--surface-light);
+        }
+
+        .yt-card-thumb-wrapper {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: var(--surface-light);
+            position: relative;
+        }
+        .yt-card-thumb-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .yt-media-card:active .yt-card-thumb-wrapper img {
+            transform: scale(1.02);
+        }
+
+        .yt-card-info {
+            padding: 12px 14px;
+            display: flex;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .yt-card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .yt-card-title {
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.4;
+            color: var(--text-main);
+            margin-bottom: 4px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .yt-card-meta {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .yt-card-capsule {
+            display: inline-flex;
+            align-items: center;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: var(--primary-dim);
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            border: 1px solid rgba(0,255,157,0.12);
+            cursor: pointer;
+            transition: background 0.18s, border-color 0.18s, box-shadow 0.18s;
+            width: fit-content;
+        }
+        .yt-card-capsule:active, .yt-card-capsule.capsule-active {
+            background: rgba(0,255,157,0.22);
+            border-color: rgba(0,255,157,0.5);
+            box-shadow: 0 0 0 2px rgba(0,255,157,0.12);
+        }
+
+        /* ── MEDIA CARD ── */
+        .media-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+            position: relative;
+        }
+        .media-card:active {
+            transform: scale(0.96);
+            border-color: var(--border-hover);
+        }
+        .media-card::after {
+            content: '';
+            position: absolute; inset: 0;
+            border-radius: var(--radius);
+            background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 55%);
+            pointer-events: none;
+        }
+
+        .card-img-wrap {
+            width: 100%; aspect-ratio: 1; overflow: hidden;
+            background: var(--surface-light);
+        }
+        .card-img-wrap img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .media-card:active .card-img-wrap img { transform: scale(1.04); }
+
+        .card-info { padding: 10px 11px 12px; }
+        .card-title {
+            font-size: 12px; font-weight: 500;
+            line-height: 1.4;
+            height: 34px; overflow: hidden;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+            color: var(--text-main);
+        }
+
+        /* IMF capsule */
+        .item-capsule {
+            display: inline-flex; align-items: center;
+            font-size: 9px; font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: var(--primary-dim);
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            margin-top: 7px;
+            border: 1px solid rgba(0,255,157,0.12);
+            cursor: pointer;
+            transition: background 0.18s, border-color 0.18s, box-shadow 0.18s;
+            user-select: none;
+        }
+        .item-capsule:active, .item-capsule.capsule-active {
+            background: rgba(0,255,157,0.22);
+            border-color: rgba(0,255,157,0.5);
+            box-shadow: 0 0 0 2px rgba(0,255,157,0.12);
+        }
+
+        /* ── BLOG LIST ── */
+        .blog-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 15px 16px;
+            margin-bottom: 10px;
+            display: flex; align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .blog-item:active {
+            background: var(--surface-light);
+            border-color: var(--border-hover);
+        }
+        .blog-tag {
+            font-size: 9px;
+            background: var(--primary-dim);
+            color: var(--primary);
+            padding: 3px 7px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+        .blog-title {
+            font-size: 14px; font-weight: 500;
+            line-height: 1.35;
+        }
+        .blog-arrow {
+            flex-shrink: 0; margin-left: 12px;
+            color: var(--text-muted);
+            transition: transform 0.2s, color 0.2s;
+        }
+        .blog-item:active .blog-arrow {
+            transform: translateX(3px);
+            color: var(--primary);
+        }
+
+        /* ── PROGRESS SECTION ── */
+        #progress-section { padding-bottom: 10px; }
+
+        .progress-hero {
+            background: linear-gradient(135deg, #0d1f14 0%, #091a10 100%);
+            border: 1px solid rgba(0,255,157,0.12);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .progress-hero::before {
+            content: '';
+            position: absolute;
+            top: -40px; right: -40px;
+            width: 130px; height: 130px;
+            background: radial-gradient(circle, rgba(0,255,157,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .progress-hero-label {
+            font-size: 10px; font-weight: 700; letter-spacing: 1px;
+            text-transform: uppercase; color: var(--primary); opacity: 0.7;
+            margin-bottom: 4px;
+        }
+        .progress-hero-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 20px; font-weight: 800;
+            margin-bottom: 16px; letter-spacing: -0.3px;
+        }
+
+        /* Big ring progress */
+        .ring-row {
+            display: flex; gap: 24px; align-items: flex-start;
+        }
+        .ring-wrap {
+            position: relative; width: 80px; height: 80px;
+        }
+        .ring-wrap svg {
+            width: 100%; height: 100%;
+            transform: rotate(-90deg);
+        }
+        .ring-bg {
+            fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 4;
+        }
+        .ring-fill {
+            fill: none; stroke: var(--primary); stroke-width: 4;
+            stroke-dasharray: 220; stroke-dashoffset: 220;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.8s ease;
+        }
+        .ring-center {
+            position: absolute; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+            flex-direction: column;
+        }
+        .ring-pct {
+            font-size: 20px; font-weight: 800; font-family: 'Syne', sans-serif;
+        }
+        .ring-label {
+            font-size: 9px; color: var(--text-muted); margin-top: 2px;
+        }
+
+        .ring-stats {
+            display: flex; flex-direction: column; gap: 12px;
+        }
+        .ring-stat-item {
+            display: flex; flex-direction: column;
+        }
+        .ring-stat-name {
+            font-size: 10px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; opacity: 0.7; margin-bottom: 3px;
+        }
+        .ring-stat-val {
+            font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800;
+        }
+        .ring-stat-val span {
+            font-size: 10px; color: var(--text-muted); margin-left: 3px;
+        }
+
+        /* Streak cards */
+        .streak-row {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px;
+        }
+        .streak-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 12px; text-align: center;
+        }
+        .streak-card.highlight {
+            background: linear-gradient(135deg, rgba(0,255,157,0.12) 0%, rgba(0,255,157,0.05) 100%);
+            border-color: rgba(0,255,157,0.2);
+        }
+        .streak-icon { font-size: 20px; display: block; margin-bottom: 6px; }
+        .streak-val {
+            font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; display: block;
+        }
+        .streak-lbl {
+            font-size: 9px; color: var(--text-muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.3px;
+        }
+
+        /* Weekly bar chart */
+        .weekly-chart {
+            margin-bottom: 20px;
+        }
+        .prog-section-title {
+            font-size: 13px; font-weight: 700; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7;
+        }
+        .bar-row {
+            display: flex; align-items: flex-end; justify-content: space-around; height: 80px; gap: 6px;
+        }
+        .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; }
+        .bar-fill-wrap { flex: 1; width: 100%; display: flex; align-items: flex-end; justify-content: center; }
+        .bar-fill {
+            width: 6px; background: rgba(0,255,157,0.3); border-radius: 3px; transition: all 0.4s ease;
+        }
+        .bar-fill.has-data { background: rgba(0,255,157,0.6); }
+        .bar-fill.active-day { background: var(--primary); box-shadow: 0 0 12px rgba(0,255,157,0.4); }
+        .bar-day { font-size: 10px; color: var(--text-muted); margin-top: 6px; font-weight: 600; }
+
+        /* Goals */
+        .goal-item {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 12px; margin-bottom: 8px;
+            font-size: 13px; display: flex; justify-content: space-between; align-items: center;
+        }
+        .goal-item.complete {
+            background: rgba(0,255,157,0.08);
+            border-color: rgba(0,255,157,0.15);
+        }
+
+        /* Recent activity */
+        .activity-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .activity-item:last-child { border-bottom: none; }
+        .activity-info { flex: 1; }
+        .activity-title { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+        .activity-meta { font-size: 11px; color: var(--text-muted); }
+        .activity-badge {
+            font-size: 8px; font-weight: 700; text-transform: uppercase; padding: 2px 6px;
+            border-radius: 4px; letter-spacing: 0.3px;
+        }
+        .activity-badge.audio {
+            background: rgba(0, 255, 157, 0.15); color: var(--primary);
+        }
+        .activity-badge.textbook {
+            background: rgba(100, 200, 255, 0.15); color: #64c8ff;
+        }
+        .activity-badge.papers {
+            background: rgba(255, 150, 100, 0.15); color: #ff9664;
+        }
+        .activity-badge.blog {
+            background: rgba(255, 200, 100, 0.15); color: #ffc864;
+        }
+        .activity-badge.courses {
+            background: rgba(200, 100, 255, 0.15); color: #c864ff;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center; padding: 40px 20px;
+        }
+        .empty-state-icon { font-size: 48px; margin-bottom: 10px; }
+        .empty-state h3 { font-size: 18px; margin: 0 0 4px; }
+        .empty-state p { font-size: 13px; color: var(--text-muted); margin:0; }
+
+        /* Mini player */
+        #miniPlayer {
+            position: fixed; bottom: var(--mini-gap); left: 14px; right: 14px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 10px 12px;
+            display: none; align-items: center;
+            z-index: 200;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        #miniPlayer:active {
+            transform: scale(0.98);
+            border-color: var(--border-hover);
+            background: var(--surface-light);
+        }
+        /* Animated bar equalizer on mini player when playing */
+        .eq-wrap { display: flex; align-items: flex-end; gap: 2px; height: 16px; margin-right: 10px; }
+        .eq-bar {
+            width: 3px; border-radius: 2px;
+            background: var(--primary);
+            animation: eqAnim 0.8s ease-in-out infinite alternate;
+        }
+        .eq-bar:nth-child(1) { animation-duration: 0.6s; animation-delay: 0s; }
+        .eq-bar:nth-child(2) { animation-duration: 0.9s; animation-delay: 0.1s; }
+        .eq-bar:nth-child(3) { animation-duration: 0.7s; animation-delay: 0.2s; }
+        @keyframes eqAnim {
+            from { height: 4px; }
+            to { height: 14px; }
+        }
+        .eq-wrap.paused .eq-bar { animation-play-state: paused; height: 4px; }
+        .mini-art { width: 46px; height: 46px; border-radius: 11px; object-fit: cover; margin-right: 12px; }
+        .mini-info { flex: 1; overflow: hidden; }
+        .mini-title { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .mini-subtitle { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+        /* ── FULL PLAYER MODAL ── */
+        .modal-overlay {
+            position: fixed; inset: 0;
+            background: #000; z-index: 1000;
+            display: none; flex-direction: column;
+            padding: var(--safe-top) 22px var(--safe-bottom);
+            animation: slideUp 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        #fullAudioPlayer.modal-overlay {
+            padding: calc(var(--safe-top) + 10px) 22px calc(var(--safe-bottom) + 70px);
+            background: linear-gradient(160deg, #080f0a 0%, #050505 100%);
+        }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+        .fa-header {
+            display: flex; justify-content: space-between; align-items: center;
+            height: 56px;
+        }
+        .fa-header-label {
+            font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+            color: var(--text-muted); text-transform: uppercase;
+        }
+        .fa-close-btn {
+            width: 32px; height: 32px; border-radius: 999px;
+            background: rgba(255,255,255,0.07);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+        }
+
+        .fa-art-container {
+            flex: 1; display: flex; align-items: center; justify-content: center;
+        }
+        #fa-img {
+            width: 100%; aspect-ratio: 1; max-height: 320px;
+            object-fit: cover; border-radius: 22px;
+            box-shadow: 0 30px 70px rgba(0, 255, 157, 0.12), 0 10px 30px rgba(0,0,0,0.6);
+        }
+
+        .fa-meta { text-align: center; margin-top: 18px; margin-bottom: 14px; }
+        #fa-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; margin: 0 0 4px; letter-spacing: -0.3px; }
+        .fa-type { font-size: 12px; color: var(--text-muted); }
+
+        .progress-area {
+            width: 100%; height: 30px;
+            display: flex; align-items: center;
+        }
+        .progress-bar-bg {
+            width: 100%; height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px; position: relative;
+        }
+        #progFill {
+            height: 100%; background: var(--primary); width: 0%; border-radius: 2px; position: relative;
+            box-shadow: 0 0 8px rgba(0,255,157,0.5);
+        }
+        #progFill::after {
+            content: ''; position: absolute; right: -6px; top: -4px;
+            width: 12px; height: 12px; background: #fff; border-radius: 50%;
+            box-shadow: 0 0 6px rgba(0,0,0,0.4);
+        }
+        .time-row {
+            display: flex; justify-content: space-between;
+            font-size: 11px; color: var(--text-muted); margin-top: 6px;
+        }
+
+        .controls-row {
+            display: flex; justify-content: space-between;
+            align-items: center; padding: 20px 6px 0;
+        }
+        .ctrl-btn {
+            width: 44px; height: 44px; border-radius: 999px;
+            background: rgba(255,255,255,0.06);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: background 0.2s;
+        }
+        .ctrl-btn:active { background: rgba(255,255,255,0.12); }
+        .play-circle-lg {
+            width: 68px; height: 68px;
+            background: var(--primary); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #000; box-shadow: 0 8px 30px rgba(0, 255, 157, 0.4);
+            transition: transform 0.15s, box-shadow 0.15s;
+            cursor: pointer;
+        }
+        .play-circle-lg:active {
+            transform: scale(0.94);
+            box-shadow: 0 4px 16px rgba(0, 255, 157, 0.3);
+        }
+
+        /* ── DOC VIEWER ── */
+        #docViewer { background: #f5f5f7; }
+        .doc-header {
+            display: flex; align-items: center;
+            padding: 10px 0 15px; border-bottom: 1px solid #ddd; margin-bottom: 10px;
+        }
+
+        /* ── OFFLINE MODAL ── */
+        #offlineModal {
+            display: none; z-index: 1500;
+            align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+        }
+        #offlineModal .offline-card {
+            background: var(--surface); padding: 22px;
+            border-radius: 18px; width: 90%; max-width: 340px;
+            text-align: center; border: 1px solid var(--border);
+        }
+        #offlineModal .offline-card h3 { margin: 0 0 8px; font-family: 'Syne', sans-serif; }
+        #offlineModal .offline-actions { display: flex; gap: 8px; margin-top: 14px; }
+
+        /* ── TOASTS ── */
+        #toast-container {
+            position: fixed; bottom: 160px; left: 50%; transform: translateX(-50%);
+            z-index: 2000; pointer-events: none; width: 90%; max-width: 340px;
+            display: flex; flex-direction: column; gap: 8px; align-items: center;
+        }
+        .toast {
+            background: rgba(14, 14, 14, 0.97);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--primary);
+            color: #fff; padding: 11px 16px;
+            border-radius: 10px; font-size: 13px; font-weight: 500;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            animation: toastIn 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            display: flex; align-items: center; gap: 8px;
+        }
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateY(12px) scale(0.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* ── BUTTONS ── */
+        .btn-primary {
+            background: var(--primary); color: #000;
+            font-weight: 700; font-family: 'DM Sans', sans-serif;
+            border: none; padding: 11px 18px;
+            border-radius: 10px; cursor: pointer;
+            font-size: 13px; letter-spacing: 0.2px;
+        }
+        .btn-ghost {
+            background: transparent; color: var(--text-main);
+            font-family: 'DM Sans', sans-serif;
+            border: 1px solid var(--border); padding: 11px 18px;
+            border-radius: 10px; cursor: pointer; font-size: 13px;
+        }
+
+        /* ── SKELETON LOADING ── */
+        .skeleton {
+            background: linear-gradient(90deg, var(--surface) 25%, var(--surface-light) 50%, var(--surface) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.4s infinite;
+            border-radius: 8px;
+        }
+        @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+    </style>
+</head>
+<body>
+
+<iframe src="loader.html" id="app-loader" style="
+    position: fixed; top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    border: none; z-index: 999999;
+    background: #050505;
+    transition: opacity 0.8s ease;
+"></iframe>
+<script>
+    window.addEventListener('load', function() {
+        const loader = document.getElementById('app-loader');
+        setTimeout(() => {
+            loader.style.opacity = "0";
+            setTimeout(() => loader.remove(), 800);
+        }, 3000);
+    });
+</script>
+
+<header class="app-header">
+    <div class="header-top">
+        <div class="header-wordmark">LIBRARY<span>.</span></div>
+        <div class="header-badge">Library</div>
+    </div>
+    <div class="search-container">
+        <div class="search-input-wrapper">
+            <i data-feather="search" class="search-icon"></i>
+            <input type="search" id="searchInput" placeholder="Search or press the capsule..." onkeyup="globalSearch()">
+        </div>
+    </div>
+    <nav class="nav-bar">
+        <div class="nav-item active" onclick="switchTab('audio', this)">
+            <i data-feather="headphones"></i><span>Audio</span>
+        </div>
+        <div class="nav-item" onclick="switchTab('textbook', this)">
+            <i data-feather="book"></i><span>Books</span>
+        </div>
+        <div class="nav-item" onclick="switchTab('papers', this)">
+            <i data-feather="file-text"></i><span>Papers</span>
+        </div>
+        <div class="nav-item" onclick="switchTab('blog', this)">
+            <i data-feather="rss"></i><span>Blog</span>
+        </div>
+        <div class="nav-item" onclick="switchTab('courses', this)">
+            <i data-feather="monitor"></i><span>Course</span>
+        </div>
+        <div class="nav-item" onclick="switchTab('progress-section', this)">
+            <i data-feather="activity"></i><span>Progress</span>
+        </div>
+    </nav>
+</header>
+
+<main class="main-content">
+
+    <div id="audio" class="section active">
+        <div class="section-header">
+            <div class="section-title">Audio</div>
+            <div class="section-count" id="audio-count"></div>
+        </div>
+        <div class="grid-layout" id="audio-grid"></div>
+    </div>
+
+    <div id="textbook" class="section">
+        <div class="section-header">
+            <div class="section-title">Books</div>
+            <div class="section-count" id="textbook-count"></div>
+        </div>
+        <div class="grid-layout" id="textbook-grid"></div>
+    </div>
+
+    <div id="papers" class="section">
+        <div class="section-header">
+            <div class="section-title">Papers</div>
+            <div class="section-count" id="papers-count"></div>
+        </div>
+        <div class="grid-layout" id="papers-grid"></div>
+    </div>
+
+    <div id="blog" class="section">
+        <div class="section-header">
+            <div class="section-title">Blog</div>
+            <div class="section-count" id="blog-count"></div>
+        </div>
+        <div id="blog-list"></div>
+    </div>
+
+    <div id="courses" class="section">
+        <div class="section-header">
+            <div class="section-title">Courses</div>
+            <div class="section-count" id="courses-count"></div>
+        </div>
+        <div class="yt-grid-layout" id="courses-grid"></div>
+    </div>
+
+    <div id="progress-section" class="section">
+        <div class="section-header">
+            <div class="section-title">Progress</div>
+        </div>
+
+        <div class="progress-hero">
+            <div class="progress-hero-label">Overview</div>
+            <div class="progress-hero-title">Your Learning Journey</div>
+            <div class="ring-row">
+                <div class="ring-wrap">
+                    <svg width="80" height="80" viewBox="0 0 80 80">
+                        <circle class="ring-bg" cx="40" cy="40" r="35"/>
+                        <circle class="ring-fill" id="ringFill" cx="40" cy="40" r="35"/>
+                    </svg>
+                    <div class="ring-center">
+                        <div class="ring-pct" id="ringPct">0%</div>
+                        <div class="ring-label">Done</div>
+                    </div>
+                </div>
+                <div class="ring-stats">
+                    <div class="ring-stat-item">
+                        <span class="ring-stat-name">Total Items</span>
+                        <span class="ring-stat-val" id="statTotal">0</span>
+                    </div>
+                    <div class="ring-stat-item">
+                        <span class="ring-stat-name">Opened</span>
+                        <span class="ring-stat-val" id="statOpened">0</span>
+                    </div>
+                    <div class="ring-stat-item">
+                        <span class="ring-stat-name">Audio Played</span>
+                        <span class="ring-stat-val" id="statAudio">0 <span>tracks</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="streak-row">
+            <div class="streak-card highlight">
+                <span class="streak-icon">🔥</span>
+                <div class="streak-val" id="streakDays">0</div>
+                <div class="streak-lbl">Day Streak</div>
+            </div>
+            <div class="streak-card">
+                <span class="streak-icon">📚</span>
+                <div class="streak-val" id="streakItems">0</div>
+                <div class="streak-lbl">This Week</div>
+            </div>
+            <div class="streak-card">
+                <span class="streak-icon">⏱️</span>
+                <div class="streak-val" id="streakMins">0</div>
+                <div class="streak-lbl">Min Listened</div>
+            </div>
+        </div>
+
+        <div class="weekly-chart">
+            <div class="prog-section-title" style="margin-bottom:14px;">This Week</div>
+            <div class="bar-row" id="weeklyBars"></div>
+        </div>
+
+        <div class="prog-section-title">Goals</div>
+        <div id="goals-list"></div>
+
+        <div class="prog-section-title" style="margin-top:20px;">Recent Activity</div>
+        <div id="recent-activity"></div>
+    </div>
+
+</main>
+
+<div id="miniPlayer" onclick="openFullAudio()">
+    <img id="m-img" class="mini-art" src="" alt="">
+    <div class="mini-info">
+        <div id="m-title" class="mini-title">Title</div>
+        <div class="mini-subtitle">Now Playing</div>
+    </div>
+    <div class="eq-wrap paused" id="eqWrap">
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+    </div>
+    <div style="width:36px; display:flex; align-items:center; justify-content:center;">
+        <img id="p-mini-icon" src="" style="width:20px; height:20px;" alt="play/pause">
+    </div>
+</div>
+
+<div id="fullAudioPlayer" class="modal-overlay">
+    <div class="fa-header">
+        <div class="fa-close-btn" onclick="closeFullAudio()">
+            <i data-feather="chevron-down" style="color:#888; width:18px; height:18px;"></i>
+        </div>
+        <span class="fa-header-label">Now Playing</span>
+        <div style="width:32px;"></div>
+    </div>
+    <div class="fa-art-container">
+        <img id="fa-img" src="" alt="">
+    </div>
+    <div class="fa-meta">
+        <h2 id="fa-title">Loading...</h2>
+        <p class="fa-type">Audio Track</p>
+    </div>
+    <div class="progress-area">
+        <div class="progress-bar-bg" id="seekHandler">
+            <div id="progFill"></div>
+        </div>
+    </div>
+    <div class="time-row">
+        <span id="currTime">0:00</span>
+        <span id="durTime">0:00</span>
+    </div>
+    <div class="controls-row">
+        <div class="ctrl-btn" onclick="skip(-15)"><i data-feather="rotate-ccw" style="width:20px;"></i></div>
+        <div class="play-circle-lg" onclick="togglePlay()"><img id="p-full-icon" src="" style="width:28px;" alt="play"></div>
+        <div class="ctrl-btn" onclick="skip(15)"><i data-feather="rotate-cw" style="width:20px;"></i></div>
+    </div>
+</div>
+
+<div id="docViewer" class="modal-overlay" style="background: #f5f5f7;">
+    <div class="doc-header">
+        <h2 style="flex:1; color:#000; margin:0; font-size:16px;" id="doc-title">Document</h2>
+        <button onclick="closeDoc()" style="background:none; border:none; color:#888; cursor:pointer; font-size:18px;">✕</button>
+    </div>
+    <iframe id="docFrame" style="flex:1; border:none; border-radius:8px;"></iframe>
+</div>
+
+<div id="offlineModal" class="modal-overlay">
+    <div class="offline-card">
+        <h3>You're offline</h3>
+        <p style="color:var(--text-sec); margin:0;">Some features may be limited</p>
+        <div class="offline-actions">
+            <button class="btn-ghost" onclick="dismissOffline()">Dismiss</button>
+            <button class="btn-primary" onclick="retryOnline()">Retry</button>
+        </div>
+    </div>
+</div>
+
+<div id="toast-container"></div>
+
+<audio id="mainAppAudioPlayer" style="display:none;"></audio>
+
+<script>
+    const PLAY_SRC = 'data:image/svg+xml,%3Csvg viewBox=%220 0 24 24%22 fill=%22%2300ff9d%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpath d=%22M5 3v18l15-9z%22/%3E%3C/svg%3E';
+    const PAUSE_SRC = 'data:image/svg+xml,%3Csvg viewBox=%220 0 24 24%22 fill=%22%2300ff9d%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Crect x=%225%22 y=%223%22 width=%224%22 height=%2218%22/%3E%3Crect x=%2215%22 y=%223%22 width=%224%22 height=%2218%22/%3E%3C/svg%3E';
+
+    const APP_DATA = { audio: [], textbook: [], papers: [], blog: [], courses: [] };
+    let activeCapsuleFilter = null;
+    let isDragging = false;
+
+    const audio = document.getElementById('mainAppAudioPlayer');
+    let PROGRESS = {
+        opened: { audio: [], textbook: [], papers: [], blog: [], courses: [] },
+        audioPlayed: [],
+        weeklyData: [0, 0, 0, 0, 0, 0, 0],
+        totalMins: 0,
+        streak: { days: 0, lastDate: null }
+    };
+
+    function init() {
+        loadProgress();
+        fetchAllData();
+        setupAudioListeners();
+        setupSeek();
+        updateOnlineStatus();
+    }
+
+    function loadProgress() {
+        try {
+            const saved = localStorage.getItem('anxProgress');
+            if (saved) PROGRESS = { ...PROGRESS, ...JSON.parse(saved) };
+        } catch (e) {}
+    }
+
+    function saveProgress() {
+        localStorage.setItem('anxProgress', JSON.stringify(PROGRESS));
+    }
+
+    function trackOpen(type, title) {
+        if (!PROGRESS.opened[type]) PROGRESS.opened[type] = [];
+        if (!PROGRESS.opened[type].includes(title)) {
+            PROGRESS.opened[type].push(title);
+            saveProgress();
+        }
+    }
+
+    function levenshtein(a, b) {
+        if (Math.abs(a.length - b.length) > 3) return 99;
+        const dp = Array.from({length: a.length + 1}, (_, i) => [i]);
+        for (let j = 0; j <= b.length; j++) dp[0][j] = j;
+        for (let i = 1; i <= a.length; i++) {
+            for (let j = 1; j <= b.length; j++) {
+                dp[i][j] = a[i-1] === b[j-1]
+                    ? dp[i-1][j-1]
+                    : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+            }
+        }
+        returndp[a.length][b.length];
+    }
+
+    function capsuleMatch(a, b) {
+        a = a.toLowerCase(); b = b.toLowerCase();
+        if (a === b) return true;
+        if (a.includes(b) || b.includes(a)) return true;
+        return levenshtein(a, b) <= 2;
+    }
+
+    function filterByCapsule(capsuleText, el) {
+        if (activeCapsuleFilter === capsuleText) {
+            activeCapsuleFilter = null;
+        } else {
+            activeCapsuleFilter = capsuleText;
+        }
+        document.getElementById('searchInput').value = '';
+        render('');
+        event.stopPropagation();
+    }
+
+    function render(filter = "") {
+        const term = filter.toLowerCase();
+        ['audio', 'textbook', 'papers'].forEach(key => {
+            const grid = document.getElementById(`${key}-grid`);
+            let items = (APP_DATA[key] || []).filter(i => (i.title || '').toLowerCase().includes(term));
+            if (activeCapsuleFilter) {
+                items = items.filter(i => capsuleMatch(i.imf || '', activeCapsuleFilter));
+            }
+            const cntEl = document.getElementById(`${key}-count`);
+            if (cntEl) cntEl.textContent = items.length + ' items';
+            grid.innerHTML = items.map(item => {
+                const hasImf = (key === 'papers');
+                const isActiveCapsule = activeCapsuleFilter && capsuleMatch(item.imf || '', activeCapsuleFilter);
+                const capsule = hasImf && item.imf
+                    ? `<div class="item-capsule${isActiveCapsule ? ' capsule-active' : ''}" onclick="filterByCapsule('${escapeJs(item.imf)}', this)">${escapeHtml(item.imf)}</div>`
+                    : '';
+                const cover = item.cover || '';
+                const file = item.file || '';
+                const title = item.title || '';
+                return `
+                <div class="media-card" onclick="openItem('${key}', '${file}', '${escapeJs(title)}', '${cover}')">
+                    <div class="card-img-wrap"><img src="${cover}" loading="lazy" alt="${escapeHtml(title)}"></div>
+                    <div class="card-info">
+                        <div class="card-title">${escapeHtml(title)}</div>
+                        ${capsule}
+                    </div>
+                </div>`;
+            }).join('');
+            const isEmpty = items.length === 0 && (filter || activeCapsuleFilter);
+            if (isEmpty) {
+                grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">🔍</div><h3>No results</h3><p>Try a different keyword</p></div>`;
+            }
+        });
+
+        const coursesGrid = document.getElementById('courses-grid');
+        let courseItems = (APP_DATA.courses || []).filter(i => (i.title || '').toLowerCase().includes(term));
+        if (activeCapsuleFilter) {
+            courseItems = courseItems.filter(i => capsuleMatch(i.imf || '', activeCapsuleFilter));
+        }
+        const coursesCnt = document.getElementById('courses-count');
+        if (coursesCnt) coursesCnt.textContent = courseItems.length + ' items';
+        coursesGrid.innerHTML = courseItems.map(item => {
+            const isActiveCapsule = activeCapsuleFilter && capsuleMatch(item.imf || '', activeCapsuleFilter);
+            const capsule = item.imf
+                ? `<div class="yt-card-capsule${isActiveCapsule ? ' capsule-active' : ''}" onclick="filterByCapsule('${escapeJs(item.imf)}', this)">${escapeHtml(item.imf)}</div>`
+                : '';
+            const cover = item.cover || '';
+            const file = item.file || '';
+            const title = item.title || '';
+            return `
+            <div class="yt-media-card" onclick="openYTVideo('${file}', '${escapeJs(title)}')">
+                <div class="yt-card-thumb-wrapper"><img src="${cover}" loading="lazy" alt="${escapeHtml(title)}"></div>
+                <div class="yt-card-info">
+                    <div class="yt-card-content">
+                        <div>
+                            <div class="yt-card-title">${escapeHtml(title)}</div>
+                            <div class="yt-card-meta">YouTube Video</div>
+                        </div>
+                        ${capsule}
+                    </div>
+                </div>
+            </div>`;
+        }).join('');
+        const isCoursesEmpty = courseItems.length === 0 && (filter || activeCapsuleFilter);
+        if (isCoursesEmpty) {
+            coursesGrid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">🔍</div><h3>No results</h3><p>Try a different keyword</p></div>`;
+        }
+
+        let blogItems = (APP_DATA.blog || []).filter(i => (i.title || '').toLowerCase().includes(term));
+        if (activeCapsuleFilter) {
+            blogItems = blogItems.filter(i => capsuleMatch(i.imf || '', activeCapsuleFilter));
+        }
+        const blogCnt = document.getElementById('blog-count');
+        if (blogCnt) blogCnt.textContent = blogItems.length + ' posts';
+        document.getElementById('blog-list').innerHTML = blogItems.map(item => {
+            const isActiveCapsule = activeCapsuleFilter && capsuleMatch(item.imf || '', activeCapsuleFilter);
+            const imf = item.imf
+                ? `<div class="item-capsule${isActiveCapsule ? ' capsule-active' : ''}" onclick="filterByCapsule('${escapeJs(item.imf)}', this)">${escapeHtml(item.imf)}</div>`
+                : '';
+            const file = item.file || '';
+            const title = item.title || '';
+            return `
+            <div class="blog-item" onclick="openItem('blog', '${file}', '${escapeJs(title)}', null)">
+                <div>
+                    <span class="blog-tag">Read</span>
+                    <div class="blog-title">${escapeHtml(title)}</div>
+                    ${imf}
+                </div>
+                <i data-feather="arrow-right" class="blog-arrow" style="width:16px; height:16px;"></i>
+            </div>`;
+        }).join('');
+        if (blogItems.length === 0 && (filter || activeCapsuleFilter)) {
+            document.getElementById('blog-list').innerHTML = `<div class="empty-state"><div class="empty-state-icon">🔍</div><h3>No results</h3><p>Try a different keyword</p></div>`;
+        }
+        feather.replace();
+    }
+
+    function renderProgress() {
+        let total = 0, opened = 0;
+        ['audio','textbook','papers','blog','courses'].forEach(k => {
+            const cnt = (APP_DATA[k] || []).length;
+            total += cnt;
+            opened += (PROGRESS.opened[k] || []).length;
+        });
+        const pct = total > 0 ? Math.round((opened / total) * 100) : 0;
+
+        document.getElementById('statTotal').textContent = total;
+        document.getElementById('statOpened').textContent = opened;
+        document.getElementById('statAudio').innerHTML = (PROGRESS.audioPlayed.length) + ' <span>tracks</span>';
+
+        const circumference = 2 * Math.PI * 35;
+        const offset = circumference - (pct / 100) * circumference;
+        const ring = document.getElementById('ringFill');
+        ring.style.strokeDasharray = circumference;
+        setTimeout(() => {
+            ring.style.strokeDashoffset = offset;
+            document.getElementById('ringPct').textContent = pct + '%';
+        }, 300);
+
+        document.getElementById('streakDays').textContent = PROGRESS.streak.days || 0;
+        const thisWeekTotal = (PROGRESS.weeklyData || []).reduce((a,b) => a + b, 0);
+        document.getElementById('streakItems').textContent = thisWeekTotal;
+        document.getElementById('streakMins').textContent = Math.round(PROGRESS.totalMins || 0);
+
+        const days = ['S','M','T','W','T','F','S'];
+        const todayIdx = new Date().getDay();
+        const maxVal = Math.max(...(PROGRESS.weeklyData || [1]), 1);
+        document.getElementById('weeklyBars').innerHTML = days.map((d, i) => {
+            const val = (PROGRESS.weeklyData || [])[i] || 0;
+            const h = Math.max(8, Math.round((val / maxVal) * 60));
+            const isToday = i === todayIdx;
+            const hasData = val > 0;
+            return `
+            <div class="bar-col">
+                <div class="bar-fill-wrap">
+                    <div class="bar-fill ${isToday ? 'active-day' : (hasData ? 'has-data' : '')}" style="height:${h}px;"></div>
+                </div>
+                <div class="bar-day" style="${isToday ? 'color:var(--primary);' : ''}">${d}</div>
+            </div>`;
+        }).join('');
+
+        document.getElementById('goals-list').innerHTML = `
+            <div class="goal-item complete">
+                <span>📚 Read 2 papers</span>
+                <span style="font-weight:700;color:var(--primary);">Done</span>
+            </div>
+            <div class="goal-item">
+                <span>🎵 Listen to 3 audios</span>
+                <span style="font-weight:600;color:var(--text-muted);">1/3</span>
+            </div>
+            <div class="goal-item">
+                <span>⏱️ 30 mins listening</span>
+                <span style="font-weight:600;color:var(--text-muted);">15/30</span>
+            </div>
+        `;
+
+        const typeLabel = { audio: 'Audio', textbook: 'Book', papers: 'Paper', blog: 'Blog', courses: 'Course' };
+        const badgeClass = { audio: 'audio', textbook: 'textbook', papers: 'papers', blog: 'blog', courses: 'courses' };
+        const allOpened = [];
+        Object.entries(PROGRESS.opened).forEach(([type, titles]) => {
+            titles.forEach(title => {
+                allOpened.unshift({ type, title, date: new Date().toLocaleDateString() });
+            });
+        });
+
+        document.getElementById('recent-activity').innerHTML = allOpened.slice(0, 8).map(item => `
+            <div class="activity-item">
+                <div class="activity-info">
+                    <div class="activity-title">${escapeHtml(item.title)}</div>
+                    <div class="activity-meta">Opened · ${typeLabel[item.type] || item.type}</div>
+                </div>
+                <span class="activity-badge ${badgeClass[item.type] || ''}">${typeLabel[item.type] || item.type}</span>
+            </div>`).join('');
+        feather.replace();
+    }
+
+    function setupAudioListeners() {
+        audio.addEventListener('timeupdate', () => {
+            if (!isDragging && audio.duration) {
+                const pct = (audio.currentTime / audio.duration) * 100;
+                document.getElementById('progFill').style.width = pct + '%';
+                document.getElementById('currTime').innerText = fmt(audio.currentTime);
+                document.getElementById('durTime').innerText = fmt(audio.duration);
+            }
+        });
+        audio.addEventListener('play', () => {
+            updateIcons(true);
+            document.getElementById('miniPlayer').style.display = 'flex';
+            document.getElementById('eqWrap').classList.remove('paused');
+            audio._trackInterval = setInterval(() => {
+                PROGRESS.totalMins = (PROGRESS.totalMins || 0) + (1/60);
+                saveProgress();
+            }, 1000);
+        });
+        audio.addEventListener('pause', () => {
+            updateIcons(false);
+            document.getElementById('eqWrap').classList.add('paused');
+            clearInterval(audio._trackInterval);
+        });
+        audio.addEventListener('ended', () => {
+            updateIcons(false);
+            document.getElementById('eqWrap').classList.add('paused');
+            clearInterval(audio._trackInterval);
+        });
+        audio.addEventListener('stalled', () => updateIcons(!audio.paused && !audio.ended));
+        audio.addEventListener('abort', () => updateIcons(false));
+    }
+
+    function setupSeek() {
+        const h = document.getElementById('seekHandler');
+        const handle = (e) => {
+            const r = h.getBoundingClientRect();
+            const x = e.touches ? e.touches[0].clientX : e.clientX;
+            const pct = Math.max(0, Math.min(1, (x - r.left) / r.width));
+            document.getElementById('progFill').style.width = (pct * 100) + '%';
+            if (audio.duration) document.getElementById('currTime').innerText = fmt(pct * audio.duration);
+            return pct;
+        };
+        h.addEventListener('mousedown', e => { isDragging = true; handle(e); });
+        window.addEventListener('mousemove', e => { if (isDragging) handle(e); });
+        window.addEventListener('mouseup', e => { if (isDragging) { audio.currentTime = handle(e) * audio.duration; isDragging = false; } });
+        h.addEventListener('touchstart', e => { isDragging = true; handle(e); });
+        h.addEventListener('touchmove', e => { if (isDragging) handle(e); });
+        h.addEventListener('touchend', e => { if (isDragging) { audio.currentTime = handle(e) * audio.duration; isDragging = false; } });
+    }
+
+    function togglePlay() {
+        if (audio.paused) {
+            audio.play().catch(() => showToast('Tap to start playback'));
+        } else {
+            audio.pause();
+        }
+    }
+
+    function updateIcons(isPlaying) {
+        try {
+            document.getElementById('p-mini-icon').src = isPlaying ? PAUSE_SRC : PLAY_SRC;
+            document.getElementById('p-full-icon').src = isPlaying ? PAUSE_SRC : PLAY_SRC;
+        } catch (e) {}
+    }
+
+    function fmt(s) { return Math.floor(s / 60) + ":" + ("0" + Math.floor(s % 60)).slice(-2); }
+    function skip(s) { audio.currentTime += s; }
+
+    function switchTab(id, el) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-item').forEach(t => t.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        el.classList.add('active');
+        if (id === 'progress-section') renderProgress();
+    }
+
+    function openFullAudio() { document.getElementById('fullAudioPlayer').style.display = 'flex'; }
+    function closeFullAudio() { document.getElementById('fullAudioPlayer').style.display = 'none'; }
+    function closeDoc() { document.getElementById('docViewer').style.display = 'none'; document.getElementById('docFrame').src = ""; }
+    function globalSearch() { activeCapsuleFilter = null; render(document.getElementById('searchInput').value); }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+    function escapeJs(str) {
+        if (!str) return '';
+        return String(str).replace(/'/g, "\\'");
+    }
+
+    function openItem(type, file, title, cover) {
+        trackOpen(type, title);
+        if (type === 'audio') {
+            document.getElementById('m-img').src = document.getElementById('fa-img').src = cover || '';
+            document.getElementById('m-title').innerText = document.getElementById('fa-title').innerText = title || '';
+            document.getElementById('miniPlayer').style.display = 'flex';
+            audio.src = file || '';
+            audio.play().catch(() => {
+                updateIcons(false);
+                showToast('Tap play to start audio');
+            });
+            showToast(`▶ ${title}`);
+        } else if (type === 'courses') {
+            showToast(`Opening: ${title}`);
+            const courseUrl = `n.html?video=${encodeURIComponent(file)}&title=${encodeURIComponent(title)}`;
+            document.getElementById('doc-title').innerText = title;
+            document.getElementById('docFrame').src = courseUrl;
+            document.getElementById('docViewer').style.display = 'flex';
+        } else {
+            if (type === 'blog') {
+                if (!file) { showToast('No link available', true); return; }
+                const docRe = /\.(pdf|docx?|pptx?|xlsx?|xls|odt|rtf)(\?|#|$)/i;
+                if (docRe.test(file)) {
+                    const url = `https://docs.google.com/gview?url=${encodeURIComponent(file)}&embedded=true`;
+                    document.getElementById('doc-title').innerText = title;
+                    document.getElementById('docFrame').src = url;
+                    document.getElementById('docViewer').style.display = 'flex';
+                } else {
+                    window.open(file, '_blank');
+                }
+            } else {
+                const url = `https://docs.google.com/gview?url=${encodeURIComponent(file)}&embedded=true`;
+                document.getElementById('doc-title').innerText = title;
+                document.getElementById('docFrame').src = url;
+                document.getElementById('docViewer').style.display = 'flex';
+            }
+        }
+    }
+
+    function openYTVideo(file, title) {
+        trackOpen('courses', title);
+        if (!file) { showToast('No video link available', true); return; }
+        showToast(`Opening: ${title}`);
+        const playerUrl = `n.html?video=${encodeURIComponent(file)}&title=${encodeURIComponent(title)}`;
+        window.location.href = playerUrl;
+    }
+
+    function updateOnlineStatus() {
+        const modal = document.getElementById('offlineModal');
+        if (!navigator.onLine) {
+            modal.style.display = 'flex';
+            showToast('You are offline', true);
+        } else {
+            modal.style.display = 'none';
+        }
+    }
+    window.addEventListener('online', () => { updateOnlineStatus(); fetchAllData(); showToast('Back online ✓'); });
+    window.addEventListener('offline', () => updateOnlineStatus());
+
+    function retryOnline() {
+        if (navigator.onLine) { document.getElementById('offlineModal').style.display = 'none'; fetchAllData(); showToast('Retrying...'); }
+        else showToast('Still offline', true);
+    }
+    function dismissOffline() { document.getElementById('offlineModal').style.display = 'none'; }
+
+    async function fetchAllData() {
+        const sections = ['audio', 'textbook', 'papers', 'blog', 'courses'];
+        
+        // Get quiz answers if available
+        let answers = {};
+        try {
+            const saved = localStorage.getItem('anxAnswers');
+            if (saved) answers = JSON.parse(saved);
+        } catch (e) {
+            console.log('No quiz answers found, loading normal order');
+        }
+        
+        for (const s of sections) {
+            try {
+                const res = await fetch(`${s}.json`);
+                if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+                let data = await res.json();
+                
+                // Smart sort if quiz answers exist
+                if (Object.keys(answers).length > 0 && window.smartSortJson) {
+                    const result = smartSortJson(answers, data, s);
+                    data = result.sorted;
+                    console.log(`✓ Sorted ${s}: ${result.unitCount} units, top score: ${result.topScore}`);
+                }
+                
+                APP_DATA[s] = data;
+            } catch (e) {
+                showToast(`Failed to load ${s}`, true);
+            }
+        }
+        render();
+    }
+
+    function showToast(msg, isErr = false) {
+        const c = document.getElementById('toast-container');
+        const d = document.createElement('div');
+        d.className = 'toast';
+        if (isErr) d.style.borderLeftColor = '#ff4d4d';
+        d.innerHTML = `<span>${msg}</span>`;
+        c.appendChild(d);
+        setTimeout(() => { d.style.opacity = '0'; d.style.transform = 'translateY(8px) scale(0.95)'; d.style.transition = 'all 0.3s'; setTimeout(() => d.remove(), 300); }, 3000);
+    }
+
+    init();
+</script>
+</body>
+</html>

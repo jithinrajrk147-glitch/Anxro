@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emerald Skeleton Merge</title>
+    <style>
+        :root {
+            /* Emerald Palette */
+            --emerald-bg: #ecfdf5;
+            --emerald-dark: #064e3b;
+            --skeleton-dim: #769863;
+            
+            /* Logo Positions */
+            --pos-apart: 25px; 
+            --pos-touch: 36px;   
+            --pos-merge: 45px;  
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            background-color: var(--emerald-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: sans-serif;
+        }
+
+        /* SKELETON LOADING BACKGROUND */
+        .skeleton-container {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            grid-template-columns: repeat(5, 3fr);
+            grid-template-rows: repeat(10, fr);
+            gap: 20px;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        .skeleton-box {
+            background: var(--skeleton-dim);
+            border-radius: 8px;
+            animation: pulse 1.8s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* EMERALD BLUR LAYER */
+        .blur-layer {
+            position: absolute;
+            inset: 0;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 2;
+        }
+
+        /* LOADER STAGE */
+        .loader-stage {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Moves the logo interaction slightly higher */
+            margin-top: -50px; 
+        }
+
+        .logo-part {
+            position: absolute;
+            width: 110px;
+            height: auto;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            will-change: transform;
+        }
+
+        #left {
+            right: 50%;
+            transform: translateX(var(--pos-apart));
+        }
+
+        #right {
+            left: 50%;
+            transform: scaleX(-1) translateX(var(--pos-apart));
+        }
+
+        /* CUSTOM SAVE POP-UP */
+        .custom-popup {
+            position: fixed;
+            bottom: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--emerald-dark);
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: bottom 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 100;
+        }
+
+        .popup-active { bottom: 40px; }
+    </style>
+</head>
+<body>
+
+    <div class="skeleton-container">
+        <div class="skeleton-box" style="grid-column: span 4; height: 50px;"></div>
+        <div class="skeleton-box"></div><div class="skeleton-box"></div>
+        <div class="skeleton-box"></div><div class="skeleton-box"></div>
+        <div class="skeleton-box" style="grid-column: span 2;"></div>
+        <div class="skeleton-box" style="grid-column: span 2;"></div>
+    </div>
+
+    <div class="blur-layer"></div>
+
+    <div class="loader-stage">
+        <img src="load1.png" id="left" class="logo-part">
+        <img src="load1.png" id="right" class="logo-part">
+    </div>
+
+    
+
+    <script>
+        const left = document.getElementById('left');
+        const right = document.getElementById('right');
+        const popup = document.getElementById('save-popup');
+
+        let isLoading = true;
+        let toggle = true;
+
+        // Oscillation (The Struggle)
+        const loadingInterval = setInterval(() => {
+            if (!isLoading) return;
+            const currentPos = toggle ? 'var(--pos-touch)' : 'var(--pos-apart)';
+            left.style.transform = `translateX(${currentPos})`;
+            right.style.transform = `scaleX(-1) translateX(${currentPos})`;
+            toggle = !toggle;
+        }, 800); 
+
+        // Final Merge
+        setTimeout(() => {
+            isLoading = false;
+            clearInterval(loadingInterval);
+            
+            left.style.transition = "transform 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+            right.style.transition = "transform 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+            
+            left.style.transform = `translateX(var(--pos-merge))`;
+            right.style.transform = `scaleX(-1) translateX(var(--pos-merge))`;
+
+            setTimeout(() => {
+                popup.classList.add('popup-active');
+            }, 800);
+        }, 3000);
+    </script>
+</body>
+</html>

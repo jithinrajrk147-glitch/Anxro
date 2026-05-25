@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hashtag Generator – Premium UI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #0f0f10, #1c1c1e, #111);
+        font-family: 'Arial';
+        color: #fff;
+        min-height: 100vh;
+    }
+
+    .container {
+        max-width: 500px;
+        margin: 50px auto;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        background: rgba(255, 255, 255, 0.06);
+        padding: 20px;
+        border-radius: 18px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255,255,255,0.1);
+        animation: fadeIn 0.5s ease;
+    }
+
+    input, select {
+        width: 90%;
+        padding: 14px;
+        margin-top: 12px;
+        margin-bottom: 12px;
+        border-radius: 14px;
+        border: none;
+        font-size: 17px;
+        outline: none;
+        background: rgba(255,255,255,0.15);
+        color: #fff;
+        backdrop-filter: blur(5px);
+    }
+
+    #btn {
+        width: 100%;
+        padding: 15px;
+        margin-top: 10px;
+        background: #007bff;
+        border: none;
+        border-radius: 14px;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    #btn:hover {
+        background: #005ed1;
+    }
+
+    #output {
+        margin-top: 20px;
+        background: rgba(255,255,255,0.10);
+        padding: 18px;
+        border-radius: 14px;
+        font-size: 15px;
+        line-height: 1.7;
+        border: 1px solid rgba(255,255,255,0.12);
+        word-break: break-word;
+        color: #fff;
+        animation: fadeIn 0.4s ease;
+    }
+
+    .copyBtn {
+        width: 100%;
+        margin-top: 12px;
+        padding: 13px;
+        background: #00d18f;
+        border: none;
+        border-radius: 14px;
+        color: #000;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .copyBtn:hover {
+        background: #00a871;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🔥 Hashtag Generator</h1>
+
+    <div class="card">
+        
+        <input type="text" id="keyword" placeholder="Enter keyword (ex: travel, gaming)">
+        
+        <select id="category">
+            <option value="">Select Category</option>
+            <option>Travel</option>
+            <option>Fitness</option>
+            <option>Gaming</option>
+            <option>Tech</option>
+            <option>Fashion</option>
+            <option>Food</option>
+            <option>Business</option>
+            <option>Meme</option>
+            <option>Music</option>
+        </select>
+
+        <button id="btn" onclick="generateTags()">Generate Hashtags</button>
+
+        <div id="output"></div>
+
+        <button class="copyBtn" onclick="copyTags()">Copy Hashtags</button>
+
+    </div>
+</div>
+
+<script>
+(function() {
+    // 1. Theme Detection & Sync
+    const savedTheme = localStorage.getItem('perfectTheme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    const applyForceTheme = (theme) => {
+        const isDark = theme === 'dark';
+        let style = document.getElementById("force-hashtag-emerald");
+        if (!style) {
+            style = document.createElement('style');
+            style.id = "force-hashtag-emerald";
+            document.head.appendChild(style);
+        }
+
+        if (isDark) {
+            style.innerHTML = `
+                body { background: #010d08 !important; color: #ecfdf5 !important; }
+                h1 { color: #10b981 !important; text-shadow: 0 0 10px rgba(16, 185, 129, 0.3) !important; }
+                .card { 
+                    background: #064e3b !important; 
+                    border: 1px solid rgba(16, 185, 129, 0.2) !important; 
+                    box-shadow: 0 8px 32px rgba(0,0,0,0.8) !important;
+                }
+                input, select { 
+                    background: #010d08 !important; 
+                    border: 1px solid #059669 !important; 
+                    color: #ecfdf5 !important; 
+                }
+                #btn { 
+                    background: linear-gradient(45deg, #059669, #10b981) !important; 
+                    color: #010d08 !important; 
+                    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3) !important;
+                }
+                #output { 
+                    background: rgba(1, 13, 8, 0.6) !important; 
+                    border-color: #10b981 !important; 
+                    color: #10b981 !important; 
+                    font-family: monospace !important;
+                }
+                .copyBtn { background: #ecfdf5 !important; color: #010d08 !important; }
+            `;
+        } else {
+            style.innerHTML = `
+                body { background: #f0fdf4 !important; color: #000000 !important; }
+                h1, .card, input, select, #output { color: #000000 !important; }
+                .card { background: #ffffff !important; border: 1px solid #059669 !important; box-shadow: none !important; }
+                input, select { background: #ffffff !important; border: 1px solid #059669 !important; }
+                #btn { background: #059669 !important; color: #ffffff !important; }
+                #output { background: #f0fdf4 !important; border-color: #059669 !important; font-weight: 600 !important; }
+                .copyBtn { background: #000000 !important; color: #ffffff !important; }
+                ::placeholder { color: #666 !important; }
+            `;
+        }
+    };
+
+    applyForceTheme(savedTheme);
+
+    // Auto-scroll to output when hashtags are generated
+    const originalGenerate = window.generateTags;
+    window.generateTags = async function() {
+        await originalGenerate();
+        document.getElementById('output').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    };
+})();
+
+// Local trending category tags
+const localTrending = {
+    "Travel": ["#wanderlust", "#travelgram", "#exploremore"],
+    "Fitness": ["#fitlife", "#gymmotivation", "#workoutdaily"],
+    "Gaming": ["#gamerlife", "#gamingcommunity", "#pcgaming"],
+    "Tech": ["#technews", "#futuretech", "#gadgets"],
+    "Fashion": ["#ootd", "#style2025", "#streetfashion"],
+    "Food": ["#foodie", "#tastytreats", "#yummy"],
+    "Business": ["#startup2025", "#entrepreneur", "#businessideas"],
+    "Meme": ["#memesdaily", "#lolzone", "#funny"],
+    "Music": ["#musiclover", "#beatszone", "#newmusic2025"]
+};
+
+// Free online API (NO KEY)
+async function fetchFreeAPITrendingTags() {
+    try {
+        let response = await fetch("https://dummyjson.com/posts");
+        let data = await response.json();
+
+        let apiTags = [];
+
+        data.posts.forEach(post => {
+            post.tags.forEach(t => apiTags.push("#" + t.toLowerCase().replace(/\s+/g, "")));
+        });
+
+        return [...new Set(apiTags)];
+    } 
+    catch {
+        return ["#viral", "#trending", "#popular"];
+    }
+}
+
+async function generateTags() {
+    let kw = document.getElementById("keyword").value.trim();
+    let cat = document.getElementById("category").value;
+
+    if (!kw) {
+        alert("Enter a keyword");
+        return;
+    }
+
+    let base = [
+        `#${kw}`, `#${kw}reels`, `#${kw}shorts`, `#${kw}viral`,
+        `#${kw}trend`, `#${kw}2025`, `#${kw}video`
+    ];
+
+    let categoryTags = cat ? localTrending[cat] : [];
+
+    let apiTags = await fetchFreeAPITrendingTags();
+
+    let final = [...base, ...categoryTags, ...apiTags];
+
+    document.getElementById("output").innerText = final.join(" ");
+}
+
+function copyTags() {
+    let text = document.getElementById("output").innerText;
+    navigator.clipboard.writeText(text);
+    alert("Copied!");
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Terms & Conditions | Anxro</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:          #020a07;
+  --bg2:         #051410;
+  --surface:     #0a1f17;
+  --surface2:    #0f2a1f;
+  --emerald:     #10b981;
+  --emerald-light: #34d399;
+  --emerald-dim: rgba(16,185,129,0.12);
+  --emerald-glow: rgba(16,185,129,0.3);
+  --jade:        #059669;
+  --white:       #f8fafc;
+  --white-dim:   #cbd5e1;
+  --white-muted: #94a3b8;
+  --border:      rgba(255,255,255,0.06);
+  --border-emerald: rgba(16,185,129,0.25);
+  --glass:       rgba(10,31,23,0.7);
+  --ff-display:  'Sora', sans-serif;
+  --ff-body:     'Outfit', sans-serif;
+  --ff-mono:     'JetBrains Mono', monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--ff-body);
+  background:var(--bg);
+  color:var(--white);
+  min-height:100vh;
+  line-height:1.75;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 10% -10%,rgba(16,185,129,0.08) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 40% at 90% 110%,rgba(5,150,105,0.06) 0%,transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M0 40h80M40 0v80' stroke='rgba(255,255,255,0.015)' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+/* HEADER */
+.header{position:sticky;top:0;z-index:200;background:rgba(2,10,7,0.8);backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--border-emerald);}
+.header-inner{max-width:900px;margin:0 auto;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand-mark img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius:12px;
+  box-shadow:0 0 20px var(--emerald-glow);
+}
+.brand-text{display:flex;flex-direction:column;}
+.brand-name{font-family:var(--ff-display);font-size:1.2rem;font-weight:700;color:var(--white);line-height:1.1;}
+.brand-sub{font-size:0.58rem;color:var(--emerald-light);letter-spacing:3px;text-transform:uppercase;font-family:var(--ff-mono);}
+.header-badge{background:var(--emerald-dim);border:1px solid var(--border-emerald);border-radius:24px;padding:5px 12px;font-size:0.62rem;color:var(--emerald-light);font-family:var(--ff-mono);white-space:nowrap;backdrop-filter:blur(10px);}
+
+/* HERO */
+.hero-band{background:linear-gradient(135deg,#051410 0%,#0a1f17 50%,#072219 100%);border-bottom:1px solid var(--border);padding:40px 20px 32px;text-align:center;position:relative;overflow:hidden;}
+.hero-band::before{content:'';position:absolute;top:-50px;left:50%;transform:translateX(-50%);width:400px;height:160px;background:radial-gradient(ellipse,rgba(16,185,129,0.15) 0%,transparent 70%);pointer-events:none;filter:blur(20px);}
+.hero-title{font-family:var(--ff-display);font-size:2rem;font-weight:700;color:var(--white);letter-spacing:-0.5px;margin-bottom:8px;position:relative;}
+.hero-title span{background:linear-gradient(90deg,var(--emerald),var(--emerald-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-desc{font-size:0.8rem;color:var(--white-muted);letter-spacing:0.5px;}
+
+/* MAIN */
+main{max-width:900px;margin:0 auto;padding:24px 16px 120px;}
+
+/* TOC */
+.toc-wrap{background:var(--glass);backdrop-filter:blur(16px);border-radius:20px;border:1px solid var(--border-emerald);overflow:hidden;margin-bottom:24px;position:relative;box-shadow:0 8px 32px rgba(0,0,0,0.4);}
+.toc-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--emerald),var(--jade),transparent);}
+.toc-head{padding:16px 20px 12px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);}
+.toc-head i{color:var(--emerald);font-size:0.85rem;}
+.toc-label{font-family:var(--ff-mono);font-size:0.6rem;color:var(--white-muted);letter-spacing:2.5px;text-transform:uppercase;}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;padding:14px;gap:6px;}
+.toc-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;text-decoration:none;color:var(--white-dim);font-size:0.78rem;font-weight:500;transition:all 0.2s;border:1px solid transparent;}
+.toc-item:hover,.toc-item:active{background:var(--emerald-dim);border-color:var(--border-emerald);color:var(--emerald-light);transform:translateX(2px);}
+.toc-n{font-family:var(--ff-mono);font-size:0.56rem;color:var(--emerald);opacity:0.8;min-width:18px;}
+
+/* CARDS */
+.card{background:var(--glass);backdrop-filter:blur(16px);border-radius:20px;padding:24px 22px;margin-bottom:14px;border:1px solid var(--border);position:relative;overflow:hidden;transition:all 0.3s;animation:fadeUp 0.5s ease both;box-shadow:0 4px 24px rgba(0,0,0,0.3);}
+.card:hover{border-color:var(--border-emerald);transform:translateY(-2px);box-shadow:0 8px 32px rgba(16,185,129,0.15);}
+.card.accent{border-color:var(--border-emerald);background:linear-gradient(145deg,rgba(10,31,23,0.9),rgba(15,42,31,0.9));}
+.card.accent::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--emerald),var(--emerald-light) 50%,transparent);}
+.card-tag{display:inline-block;font-family:var(--ff-mono);font-size:0.55rem;color:var(--emerald);letter-spacing:3px;text-transform:uppercase;opacity:0.7;margin-bottom:8px;}
+.card h2{font-family:var(--ff-display);font-size:1.1rem;font-weight:600;color:var(--white);margin-bottom:14px;display:flex;align-items:center;gap:12px;line-height:1.3;}
+.ico{width:36px;height:36px;background:var(--emerald-dim);border:1px solid var(--border-emerald);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--emerald-light);font-size:0.8rem;flex-shrink:0;backdrop-filter:blur(10px);}
+
+/* TEXT */
+p{font-size:0.88rem;color:var(--white-dim);line-height:1.85;margin-bottom:11px;}
+p:last-child{margin-bottom:0;}
+p strong{color:var(--white);font-weight:600;}
+
+/* LISTS */
+.list{list-style:none;margin:10px 0;}
+.list li{font-size:0.87rem;color:var(--white-dim);padding:8px 0 8px 26px;position:relative;border-bottom:1px solid rgba(255,255,255,0.03);line-height:1.75;}
+.list li:last-child{border-bottom:none;}
+.list li::before{content:'◆';position:absolute;left:6px;top:12px;color:var(--emerald);font-size:0.4rem;opacity:0.9;}
+.list li strong{color:var(--white);font-weight:600;}
+
+/* SUB HEADING */
+.sub-h{font-size:0.76rem;font-weight:600;color:var(--emerald-light);letter-spacing:0.6px;margin:16px 0 7px;display:flex;align-items:center;gap:8px;}
+.sub-h::before{content:'';width:16px;height:2px;background:var(--emerald);opacity:0.6;border-radius:2px;}
+
+/* CALLOUT */
+.callout{background:rgba(16,185,129,0.08);border:1px solid var(--border-emerald);border-radius:12px;padding:14px 16px;margin-top:14px;backdrop-filter:blur(10px);}
+.callout.warn{background:rgba(16,185,129,0.1);border-color:var(--border-emerald);}
+.callout p{font-size:0.82rem;color:var(--white-dim);margin:0;}
+.callout p i{color:var(--emerald);margin-right:7px;}
+.callout a{color:var(--emerald-light);text-decoration:none;font-weight:600;}
+
+/* FOUNDER */
+.founder-card{background:linear-gradient(145deg,rgba(15,42,31,0.9),rgba(10,31,23,0.9));backdrop-filter:blur(16px);border-radius:20px;border:1px solid var(--border-emerald);padding:24px 22px;margin-bottom:14px;position:relative;overflow:hidden;animation:fadeUp 0.5s ease both;box-shadow:0 4px 24px rgba(0,0,0,0.3);}
+.founder-card::before{content:'';position:absolute;top:-70px;right:-70px;width:200px;height:200px;background:radial-gradient(circle,rgba(16,185,129,0.1) 0%,transparent 70%);pointer-events:none;filter:blur(20px);}
+.founder-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--emerald),var(--emerald-light) 40%,transparent);}
+.f-row{display:flex;align-items:center;gap:16px;margin-bottom:18px;}
+.f-avatar{width:62px;height:62px;background:linear-gradient(135deg,#0a1f17,#0f2a1f);border:2px solid var(--border-emerald);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 0 30px var(--emerald-glow);flex-shrink:0;}
+.f-info h3{font-family:var(--ff-display);font-size:1.1rem;font-weight:600;color:var(--white);margin-bottom:4px;}
+.f-info .role{font-family:var(--ff-mono);font-size:0.61rem;color:var(--emerald-light);letter-spacing:2px;text-transform:uppercase;}
+
+/* CONTACT */
+.links{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
+.lnk{display:flex;align-items:center;gap:14px;background:rgba(16,185,129,0.06);border:1px solid var(--border-emerald);padding:14px 18px;border-radius:14px;color:var(--white);text-decoration:none;font-weight:500;font-size:0.87rem;transition:all 0.25s;backdrop-filter:blur(10px);}
+.lnk i{color:var(--emerald-light);font-size:0.95rem;flex-shrink:0;}
+.lnk:hover,.lnk:active{background:var(--emerald-dim);transform:translateX(6px);box-shadow:0 0 20px var(--emerald-glow);}
+.lnk .sub{display:block;font-size:0.71rem;color:var(--white-muted);font-weight:400;margin-top:2px;}
+
+/* DIVIDER */
+.divider{display:flex;align-items:center;gap:14px;margin:26px 0 18px;font-family:var(--ff-mono);font-size:0.56rem;color:var(--white-muted);letter-spacing:3px;text-transform:uppercase;}
+.divider::before,.divider::after{content:'';flex:1;height:1px;}
+.divider::before{background:linear-gradient(90deg,transparent,var(--border-emerald));}
+.divider::after{background:linear-gradient(90deg,var(--border-emerald),transparent);}
+
+/* FOOTER */
+footer{max-width:900px;margin:0 auto;padding:28px 20px;text-align:center;border-top:1px solid var(--border);font-size:0.76rem;color:var(--white-muted);}
+footer .fl{font-family:var(--ff-display);font-size:1.05rem;font-weight:600;color:var(--emerald-light);margin-bottom:6px;}
+
+/* ANIMATION */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:480px){
+  .toc-grid{grid-template-columns:1fr;}
+  .hero-title{font-size:1.6rem;}
+  main{padding:20px 14px 120px;}
+  .header-inner{padding:14px 16px;}
+  .card{padding:20px 18px;}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-mark"><img src="anxro-logo.png" alt="logo"></div>
+      <div class="brand-text">
+        <span class="brand-name">Anxro</span>
+        <span class="brand-sub">by Black Strings</span>
+      </div>
+    </div>
+    <div class="header-badge">v2.0 · Jun 2025</div>
+  </div>
+</header>
+
+<div class="hero-band">
+  <div class="hero-title">Terms &amp; <span>Conditions</span></div>
+  <div class="hero-desc">Please read these terms carefully before using the Anxro application</div>
+</div>
+
+<main>
+
+  <div class="card accent" style="margin-top:4px;">
+    <p>Welcome to <strong>Anxro</strong> — an all-in-one learning and productivity Progressive Web App developed and owned by <strong>Black Strings</strong>. By accessing or using this application, you agree to be fully bound by these Terms &amp; Conditions. If you disagree with any part, please discontinue use immediately.</p>
+    <p>These terms govern all use of the Anxro app, whether via web browser, installed as a PWA, or accessed through any affiliated platform.</p>
+    <div class="callout warn">
+      <p><i class="fa fa-globe"></i> Official App: <a href="https://jithinrajrk147-glitch.github.io/Anxro/" target="_blank">jithinrajrk147-glitch.github.io/Anxro</a></p>
+    </div>
+  </div>
+
+  <div class="toc-wrap">
+    <div class="toc-head"><i class="fa fa-list-ul"></i><span class="toc-label">Table of Contents</span></div>
+    <div class="toc-grid">
+      <a href="#s1"  class="toc-item"><span class="toc-n">01</span> Acceptance of Terms</a>
+      <a href="#s2"  class="toc-item"><span class="toc-n">02</span> About Anxro</a>
+      <a href="#s3"  class="toc-item"><span class="toc-n">03</span> About the Founder</a>
+      <a href="#s4"  class="toc-item"><span class="toc-n">04</span> Features &amp; Tools</a>
+      <a href="#s5"  class="toc-item"><span class="toc-n">05</span> Acceptable Use</a>
+      <a href="#s6"  class="toc-item"><span class="toc-n">06</span> User Data &amp; Privacy</a>
+      <a href="#s7"  class="toc-item"><span class="toc-n">07</span> Intellectual Property</a>
+      <a href="#s8"  class="toc-item"><span class="toc-n">08</span> Paper Trading</a>
+      <a href="#s9"  class="toc-item"><span class="toc-n">09</span> Educational Content</a>
+      <a href="#s10" class="toc-item"><span class="toc-n">10</span> AI &amp; Third-Party APIs</a>
+      <a href="#s11" class="toc-item"><span class="toc-n">11</span> PWA &amp; Offline Use</a>
+      <a href="#s12" class="toc-item"><span class="toc-n">12</span> Disclaimers</a>
+      <a href="#s13" class="toc-item"><span class="toc-n">13</span> Limitation of Liability</a>
+      <a href="#s14" class="toc-item"><span class="toc-n">14</span> Modifications</a>
+      <a href="#s15" class="toc-item"><span class="toc-n">15</span> Governing Law</a>
+      <a href="#s16" class="toc-item"><span class="toc-n">16</span> Contact Us</a>
+    </div>
+  </div>
+
+  <div class="divider">Legal Terms</div>
+
+  <div class="card" id="s1">
+    <div class="card-tag">§ 01</div>
+    <h2><span class="ico"><i class="fa fa-check-circle"></i></span> Acceptance of Terms</h2>
+    <p>By downloading, installing, or using Anxro in any form, you confirm that:</p>
+    <ul class="list">
+      <li>You are at least <strong>13 years of age</strong>. Users under 18 should have parental or guardian consent.</li>
+      <li>You have read, understood, and agree to these Terms &amp; Conditions in their entirety.</li>
+      <li>You agree to comply with all applicable local, national, and international laws while using this application.</li>
+      <li>You acknowledge these terms form a legally binding agreement between you and Black Strings.</li>
+      <li>If using this app on behalf of an organization, you represent that you have authority to bind that entity.</li>
+    </ul>
+    <div class="callout"><p><i class="fa fa-info-circle"></i> Continued use of the app after any terms update implies acceptance of the revised terms.</p></div>
+  </div>
+
+  <div class="card" id="s2">
+    <div class="card-tag">§ 02</div>
+    <h2><span class="ico"><i class="fa fa-mobile-alt"></i></span> About Anxro</h2>
+    <p><strong>Anxro</strong> is an all-in-one learning and productivity Progressive Web App (PWA) developed by <strong>Black Strings</strong>, an independent software development entity based in India, designed for students, learners, and productivity enthusiasts across India and beyond.</p>
+    <ul class="list">
+      <li><strong>Platform Type:</strong> Progressive Web App (PWA) — installable on any device, works offline</li>
+      <li><strong>Primary Market:</strong> India — content available in Hindi and English</li>
+      <li><strong>Interface:</strong> Mobile-first, dark-themed, bottom navigation PWA</li>
+      <li><strong>Developed by:</strong> Black Strings (independent developer)</li>
+      <li><strong>Official URL:</strong> jithinrajrk147-glitch.github.io/Anxro</li>
+      <li><strong>Business Website:</strong> blackstring-offical.github.io/Black-string-/</li>
+      <li><strong>Target Audience:</strong> Students, self-learners, traders, and productivity users</li>
+    </ul>
+    <p>Anxro is free to use and does not require account creation or registration to access core features. All data is stored locally on your device.</p>
+  </div>
+
+  <div class="founder-card" id="s3">
+    <div class="card-tag">§ 03 · Founder</div>
+    <div class="f-row">
+      <div class="f-avatar">👨‍💻</div>
+      <div class="f-info">
+        <h3>Jithin</h3>
+        <span class="role">Founder &nbsp;·&nbsp; Black Strings &nbsp;·&nbsp; India</span>
+      </div>
+    </div>
+    <p><strong>Jithin</strong> is the sole founder, developer, and owner of both <strong>Anxro</strong> and its parent brand <strong>Black Strings</strong> — an independent developer based in India who builds and ships production-grade web applications primarily as lightweight, no-backend single-file HTML projects optimized for performance and accessibility.</p>
+    <p>Jithin conceived Anxro as a comprehensive all-in-one learning app for the Indian market — combining educational content, trading simulation, and productivity tools in a unified, free platform to empower students and self-learners.</p>
+    <div class="sub-h">Projects by Jithin</div>
+    <ul class="list">
+      <li><strong>Anxro</strong> — All-in-one learning &amp; productivity PWA (this app)</li>
+      <li><strong>EmbedAI</strong> — Free embeddable AI chat widget for websites</li>
+      <li><strong>DepthRoot AI</strong> — No-code chatbot builder platform</li>
+      <li><strong>LlamaChat</strong> — Mobile-optimized local LLM chat UI for llama.cpp</li>
+      <li><strong>FlipAnim Studio</strong> — Browser-based FlipaClip-style animation editor</li>
+      <li><strong>Designr</strong> — Canva-like browser design editor for logos &amp; banners</li>
+    </ul>
+    <div class="callout warn"><p><i class="fa fa-building"></i> <strong>Black Strings</strong> is the official business entity under which all of Jithin's apps and tools are developed and published.</p></div>
+  </div>
+
+  <div class="card" id="s4">
+    <div class="card-tag">§ 04</div>
+    <h2><span class="ico"><i class="fa fa-th-large"></i></span> Features &amp; Tools Covered</h2>
+    <p>These Terms apply to all features, tools, and modules within Anxro, including but not limited to:</p>
+    <div class="sub-h">📚 Learning &amp; Library</div>
+    <ul class="list">
+      <li><strong>Book Summaries Library</strong> — Original summaries of business, self-help, and educational books in Hindi and English. All summaries are original works.</li>
+      <li><strong>Audiobook Player</strong> — In-app audio playback for original audio summaries with progress tracking.</li>
+      <li><strong>Trading Education</strong> — Beginner-to-advanced trading course materials, all originally written.</li>
+      <li><strong>Learning Progress Tracker</strong> — Tracks reading and course completion progress locally on your device.</li>
+    </ul>
+    <div class="sub-h">📈 Trading &amp; Finance</div>
+    <ul class="list">
+      <li><strong>Paper Trading Simulator</strong> — Virtual stock trading in INR with drawing tools and chart analysis. Simulated funds only.</li>
+      <li><strong>Business Calculator Suite</strong> — Specialized calculators for profit/loss, margins, EMI, SIP, and more.</li>
+      <li><strong>Crypto Analysis Tools</strong> — Rule-based crypto analysis using CoinGecko market data (no real trading).</li>
+    </ul>
+    <div class="sub-h">🛠 Productivity &amp; Utilities</div>
+    <ul class="list">
+      <li><strong>Daily Diary / Journal</strong> — Private, locally stored personal diary with rich-text capabilities.</li>
+      <li><strong>AI-Powered Tools (14 Tools)</strong> — A suite of AI-assisted productivity tools built into the app.</li>
+      <li><strong>Unit Converters</strong> — Fast, offline-capable conversion utilities for various measurements.</li>
+    </ul>
+  </div>
+
+  <div class="card" id="s5">
+    <div class="card-tag">§ 05</div>
+    <h2><span class="ico"><i class="fa fa-shield-alt"></i></span> Acceptable Use</h2>
+    <p>You agree to use Anxro only for lawful purposes and in accordance with these Terms. You agree <strong>not to</strong>:</p>
+    <ul class="list">
+      <li>Use the app to violate any applicable local, national, or international law or regulation.</li>
+     </html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<title>QR Generator – Anxro</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root{--bg:#0d0d0f;--card:#1a1a1f;--card2:#202026;--accent:#f59e0b;--text:#f1f0ee;--muted:#6b6b78;--border:#2a2a32;--radius:16px;--nav-h:68px;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{min-height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;}
+body{padding-bottom:calc(var(--nav-h)+16px);}
+.topbar{position:sticky;top:0;z-index:100;background:rgba(13,13,15,.9);backdrop-filter:blur(18px);padding:14px 20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border);}
+.back-btn{width:36px;height:36px;border-radius:10px;background:var(--card2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;text-decoration:none;flex-shrink:0;}
+.back-btn svg{width:18px;height:18px;stroke:var(--text);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.topbar-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;}
+.page{padding:24px 16px;}
+.hero{text-align:center;margin-bottom:28px;}
+.hero-icon{font-size:52px;margin-bottom:12px;}
+.hero-title{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;margin-bottom:6px;}
+.hero-title span{background:linear-gradient(110deg,var(--accent),#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-sub{color:var(--muted);font-size:14px;}
+.input-group{margin-bottom:16px;}
+.input-label{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;display:block;}
+.input-wrap{background:var(--card);border:1px solid var(--border);border-radius:14px;display:flex;align-items:center;padding:14px 16px;gap:10px;transition:border-color .2s;}
+.input-wrap:focus-within{border-color:var(--accent);}
+.input-wrap input,.input-wrap textarea,.input-wrap select{flex:1;background:none;border:none;outline:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;}
+.input-wrap textarea{resize:vertical;min-height:80px;}
+.input-wrap select option{background:var(--card);}
+.type-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px;}
+.type-btn{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s;font-size:12px;font-weight:600;color:var(--muted);}
+.type-btn .type-icon{font-size:20px;display:block;margin-bottom:4px;}
+.type-btn.active{border-color:var(--accent);background:rgba(245,158,11,.08);color:var(--accent);}
+.size-row{display:flex;gap:8px;margin-bottom:20px;}
+.size-btn{flex:1;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px;text-align:center;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);transition:all .2s;}
+.size-btn.active{border-color:var(--accent);background:rgba(245,158,11,.08);color:var(--accent);}
+.color-row{display:flex;gap:12px;margin-bottom:24px;align-items:center;}
+.color-swatch{width:36px;height:36px;border-radius:10px;border:2px solid var(--border);cursor:pointer;transition:transform .15s;overflow:hidden;position:relative;}
+.color-swatch input[type=color]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;}
+.color-swatch.active{border-color:var(--accent);transform:scale(1.1);}
+.color-label{font-size:12px;color:var(--muted);}
+.gen-btn{width:100%;background:linear-gradient(110deg,var(--accent),#fb923c);color:#0d0d0f;border:none;border-radius:14px;padding:16px;font-family:'Syne',sans-serif;font-size:16px;font-weight:800;cursor:pointer;transition:opacity .2s;margin-bottom:24px;}
+.gen-btn:hover{opacity:.88;}
+.qr-result{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px 20px;text-align:center;display:none;margin-bottom:16px;}
+.qr-result.show{display:block;}
+#qrDisplay{display:inline-block;padding:16px;background:white;border-radius:12px;margin-bottom:16px;}
+.dl-row{display:flex;gap:10px;justify-content:center;}
+.dl-btn{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:10px 18px;font-size:13px;font-weight:600;color:var(--text);cursor:pointer;transition:background .2s;}
+.dl-btn:hover{background:rgba(245,158,11,.1);border-color:var(--accent);}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:var(--nav-h);z-index:200;background:rgba(13,13,15,.92);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-around;padding:0 8px;}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-decoration:none;color:var(--muted);font-size:10px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;padding:8px 4px;transition:color .2s;position:relative;}
+.nav-item.active{color:var(--accent);}
+.nav-item svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="home.html" class="back-btn"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></a>
+  <div class="topbar-title">QR Generator</div>
+</div>
+<div class="page">
+  <div class="hero">
+    <div class="hero-icon">📷</div>
+    <div class="hero-title">Generate <span>QR Codes</span></div>
+    <div class="hero-sub">URLs, text, WiFi, contact & more</div>
+  </div>
+
+  <span class="input-label">QR Type</span>
+  <div class="type-grid">
+    <div class="type-btn active" data-type="url"><span class="type-icon">🔗</span>URL</div>
+    <div class="type-btn" data-type="text"><span class="type-icon">📝</span>Text</div>
+    <div class="type-btn" data-type="email"><span class="type-icon">📧</span>Email</div>
+    <div class="type-btn" data-type="phone"><span class="type-icon">📞</span>Phone</div>
+    <div class="type-btn" data-type="wifi"><span class="type-icon">📶</span>WiFi</div>
+    <div class="type-btn" data-type="contact"><span class="type-icon">👤</span>Contact</div>
+  </div>
+
+  <div class="input-group">
+    <span class="input-label" id="inputLabel">Enter URL</span>
+    <div class="input-wrap">
+      <textarea id="qrInput" placeholder="https://example.com" rows="2"></textarea>
+    </div>
+  </div>
+
+  <span class="input-label">Size</span>
+  <div class="size-row">
+    <div class="size-btn" data-size="128">Small</div>
+    <div class="size-btn active" data-size="200">Medium</div>
+    <div class="size-btn" data-size="300">Large</div>
+    <div class="size-btn" data-size="400">XL</div>
+  </div>
+
+  <span class="input-label">Color</span>
+  <div class="color-row">
+    <div class="color-swatch active" style="background:#000000;" title="Dark">
+      <input type="color" id="fgColor" value="#000000"/>
+    </div>
+    <div class="color-swatch" style="background:#ffffff;" title="Light">
+      <input type="color" id="bgColor" value="#ffffff"/>
+    </div>
+    <span class="color-label">Tap to pick foreground / background color</span>
+  </div>
+
+  <button class="gen-btn" onclick="generateQR()">⚡ Generate QR Code</button>
+
+  <div class="qr-result" id="qrResult">
+    <div id="qrDisplay"></div>
+    <div class="dl-row">
+      <button class="dl-btn" onclick="downloadQR()">⬇ Download PNG</button>
+      <button class="dl-btn" onclick="copyQR()">📋 Copy</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+let qrSize = 200, activeType = 'url';
+const placeholders = {url:'https://example.com',text:'Enter your text here...',email:'mailto:you@email.com',phone:'tel:+919876543210',wifi:'WIFI:S:NetworkName;T:WPA;P:password;;',contact:'BEGIN:VCARD\nFN:Your Name\nTEL:+91XXXXXXXXXX\nEMAIL:you@email.com\nEND:VCARD'};
+const labels = {url:'Enter URL',text:'Enter Text',email:'Enter Email Address',phone:'Enter Phone Number',wifi:'WiFi Config (WIFI:S:Name;T:WPA;P:pass;;)',contact:'vCard Data'};
+
+document.querySelectorAll('.type-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.type-btn').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    activeType = b.dataset.type;
+    document.getElementById('qrInput').value = '';
+    document.getElementById('qrInput').placeholder = placeholders[activeType];
+    document.getElementById('inputLabel').textContent = labels[activeType];
+  });
+});
+document.querySelectorAll('.size-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.size-btn').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active'); qrSize = parseInt(b.dataset.size);
+  });
+});
+document.getElementById('fgColor').addEventListener('input',function(){this.parentElement.style.background=this.value;});
+document.getElementById('bgColor').addEventListener('input',function(){this.parentElement.style.background=this.value;});
+
+function generateQR(){
+  const val = document.getElementById('qrInput').value.trim();
+  if(!val){alert('Please enter some content!');return;}
+  const display = document.getElementById('qrDisplay');
+  display.innerHTML = '';
+  new QRCode(display,{text:val,width:qrSize,height:qrSize,colorDark:document.getElementById('fgColor').value,colorLight:document.getElementById('bgColor').value,correctLevel:QRCode.CorrectLevel.H});
+  document.getElementById('qrResult').classList.add('show');
+  document.getElementById('qrResult').scrollIntoView({behavior:'smooth'});
+}
+function downloadQR(){
+  const img = document.querySelector('#qrDisplay img');
+  if(!img)return;
+  const a = document.createElement('a');
+  a.href = img.src; a.download = 'anxro-qr.png'; a.click();
+}
+function copyQR(){
+  const img = document.querySelector('#qrDisplay img');
+  if(!img){alert('Generate QR first');return;}
+  const canvas = document.createElement('canvas');
+  canvas.width = qrSize; canvas.height = qrSize;
+  const ctx = canvas.getContext('2d');
+  const i = new Image(); i.src = img.src;
+  i.onload = ()=>{ ctx.drawImage(i,0,0); canvas.toBlob(b=>{ try{navigator.clipboard.write([new ClipboardItem({'image/png':b})]);alert('Copied!');}catch(e){alert('Use Download instead');} }); };
+}
+</script>
+</body>
+</html>
