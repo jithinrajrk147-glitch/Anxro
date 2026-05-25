@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Anxro Browser</title>
+<style>
+:root {
+    --bg: #ffffff;
+    --accent: #00c853;
+    --text-main: #202124;
+    --text-dim: #5f6368;
+    --border: #dadce0;
+    --card-bg: #f8f9fa;
+    --hover: rgba(0,0,0,0.04);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Google Sans', 'Roboto', -apple-system, sans-serif; }
+body {
+    background: var(--bg);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+.top-bar {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 8px 8px 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 56px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1000;
+}
+.icon-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.icon-btn:active { background: var(--hover); }
+.url-bar {
+    flex: 1;
+    background: var(--card-bg);
+    border: 1px solid transparent;
+    border-radius: 24px;
+    padding: 10px 16px;
+    font-size: 14px;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    user-select: none;
+}
+.favicon {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+.url-text {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.tab-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    min-width: 32px;
+    height: 32px;
+    color: var(--text-main);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+}
+#menu-popup {
+    position: absolute;
+    top: 60px;
+    right: 12px;
+    background: var(--bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    display: none;
+    z-index: 1001;
+    min-width: 240px;
+    border: 1px solid var(--border);
+    padding: 8px 0;
+}
+#menu-popup.visible { display: block; }
+.menu-item {
+    padding: 12px 20px;
+    color: var(--text-main);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 14px;
+}
+.menu-item:active { background: var(--hover); }
+.menu-divider { height: 1px; background: var(--border); margin: 8px 0; }
+#frameWrapper {
+    flex: 1;
+    position: relative;
+    background: #fff;
+    overflow: hidden;
+}
+#frame { width: 100%; height: 100%; border: none; }
+#progressBar {
+    position: absolute;
+    top: 56px;
+    left: 0;
+    height: 2px;
+    background: var(--accent);
+    width: 0%;
+    transition: width 0.3s;
+    z-index: 999;
+}
+/* PULL TO REFRESH */
+#pullToRefresh {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 998;
+    transition: top 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+#pullToRefresh.show { top: 70px; }
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+/* TOAST */
+#anxToast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: #323232;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 12px 20px;
+    border-radius: 8px;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s;
+}
+#anxToast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+    <button class="icon-btn" onclick="goBack()">❮</button>
+    <div class="url-bar" onclick="location.href='tab.html'">
+        <img class="favicon" id="favicon" src="">
+        <div class="url-text" id="urlText">Loading...</div>
+    </div>
+    <button class="tab-btn" id="tabBtn" onclick="location.href='tab.html'">0</button>
+    <button class="icon-btn" id="menuBtn">⋮</button>
+    <div id="menu-popup"></div>
+</div>
+
+<div id="progressBar"></div>
+
+<div id="frameWrapper">
+  <div id="pullToRefresh"><div class="spinner"></div></div>
+  <iframe id="frame" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation-by-user-activation"></iframe>
+</div>
+
+<div id="anxToast">Added to Anx Tools</div>
+
+<script>
+const channel = new BroadcastChannel('anxro_tabs');
+let tabs = JSON.parse(localStorage.getItem("anxroTabs") || '[]');
+let activeTabId = localStorage.getItem("anxroActiveTab") || null;
+let frame = document.getElementById("frame");
+let currentUrl = '';
+
+// INIT: If no tabs, create first one
+if(tabs.length === 0) {
+    const query = sessionStorage.getItem('searchQuery') || 'https://www.google.com';
+    createFirstTab(query);
+} else {
+    loadActiveTab();
+}
+updateTabCount();
+
+function createFirstTab(query) {
+    const id = 'tab_' + Date.now();
+    const isUrl = query.includes('.') &&!query.includes(' ');
+    const url = isUrl &&!query.startsWith('http')? 'https://' + query :
+                isUrl? query :
+                'https://www.google.com/search?q=' + encodeURIComponent(query);
+
+    tabs = [{
+        id,
+        url,
+        title: query,
+        favicon: `https://www.google.com/s2/favicons?domain=${getDomain(url)}&sz=32`
+    }];
+    activeTabId = id;
+    saveTabs();
+    loadActiveTab();
+}
+
+function saveTabs() {
+    localStorage.setItem("anxroTabs", JSON.stringify(tabs));
+    localStorage.setItem("anxroActiveTab", activeTabId);
+    channel.postMessage({type: 'update'});
+}
+
+function loadActiveTab() {
+    const tab = tabs.find(t => t.id === activeTabId);
+    if(tab) {
+        currentUrl = tab.url;
+        frame.src = tab.url;
+        document.getElementById("urlText").textContent = tab.url.replace(/^https?:\/\//, '');
+        document.getElementById("favicon").src = tab.favicon;
+        startProgress();
+    }
+}
+
+function updateTabCount() {
+    tabs = JSON.parse(localStorage.getItem("anxroTabs") || '[]');
+    document.getElementById("tabBtn").textContent = tabs.length;
+}
+
+function getDomain(url) {
+    try { return new URL(url).hostname.replace('www.', ''); }
+    catch { return url; }
+}
+
+function startProgress() {
+    let bar = document.getElementById("progressBar");
+    bar.style.width = "70%";
+    frame.onload = () => {
+        bar.style.width = "100%";
+        setTimeout(() => bar.style.width = "0%", 300);
+        // Update current URL from iframe
+        try {
+            currentUrl = frame.contentWindow.location.href;
+            document.getElementById("urlText").textContent = currentUrl.replace(/^https?:\/\//, '');
+        } catch(e) {}
+    };
+}
+
+// MENU: Fixed refresh + Add to Anx
+document.getElementById("menuBtn").onclick = (e) => {
+    e.stopPropagation();
+    const menu = document.getElementById("menu-popup");
+    if(menu.classList.contains('visible')) {
+        menu.classList.remove('visible');
+    } else {
+        menu.innerHTML = `
+            <div class="menu-item" onclick="window.location.href='index.html?newtab=1'">➕ New tab</div>
+            <div class="menu-item" onclick="location.href='tab.html'">📑 Manage tabs</div>
+            <div class="menu-divider"></div>
+            <div class="menu-item" onclick="refreshPage()">🔄 Refresh</div>
+            <div class="menu-item" onclick="addToAnx()">📌 Add to Anx</div>
+            <div class="menu-divider"></div>
+            <div class="menu-item" onclick="closeTab()">✖️ Close tab</div>
+        `;
+        menu.classList.add('visible');
+    }
+};
+
+function refreshPage() {
+    frame.contentWindow.location.reload();
+    document.getElementById("menu-popup").classList.remove('visible');
+}
+
+function goBack() {
+    if (frame.contentWindow.history.length > 1) {
+        frame.contentWindow.history.back();
+    } else {
+        history.back();
+    }
+}
+
+function closeTab() {
+    tabs = tabs.filter(t => t.id!== activeTabId);
+    localStorage.setItem("anxroTabs", JSON.stringify(tabs));
+    if(tabs.length === 0) {
+        window.location.href = 'index.html';
+    } else {
+        activeTabId = tabs[0].id;
+        localStorage.setItem("anxroActiveTab", activeTabId);
+        loadActiveTab();
+        updateTabCount();
+    }
+    document.getElementById("menu-popup").classList.remove('visible');
+}
+
+// ADD TO ANX - saves to tools.html
+function addToAnx() {
+    document.getElementById("menu-popup").classList.remove('visible');
+
+    let anxTools = JSON.parse(localStorage.getItem('anxTools') || '[]');
+    const domain = getDomain(currentUrl);
+    const name = domain.split('.')[0];
+
+    // Check if already exists
+    if(anxTools.find(t => t.url === currentUrl)) {
+        showToast('Already in Anx Tools');
+        return;
+    }
+
+    // Max 14 tools
+    if(anxTools.length >= 14) {
+        showToast('Anx Tools full - remove one first');
+        return;
+    }
+
+    anxTools.push({
+        name: name.charAt(0).toUpperCase() + name.slice(1),
+        url: currentUrl,
+        image: `https://www.google.com/s2/favicons?domain=${domain}&sz=64`,
+        category: 'Web'
+    });
+
+    localStorage.setItem('anxTools', JSON.stringify(anxTools));
+    showToast('Added to Anx Tools');
+}
+
+function showToast(msg) {
+    const toast = document.getElementById('anxToast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('#menuBtn') &&!e.target.closest('#menu-popup')) {
+        document.getElementById("menu-popup").classList.remove('visible');
+    }
+});
+
+// PULL TO REFRESH
+let startY = 0;
+let isPulling = false;
+const wrapper = document.getElementById('frameWrapper');
+const ptr = document.getElementById('pullToRefresh');
+
+wrapper.addEventListener('touchstart', (e) => {
+    if(wrapper.scrollTop === 0) {
+        startY = e.touches[0].clientY;
+        isPulling = true;
+    }
+}, {passive: true});
+
+wrapper.addEventListener('touchmove', (e) => {
+    if(!isPulling) return;
+    const y = e.touches[0].clientY;
+    const diff = y - startY;
+    if(diff > 0 && diff < 120) {
+        ptr.style.top = Math.min(diff - 20, 70) + 'px';
+        if(diff > 80) ptr.classList.add('show');
+    }
+}, {passive: true});
+
+wrapper.addEventListener('touchend', () => {
+    if(ptr.classList.contains('show')) {
+        refreshPage();
+    }
+    ptr.classList.remove('show');
+    ptr.style.top = '-60px';
+    isPulling = false;
+});
+
+channel.onmessage = (e) => {
+    if(e.data.type === 'update') {
+        tabs = JSON.parse(localStorage.getItem("anxroTabs") || '[]');
+        activeTabId = localStorage.getItem("anxroActiveTab");
+        updateTabCount();
+        loadActiveTab();
+    }
+};
+</script>
+</body>
+</html>
