@@ -1,37 +1,70 @@
 name: Auto Make Zip
+
 on:
   push:
     branches: [main]
+
   workflow_dispatch:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
+
     permissions:
       contents: write
+
     steps:
-      - name: Checkout code
+
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Show files to zip
+      - name: Clean Old Temp
         run: |
-          echo "Files in repo:"
-          ls -la
-          echo "---"
+          rm -rf temp
+          mkdir temp
 
-      - name: Create zip
+      - name: Copy Website Files
         run: |
-          shopt -s dotglob
-          zip -r app-v${{ github.run_number }}.zip * -x ".git*" -x ".github*" -x "*.zip" -x "app-version.json" -x "app-v*.zip"
 
-      - name: Create version json
-        run: |
-          echo '{"version": ${{ github.run_number }}, "zip_url": "https://jithinrajrk147-glitch.github.io/Anxro/app-v${{ github.run_number }}.zip"}' > app-version.json
+          cp -r *.html temp/ 2>/dev/null || true
 
-      - name: Commit files
+          cp -r *.js temp/ 2>/dev/null || true
+
+          cp -r *.css temp/ 2>/dev/null || true
+
+          cp -r assets temp/ 2>/dev/null || true
+
+          cp -r images temp/ 2>/dev/null || true
+
+          cp -r json temp/ 2>/dev/null || true
+
+          cp -r data temp/ 2>/dev/null || true
+
+      - name: Create ZIP
         run: |
+
+          cd temp
+
+          zip -r ../app-v${{ github.run_number }}.zip .
+
+      - name: Create Version JSON
+        run: |
+
+          echo '{
+            "version": '${{ github.run_number }}',
+            "zip_url": "https://jithinrajrk147-glitch.github.io/Anxro/app-v${{ github.run_number }}.zip"
+          }' > app-version.json
+
+      - name: Push Files
+        run: |
+
           git config user.name "github-actions[bot]"
+
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add .
-          git commit -m "Auto release v${{ github.run_number }}" || echo "Nothing to commit"
+
+          git commit -m "Auto update v${{ github.run_number }}" || echo "Nothing to commit"
+
           git push
