@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nexus IDE | Workspace</title>
+    <style>
+        :root {
+            --bg: #0d1117; --panel: #161b22; --accent: #238636;
+            --text: #c9d1d9; --border: #30363d; --active: #21262d;
+            --mono: 'ui-monospace', 'SFMono-Regular', 'Cascadia Code', monospace;
+        }
+
+        * { box-sizing: border-box; }
+        body, html { 
+            margin: 0; padding: 0; height: 100%; width: 100%;
+            background: var(--bg); color: var(--text);
+            font-family: -apple-system, system-ui, sans-serif;
+            overflow: hidden;
+        }
+
+        nav {
+            height: 50px; background: var(--panel); border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; padding: 0 15px; gap: 10px;
+        }
+
+        .main-stage { display: flex; height: calc(100vh - 100px); position: relative; }
+
+        /* The Sidebar */
+        #sidebar {
+            position: fixed; left: -280px; top: 0; height: 100%; width: 280px;
+            background: var(--panel); border-right: 1px solid var(--border);
+            z-index: 4000; transition: 0.3s ease; display: flex; flex-direction: column;
+        }
+        #sidebar.active { left: 0; }
+        
+        .sidebar-section { padding: 10px; border-bottom: 1px solid var(--border); }
+        .section-title { font-size: 11px; font-weight: bold; color: #8b949e; margin-bottom: 8px; padding-left: 5px; }
+        
+        /* List Items */
+        .list-item { 
+            padding: 8px 12px; font-size: 13px; cursor: pointer; border-radius: 6px;
+            display: flex; align-items: center; gap: 8px; margin-bottom: 2px;
+        }
+        .list-item:hover { background: var(--active); }
+        .list-item.active-proj { border: 1px solid var(--accent); background: rgba(35, 134, 54, 0.1); }
+        .list-item.active-file { background: var(--active); border-left: 3px solid var(--accent); }
+        .folder-indent { margin-left: 15px; border-left: 1px solid #30363d; padding-left: 10px; }
+
+        /* Editor & Gutter */
+        #gutter {
+            width: 40px; background: var(--bg); border-right: 1px solid var(--border);
+            color: #484f58; font-family: var(--mono); font-size: 12px;
+            line-height: 22px; text-align: right; padding-top: 20px; padding-right: 8px;
+            user-select: none; overflow: hidden;
+        }
+        .edit-area { position: relative; flex: 1; }
+        #main-input, #hl-layer {
+            position: absolute; inset: 0; margin: 0; padding: 20px;
+            font-family: var(--mono); font-size: 14px; line-height: 22px;
+            white-space: pre; tab-size: 4; border: none; width: 100%; height: 100%;
+            overflow: auto; word-wrap: normal;
+        }
+        #main-input {
+            background: transparent; color: transparent; caret-color: #58a6ff;
+            z-index: 2; resize: none; outline: none; -webkit-text-fill-color: transparent;
+        }
+        #hl-layer { z-index: 1; pointer-events: none; }
+
+        /* Custom Popup */
+        #custom-pop {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: var(--panel); border: 1px solid var(--border);
+            padding: 20px; border-radius: 12px; z-index: 5000; width: 85%; max-width: 300px; display: none;
+        }
+        #custom-pop input, #custom-pop select { 
+            width: 100%; padding: 10px; margin-bottom: 10px; background: #0d1117; 
+            border: 1px solid var(--border); color: #fff; border-radius: 6px; 
+        }
+
+        #toolbar {
+            height: 50px; background: var(--panel); border-top: 1px solid var(--border);
+            display: flex; gap: 4px; padding: 8px; overflow-x: auto;
+        }
+        .t-btn { min-width: 42px; background: #21262d; border: 1px solid var(--border); color: #fff; border-radius: 6px; font-weight: bold; }
+        
+        /* Syntax Colors */
+        .hl-k { color: #ff7b72; } .hl-s { color: #a5d6ff; } .hl-t { color: #7ee787; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <button onclick="toggleSide(true)" style="background:none; border:none; color:#fff; font-size:22px">☰</button>
+    <div id="current-proj-name" style="flex:1; font-weight:bold; color:var(--accent); font-size:14px">PROJECT: DEFAULT</div>
+    <button onclick="runProject()" style="background:var(--accent); border:none; color:#fff; padding:8px 16px; border-radius:6px; font-weight:bold">▶ RUN</button>
+</nav>
+
+<div class="main-stage">
+    <div id="gutter">1</div>
+    <div class="edit-area">
+        <textarea id="main-input" spellcheck="false" wrap="off"></textarea>
+        <pre id="hl-layer"><code id="hl-content"></code></pre>
+    </div>
+</div>
+
+<div id="toolbar">
+    <button class="t-btn" onclick="ins('    ')">TAB</button>
+    <button class="t-btn" onclick="ins('{')">{</button>
+    <button class="t-btn" onclick="ins('}')">}</button>
+    <button class="t-btn" onclick="ins('<')">&lt;</button>
+    <button class="t-btn" onclick="ins('>')">&gt;</button>
+</div>
+
+<div id="sidebar">
+    <div class="sidebar-section">
+        <div class="section-title">MY PROJECTS</div>
+        <div id="project-list"></div>
+        <button onclick="popOpen('project')" style="width:100%; padding:8px; margin-top:5px; background:transparent; border:1px dashed var(--border); color:#fff; border-radius:6px; font-size:12px">+ New Project</button>
+    </div>
+
+    <div class="sidebar-section" style="flex:1; overflow-y:auto;">
+        <div class="section-title">FILES & FOLDERS</div>
+        <div id="explorer-root"></div>
+        <div style="display:flex; gap:5px; margin-top:10px">
+            <button onclick="popOpen('file')" style="flex:1; background:var(--active); border:none; color:#fff; padding:8px; border-radius:6px; font-size:12px">+ File</button>
+            <button onclick="popOpen('folder')" style="flex:1; background:var(--active); border:none; color:#fff; padding:8px; border-radius:6px; font-size:12px">+ Folder</button>
+        </div>
+    </div>
+</div>
+
+<div id="custom-pop">
+    <h3 id="pop-title" style="margin-top:0; font-size:16px">Create</h3>
+    <div id="pop-folder-select-wrap">
+        <label style="font-size:11px; color:#8b949e">Inside Folder:</label>
+        <select id="pop-parent"></select>
+    </div>
+    <input type="text" id="pop-input" placeholder="Name...">
+    <div style="display:flex; gap:10px">
+        <button onclick="popClose()" style="flex:1; padding:10px; background:#30363d; border:none; color:#fff; border-radius:6px">Cancel</button>
+        <button id="pop-confirm" style="flex:1; padding:10px; background:var(--accent); border:none; color:#fff; border-radius:6px">Create</button>
+    </div>
+</div>
+
+<div id="preview" style="position:fixed; inset:0; background:#fff; z-index:9000; display:none; flex-direction:column;">
+    <div style="height:45px; background:#f6f8fa; display:flex; align-items:center; padding:0 15px; border-bottom:1px solid #ddd">
+        <span style="flex:1; font-size:12px; color:#57606a">Live Preview</span>
+        <button onclick="document.getElementById('preview').style.display='none'" style="background:#cf222e; color:#fff; border:none; padding:6px 15px; border-radius:6px">CLOSE</button>
+    </div>
+    <iframe id="frame" style="flex:1; border:none;"></iframe>
+</div>
+
+<script>
+    // Workspace Data Structure
+    let workspace = JSON.parse(localStorage.getItem('nexus_ws_v12')) || {
+        activeProjectId: 0,
+        projects: [
+            {
+                name: 'CandleChart_App',
+                folders: ['root', 'assets'],
+                files: [
+                    { name: 'index.html', folder: 'root', content: '<html><body><canvas id="c"></canvas><script src="app.js"><\/script></body></html>' },
+                    { name: 'app.js', folder: 'root', content: 'console.log("Chart Active");' }
+                ],
+                activeFileIndex: 0
+            }
+        ]
+    };
+
+    const input = document.getElementById('main-input');
+    const hl = document.getElementById('hl-content');
+
+    function toggleSide(v) { document.getElementById('sidebar').classList.toggle('active', v); }
+    function popClose() { document.getElementById('custom-pop').style.display = 'none'; }
+
+    function popOpen(type) {
+        const pop = document.getElementById('custom-pop');
+        const title = document.getElementById('pop-title');
+        const fWrap = document.getElementById('pop-folder-select-wrap');
+        const confirm = document.getElementById('pop-confirm');
+        
+        pop.style.display = 'block';
+        fWrap.style.display = (type === 'file') ? 'block' : 'none';
+        title.innerText = "New " + type.charAt(0).toUpperCase() + type.slice(1);
+        
+        if(type === 'file') {
+            const currentProj = workspace.projects[workspace.activeProjectId];
+            document.getElementById('pop-parent').innerHTML = currentProj.folders.map(f => `<option value="${f}">${f}</option>`).join('');
+        }
+
+        confirm.onclick = () => {
+            const val = document.getElementById('pop-input').value;
+            if(!val) return;
+            const proj = workspace.projects[workspace.activeProjectId];
+
+            if(type === 'project') {
+                workspace.projects.push({ name: val, folders: ['root'], files: [{name:'index.html', folder:'root', content:'<h1>'+val+'</h1>'}], activeFileIndex: 0 });
+                workspace.activeProjectId = workspace.projects.length - 1;
+            } else if(type === 'folder') {
+                proj.folders.push(val);
+            } else {
+                proj.files.push({ name: val, folder: document.getElementById('pop-parent').value, content: '' });
+                proj.activeFileIndex = proj.files.length - 1;
+            }
+            save(); renderAll(); popClose();
+        };
+    }
+
+    function renderAll() {
+        const projList = document.getElementById('project-list');
+        const explorer = document.getElementById('explorer-root');
+        const currentProj = workspace.projects[workspace.activeProjectId];
+
+        document.getElementById('current-proj-name').innerText = "PROJECT: " + currentProj.name.toUpperCase();
+
+        // 1. Render Projects
+        projList.innerHTML = workspace.projects.map((p, idx) => `
+            <div class="list-item ${idx === workspace.activeProjectId ? 'active-proj' : ''}" onclick="switchProj(${idx})">
+                📦 ${p.name}
+            </div>
+        `).join('');
+
+        // 2. Render Explorer (Files inside folders)
+        let explorerHtml = '';
+        currentProj.folders.forEach(folder => {
+            explorerHtml += `<div class="list-item" style="color:#e3b341">📁 ${folder}</div>`;
+            explorerHtml += `<div class="folder-indent">`;
+            currentProj.files.filter(f => f.folder === folder).forEach(file => {
+                const isAct = currentProj.files[currentProj.activeFileIndex] === file;
+                explorerHtml += `<div class="list-item ${isAct ? 'active-file' : ''}" onclick="switchFile('${file.name}', '${file.folder}')">📄 ${file.name}</div>`;
+            });
+            explorerHtml += `</div>`;
+        });
+        explorer.innerHTML = explorerHtml;
+
+        // 3. Update Editor
+        const activeFile = currentProj.files[currentProj.activeFileIndex];
+        input.value = activeFile.content;
+        refreshHL();
+    }
+
+    function switchProj(idx) { workspace.activeProjectId = idx; save(); renderAll(); }
+
+    function switchFile(name, folder) {
+        const proj = workspace.projects[workspace.activeProjectId];
+        proj.activeFileIndex = proj.files.findIndex(f => f.name === name && f.folder === folder);
+        save(); renderAll(); toggleSide(false);
+    }
+
+    function refreshHL() {
+        let code = input.value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        code = code.replace(/\b(const|let|var|function|if|else|for|return|class)\b/g, '<span class="hl-k">$1</span>');
+        code = code.replace(/('.*?'|".*?"|`.*?`)/g, '<span class="hl-s">$1</span>');
+        code = code.replace(/(&lt;[\/!?]?)([a-z0-9]+)/gi, '$1<span class="hl-t">$2</span>');
+        hl.innerHTML = code + "\n";
+        document.getElementById('gutter').innerHTML = Array.from({length: input.value.split('\n').length}, (_, i) => i + 1).join('<br>');
+    }
+
+    function save() {
+        const proj = workspace.projects[workspace.activeProjectId];
+        proj.files[proj.activeFileIndex].content = input.value;
+        localStorage.setItem('nexus_ws_v12', JSON.stringify(workspace));
+    }
+
+    function runProject() {
+        const proj = workspace.projects[workspace.activeProjectId];
+        const blobs = {};
+        proj.files.forEach(f => {
+            const path = f.folder === 'root' ? f.name : `${f.folder}/${f.name}`;
+            const mime = f.name.endsWith('.js') ? 'text/javascript' : (f.name.endsWith('.css') ? 'text/css' : 'text/html');
+            blobs[path] = URL.createObjectURL(new Blob([f.content], {type: mime}));
+        });
+        let html = proj.files.find(f => f.name === 'index.html').content;
+        Object.keys(blobs).forEach(path => {
+            html = html.replace(new RegExp(`src=["']\\.?/?${path}["']`, 'g'), `src="${blobs[path]}"`);
+            html = html.replace(new RegExp(`href=["']\\.?/?${path}["']`, 'g'), `href="${blobs[path]}"`);
+        });
+        document.getElementById('frame').src = URL.createObjectURL(new Blob([html], {type:'text/html'}));
+        document.getElementById('preview').style.display = 'flex';
+    }
+
+    function ins(c) {
+        const s = input.selectionStart;
+        input.value = input.value.substring(0, s) + c + input.value.substring(input.selectionEnd);
+        input.selectionStart = input.selectionEnd = s + c.length;
+        save(); refreshHL(); input.focus();
+    }
+
+    input.oninput = () => { save(); refreshHL(); };
+    input.onscroll = () => {
+        document.getElementById('hl-layer').scrollTop = document.getElementById('gutter').scrollTop = input.scrollTop;
+        document.getElementById('hl-layer').scrollLeft = input.scrollLeft;
+    };
+
+    window.onload = renderAll;
+</script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Name Engine V5 | Emerald Edition</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap');
+
+        /* Custom Theme & Layout */
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: #010d08; 
+            color: #ecfdf5; 
+            margin: 0; 
+            padding: 20px;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        
+        header { text-align: center; margin-bottom: 40px; }
+        h1 { 
+            color: #10b981; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+        .subtitle { color: #34d399; opacity: 0.8; font-size: 0.9rem; }
+
+        /* Grid System */
+        .main-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 2fr; 
+            gap: 25px; 
+        }
+
+        /* Controls Side */
+        .controls { 
+            background: #064e3b; 
+            padding: 25px; 
+            border-radius: 16px; 
+            border: 1px solid #059669;
+            height: fit-content;
+        }
+        .input-group { margin-bottom: 20px; }
+        label { 
+            display: block; 
+            font-size: 11px; 
+            text-transform: uppercase; 
+            font-weight: 700; 
+            color: #34d399; 
+            margin-bottom: 8px;
+        }
+        input, select { 
+            width: 100%; 
+            padding: 12px; 
+            background: #010d08; 
+            border: 1px solid #059669; 
+            color: white; 
+            border-radius: 8px; 
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+        #genBtn { 
+            width: 100%; 
+            padding: 15px; 
+            background: linear-gradient(45deg, #059669, #10b981); 
+            border: none; 
+            border-radius: 12px; 
+            color: #010d08; 
+            font-weight: 800; 
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            transition: 0.2s;
+        }
+        #genBtn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+        /* Results Side */
+        .results-container { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+            gap: 12px; 
+        }
+        .result-card { 
+            background: #0d140e; 
+            border: 1px solid #064e3b; 
+            padding: 15px; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            transition: 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .result-card:hover { border-color: #10b981; background: #064e3b; }
+        .candle { color: #10b981; font-weight: bold; margin-right: 8px; }
+        .name-text { font-weight: 700; font-size: 1.1rem; }
+        .copy-tag { font-size: 10px; color: #34d399; opacity: 0.5; }
+
+        /* Custom Popup */
+        #customPopup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #10b981;
+            color: #010d08;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Name Engine V5</h1>
+            <p class="subtitle">Multi-Source Linguistic Blending</p>
+        </header>
+
+        <div class="main-grid">
+            <div class="controls">
+                <div class="input-group">
+                    <label>Base Keyword</label>
+                    <input type="text" id="userInput" placeholder="e.g. Zen, Cloud, Peak">
+                </div>
+                <div class="input-group">
+                    <label>Vibe Style</label>
+                    <select id="userStyle">
+                        <option value="modern">Modern & Clean</option>
+                        <option value="tech">Future Tech</option>
+                        <option value="luxury">Luxury / Bold</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Name Size</label>
+                    <select id="userSize">
+                        <option value="short">Short (3-6)</option>
+                        <option value="medium" selected>Medium (7-11)</option>
+                        <option value="long">Professional (12+)</option>
+                    </select>
+                </div>
+                <button id="genBtn" onclick="generateNames()">GENERATE 60+ NAMES</button>
+            </div>
+
+            <div id="results" class="results-container">
+                </div>
+        </div>
+    </div>
+
+    <div id="customPopup">▮ NAME COPIED TO CLIPBOARD</div>
+
+    <script>
+        function showPopup(text) {
+            const pop = document.getElementById('customPopup');
+            pop.innerText = "▮ " + text.toUpperCase();
+            pop.style.display = 'block';
+            setTimeout(() => { pop.style.display = 'none'; }, 2000);
+        }
+
+        async function generateNames() {
+            const input = document.getElementById('userInput').value.trim();
+            const style = document.getElementById('userStyle').value;
+            const size = document.getElementById('userSize').value;
+            const resultsDiv = document.getElementById('results');
+
+            if (!input) {
+                showPopup("Please enter a keyword");
+                return;
+            }
+
+            resultsDiv.innerHTML = "<p style='grid-column: 1/-1; text-align: center;'>Syncing with market data...</p>";
+
+            try {
+                // Fetching from Datamuse (Related words and specific adjectives)
+                const [r1, r2] = await Promise.all([
+                    fetch(`https://api.datamuse.com/words?rel_trg=${input}&max=30`),
+                    fetch(`https://api.datamuse.com/words?rel_jjb=${input}&max=30`)
+                ]);
+                
+                const data1 = await r1.json();
+                const data2 = await r2.json();
+                const apiWords = [...data1, ...data2].map(o => o.word);
+
+                const finalNames = buildLogic(input, apiWords, style, size);
+                
+                resultsDiv.innerHTML = "";
+                finalNames.forEach(name => {
+                    const card = document.createElement('div');
+                    card.className = "result-card";
+                    card.onclick = () => {
+                        navigator.clipboard.writeText(name);
+                        showPopup("Saved: " + name);
+                    };
+                    card.innerHTML = `
+                        <div>
+                            <span class="candle">▮</span>
+                            <span class="name-text">${name}</span>
+                        </div>
+                        <span class="copy-tag">COPY</span>
+                    `;
+                    resultsDiv.appendChild(card);
+                });
+
+            } catch (err) {
+                resultsDiv.innerHTML = "Error connecting to APIs.";
+            }
+        }
+
+        function buildLogic(base, pool, style, size) {
+            let names = new Set();
+            const mods = {
+                modern: ['ify', 'ly', 'io', 'hub', 'flow', 'lab'],
+                tech: ['core', 'sync', 'bit', 'node', 'grid', 'ai'],
+                luxury: ['vante', 'noir', 'elite', 'grand', 'royal', 'aura']
+            };
+            const pre = ['meta', 'neo', 'pro', 'alt', 'omni'];
+
+            // 1. Style Suffixes
+            mods[style].forEach(s => names.add(base + s));
+
+            // 2. API Blends
+            pool.forEach(word => {
+                names.add(base + word);
+                names.add(pre[Math.floor(Math.random()*pre.length)] + word);
+            });
+
+            // 3. Fill logic to hit 60
+            let i = 0;
+            while(names.size < 65 && i < 100) {
+                names.add(pre[i % pre.length] + base + (i % 10));
+                i++;
+            }
+
+            // Formatting & Size Filter
+            let arr = Array.from(names).map(n => n.charAt(0).toUpperCase() + n.slice(1).toLowerCase());
+            
+            if (size === 'short') return arr.filter(n => n.length <= 6).slice(0, 60);
+            if (size === 'medium') return arr.filter(n => n.length > 6 && n.length <= 11).slice(0, 60);
+            return arr.filter(n => n.length > 11).slice(0, 60);
+        }
+    </script>
+</body>
+</html>

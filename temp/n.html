@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>YouTube Player + Bottom Notes</title>
+<script src="https://unpkg.com/feather-icons"></script>
+<style>
+  :root{
+    --bg:#0b0b0c;
+    --surface:#0f1113;
+    --muted:#a6a6a6;
+    --primary:#00d48d;
+    --panel-border: rgba(255,255,255,0.06);
+    --glass: rgba(255,255,255,0.03);
+    --radius:12px;
+    --default-bottom:40vh;
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;background:var(--bg);color:#fff;font-family:Inter,-apple-system,Segoe UI,Roboto,Arial}
+  .app { display:flex; flex-direction:column; width:100vw; height:100vh; gap:0; align-items:stretch; position:relative; }
+
+  .video-wrap {
+    flex:1 1 auto;
+    min-height:0;
+    position:relative;
+    background:#000;
+    overflow:hidden;
+  }
+  .player { position:absolute; inset:0; }
+  .player iframe { width:100%; height:100%; border:0; display:block; }
+
+  .controls { position:absolute; right:18px; bottom:18px; display:flex; gap:10px; z-index:40; }
+  .btn {
+    background:var(--glass);
+    border:1px solid var(--panel-border);
+    color:#fff;
+    padding:8px 10px;
+    display:inline-flex;
+    gap:8px;
+    align-items:center;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:13px;
+    backdrop-filter: blur(6px);
+  }
+
+  .notes {
+    width:100%;
+    height:var(--default-bottom);
+    min-height:120px;
+    max-height:80vh;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-top:1px solid var(--panel-border);
+    display:flex;
+    flex-direction:column;
+    position:relative;
+  }
+
+  .note-head {
+    padding:10px 14px;
+    border-bottom:1px solid var(--panel-border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    user-select:none;
+  }
+  .note-title{ font-weight:700; color:#fff }
+  .video-id{ color:var(--muted); font-size:12px }
+  .note-actions{ display:flex; gap:6px; align-items:center }
+
+  .note-body { flex:1; display:flex; flex-direction:column; min-height:0; position:relative; }
+  textarea#textPad {
+    width:100%;
+    height:100%;
+    padding:16px;
+    border:0;
+    resize:none;
+    background:transparent;
+    color:#fff;
+    outline:none;
+    font-size:14px;
+    line-height:1.45;
+  }
+
+  .resizer {
+    left:0; top:-5px; height:10px; width:100%; cursor:ns-resize;
+    position:absolute; z-index:40; touch-action:none;
+  }
+  .resizer .bar { height:2px; width:40px; background:rgba(255,255,255,0.15); margin:4px auto; border-radius:2px; }
+
+  @media (max-width:920px){
+    .controls{ right:12px; bottom:12px }
+  }
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <div class="video-wrap" id="videoWrap" aria-label="Video area">
+    <div class="player" id="player">
+      <iframe id="ytIframe" src="" allow="autoplay; encrypted-media; fullscreen" allowfullscreen loading="lazy" title="YouTube player"></iframe>
+    </div>
+
+    <div class="controls" role="group" aria-label="Player controls">
+      <button class="btn" id="notesToggle" title="Toggle notes"><i data-feather="edit-3"></i><span style="margin-left:6px">Notes</span></button>
+
+    </div>
+  </div>
+
+  <aside class="notes" id="notes" aria-label="Notes panel">
+    <div class="resizer" id="resizer" aria-hidden="true"><div class="bar"></div></div>
+
+    <div class="note-head" id="noteHead">
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="note-title">Notes</div>
+        <div class="video-id" id="videoIdLabel"></div>
+      </div>
+      <div class="note-actions">
+        <button class="btn small" id="saveBtn">Save</button>
+        <button class="btn small" id="exportBtn">Export</button>
+        <button class="btn small" id="ytbookBtn" title="View all notes">All Notes</button>
+      </div>
+    </div>
+
+    <div class="note-body">
+      <textarea id="textPad" placeholder="Type pattern analysis, timestamps, ideas..." aria-label="Notes text area"></textarea>
+    </div>
+  </aside>
+</div>
+
+<script>
+  feather.replace();
+
+  // ---------- Params & iframe setup ----------
+  const params = new URLSearchParams(location.search);
+  const videoParam = params.get('video') || params.get('v') || '';
+  const iframe = document.getElementById('ytIframe');
+  const videoIdLabel = document.getElementById('videoIdLabel');
+
+  function extractYoutubeId(input){
+    if(!input) return null;
+    if(/^[A-Za-z0-9_-]{11}$/.test(input)) return input;
+    let m = input.match(/youtu\.be\/([A-Za-z0-9_-]{11})/);
+    if(m) return m[1];
+    m = input.match(/[?&]v=([A-Za-z0-9_-]{11})/);
+    if(m) return m[1];
+    m = input.match(/embed\/([A-Za-z0-9_-]{11})/);
+    if(m) return m[1];
+    return null;
+  }
+  
+  const videoId = extractYoutubeId(videoParam) || 'default';
+  videoIdLabel.textContent = videoId === 'default' ? 'No video' : videoId;
+  
+  // No YouTube badges/logos: modestbranding=1, controls=1, rel=0, iv_load_policy=3
+  if(videoId !== 'default'){
+    iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&iv_load_policy=3&controls=1&disablekb=0`;
+  }
+
+  // ---------- Elements ----------
+  const notes = document.getElementById('notes');
+  const resizer = document.getElementById('resizer');
+  const fullscreenBtn = document.getElementById('fullscreenBtn');
+  const notesToggle = document.getElementById('notesToggle');
+  const saveBtn = document.getElementById('saveBtn');
+  const exportBtn = document.getElementById('exportBtn');
+  const ytbookBtn = document.getElementById('ytbookBtn');
+  const textPad = document.getElementById('textPad');
+
+  // ---------- Storage keys - per video ----------
+  const TXT_KEY = `yt_notes_text_${videoId}`;
+  const HEIGHT_KEY = 'yt_notes_height_v1';
+  const ALL_NOTES_KEY = 'yt_notes_index_v1';
+
+  // ---------- Resizing ----------
+  let resizing = false;
+  let resizeStart = null;
+  
+  resizer.addEventListener('pointerdown', (e)=>{
+    resizing = true;
+    resizer.setPointerCapture(e.pointerId);
+    resizeStart = {y:e.clientY, h:notes.offsetHeight};
+    document.body.style.userSelect = 'none';
+  });
+  
+  window.addEventListener('pointermove', (e)=>{
+    if(!resizing) return;
+    const dy = resizeStart.y - e.clientY;
+    const newHeight = Math.max(120, Math.min(window.innerHeight * 0.85, resizeStart.h + dy));
+    notes.style.height = newHeight + 'px';
+    localStorage.setItem(HEIGHT_KEY, notes.style.height);
+  });
+  
+  window.addEventListener('pointerup', (e)=>{
+    if(resizing){
+      resizing = false;
+      try{ resizer.releasePointerCapture(e.pointerId); }catch{}
+      document.body.style.userSelect = '';
+    }
+  });
+
+  // Restore height
+  const savedH = localStorage.getItem(HEIGHT_KEY);
+  if(savedH) notes.style.height = savedH;
+
+  // ---------- Notes: autosave per video ----------
+  const SAVE_DEBOUNCE = 400;
+  let saveTimer = null;
+  
+  function saveNote(){
+    const text = textPad.value || '';
+    localStorage.setItem(TXT_KEY, text);
+    
+    // Update index of all videos with notes
+    let index = JSON.parse(localStorage.getItem(ALL_NOTES_KEY) || '{}');
+    if(text.trim()){
+      index[videoId] = { updated: Date.now(), preview: text.slice(0,100) };
+    } else {
+      delete index[videoId];
+    }
+    localStorage.setItem(ALL_NOTES_KEY, JSON.stringify(index));
+  }
+  
+  function scheduleSave(){
+    if(saveTimer) clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveNote, SAVE_DEBOUNCE);
+  }
+  
+  textPad.addEventListener('input', scheduleSave);
+  textPad.value = localStorage.getItem(TXT_KEY) || '';
+
+  saveBtn.addEventListener('click', ()=>{
+    saveNote();
+    saveBtn.textContent = 'Saved';
+    setTimeout(()=> saveBtn.textContent = 'Save', 900);
+  });
+
+  exportBtn.addEventListener('click', ()=>{
+    const blob = new Blob([textPad.value || ''], {type:'text/plain;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); 
+    a.href = url; 
+    a.download = `notes_${videoId}.txt`; 
+    document.body.appendChild(a); 
+    a.click(); 
+    a.remove(); 
+    URL.revokeObjectURL(url);
+  });
+
+  ytbookBtn.addEventListener('click', ()=>{
+    window.open('ytbook.html', 'ytbook', 'width=900,height=700');
+  });
+
+  // ---------- Controls ----------
+  notesToggle.addEventListener('click', ()=> {
+    notes.style.display = (notes.style.display === 'none') ? '' : 'none';
+  });
+
+  fullscreenBtn.addEventListener('click', async ()=>{
+    try{
+      if(!document.fullscreenElement) await document.getElementById('videoWrap').requestFullscreen();
+      else await document.exitFullscreen();
+    }catch(e){ console.warn('fullscreen failed', e); }
+  });
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && document.fullscreenElement) document.exitFullscreen();
+    if((e.ctrlKey || e.metaKey) && e.key === 's'){ e.preventDefault(); saveBtn.click(); }
+    if((e.ctrlKey || e.metaKey) && e.key === 'n'){ e.preventDefault(); notesToggle.click(); }
+  });
+
+  feather.replace();
+</script>
+</body>
+</html>

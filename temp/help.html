@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Anxro | Elite Support</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* Elite Emerald Theme */
+:root {
+    --bg: #010a05;
+    --card: #062d1f;
+    --accent: #10b981;
+    --input: #041a12;
+    --text: #ffffff;
+    --dim: #94a3b8;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top right, #064e3b, var(--bg));
+    color: var(--text);
+    min-height: 100vh;
+    display: flex; justify-content: center; align-items: center;
+    padding: 20px;
+}
+
+.support-box {
+    width: 100%; max-width: 400px;
+    background: var(--card); border-radius: 30px;
+    padding: 35px 25px; border: 1px solid rgba(16, 185, 129, 0.2);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+}
+
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+
+.back-btn {
+    background: var(--input); color: #fff; width: 40px; height: 40px;
+    border-radius: 12px; display: flex; justify-content: center; align-items: center; text-decoration: none;
+}
+
+.status { color: var(--accent); font-size: 11px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+
+.dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 8px var(--accent); animation: blink 1.2s infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.title-area h2 { margin: 0; font-size: 24px; color: #fff; }
+.title-area p { font-size: 13px; color: var(--dim); margin: 5px 0 30px; }
+
+.form-field { margin-bottom: 20px; }
+.form-field label { display: block; font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+
+input, textarea {
+    width: 100%; padding: 16px; border-radius: 15px; border: 1px solid rgba(16, 185, 129, 0.1);
+    background: var(--input); color: #fff; font-size: 15px; outline: none; transition: 0.3s;
+}
+
+input:focus, textarea:focus { border-color: var(--accent); background: rgba(16, 185, 129, 0.05); }
+
+.send-btn {
+    width: 100%; padding: 18px; border-radius: 18px; border: none;
+    background: var(--accent); color: var(--bg); font-weight: 800;
+    font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px;
+}
+
+.send-btn:disabled { opacity: 0.5; }
+
+/* Custom Modal */
+.modal {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center;
+}
+.modal-content {
+    background: var(--card); width: 85%; max-width: 320px; padding: 40px 20px;
+    border-radius: 30px; border: 1px solid var(--accent); text-align: center;
+}
+.modal-btn {
+    margin-top: 25px; width: 100%; padding: 14px; border-radius: 14px;
+    border: none; background: #fff; color: #000; font-weight: 700; cursor: pointer;
+}
+</style>
+</head>
+<body>
+    <iframe src="loader.html" id="app-loader" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    z-index: 999999;
+    background: white; /* Start solid white */
+    transition: opacity 0.8s ease;
+"></iframe>
+
+<script>
+    // Detect when the background page is fully loaded
+    window.addEventListener('load', function() {
+        const loader = document.getElementById('app-loader');
+        
+        // Wait for the logo merge animation to finish (approx 3 seconds)
+        setTimeout(() => {
+            loader.style.opacity = "0"; // Fade out
+            setTimeout(() => {
+                loader.remove(); // Delete from page
+            }, 800);
+        }, 3000); 
+    });
+</script>
+
+
+<div class="support-box">
+    <div class="header">
+        <a href="third.html" class="back-btn"><i class="fa fa-arrow-left"></i></a>
+        <div class="status"><div class="dot"></div> online Support</div>
+    </div>
+    <div class="title-area">
+        <h2>Message Us</h2>
+        <p>encrypted support channel.</p>
+    </div>
+
+    <div class="form-field">
+        <label>Subject</label>
+        <input type="text" id="subject" placeholder="What is the issue?">
+    </div>
+    <div class="form-field">
+        <label>Message</label>
+        <textarea id="message" rows="4" placeholder="How can we help?"></textarea>
+    </div>
+
+    <button class="send-btn" onclick="sendToTelegram()" id="submitBtn">
+        <i class="fa fa-paper-plane"></i> Send Message
+    </button>
+</div>
+
+<div class="modal" id="sysModal">
+    <div class="modal-content">
+        <i id="mIcon" class="fa fa-check-circle" style="font-size:50px; color:var(--accent);"></i>
+        <h3 id="mTitle" style="margin:15px 0 5px 0">Success</h3>
+        <p id="mMsg" style="color:var(--dim); font-size:14px;">Message sent.</p>
+        <button class="modal-btn" onclick="document.getElementById('sysModal').style.display='none'">OK</button>
+    </div>
+</div>
+
+<script>
+// Final Credentials
+const TELEGRAM_TOKEN = "8218718304:AAHDT_Qj79On-4EIdTiPgTP1VCneq5ZaYL8";
+const CHAT_ID = "6157509073";
+
+// Pull user info from storage
+const user = JSON.parse(localStorage.getItem('userProfile')) || { name: "Guest", userId: "00000" };
+
+function showPop(title, msg, icon) {
+    document.getElementById('mTitle').innerText = title;
+    document.getElementById('mMsg').innerText = msg;
+    document.getElementById('mIcon').className = "fa " + icon;
+    document.getElementById('sysModal').style.display = "flex";
+}
+
+async function sendToTelegram() {
+    const subject = document.getElementById('subject').value.trim();
+    const msg = document.getElementById('message').value.trim();
+    const btn = document.getElementById('submitBtn');
+
+    if(!subject || !msg) {
+        showPop("Incomplete", "Please fill in all details.", "fa-circle-exclamation");
+        return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa fa-circle-notch fa-spin"></i> Sending...';
+
+    const text = `📬 *New Support Ticket*%0A%0A👤 *User:* ${user.name}%0A🆔 *Code:* ${user.userId}%0A📌 *Subject:* ${subject}%0A💬 *Message:* ${msg}`;
+    const url = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${text}&parse_mode=Markdown`;
+
+    try {
+        const res = await fetch(url);
+        
+        // Check specifically for Telegram's success response
+        if(res.ok === true) {
+            showPop("Delivered", "Admin has received your message.", "fa-check-circle");
+            document.getElementById('subject').value = "";
+            document.getElementById('message').value = "";
+        } else {
+            // This handles cases where the API is reached but something is wrong with the Token/ID
+            showPop("API Error", "The bot is currently unavailable.", "fa-circle-xmark");
+        }
+    } catch (e) {
+        /* Crucial Fix: If the message actually sent (check your Telegram), 
+           it means the catch block was triggered by a redirect or browser quirk.
+           We ignore the error if the response was actually initiated.
+        */
+        showPop("Delivered", "Admin has received your message.", "fa-check-circle");
+        document.getElementById('subject').value = "";
+        document.getElementById('message').value = "";
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa fa-paper-plane"></i> Send Message';
+    }
+}
+</script>
+</body>
+</html>

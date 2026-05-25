@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>SVA AI</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --emerald: #10b981;
+    --emerald-dark: #059669;
+    --emerald-dim: #064e3b;
+    --emerald-subtle: rgba(16,185,129,0.12);
+    --bg: #0d1117;
+    --bg-surface: #161b22;
+    --bg-card: #1c2128;
+    --border: rgba(16,185,129,0.18);
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --radius: 18px;
+    --radius-sm: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: 'Sora', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ─── TOPBAR ─── */
+  #topbar {
+    flex-shrink: 0;
+    height: 56px;
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px;
+    z-index: 50;
+  }
+
+  .logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-icon {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--emerald), #34d399);
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+    box-shadow: 0 0 14px rgba(16,185,129,0.35);
+  }
+
+  .logo-text {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+
+  .logo-text span { color: var(--emerald); }
+
+  .topbar-actions { display: flex; gap: 12px; align-items: center; }
+
+  .icon-btn {
+    width: 34px; height: 34px;
+    border: none;
+    background: var(--bg-card);
+    border-radius: 8px;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    transition: color 0.2s, background 0.2s;
+  }
+  .icon-btn:hover { color: var(--emerald); background: var(--emerald-subtle); }
+
+  /* ─── CHAT AREA ─── */
+  #chatbox {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 0 12px;
+    display: flex;
+    flex-direction: column;
+    scroll-behavior: smooth;
+  }
+  #chatbox::-webkit-scrollbar { width: 4px; }
+  #chatbox::-webkit-scrollbar-track { background: transparent; }
+  #chatbox::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  /* Welcome screen */
+  #welcome {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 30px 24px;
+    text-align: center;
+  }
+  #welcome .w-icon {
+    width: 64px; height: 64px;
+    background: linear-gradient(135deg, var(--emerald), #34d399);
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    box-shadow: 0 0 30px rgba(16,185,129,0.3);
+    margin-bottom: 6px;
+  }
+  #welcome h2 { font-size: 22px; font-weight: 700; color: var(--text); }
+  #welcome p { font-size: 14px; color: var(--text-muted); line-height: 1.6; max-width: 280px; }
+
+  .suggestion-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    max-width: 360px;
+    margin-top: 8px;
+  }
+
+  .suggest-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 11px 13px;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .suggest-card:hover { background: var(--emerald-subtle); border-color: var(--emerald); }
+  .suggest-card .s-icon { font-size: 16px; margin-bottom: 4px; }
+  .suggest-card .s-text { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+
+  /* ─── MESSAGES ─── */
+  .msg-row {
+    display: flex;
+    gap: 10px;
+    padding: 6px 16px;
+    align-items: flex-end;
+    animation: fadeUp 0.25s ease;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .msg-row.user { flex-direction: row-reverse; }
+
+  .avatar {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .avatar.bot-av {
+    background: linear-gradient(135deg, var(--emerald), #34d399);
+    color: white;
+    box-shadow: 0 0 10px rgba(16,185,129,0.3);
+  }
+  .avatar.user-av {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+
+  .bubble {
+    max-width: min(75vw, 420px);
+    padding: 11px 15px;
+    font-size: 14px;
+    line-height: 1.7;
+    border-radius: 18px;
+  }
+  .bubble.user-bubble {
+    background: var(--emerald);
+    color: white;
+    border-bottom-right-radius: 5px;
+    font-weight: 500;
+  }
+  .bubble.bot-bubble {
+    background: var(--bg-card);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-bottom-left-radius: 5px;
+  }
+  .bubble img {
+    width: 100%;
+    border-radius: 12px;
+    margin-top: 6px;
+    display: block;
+  }
+  .bubble b { color: var(--emerald); }
+
+  /* wiki images */
+  .wiki-images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .wiki-images img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+
+  /* ─── TYPING LOADER ─── */
+  .typing-loader {
+    display: flex; gap: 5px; align-items: center; padding: 4px 2px;
+  }
+  .typing-loader span {
+    width: 8px; height: 8px;
+    background: var(--emerald);
+    border-radius: 50%;
+    opacity: 0.4;
+    animation: blink 1.2s infinite;
+  }
+  .typing-loader span:nth-child(2) { animation-delay: 0.2s; }
+  .typing-loader span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes blink {
+    0%, 100% { opacity: 0.25; transform: scale(0.85); }
+    50%       { opacity: 1;    transform: scale(1.15); }
+  }
+
+  /* image generating loader */
+  .img-gen-box {
+    width: 180px; height: 180px;
+    background: var(--bg-surface);
+    border: 1px dashed var(--border);
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+  .spin-ring {
+    width: 28px; height: 28px;
+    border: 3px solid var(--border);
+    border-top-color: var(--emerald);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ─── INPUT AREA ─── */
+  #input-wrap {
+    flex-shrink: 0;
+    padding: 10px 14px 14px;
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border);
+  }
+
+  #input-box {
+    display: flex;
+    align-items: flex-end;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 6px 6px 6px 14px;
+    gap: 8px;
+    transition: border-color 0.2s;
+  }#input-box:focus-within { border-color: var(--emerald); }
+
+  #q {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    font-family: 'Sora', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    resize: none;
+    max-height: 120px;
+    min-height: 24px;
+    line-height: 1.5;
+    padding: 5px 0;
+  }
+  #q::placeholder { color: var(--text-muted); }
+  #q::-webkit-scrollbar { display: none; }
+
+  #send-btn {
+    width: 38px; height: 38px;
+    border: none;
+    border-radius: 10px;
+    background: var(--emerald);
+    color: white;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    transition: background 0.2s, transform 0.1s;
+    flex-shrink: 0;
+  }
+  #send-btn:hover:not(:disabled) { background: var(--emerald-dark); }
+  #send-btn:active:not(:disabled) { transform: scale(0.93); }
+  #send-btn:disabled { background: #2d333b; color: #484f58; cursor: not-allowed; }
+  #send-btn.stop { background: #ef4444; }
+
+  .hint {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    opacity: 0.7;
+  }
+
+  /* ─── AD SPACE ─── */
+  #ad-space {
+    flex-shrink: 0;
+    height: 50px;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div id="topbar">
+  <div class="logo-wrap">
+    <div class="logo-icon">𖠌</div>
+    <div class="logo-text">DEPTHROOTS<span>AI</span></div>
+  </div>
+  <div class="topbar-actions">
+    <button class="icon-btn" onclick="clearChat()" title="Clear chat"><i class="fa-solid fa-trash"></i></button>
+  </div>
+</div>
+
+<!-- CHAT -->
+<div id="chatbox">
+  <div id="welcome">
+    <div class="w-icon">✦</div>
+    <h2>How can I help?</h2>
+    <p>Ask me anything — Wikipedia knowledge, images, crypto prices, jokes, quotes & more.</p>
+    <div class="suggestion-grid">
+      <div class="suggest-card" onclick="quickSend('Tell me about black holes')">
+        <div class="s-icon">🔭</div>
+        <div class="s-text">Tell me about black holes</div>
+      </div>
+      <div class="suggest-card" onclick="quickSend('Bitcoin price today')">
+        <div class="s-icon">₿</div>
+        <div class="s-text">Bitcoin price today</div>
+      </div>
+      <div class="suggest-card" onclick="quickSend('Wikipedia images of Mount Everest')">
+        <div class="s-icon">🏔️</div>
+        <div class="s-text">Images of Mount Everest</div>
+      </div>
+      <div class="suggest-card" onclick="quickSend('Tell me a joke')">
+        <div class="s-icon">😄</div>
+        <div class="s-text">Tell me a joke</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INPUT -->
+<div id="input-wrap">
+  <div id="input-box">
+    <textarea id="q" rows="1" placeholder="Message SVA AI…" oninput="autoResize(this); checkInput();"></textarea>
+    <button id="send-btn" onclick="handleInteraction()" disabled>
+      <i id="btnIcon" class="fa-solid fa-arrow-up"></i>
+    </button>
+  </div>
+  <div class="hint">DEPTHROOT AI · Powered by Wikipedia & open APIs</div>
+</div>
+
+<!-- AD -->
+<div id="ad-space">AD SPACE</div>
+
+<script>
+let isGenerating = false;
+
+// Auto-resize textarea
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+}
+
+function checkInput() {
+  const v = document.getElementById('q').value.trim();
+  const btn = document.getElementById('send-btn');
+  if (!isGenerating) btn.disabled = v === '';
+}
+
+function quickSend(text) {
+  document.getElementById('q').value = text;
+  checkInput();
+  handleInteraction();
+}
+
+// ─── SAFE FETCH ───
+async function safeFetch(url) {
+  try {
+    const r = await fetch(url, { cache: 'no-store' });
+    return await r.json();
+  } catch { return null; }
+}
+
+function rankAnswer(ans) {
+  if (!ans) return 0;
+  let s = 0;
+  if (ans.includes('http')) s += 2;
+  if (ans.length > 20) s += 3;
+  if (ans.toLowerCase().includes('price')) s += 2;
+  if (ans.toLowerCase().includes('business')) s += 3;
+  if (ans.length > 80) s += 3;
+  return s;
+}
+
+// ─── WIKIPEDIA IMAGES (NEW) ───
+async function getWikiImages(query) {
+  const searchURL = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&format=json&origin=*`;
+  const searchData = await safeFetch(searchURL);
+  if (!searchData?.query?.search?.length) return null;
+
+  const title = searchData.query.search[0].title;
+  const imgURL = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(title)}&prop=images&imlimit=8&format=json&origin=*`;
+  const imgData = await safeFetch(imgURL);
+  if (!imgData?.query?.pages) return null;
+
+  const page = Object.values(imgData.query.pages)[0];
+  const images = page.images || [];
+
+  const validImgs = images.filter(i => {
+    const n = i.title.toLowerCase();
+    return !n.includes('.svg') && !n.includes('icon') && !n.includes('logo') && !n.includes('flag') && !n.includes('commons');
+  }).slice(0, 4);
+
+  const imageURLs = [];
+  for (const img of validImgs) {
+    const infoURL = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(img.title)}&prop=imageinfo&iiprop=url&format=json&origin=*`;
+    const info = await safeFetch(infoURL);
+    if (info?.query?.pages) {
+      const p = Object.values(info.query.pages)[0];
+      const url = p?.imageinfo?.[0]?.url;
+      if (url) imageURLs.push(url);
+    }
+  }
+
+  if (!imageURLs.length) return null;
+
+  const gridHTML = imageURLs.map(u =>
+    `<img src="${u}" loading="lazy" onerror="this.parentElement.removeChild(this)" />`
+  ).join('');
+
+  return `<b>Images: ${title}</b>
+    <div class="wiki-images">${gridHTML}</div>`;
+}
+
+// ─── MAIN LOGIC (ALL ORIGINAL APIs INTACT) ───
+async function ask(q) {
+  const ql = q.toLowerCase();
+  let answers = [];
+  let handled = false;
+
+  // IMAGE GENERATOR (Wikipedia images)
+  if (ql.includes('image') || ql.includes('photo') || ql.includes('picture') || ql.includes('draw') || ql.includes('show me')) {
+    handled = true;
+    const cleanQ = q.replace(/image(s)?|photo(s)?|picture(s)?|draw|show me|of|wikipedia/gi, '').trim() || q;
+    const result = await getWikiImages(cleanQ);
+    if (result) return result;
+    // fallback: Pollinations
+    const seed = Math.floor(Math.random() * 1000000);
+    return `<b>Generated:</b><img src="https://image.pollinations.ai/prompt/${encodeURIComponent(cleanQ)}?model=flux&width=512&height=512&seed=${seed}&nologo=true&nocache=${Date.now()}" />`;
+  }
+
+  // WIKIPEDIA FULL TEXT (primary fallback)
+  if (!handled) {
+    const searchURL = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(q)}&format=json&origin=*`;
+    const searchData = await safeFetch(searchURL);
+    if (searchData?.query?.search?.length) {
+      const title = searchData.query.search[0].title;
+      const contentURL = `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext&exintro&titles=${encodeURIComponent(title)}&format=json&origin=*`;
+      const contentData = await safeFetch(contentURL);
+      if (contentData?.query?.pages) {
+        const page = Object.values(contentData.query.pages)[0];
+        if (page?.extract && page.extract.length> 80) {
+          const text = page.extract.substring(0, 1800);
+          return `<b>${page.title}</b><br><br>${text.replace(/\n/g, '<br>')}`;
+        }
+      }
+    }
+  }
+
+  // DICTIONARY
+  if (ql.includes('meaning') || ql.includes('define')) {
+    handled = true;
+    const word = q.replace(/meaning|define/gi, '').trim();
+    const res = await safeFetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`);
+    if (res?.[0]) return `📖 <b>Definition:</b><br>${res[0].meanings[0].definitions[0].definition}`;
+  }
+
+  // CRYPTO
+  if (ql.includes('price') || ql.includes('bitcoin') || ql.includes('btc') || ql.includes('market')) {
+    handled = true;
+    const res = await safeFetch('https://api.coindesk.com/v1/bpi/currentprice.json');
+    if (res) return `₿ <b>Bitcoin:</b> $${res.bpi.USD.rate} USD`;
+  }
+
+  // JOKE
+  if (ql.includes('joke') || ql.includes('funny')) {
+    handled = true;
+    const jk = await safeFetch('https://official-joke-api.appspot.com/random_joke');
+    if (jk?.setup) return `😄 ${jk.setup}<br><br><i>${jk.punchline}</i>`;
+  }
+
+  // QUOTE
+  if (ql.includes('quote') || ql.includes('motivation') || ql.includes('inspire')) {
+    handled = true;
+    const q2 = await safeFetch('https://api.quotable.io/random');
+    if (q2?.content) return `💬 <i>"${q2.content}"</i><br><br>— ${q2.author}`;
+  }
+
+  // CURRENCY
+  if (!handled && (ql.includes('inr') || ql.includes('usd') || ql.includes('currency'))) {
+    handled = true;
+    const fx = await safeFetch('https://open.er-api.com/v6/latest/INR');
+    if (fx?.rates) return `💱 1 INR = ${fx.rates.USD.toFixed(5)} USD`;
+  }
+
+  // GDP
+  if (!handled && (ql.includes('gdp') || ql.includes('economy'))) {
+    handled = true;
+    const wb = await safeFetch('https://api.worldbank.org/v2/country/in/indicator/NY.GDP.MKTP.CD?format=json');
+    if (wb?.[1]?.[0]) return `🌐 India GDP: $${(wb[1][0].value / 1e12).toFixed(2)} Trillion`;
+  }
+
+  // WEATHER
+  if (!handled && (ql.includes('weather') || ql.includes('temperature'))) {
+    handled = true;
+    const w = await safeFetch('https://api.open-meteo.com/v1/forecast?latitude=13.3&longitude=74.7&hourly=temperature_2m');
+    if (w?.hourly?.temperature_2m) return `🌡️ Current Temperature: ${w.hourly.temperature_2m[0]}°C`;
+  }
+
+  // DUCKDUCKGO
+  const dd = await safeFetch(`https://api.duckduckgo.com/?q=${encodeURIComponent(q)}&format=json&no_html=1&skip_disambig=1`);
+  if (dd?.Abstract) answers.push(dd.Abstract);
+  if (dd?.RelatedTopics?.[0]?.Text) answers.push(dd.RelatedTopics[0].Text);
+
+  if (!answers.length) return '🤔 No answer found. Try rephrasing your question.';
+  answers.sort((a, b) => rankAnswer(b) - rankAnswer(a));
+  return answers[0];
+}
+
+// ─── UI CONTROLLER ───
+function hideWelcome() {
+  const w = document.getElementById('welcome');
+  if (w) w.remove();
+}
+
+function addMessage(text, isUser) {
+  hideWelcome();
+  const chatbox = document.getElementById('chatbox');
+  const row = document.createElement('div');
+  row.className = 'msg-row ' + (isUser ? 'user' : 'bot');
+
+  const av = document.createElement('div');
+  av.className = 'avatar ' + (isUser ? 'user-av' : 'bot-av');
+  av.textContent = isUser ? '👤' : '𖠌';
+
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble ' + (isUser ? 'user-bubble' : 'bot-bubble');
+  if (isUser) bubble.textContent = text;
+  else bubble.innerHTML = text;
+
+  row.appendChild(av);
+  row.appendChild(bubble);
+  chatbox.appendChild(row);
+  chatbox.scrollTop = chatbox.scrollHeight;
+  return bubble;
+}
+
+function addTypingLoader(isImage) {
+  hideWelcome();
+  const chatbox = document.getElementById('chatbox');
+  const row = document.createElement('div');
+  row.className = 'msg-row bot';
+
+  const av = document.createElement('div');
+  av.className = 'avatar bot-av';
+  av.textContent = '✦';
+
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble bot-bubble';
+
+  if (isImage) {
+    bubble.innerHTML = `<div class="img-gen-box"><div class="spin-ring"></div><span>Searching images…</span></div>`;
+  } else {
+    bubble.innerHTML = `<div class="typing-loader"><span></span><span></span><span></span></div>`;
+  }
+
+  row.appendChild(av);
+  row.appendChild(bubble);
+  chatbox.appendChild(row);
+  chatbox.scrollTop = chatbox.scrollHeight;
+  return { row, bubble };
+}
+
+async function handleInteraction() {
+  const input = document.getElementById('q');
+  const btn = document.getElementById('send-btn');
+  const icon = document.getElementById('btnIcon');
+
+  if (isGenerating) { location.reload(); return; }
+
+  const query = input.value.trim();
+  if (!query) return;
+
+  addMessage(query, true);
+  input.value = '';
+  input.style.height = 'auto';
+
+  isGenerating = true;
+  btn.disabled = false;
+  btn.classList.add('stop');
+  icon.className = 'fa-solid fa-stop';
+
+  const isImg = /image|photo|picture|draw|show me/i.test(query);
+  const { row, bubble } = addTypingLoader(isImg);
+
+  try {
+    const response = await ask(query);
+    bubble.innerHTML = response;
+    saveChat();
+  } catch (e) {
+    bubble.textContent = '⚠️ Connection error. Please try again.';
+  } finally {
+    isGenerating = false;
+    btn.classList.remove('stop');
+    icon.className = 'fa-solid fa-arrow-up';
+    checkInput();
+    document.getElementById('chatbox').scrollTop = document.getElementById('chatbox').scrollHeight;
+  }
+}
+
+function saveChat() {
+  const rows = [];
+  document.querySelectorAll('#chatbox .msg-row').forEach(row => {
+    const bubble = row.querySelector('.bubble');
+    rows.push({ html: bubble.innerHTML, user: row.classList.contains('user') });
+  });
+  localStorage.setItem('sva_chat', JSON.stringify(rows));
+}
+
+function loadChat() {
+  const rows = JSON.parse(localStorage.getItem('sva_chat') || '[]');
+  if (!rows.length) return;
+  rows.forEach(r => addMessage(r.html, r.user));
+}
+
+function clearChat() {
+  document.getElementById('chatbox').innerHTML = '';
+  localStorage.removeItem('sva_chat');
+  // Re-add welcome
+  const welcome = document.createElement('div');
+  welcome.id = 'welcome';
+  welcome.innerHTML = `
+    <div class="w-icon">✦</div>
+    <h2>How can I help?</h2>
+    <p>Ask me anything — Wikipedia knowledge, images, crypto prices, jokes, quotes & more.</p>
+    <div class="suggestion-grid">
+      <div class="suggest-card" onclick="quickSend('Tell me about black holes')">
+        <div class="s-icon">🔭</div><div class="s-text">Tell me about black holes</div>
+      </div>
+      <div class="suggest-card" onclick="quickSend('Bitcoin price today')">
+        <div class="s-icon">₿</div><div class="s-text">Bitcoin price today</div>
+      </div>
+      <div class="suggest-card" onclick="quickSend('Wikipedia images of Mount Everest')">
+        <div class="s-icon">🏔️</div><div class="s-text">Images of Mount Everest</div>
+      </div>
+      <div class="suggest-card" onclick="quickSend('Tell me a joke')">
+        <div class="s-icon">😄</div><div class="s-text">Tell me a joke</div>
+      </div>
+    </div>`;
+  document.getElementById('chatbox').appendChild(welcome);
+}
+
+// Enter to send (Shift+Enter = newline)
+document.getElementById('q').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    handleInteraction();
+  }
+});
+
+window.onload = loadChat;
+</script>
+</body>
+</html>
