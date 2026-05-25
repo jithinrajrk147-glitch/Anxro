@@ -19,27 +19,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Clean Old Temp
+      - name: Remove Old Temp
         run: |
           rm -rf temp
           mkdir temp
 
-      - name: Copy Website Files
+      - name: Copy All Website Files
         run: |
 
-          cp -r *.html temp/ 2>/dev/null || true
+          shopt -s dotglob
 
-          cp -r *.js temp/ 2>/dev/null || true
+          for item in *; do
 
-          cp -r *.css temp/ 2>/dev/null || true
+            if [[ "$item" != ".git" &&
+                  "$item" != ".github" &&
+                  "$item" != "temp" &&
+                  "$item" != "app-version.json" &&
+                  "$item" != app-v*.zip ]]; then
 
-          cp -r assets temp/ 2>/dev/null || true
+              cp -r "$item" temp/
 
-          cp -r images temp/ 2>/dev/null || true
+            fi
 
-          cp -r json temp/ 2>/dev/null || true
-
-          cp -r data temp/ 2>/dev/null || true
+          done
 
       - name: Create ZIP
         run: |
@@ -56,7 +58,7 @@ jobs:
             "zip_url": "https://jithinrajrk147-glitch.github.io/Anxro/app-v${{ github.run_number }}.zip"
           }' > app-version.json
 
-      - name: Push Files
+      - name: Commit Files
         run: |
 
           git config user.name "github-actions[bot]"
