@@ -58,6 +58,10 @@ jobs:
             "zip_url": "https://jithinrajrk147-glitch.github.io/Anxro/app-v${{ github.run_number }}.zip"
           }' > app-version.json
 
+      - name: Cleanup Temp
+        run: |
+          rm -rf temp
+
       - name: Commit Files
         run: |
 
@@ -65,7 +69,7 @@ jobs:
 
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add .
+          git add app-v*.zip app-version.json
 
           git commit -m "Auto update v${{ github.run_number }}" || echo "Nothing to commit"
 
