@@ -24,20 +24,24 @@ jobs:
           rm -rf temp
           mkdir temp
 
-      
+      - name: Copy Website Files
+        run: |
 
-       - name: Copy Website Files
-  run: |
+          cp -r *.html temp/ 2>/dev/null || true
+          cp -r *.css temp/ 2>/dev/null || true
+          cp -r *.js temp/ 2>/dev/null || true
 
-    mkdir temp
+          cp -r assets temp/ 2>/dev/null || true
+          cp -r images temp/ 2>/dev/null || true
+          cp -r json temp/ 2>/dev/null || true
+          cp -r data temp/ 2>/dev/null || true
 
-    cp -r *.html temp/ 2>/dev/null || true
-    cp -r *.css temp/ 2>/dev/null || true
-    cp -r *.js temp/ 2>/dev/null || true
+      - name: Create ZIP
+        run: |
 
-    cp -r assets temp/ 2>/dev/null || true
-    cp -r images temp/ 2>/dev/null || true
-    cp -r json temp/ 2>/dev/null || true
+          cd temp
+
+          zip -9 -r ../app-v${{ github.run_number }}.zip .
 
       - name: Create Version JSON
         run: |
@@ -45,7 +49,7 @@ jobs:
           echo '{
             "version": '${{ github.run_number }}',
             "zip_url": "https://jithinrajrk147-glitch.github.io/Anxro/app-v${{ github.run_number }}.zip"
-          }' > app-version.json
+          }' > ../app-version.json
 
       - name: Cleanup Temp
         run: |
@@ -58,7 +62,7 @@ jobs:
 
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add app-v*.zip app-version.json
+          git add .
 
           git commit -m "Auto update v${{ github.run_number }}" || echo "Nothing to commit"
 
