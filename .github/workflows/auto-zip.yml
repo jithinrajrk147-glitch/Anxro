@@ -24,31 +24,20 @@ jobs:
           rm -rf temp
           mkdir temp
 
-      - name: Copy All Website Files
-        run: |
+      
 
-          shopt -s dotglob
+       - name: Copy Website Files
+  run: |
 
-          for item in *; do
+    mkdir temp
 
-            if [[ "$item" != ".git" &&
-                  "$item" != ".github" &&
-                  "$item" != "temp" &&
-                  "$item" != "app-version.json" &&
-                  "$item" != app-v*.zip ]]; then
+    cp -r *.html temp/ 2>/dev/null || true
+    cp -r *.css temp/ 2>/dev/null || true
+    cp -r *.js temp/ 2>/dev/null || true
 
-              cp -r "$item" temp/
-
-            fi
-
-          done
-
-      - name: Create ZIP
-        run: |
-
-          cd temp
-
-          zip -r ../app-v${{ github.run_number }}.zip .
+    cp -r assets temp/ 2>/dev/null || true
+    cp -r images temp/ 2>/dev/null || true
+    cp -r json temp/ 2>/dev/null || true
 
       - name: Create Version JSON
         run: |
